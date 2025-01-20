@@ -38,7 +38,7 @@ resource "aws_s3_object" "lambda_birdsongquiz" {
 
 resource "aws_lambda_function" "get_recordings" {
   function_name = "GetRecordings"
-
+  timeout = 30
   s3_bucket = aws_s3_bucket.lambda_bucket.id
   s3_key    = aws_s3_object.lambda_birdsongquiz.key
 

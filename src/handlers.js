@@ -1,5 +1,5 @@
-import test from 'node:test';
-import { getRandomRecordingForSpecies } from './recording.js';
+import { getRandomRecordingsForMultipleSpecies } from './recording.js';
+
 const response = (statusCode, responseBody) => ({
     statusCode,
     headers: {
@@ -16,11 +16,11 @@ export const getRecordings = async (event) => {
     }
     console.log("Calling getRandomRecordingForSpecies with species: ", speciesList[0]);
     try {
-      const recording = await getRandomRecordingForSpecies(speciesList[0])
-      console.log("Got recording: ", recording);
-      return response(200, recording);
+      const recordings = await getRandomRecordingsForMultipleSpecies(speciesList)
+      console.log("Got recording: ", recordings);
+      return response(200, recordings);
     } catch (error) {
-      console.error("Error getting recording: ", error);
-      return response(500, { "message": "Error getting recording" });
+      console.error("Error getting recordings: ", error);
+      return response(500, { "message": "Error getting recordings" });
     }
   }

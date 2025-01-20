@@ -54,4 +54,9 @@ const getRandomRecordingForSpecies = async (species) => {
     };
 }
 
-export { getRandomRecordingForSpecies }
+const getRandomRecordingsForMultipleSpecies = async (speciesList) => { 
+    const recordings = await Promise.all(speciesList.map(getRandomRecordingForSpecies));
+    return recordings;
+}
+
+export { getRandomRecordingsForMultipleSpecies }
