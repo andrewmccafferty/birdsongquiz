@@ -23,7 +23,7 @@ resource "aws_s3_bucket_acl" "lambda_bucket" {
 data "archive_file" "lambda_birdsongquiz" {
   type = "zip"
 
-  source_dir  = "../src"
+  source_dir  = "../api"
   output_path = "${path.module}/birdsongquiz_lambdas.zip"
 }
 
