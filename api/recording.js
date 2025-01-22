@@ -50,13 +50,8 @@ const getRandomRecordingForSpecies = async (species) => {
     console.log("Got recording: ", recording);
     return {
         species: species,
-        file: recording.file
+        recording
     };
 }
 
-const getRandomRecordingsForMultipleSpecies = async (speciesList) => { 
-    const recordings = await Promise.all(speciesList.map(getRandomRecordingForSpecies));
-    return recordings;
-}
-
-export { getRandomRecordingsForMultipleSpecies }
+export { getRandomRecordingForSpecies }

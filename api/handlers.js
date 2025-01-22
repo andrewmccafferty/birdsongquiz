@@ -1,4 +1,4 @@
-import { getRandomRecordingsForMultipleSpecies } from './recording.js';
+import { getRandomRecordingForSpecies } from './recording.js';
 
 const response = (statusCode, responseBody) => ({
     statusCode,
@@ -8,19 +8,17 @@ const response = (statusCode, responseBody) => ({
     body: JSON.stringify(responseBody),
   });
 
-export const getRecordings = async (event) => {
+export const getRecording = async (event) => {
     console.log('Event: ', event);
-    const speciesList = event.multiValueQueryStringParameters ? event.multiValueQueryStringParameters["species"] : null;
-    if (!speciesList || speciesList.length < 2) {
-        return response(400, { "message": "Should include at least 2 species" });
-    }
-    console.log("Calling getRandomRecordingForSpecies with species: ", speciesList[0]);
+    const species = event.queryStringParameters ? event.queryStringParameters["species"] : null;
+    
+    console.log("Calling getRandomRecordingForSpecies with species: ", species);
     try {
-      const recordings = await getRandomRecordingsForMultipleSpecies(speciesList)
-      console.log("Got recording: ", recordings);
-      return response(200, recordings);
+      const recording = await getRandomRecordingForSpecies(species)
+      console.log("Got recording: ", recording);
+      return response(200, recording);
     } catch (error) {
-      console.error("Error getting recordings: ", error);
-      return response(500, { "message": "Error getting recordings" });
+      console.error("Error getting recording: ", error);
+      return response(500, { "message": "Error getting recording" });
     }
   }
