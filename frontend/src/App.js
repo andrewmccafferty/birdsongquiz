@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import HeadToHeadSpeciesSelector from './HeadToHeadSpeciesSelector';
+import GameControls from './GameControls';
+import './App.css';
 
 class App extends Component {
     constructor(props) {
@@ -31,6 +33,8 @@ class App extends Component {
             this.state.headToHeadSpeciesList && this.state.headToHeadSpeciesList.length > 0 &&
                 <h2>{this.headToHeadLabel()}</h2>
         }
+        { this.state.headToHeadSpeciesList && this.state.headToHeadSpeciesList.length > 0 &&
+                    <GameControls headToHeadSpecies={this.state.headToHeadSpeciesList}/>}
         </div>
     }
 }
