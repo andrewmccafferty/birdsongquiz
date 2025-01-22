@@ -5,3 +5,4 @@
 node_modules/
 coverage/
 birdsongquiz_lambdas.zip
+dist/
