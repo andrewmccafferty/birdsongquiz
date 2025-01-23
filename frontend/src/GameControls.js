@@ -29,7 +29,8 @@ class GameControls extends Component {
 
 
     callApi = async (path) => {
-        const API_ROOT = "https://api.birdsongquiz.co.uk"
+        //const API_ROOT = "https://api.birdsongquiz.co.uk"
+        const API_ROOT = "https://asry9syqi9.execute-api.eu-west-2.amazonaws.com/prod"
         console.log("Calling API with path: ", path);
         const response = await fetch(`${API_ROOT}/${path}`);
         const body = await response.json();
