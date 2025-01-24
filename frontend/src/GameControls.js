@@ -141,7 +141,7 @@ class GameControls extends Component {
                 this.state.birdsongId &&
                 !this.state.noRecordingFound &&
                 
-                    <div class="audio-player">
+                    <div className="audio-player">
                         <audio autoPlay={true} controls src={`https://www.xeno-canto.org/${this.state.birdsongId}/download`}>
                         Your browser does not support the audio element.
                         </audio>
@@ -150,7 +150,7 @@ class GameControls extends Component {
 
             {!this.state.loading &&
                 this.state.headToHeadSpecies &&
-                <div class="options">
+                <div className="options">
                     {this.state.headToHeadSpecies.map(option => {
                         let backgroundColour = 'gray'
                         if (option === this.state.selectedSpeciesGuess) {
@@ -185,8 +185,6 @@ class GameControls extends Component {
                         Recording courtesy of {this.state.recordist} via <a target="_blank" href={`http://xeno-canto.org/${this.state.birdsongId}`}>http://xeno-canto.org/{this.state.birdsongId}</a>
                     </div>
                     {this.state.livesLeft > 0 && <button className="btn btn-info" onClick={() => this.getRandomBirdsong()}>Next -></button>}
-                    {this.state.livesLeft === 0 &&
-                        <button className="btn btn-info" href="#" onClick={() => this.restartGame()}>Play again?</button>}
                 </div>
             }
         </div>
