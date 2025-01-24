@@ -42,21 +42,37 @@ class App extends Component {
     headToHeadSharingLink = () => `${window.location.origin}?presetSpecies=${btoa(JSON.stringify(this.state.headToHeadSpeciesList))}`
 
     render() {
-        return <div><h1>Head-to-Head Birdsong quiz</h1>
+        return <div class="quiz-container">
+            <div class="quiz-header">Head-to-Head Birdsong Quiz</div>
             {(!this.state.headToHeadSpeciesList || this.state.headToHeadSpeciesList.length === 0) &&
                 <HeadToHeadSpeciesSelector onSelectionComplete={headToHeadSpeciesList => this.onHeadToHeadSpeciesSelected(headToHeadSpeciesList)} />
             }
             {
                 this.state.headToHeadSpeciesList && this.state.headToHeadSpeciesList.length > 0 &&
-                <h2>{this.headToHeadLabel()}</h2>
+                <div class="quiz-subheader">{this.headToHeadLabel()}</div>
             }
             {this.state.headToHeadSpeciesList && this.state.headToHeadSpeciesList.length > 0 &&
                 <GameControls headToHeadSpecies={this.state.headToHeadSpeciesList} />}
             {
                 this.state.headToHeadSpeciesList && this.state.headToHeadSpeciesList.length > 0 &&
-                <a href={this.headToHeadSharingLink()} style={{ 'margin-left': '5px' }}>permalink</a>
+                <a class="permalink" href={this.headToHeadSharingLink()}>permalink</a>
             }
         </div>
+        // return <div class="quiz-container"><h1>Head-to-Head Birdsong quiz</h1>
+        //     {(!this.state.headToHeadSpeciesList || this.state.headToHeadSpeciesList.length === 0) &&
+        //         <HeadToHeadSpeciesSelector onSelectionComplete={headToHeadSpeciesList => this.onHeadToHeadSpeciesSelected(headToHeadSpeciesList)} />
+        //     }
+        //     {
+        //         this.state.headToHeadSpeciesList && this.state.headToHeadSpeciesList.length > 0 &&
+        //         <div class="quiz-subheader">{this.headToHeadLabel()}</div>
+        //     }
+        //     {this.state.headToHeadSpeciesList && this.state.headToHeadSpeciesList.length > 0 &&
+        //         <GameControls headToHeadSpecies={this.state.headToHeadSpeciesList} />}
+        //     {
+        //         this.state.headToHeadSpeciesList && this.state.headToHeadSpeciesList.length > 0 &&
+        //         <a class="permalink" href={this.headToHeadSharingLink()}>permalink</a>
+        //     }
+        // </div>
     }
 }
 

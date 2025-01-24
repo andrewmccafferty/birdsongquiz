@@ -1,57 +1,76 @@
-.App {
-    text-align: center;
-  }
-  
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-    height: 80px;
-  }
-  
-  .App-header {
-    background-color: #222;
-    height: 150px;
-    padding: 20px;
-    color: white;
-  }
-  
-  .App-title {
-    font-size: 1.5em;
-  }
-  
-  .App-intro {
-    font-size: large;
-  }
-  
-  @keyframes App-logo-spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-  @media only screen and (min-width: 450px) {
-    .Game-Area {
-      width: 50%;
-      margin-left: 30%;
-    }
-  }
-  
-  .Species-Selection {
-    margin-bottom: 5px;
-  }
-  
-  .Selection-Button {
-  background-color: gray;
-  color: white;
-  border: solid 1px;
-  height: 40px;
-  vertical-align: middle;
-  font-size: 20px;
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.quiz-container {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  max-width: 400px;
   width: 100%;
-  margin-bottom: 5px;
+  text-align: center;
+}
+
+.quiz-header {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 10px;
+}
+
+.quiz-subheader {
+  font-size: 1.1em;
+  color: #555555;
+  margin-bottom: 20px;
+}
+
+.quiz-stats {
+  font-size: 1em;
+  color: #777777;
+  margin-bottom: 20px;
+}
+
+.audio-player {
+  margin: 20px 0;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.option-button {
+  padding: 10px 20px;
+  font-size: 1em;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  background: #0078d4;
+  color: #ffffff;
   cursor: pointer;
-  padding-top: 5px
-  }
-  
-  .Icon-Button {
-    border: none;
-    background: transparent;
-    cursor: pointer;
-  }
+  transition: background 0.3s ease;
+}
+
+.option-button:hover {
+  background: #005bb5;
+}
+
+.permalink {
+  margin-top: 20px;
+  font-size: 0.9em;
+  color: #0078d4;
+  text-decoration: none;
+}
+
+.permalink:hover {
+  text-decoration: underline;
+}

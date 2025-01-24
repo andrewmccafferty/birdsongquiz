@@ -140,17 +140,17 @@ class GameControls extends Component {
                 !this.state.errorLoading &&
                 this.state.birdsongId &&
                 !this.state.noRecordingFound &&
-                <div>
-                    <div>
+                
+                    <div class="audio-player">
                         <audio autoPlay={true} controls src={`https://www.xeno-canto.org/${this.state.birdsongId}/download`}>
+                        Your browser does not support the audio element.
                         </audio>
                     </div>
-                </div>
             }
 
             {!this.state.loading &&
                 this.state.headToHeadSpecies &&
-                <div>
+                <div class="options">
                     {this.state.headToHeadSpecies.map(option => {
                         let backgroundColour = 'gray'
                         if (option === this.state.selectedSpeciesGuess) {
@@ -160,14 +160,14 @@ class GameControls extends Component {
                             option.ScientificName.toLowerCase() === this.state.scientificName.toLowerCase()) {
                             backgroundColour = 'green'
                         }
-                        return <div key={option.Species} style={{
+                        return <button key={option.Species} style={{
                             'backgroundColor': backgroundColour
                         }}
-                            className={'Selection-Button'}
+                            className={'option-button'}
                             onClick={() => this.onSpeciesGuessMade(option)}>{option.Species}
                             {backgroundColour === 'green' && <FontAwesomeIcon style={{ 'marginLeft': '5px' }} icon={faCheck} />}
                             {backgroundColour === 'red' && <FontAwesomeIcon style={{ 'marginLeft': '5px' }} icon={faTimes} />}
-                        </div>
+                        </button>
                     })
                     }
                 </div>
