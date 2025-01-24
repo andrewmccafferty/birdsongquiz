@@ -3,11 +3,20 @@ provider "aws" {
 }
 
 import {
-  to = aws_s3_bucket.aws_s3_bucket
+  to = aws_s3_bucket.frontend_bucket
   id = "birdsongquiz"
 }
 
-resource "aws_s3_bucket" "aws_s3_bucket" {
+resource "aws_s3_bucket" "frontend_bucket" {
+}
+
+resource "aws_s3_object" "birdsongquiz_frontend" {
+  bucket = aws_s3_bucket.frontend_bucket.id
+
+  key    = "dist/bundle.js"
+  source = "../frontend/dist/bundle.js"
+
+  etag = filemd5("../frontend/dist/bundle.js")
 }
 
 resource "aws_s3_bucket" "lambda_bucket" {
