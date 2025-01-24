@@ -2,6 +2,14 @@ provider "aws" {
   region = var.aws_region
 }
 
+import {
+  to = aws_s3_bucket.aws_s3_bucket
+  id = "birdsongquiz"
+}
+
+resource "aws_s3_bucket" "aws_s3_bucket" {
+}
+
 resource "aws_s3_bucket" "lambda_bucket" {
   bucket = "birdsongquiz-bucket"
 }
