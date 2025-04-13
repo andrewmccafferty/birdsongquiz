@@ -29,6 +29,7 @@ class GameControls extends Component {
 
 
     callApi = async (path) => {
+        // TODO: if this API remains stable, switch back to the domain name
         //const API_ROOT = "https://api.birdsongquiz.co.uk"
         const API_ROOT = "https://asry9syqi9.execute-api.eu-west-2.amazonaws.com/prod"
         console.log("Calling API with path: ", path);
@@ -52,7 +53,6 @@ class GameControls extends Component {
     }
 
     onSpeciesGuessMade = (guess) => {
-        const levelIncrementInterval = 5
         if (this.state.selectedSpeciesGuess) {
             return
         }
