@@ -38,7 +38,7 @@ class App extends Component {
     }
 
     headToHeadLabel = () =>
-        `Head to head species: ${this.state.headToHeadSpeciesList.map(species => species.Species).join(", ")}`
+        `Species: ${this.state.headToHeadSpeciesList.map(species => species.Species).join(", ")}`
 
     headToHeadSharingLink = () => `${window.location.origin}?presetSpecies=${btoa(JSON.stringify(this.state.headToHeadSpeciesList))}`
 
