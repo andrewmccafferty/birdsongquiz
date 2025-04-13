@@ -9,7 +9,8 @@ class App extends Component {
         super(props);
         const presetSpecies = this.decodePresetSpecies()
         this.state = {
-            headToHeadSpeciesList: presetSpecies ? presetSpecies : []
+            headToHeadSpeciesList: presetSpecies ? presetSpecies : [],
+            soundType: null
         }
     }
 
@@ -28,17 +29,18 @@ class App extends Component {
         }
     }
 
-    onHeadToHeadSpeciesSelected = headToHeadSpeciesList => {
+    onHeadToHeadSpeciesSelected = (headToHeadSpeciesList, soundType) => {
         this.setState((prevState, props) => {
             return {
                 ...props,
-                headToHeadSpeciesList
+                headToHeadSpeciesList,
+                soundType
             }
         })
     }
 
     headToHeadLabel = () =>
-        `Species: ${this.state.headToHeadSpeciesList.map(species => species.Species).join(", ")}`
+        `Species: ${this.state.headToHeadSpeciesList.map(species => species.Species).join(", ")} ${this.state.soundType ? `(${this.state.soundType})` : ""}`
 
     headToHeadSharingLink = () => `${window.location.origin}?presetSpecies=${btoa(JSON.stringify(this.state.headToHeadSpeciesList))}`
 
@@ -48,7 +50,8 @@ class App extends Component {
         this.setState((prevState, props) => {
             return {
                 ...props,
-                headToHeadSpeciesList: []
+                headToHeadSpeciesList: [],
+                soundType: null
             }
         })
     }
@@ -78,7 +81,7 @@ class App extends Component {
             <FontAwesomeIcon className="info-link" icon={faInfoCircle} onClick={() => this.openGameExplanation()}/>
             </div>
             {(!this.state.headToHeadSpeciesList || this.state.headToHeadSpeciesList.length === 0) &&
-                <HeadToHeadSpeciesSelector onSelectionComplete={headToHeadSpeciesList => this.onHeadToHeadSpeciesSelected(headToHeadSpeciesList)} />
+                <HeadToHeadSpeciesSelector onSelectionComplete={(headToHeadSpeciesList, soundType) => this.onHeadToHeadSpeciesSelected(headToHeadSpeciesList, soundType)} />
             }
             {
                 this.state.headToHeadSpeciesList && this.state.headToHeadSpeciesList.length > 0 &&
@@ -86,7 +89,7 @@ class App extends Component {
             }
             {
                 this.gameActive() &&
-                <GameControls headToHeadSpecies={this.state.headToHeadSpeciesList} />
+                <GameControls headToHeadSpecies={this.state.headToHeadSpeciesList} soundType={this.state.soundType} />
             }
             {
                 this.gameActive() &&

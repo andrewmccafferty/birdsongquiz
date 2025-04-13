@@ -1,8 +1,14 @@
 import * as http  from 'http';
 import * as https  from 'https';
+const formatTypeParameter = (soundType) => soundType ? encodeURIComponent(` type:"${soundType}"`) : ''
+    
+const getXenoCantoQueryUrl = (species, soundType) => {
+    return `https://xeno-canto.org/api/2/recordings?query=${encodeURIComponent(species)}${encodeURIComponent(' q:"A"')}${formatTypeParameter(soundType)}`
+}
+const getRecordingData = async (species, soundType) => {
+    console.log(`Calling getXenoCantoQueryUrl with species: ${species}, soundType: ${soundType}`);
+    const url = getXenoCantoQueryUrl(species, soundType);
 
-const getRecordingData = async (species) => {
-    const url = `https://xeno-canto.org/api/2/recordings?query=${encodeURIComponent(species)}`;
     console.log("Calling with URL:", url);
     // Tried to do this with fetch, but it didn't work in the Lambda
     // for some reason.
@@ -37,9 +43,9 @@ const getRecordingData = async (species) => {
     });
 };
 
-const getRandomRecordingForSpecies = async (species) => {
-    console.log("Calling getRecordingData with species: ", species);
-    const data = await getRecordingData(species);
+const getRandomRecordingForSpecies = async (species, soundType) => {
+    console.log(`Calling getRecordingData with species: ${species}, soundType: ${soundType}`);
+    const data = await getRecordingData(species, soundType);
     console.log("Got data: ", data);
     if (data.recordings.length === 0) {
         throw new Error(`No recordings found for species ${species}`);

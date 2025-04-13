@@ -12,7 +12,8 @@ class HeadToHeadSpeciesSelector extends Component {
 		this.state = {
 			selectedSpeciesList: [],
 			speciesList: speciesList,
-			typeaheadRef: null
+			typeaheadRef: null,
+			soundType: 'any'
 		}
 	}
 
@@ -23,14 +24,27 @@ class HeadToHeadSpeciesSelector extends Component {
 		} else {
 			this.setState({showValidationMessage: false})
 		}
-		this.props.onSelectionComplete(this.state.selectedSpeciesList)
+		this.props.onSelectionComplete(
+			this.state.selectedSpeciesList, 
+			this.state.soundType
+		)
 	}
-
+	onSoundTypeChanged = (soundType) => {
+		this.setState({soundType: soundType})
+	}
 	render() {
 		return (
 			<div>
 				<div className="quiz-subheader">Select some species to go head to head</div>
+				<div className="quiz-subheader">Select a sound type
+					<select onChange={e => this.onSoundTypeChanged(e.target.value)}>
+						<option value="any">Any sound type</option>
+						<option value="song">Song</option>
+						<option value="call">Call</option>
+					</select>
+				</div>
 				<div className="input-container">
+				
 				<Typeahead
 					multiple
 				id="species-selection"

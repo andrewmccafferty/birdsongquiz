@@ -14,10 +14,10 @@ const response = (statusCode, responseBody) => ({
 export const getRecording = async (event) => {
   console.log('Event: ', event);
   const species = event.queryStringParameters ? event.queryStringParameters["species"] : null;
-
-  console.log("Calling getRandomRecordingForSpecies with species: ", species);
+  const soundType = event.queryStringParameters ? event.queryStringParameters["soundType"] : null;
+  console.log(`Calling getRandomRecordingForSpecies with species: ${species}, soundType: ${soundType}`);
   try {
-    const recording = await getRandomRecordingForSpecies(species)
+    const recording = await getRandomRecordingForSpecies(species, soundType);
     console.log("Got recording: ", recording);
     return response(200, recording);
   } catch (error) {

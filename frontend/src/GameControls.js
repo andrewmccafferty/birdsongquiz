@@ -7,6 +7,7 @@ class GameControls extends Component {
         super(props);
         this.state = {
             headToHeadSpecies: props.headToHeadSpecies,
+            soundType: props.soundType,
             isInitialised: false,
             birdsongId: "",
             species: "",
@@ -78,6 +79,14 @@ class GameControls extends Component {
         return speciesList[randomIndex].ScientificName;
     }
 
+    buildApiUrl = () => {
+        let soundTypeUrlSegment = ""
+        if (this.state.soundType && this.state.soundType !== 'any') {
+            soundTypeUrlSegment = `&soundType=${encodeURIComponent(this.state.soundType)}`
+        }
+        return `recording?species=${encodeURIComponent(this.getRandomSpecies())}${soundTypeUrlSegment}`
+    }
+
     getRandomBirdsong = async () => {
         this.clearGuess();
         this.setState((prevState, props) => {
@@ -88,7 +97,7 @@ class GameControls extends Component {
                 guessCorrect: false
             }
         });
-        const url = `recording?species=${encodeURIComponent(this.getRandomSpecies())}`
+        const url = this.buildApiUrl();
         console.log("Calling API...", url),
             this.callApi(url).then(result => {
                 this.setState((prevState, props) => {

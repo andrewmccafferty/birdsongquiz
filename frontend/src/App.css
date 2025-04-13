@@ -179,3 +179,29 @@ body {
   font-size: 0.9em;
   margin-top: 5px;
 }
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+label.quiz-subheader {
+  font-weight: 600;
+  margin-bottom: 5px;
+  display: block;
+}
+
+#sound-type {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #cccccc;
+  font-size: 1em;
+  background: #ffffff;
+  cursor: pointer;
+}
