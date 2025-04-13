@@ -7,24 +7,24 @@ import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 class App extends Component {
     constructor(props) {
         super(props);
-        const presetSpecies = this.decodePresetSpecies()
+        const permalinkData = this.decodePermalink()
         this.state = {
-            headToHeadSpeciesList: presetSpecies ? presetSpecies : [],
-            soundType: null
+            headToHeadSpeciesList: permalinkData ? permalinkData.presetSpecies : [],
+            soundType: permalinkData ? permalinkData.soundType : null,
         }
     }
 
-    decodePresetSpecies = () => {
+    decodePermalink = () => {
         try {
             const urlParams = new URLSearchParams(window.location.search)
-            const presetSpeciesBase64 = urlParams.get('presetSpecies')
-            if (!presetSpeciesBase64) {
+            const permalinkDataBase64 = urlParams.get('presets')
+            if (!permalinkDataBase64) {
                 return null
             }
-            const presetSpecies = JSON.parse(atob(presetSpeciesBase64))
-            return presetSpecies
+            const permalinkData = JSON.parse(atob(permalinkDataBase64))
+            return permalinkData
         } catch (e) {
-            console.error("error decoding preset species", e)
+            console.error("error decoding permalink data", e)
             return null
         }
     }
@@ -42,7 +42,10 @@ class App extends Component {
     headToHeadLabel = () =>
         `Species: ${this.state.headToHeadSpeciesList.map(species => species.Species).join(", ")} ${this.state.soundType ? `(${this.state.soundType})` : ""}`
 
-    headToHeadSharingLink = () => `${window.location.origin}?presetSpecies=${btoa(JSON.stringify(this.state.headToHeadSpeciesList))}`
+    headToHeadSharingLink = () => `${window.location.origin}?presets=${btoa(JSON.stringify({
+        presetSpecies: this.state.headToHeadSpeciesList,
+        soundType: this.state.soundType
+    }))}`
 
     gameActive = () => this.state.headToHeadSpeciesList && this.state.headToHeadSpeciesList.length > 0
 
@@ -107,12 +110,17 @@ class App extends Component {
                     <h2>How to Play</h2>
                     <p>This quiz is designed to test your ability to recognise birdsong.</p>
                     <p>You start by picking two or more species that you find difficult to distinguish</p>
-                    <p>The quiz will then randomly select one of the species you select, and then randomly select examples of that species from <a href="http://www.xeno-canto.org">Xeno-Canto</a>, a worldwide website for birdsound sharing</p>
+                    <p>If you like, you can also specify you want songs or calls (e.g. try out Robin vs Hawfinch calls)</p>
+                    <p>The quiz will then randomly select one of the species you select, and then randomly select examples of that species 
+                        from <a href="http://www.xeno-canto.org">Xeno-Canto</a>, a worldwide website for birdsound sharing</p>
                     <p>You'll be asked which species you think it is, and the quiz will tell you if you're right. You get 5 "lives" and the quiz
                         will keep going until you run out of lives. See how far you can get!
                     </p>
                     <p>
                         If you don't want to go to the bitter end, you can hit the "Reset Quiz" button to start again.
+                    </p>
+                    <p>
+                        The data on Xeno-Canto is user-generated, so will sometimes be tagged incorrectly (e.g. a sound type tagged as call when it's song or vice versa), or include poor-quality recordings!
                     </p>
                     <p>Quiz built by Andrew McCafferty. If you've got any feedback/suggestions, feel free to get in touch with me at <a href="mailto:feedback@birdsongquiz.co.uk">feedback@birdsongquiz.co.uk</a></p>
                     <button className="close-button" onClick={() => this.closeGameExplanation()}>Close</button>
