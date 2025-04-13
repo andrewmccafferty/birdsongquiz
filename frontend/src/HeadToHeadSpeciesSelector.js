@@ -36,8 +36,9 @@ class HeadToHeadSpeciesSelector extends Component {
 		return (
 			<div>
 				<div className="quiz-subheader">Select some species to go head to head</div>
-				<div className="quiz-subheader">Select a sound type
-					<select onChange={e => this.onSoundTypeChanged(e.target.value)}>
+				<div className="quiz-subheader">
+					<label htmlFor="sound-type" className="form-label">Sound type:</label>
+					<select id="sound-type" onChange={e => this.onSoundTypeChanged(e.target.value)}>
 						<option value="any">Any sound type</option>
 						<option value="song">Song</option>
 						<option value="call">Call</option>
