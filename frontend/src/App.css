@@ -126,8 +126,10 @@ body {
   border-radius: 12px;
   max-width: 400px;
   width: 90%;
+  height: 90%;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
 }
 
 .modal-content h2 {
@@ -189,6 +191,20 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 1.5rem;
+  color: #333;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.close-btn:hover {
+  color: #ff0000;
 }
 
 label.quiz-subheader {
