@@ -5,6 +5,7 @@
   "main": "handlers.js",
   "type": "module",
   "dependencies": {
+    "@aws-sdk/client-s3": "3.850.0"
   },
   "devDependencies": {},
   "scripts": {

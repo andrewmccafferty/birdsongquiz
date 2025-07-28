@@ -1,0 +1,5102 @@
+[
+  {
+    "Species": "Common Ostrich",
+    "ScientificName": "Struthio camelus"
+  },
+  {
+    "Species": "Southern Cassowary",
+    "ScientificName": "Casuarius casuarius"
+  },
+  {
+    "Species": "Emu",
+    "ScientificName": "Dromaius novaehollandiae"
+  },
+  {
+    "Species": "Magpie Goose",
+    "ScientificName": "Anseranas semipalmata"
+  },
+  {
+    "Species": "Spotted Whistling-Duck",
+    "ScientificName": "Dendrocygna guttata"
+  },
+  {
+    "Species": "Plumed Whistling-Duck",
+    "ScientificName": "Dendrocygna eytoni"
+  },
+  {
+    "Species": "Wandering Whistling-Duck",
+    "ScientificName": "Dendrocygna arcuata"
+  },
+  {
+    "Species": "Plumed x Wandering Whistling-Duck (hybrid)",
+    "ScientificName": "Dendrocygna eytoni x arcuata"
+  },
+  {
+    "Species": "Canada Goose",
+    "ScientificName": "Branta canadensis"
+  },
+  {
+    "Species": "Canada Goose (canadensis Group)",
+    "ScientificName": "Branta canadensis [canadensis Group]"
+  },
+  {
+    "Species": "Cape Barren Goose",
+    "ScientificName": "Cereopsis novaehollandiae"
+  },
+  {
+    "Species": "Freckled Duck",
+    "ScientificName": "Stictonetta naevosa"
+  },
+  {
+    "Species": "Mute Swan",
+    "ScientificName": "Cygnus olor"
+  },
+  {
+    "Species": "Black Swan",
+    "ScientificName": "Cygnus atratus"
+  },
+  {
+    "Species": "Radjah Shelduck",
+    "ScientificName": "Radjah radjah"
+  },
+  {
+    "Species": "Australian Shelduck",
+    "ScientificName": "Tadorna tadornoides"
+  },
+  {
+    "Species": "Paradise Shelduck",
+    "ScientificName": "Tadorna variegata"
+  },
+  {
+    "Species": "Green Pygmy-Goose",
+    "ScientificName": "Nettapus pulchellus"
+  },
+  {
+    "Species": "Cotton Pygmy-Goose",
+    "ScientificName": "Nettapus coromandelianus"
+  },
+  {
+    "Species": "Maned Duck",
+    "ScientificName": "Chenonetta jubata"
+  },
+  {
+    "Species": "Garganey",
+    "ScientificName": "Spatula querquedula"
+  },
+  {
+    "Species": "Australasian Shoveler",
+    "ScientificName": "Spatula rhynchotis"
+  },
+  {
+    "Species": "Northern Shoveler",
+    "ScientificName": "Spatula clypeata"
+  },
+  {
+    "Species": "Eurasian Wigeon",
+    "ScientificName": "Mareca penelope"
+  },
+  {
+    "Species": "Pacific Black Duck",
+    "ScientificName": "Anas superciliosa"
+  },
+  {
+    "Species": "Mallard",
+    "ScientificName": "Anas platyrhynchos"
+  },
+  {
+    "Species": "Mallard (Domestic type)",
+    "ScientificName": "Anas platyrhynchos (Domestic type)"
+  },
+  {
+    "Species": "Mallard x Pacific Black Duck (hybrid)",
+    "ScientificName": "Anas platyrhynchos x superciliosa"
+  },
+  {
+    "Species": "Northern Pintail",
+    "ScientificName": "Anas acuta"
+  },
+  {
+    "Species": "Pacific Black Duck x Northern Pintail (hybrid)",
+    "ScientificName": "Anas superciliosa x acuta"
+  },
+  {
+    "Species": "Green-winged Teal",
+    "ScientificName": "Anas crecca"
+  },
+  {
+    "Species": "Green-winged Teal (Eurasian)",
+    "ScientificName": "Anas crecca crecca"
+  },
+  {
+    "Species": "Gray Teal",
+    "ScientificName": "Anas gracilis"
+  },
+  {
+    "Species": "Pacific Black Duck x Gray Teal (hybrid)",
+    "ScientificName": "Anas superciliosa x gracilis"
+  },
+  {
+    "Species": "Chestnut Teal",
+    "ScientificName": "Anas castanea"
+  },
+  {
+    "Species": "Pacific Black Duck x Chestnut Teal (hybrid)",
+    "ScientificName": "Anas superciliosa x castanea"
+  },
+  {
+    "Species": "Gray x Chestnut Teal (hybrid)",
+    "ScientificName": "Anas gracilis x castanea"
+  },
+  {
+    "Species": "Pink-eared Duck",
+    "ScientificName": "Malacorhynchus membranaceus"
+  },
+  {
+    "Species": "Hardhead",
+    "ScientificName": "Aythya australis"
+  },
+  {
+    "Species": "Gray Teal x Hardhead (hybrid)",
+    "ScientificName": "Anas gracilis x Aythya australis"
+  },
+  {
+    "Species": "Tufted Duck",
+    "ScientificName": "Aythya fuligula"
+  },
+  {
+    "Species": "Blue-billed Duck",
+    "ScientificName": "Oxyura australis"
+  },
+  {
+    "Species": "Musk Duck",
+    "ScientificName": "Biziura lobata"
+  },
+  {
+    "Species": "Australian Brushturkey",
+    "ScientificName": "Alectura lathami"
+  },
+  {
+    "Species": "Australian Brushturkey (Purple-pouched)",
+    "ScientificName": "Alectura lathami purpureicollis"
+  },
+  {
+    "Species": "Australian Brushturkey (Yellow-pouched)",
+    "ScientificName": "Alectura lathami lathami"
+  },
+  {
+    "Species": "Malleefowl",
+    "ScientificName": "Leipoa ocellata"
+  },
+  {
+    "Species": "Orange-footed Megapode",
+    "ScientificName": "Megapodius reinwardt"
+  },
+  {
+    "Species": "Helmeted Guineafowl",
+    "ScientificName": "Numida meleagris"
+  },
+  {
+    "Species": "California Quail",
+    "ScientificName": "Callipepla californica"
+  },
+  {
+    "Species": "Ring-necked Pheasant",
+    "ScientificName": "Phasianus colchicus"
+  },
+  {
+    "Species": "Indian Peafowl",
+    "ScientificName": "Pavo cristatus"
+  },
+  {
+    "Species": "Green Junglefowl",
+    "ScientificName": "Gallus varius"
+  },
+  {
+    "Species": "Red Junglefowl",
+    "ScientificName": "Gallus gallus"
+  },
+  {
+    "Species": "Brown Quail",
+    "ScientificName": "Synoicus ypsilophorus"
+  },
+  {
+    "Species": "Blue-breasted Quail",
+    "ScientificName": "Synoicus chinensis"
+  },
+  {
+    "Species": "Stubble Quail",
+    "ScientificName": "Coturnix pectoralis"
+  },
+  {
+    "Species": "Rock Pigeon",
+    "ScientificName": "Columba livia"
+  },
+  {
+    "Species": "Rock Pigeon (Feral Pigeon)",
+    "ScientificName": "Columba livia (Feral Pigeon)"
+  },
+  {
+    "Species": "Metallic Pigeon",
+    "ScientificName": "Columba vitiensis"
+  },
+  {
+    "Species": "Metallic Pigeon (Metallic)",
+    "ScientificName": "Columba vitiensis [vitiensis Group]"
+  },
+  {
+    "Species": "White-headed Pigeon",
+    "ScientificName": "Columba leucomela"
+  },
+  {
+    "Species": "Oriental Turtle-Dove",
+    "ScientificName": "Streptopelia orientalis"
+  },
+  {
+    "Species": "Red Collared-Dove",
+    "ScientificName": "Streptopelia tranquebarica"
+  },
+  {
+    "Species": "Spotted Dove",
+    "ScientificName": "Spilopelia chinensis"
+  },
+  {
+    "Species": "Spotted Dove (Eastern)",
+    "ScientificName": "Spilopelia chinensis chinensis/tigrina"
+  },
+  {
+    "Species": "Laughing Dove",
+    "ScientificName": "Spilopelia senegalensis"
+  },
+  {
+    "Species": "Brown Cuckoo-Dove",
+    "ScientificName": "Macropygia phasianella"
+  },
+  {
+    "Species": "Asian Emerald Dove",
+    "ScientificName": "Chalcophaps indica"
+  },
+  {
+    "Species": "Pacific Emerald Dove",
+    "ScientificName": "Chalcophaps longirostris"
+  },
+  {
+    "Species": "Stephan's Dove",
+    "ScientificName": "Chalcophaps stephani"
+  },
+  {
+    "Species": "Norfolk Ground Dove",
+    "ScientificName": "Pampusana norfolkensis"
+  },
+  {
+    "Species": "Common Bronzewing",
+    "ScientificName": "Phaps chalcoptera"
+  },
+  {
+    "Species": "Brush Bronzewing",
+    "ScientificName": "Phaps elegans"
+  },
+  {
+    "Species": "Flock Bronzewing",
+    "ScientificName": "Phaps histrionica"
+  },
+  {
+    "Species": "Crested Pigeon",
+    "ScientificName": "Ocyphaps lophotes"
+  },
+  {
+    "Species": "Spinifex Pigeon",
+    "ScientificName": "Geophaps plumifera"
+  },
+  {
+    "Species": "Spinifex Pigeon (Rufous-bellied)",
+    "ScientificName": "Geophaps plumifera ferruginea"
+  },
+  {
+    "Species": "Spinifex Pigeon (White-bellied)",
+    "ScientificName": "Geophaps plumifera plumifera/leucogaster"
+  },
+  {
+    "Species": "Squatter Pigeon",
+    "ScientificName": "Geophaps scripta"
+  },
+  {
+    "Species": "Partridge Pigeon",
+    "ScientificName": "Geophaps smithii"
+  },
+  {
+    "Species": "Partridge Pigeon (Yellow-faced)",
+    "ScientificName": "Geophaps smithii blaauwi"
+  },
+  {
+    "Species": "Partridge Pigeon (Red-faced)",
+    "ScientificName": "Geophaps smithii smithii"
+  },
+  {
+    "Species": "Chestnut-quilled Rock-Pigeon",
+    "ScientificName": "Petrophassa rufipennis"
+  },
+  {
+    "Species": "White-quilled Rock-Pigeon",
+    "ScientificName": "Petrophassa albipennis"
+  },
+  {
+    "Species": "Wonga Pigeon",
+    "ScientificName": "Leucosarcia melanoleuca"
+  },
+  {
+    "Species": "Diamond Dove",
+    "ScientificName": "Geopelia cuneata"
+  },
+  {
+    "Species": "Peaceful Dove",
+    "ScientificName": "Geopelia placida"
+  },
+  {
+    "Species": "Bar-shouldered Dove",
+    "ScientificName": "Geopelia humeralis"
+  },
+  {
+    "Species": "Nicobar Pigeon",
+    "ScientificName": "Caloenas nicobarica"
+  },
+  {
+    "Species": "Black-banded Fruit-Dove",
+    "ScientificName": "Ptilinopus alligator"
+  },
+  {
+    "Species": "Wompoo Fruit-Dove",
+    "ScientificName": "Ptilinopus magnificus"
+  },
+  {
+    "Species": "Orange-fronted Fruit-Dove",
+    "ScientificName": "Ptilinopus aurantiifrons"
+  },
+  {
+    "Species": "Superb Fruit-Dove",
+    "ScientificName": "Ptilinopus superbus"
+  },
+  {
+    "Species": "Superb Fruit-Dove (Eastern)",
+    "ScientificName": "Ptilinopus superbus superbus"
+  },
+  {
+    "Species": "Rose-crowned Fruit-Dove",
+    "ScientificName": "Ptilinopus regina"
+  },
+  {
+    "Species": "Rose-crowned Fruit-Dove (Rosy-crowned)",
+    "ScientificName": "Ptilinopus regina [regina Group]"
+  },
+  {
+    "Species": "Orange-bellied Fruit-Dove",
+    "ScientificName": "Ptilinopus iozonus"
+  },
+  {
+    "Species": "Elegant Imperial-Pigeon",
+    "ScientificName": "Ducula concinna"
+  },
+  {
+    "Species": "Pacific Imperial-Pigeon",
+    "ScientificName": "Ducula pacifica"
+  },
+  {
+    "Species": "Island Imperial-Pigeon",
+    "ScientificName": "Ducula pistrinaria"
+  },
+  {
+    "Species": "Christmas Island Imperial-Pigeon",
+    "ScientificName": "Ducula whartoni"
+  },
+  {
+    "Species": "Collared Imperial-Pigeon",
+    "ScientificName": "Ducula mullerii"
+  },
+  {
+    "Species": "Zoe's Imperial-Pigeon",
+    "ScientificName": "Ducula zoeae"
+  },
+  {
+    "Species": "Torresian Imperial-Pigeon",
+    "ScientificName": "Ducula spilorrhoa"
+  },
+  {
+    "Species": "Topknot Pigeon",
+    "ScientificName": "Lopholaimus antarcticus"
+  },
+  {
+    "Species": "New Zealand Pigeon",
+    "ScientificName": "Hemiphaga novaeseelandiae"
+  },
+  {
+    "Species": "Australian Bustard",
+    "ScientificName": "Ardeotis australis"
+  },
+  {
+    "Species": "Lesser Coucal",
+    "ScientificName": "Centropus bengalensis"
+  },
+  {
+    "Species": "Pheasant Coucal",
+    "ScientificName": "Centropus phasianinus"
+  },
+  {
+    "Species": "Pheasant Coucal (Pheasant)",
+    "ScientificName": "Centropus phasianinus [phasianinus Group]"
+  },
+  {
+    "Species": "Chestnut-winged Cuckoo",
+    "ScientificName": "Clamator coromandus"
+  },
+  {
+    "Species": "Asian Koel",
+    "ScientificName": "Eudynamys scolopaceus"
+  },
+  {
+    "Species": "Pacific Koel",
+    "ScientificName": "Eudynamys orientalis"
+  },
+  {
+    "Species": "Pacific Koel (Oriental)",
+    "ScientificName": "Eudynamys orientalis [orientalis Group]"
+  },
+  {
+    "Species": "Pacific Koel (Australian)",
+    "ScientificName": "Eudynamys orientalis cyanocephalus/subcyanocephalus"
+  },
+  {
+    "Species": "Long-tailed Koel",
+    "ScientificName": "Urodynamis taitensis"
+  },
+  {
+    "Species": "Channel-billed Cuckoo",
+    "ScientificName": "Scythrops novaehollandiae"
+  },
+  {
+    "Species": "Horsfield's Bronze-Cuckoo",
+    "ScientificName": "Chalcites basalis"
+  },
+  {
+    "Species": "Black-eared Cuckoo",
+    "ScientificName": "Chalcites osculans"
+  },
+  {
+    "Species": "Shining Bronze-Cuckoo",
+    "ScientificName": "Chalcites lucidus"
+  },
+  {
+    "Species": "Shining Bronze-Cuckoo (Shining)",
+    "ScientificName": "Chalcites lucidus lucidus"
+  },
+  {
+    "Species": "Shining Bronze-Cuckoo (Golden)",
+    "ScientificName": "Chalcites lucidus plagosus"
+  },
+  {
+    "Species": "Little Bronze-Cuckoo",
+    "ScientificName": "Chalcites minutillus"
+  },
+  {
+    "Species": "Little Bronze-Cuckoo (Little)",
+    "ScientificName": "Chalcites minutillus [minutillus Group]"
+  },
+  {
+    "Species": "Little Bronze-Cuckoo (Gould's)",
+    "ScientificName": "Chalcites minutillus [poecilurus Group]"
+  },
+  {
+    "Species": "Pallid Cuckoo",
+    "ScientificName": "Heteroscenes pallidus"
+  },
+  {
+    "Species": "Chestnut-breasted Cuckoo",
+    "ScientificName": "Cacomantis castaneiventris"
+  },
+  {
+    "Species": "Fan-tailed Cuckoo",
+    "ScientificName": "Cacomantis flabelliformis"
+  },
+  {
+    "Species": "Fan-tailed Cuckoo (Sahul)",
+    "ScientificName": "Cacomantis flabelliformis [flabelliformis Group]"
+  },
+  {
+    "Species": "Sahul Brush Cuckoo",
+    "ScientificName": "Cacomantis variolosus"
+  },
+  {
+    "Species": "Large Hawk-Cuckoo",
+    "ScientificName": "Hierococcyx sparverioides"
+  },
+  {
+    "Species": "Hodgson's Hawk-Cuckoo",
+    "ScientificName": "Hierococcyx nisicolor"
+  },
+  {
+    "Species": "Indian Cuckoo",
+    "ScientificName": "Cuculus micropterus"
+  },
+  {
+    "Species": "Common Cuckoo",
+    "ScientificName": "Cuculus canorus"
+  },
+  {
+    "Species": "Oriental Cuckoo",
+    "ScientificName": "Cuculus optatus"
+  },
+  {
+    "Species": "Spotted Nightjar",
+    "ScientificName": "Eurostopodus argus"
+  },
+  {
+    "Species": "White-throated Nightjar",
+    "ScientificName": "Eurostopodus mystacalis"
+  },
+  {
+    "Species": "Gray Nightjar",
+    "ScientificName": "Caprimulgus jotaka"
+  },
+  {
+    "Species": "Large-tailed Nightjar",
+    "ScientificName": "Caprimulgus macrurus"
+  },
+  {
+    "Species": "Savanna Nightjar",
+    "ScientificName": "Caprimulgus affinis"
+  },
+  {
+    "Species": "Savanna Nightjar (Sunda)",
+    "ScientificName": "Caprimulgus affinis [affinis Group]"
+  },
+  {
+    "Species": "Tawny Frogmouth",
+    "ScientificName": "Podargus strigoides"
+  },
+  {
+    "Species": "Marbled Frogmouth",
+    "ScientificName": "Podargus ocellatus"
+  },
+  {
+    "Species": "Marbled Frogmouth (Marbled)",
+    "ScientificName": "Podargus ocellatus [ocellatus Group]"
+  },
+  {
+    "Species": "Marbled Frogmouth (Plumed)",
+    "ScientificName": "Podargus ocellatus plumiferus"
+  },
+  {
+    "Species": "Papuan Frogmouth",
+    "ScientificName": "Podargus papuensis"
+  },
+  {
+    "Species": "Australian Owlet-nightjar",
+    "ScientificName": "Aegotheles cristatus"
+  },
+  {
+    "Species": "Papuan Spinetail",
+    "ScientificName": "Mearnsia novaeguineae"
+  },
+  {
+    "Species": "White-throated Needletail",
+    "ScientificName": "Hirundapus caudacutus"
+  },
+  {
+    "Species": "White-throated Needletail (White-lored)",
+    "ScientificName": "Hirundapus caudacutus caudacutus"
+  },
+  {
+    "Species": "Christmas Island Swiftlet",
+    "ScientificName": "Collocalia natalis"
+  },
+  {
+    "Species": "Glossy Swiftlet",
+    "ScientificName": "Collocalia esculenta"
+  },
+  {
+    "Species": "Australian Swiftlet",
+    "ScientificName": "Aerodramus terraereginae"
+  },
+  {
+    "Species": "Uniform Swiftlet",
+    "ScientificName": "Aerodramus vanikorensis"
+  },
+  {
+    "Species": "White-nest Swiftlet",
+    "ScientificName": "Aerodramus fuciphagus"
+  },
+  {
+    "Species": "White-nest Swiftlet (White-nest)",
+    "ScientificName": "Aerodramus fuciphagus [fuciphagus Group]"
+  },
+  {
+    "Species": "Common Swift",
+    "ScientificName": "Apus apus"
+  },
+  {
+    "Species": "Pacific Swift",
+    "ScientificName": "Apus pacificus"
+  },
+  {
+    "Species": "House Swift",
+    "ScientificName": "Apus nipalensis"
+  },
+  {
+    "Species": "Corn Crake",
+    "ScientificName": "Crex crex"
+  },
+  {
+    "Species": "Slaty-breasted Rail",
+    "ScientificName": "Lewinia striata"
+  },
+  {
+    "Species": "Lewin's Rail",
+    "ScientificName": "Lewinia pectoralis"
+  },
+  {
+    "Species": "Chestnut Rail",
+    "ScientificName": "Gallirallus castaneoventris"
+  },
+  {
+    "Species": "Weka",
+    "ScientificName": "Gallirallus australis"
+  },
+  {
+    "Species": "Lord Howe Rail",
+    "ScientificName": "Gallirallus sylvestris"
+  },
+  {
+    "Species": "Buff-banded Rail",
+    "ScientificName": "Gallirallus philippensis"
+  },
+  {
+    "Species": "Black-tailed Nativehen",
+    "ScientificName": "Tribonyx ventralis"
+  },
+  {
+    "Species": "Tasmanian Nativehen",
+    "ScientificName": "Tribonyx mortierii"
+  },
+  {
+    "Species": "Australian Crake",
+    "ScientificName": "Porzana fluminea"
+  },
+  {
+    "Species": "Lesser Moorhen",
+    "ScientificName": "Paragallinula angulata"
+  },
+  {
+    "Species": "Eurasian Moorhen",
+    "ScientificName": "Gallinula chloropus"
+  },
+  {
+    "Species": "Dusky Moorhen",
+    "ScientificName": "Gallinula tenebrosa"
+  },
+  {
+    "Species": "Eurasian Coot",
+    "ScientificName": "Fulica atra"
+  },
+  {
+    "Species": "Black-backed Swamphen",
+    "ScientificName": "Porphyrio indicus"
+  },
+  {
+    "Species": "Australasian Swamphen",
+    "ScientificName": "Porphyrio melanotus"
+  },
+  {
+    "Species": "Lord Howe Swamphen",
+    "ScientificName": "Porphyrio albus"
+  },
+  {
+    "Species": "White-browed Crake",
+    "ScientificName": "Poliolimnas cinereus"
+  },
+  {
+    "Species": "Watercock",
+    "ScientificName": "Gallicrex cinerea"
+  },
+  {
+    "Species": "White-breasted Waterhen",
+    "ScientificName": "Amaurornis phoenicurus"
+  },
+  {
+    "Species": "Pale-vented Bush-hen",
+    "ScientificName": "Amaurornis moluccana"
+  },
+  {
+    "Species": "Red-necked Crake",
+    "ScientificName": "Rallina tricolor"
+  },
+  {
+    "Species": "Red-legged Crake",
+    "ScientificName": "Rallina fasciata"
+  },
+  {
+    "Species": "Ruddy-breasted Crake",
+    "ScientificName": "Zapornia fusca"
+  },
+  {
+    "Species": "Baillon's Crake",
+    "ScientificName": "Zapornia pusilla"
+  },
+  {
+    "Species": "Baillon's Crake (Eastern)",
+    "ScientificName": "Zapornia pusilla pusilla"
+  },
+  {
+    "Species": "Baillon's Crake (Australasian)",
+    "ScientificName": "Zapornia pusilla [palustris Group]"
+  },
+  {
+    "Species": "Spotless Crake",
+    "ScientificName": "Zapornia tabuensis"
+  },
+  {
+    "Species": "Sarus Crane",
+    "ScientificName": "Antigone antigone"
+  },
+  {
+    "Species": "Brolga",
+    "ScientificName": "Antigone rubicunda"
+  },
+  {
+    "Species": "Beach Thick-knee",
+    "ScientificName": "Esacus magnirostris"
+  },
+  {
+    "Species": "Bush Thick-knee",
+    "ScientificName": "Burhinus grallarius"
+  },
+  {
+    "Species": "Pied Stilt",
+    "ScientificName": "Himantopus leucocephalus"
+  },
+  {
+    "Species": "Pied x Black Stilt (hybrid)",
+    "ScientificName": "Himantopus leucocephalus x novaezelandiae"
+  },
+  {
+    "Species": "Banded Stilt",
+    "ScientificName": "Cladorhynchus leucocephalus"
+  },
+  {
+    "Species": "Red-necked Avocet",
+    "ScientificName": "Recurvirostra novaehollandiae"
+  },
+  {
+    "Species": "Pied Oystercatcher",
+    "ScientificName": "Haematopus longirostris"
+  },
+  {
+    "Species": "South Island Oystercatcher",
+    "ScientificName": "Haematopus finschi"
+  },
+  {
+    "Species": "Sooty Oystercatcher",
+    "ScientificName": "Haematopus fuliginosus"
+  },
+  {
+    "Species": "Black-bellied Plover",
+    "ScientificName": "Pluvialis squatarola"
+  },
+  {
+    "Species": "American Golden-Plover",
+    "ScientificName": "Pluvialis dominica"
+  },
+  {
+    "Species": "Pacific Golden-Plover",
+    "ScientificName": "Pluvialis fulva"
+  },
+  {
+    "Species": "Common Ringed Plover",
+    "ScientificName": "Charadrius hiaticula"
+  },
+  {
+    "Species": "Semipalmated Plover",
+    "ScientificName": "Charadrius semipalmatus"
+  },
+  {
+    "Species": "Hooded Plover",
+    "ScientificName": "Thinornis cucullatus"
+  },
+  {
+    "Species": "Black-fronted Dotterel",
+    "ScientificName": "Thinornis melanops"
+  },
+  {
+    "Species": "Little Ringed Plover",
+    "ScientificName": "Thinornis dubius"
+  },
+  {
+    "Species": "Little Ringed Plover (curonicus)",
+    "ScientificName": "Thinornis dubius curonicus"
+  },
+  {
+    "Species": "Gray-headed Lapwing",
+    "ScientificName": "Vanellus cinereus"
+  },
+  {
+    "Species": "Banded Lapwing",
+    "ScientificName": "Vanellus tricolor"
+  },
+  {
+    "Species": "Masked Lapwing",
+    "ScientificName": "Vanellus miles"
+  },
+  {
+    "Species": "Masked Lapwing (Masked)",
+    "ScientificName": "Vanellus miles miles"
+  },
+  {
+    "Species": "Masked Lapwing (Black-shouldered)",
+    "ScientificName": "Vanellus miles novaehollandiae"
+  },
+  {
+    "Species": "Red-kneed Dotterel",
+    "ScientificName": "Erythrogonys cinctus"
+  },
+  {
+    "Species": "Inland Dotterel",
+    "ScientificName": "Peltohyas australis"
+  },
+  {
+    "Species": "Caspian Plover",
+    "ScientificName": "Anarhynchus asiaticus"
+  },
+  {
+    "Species": "Oriental Plover",
+    "ScientificName": "Anarhynchus veredus"
+  },
+  {
+    "Species": "Siberian Sand-Plover",
+    "ScientificName": "Anarhynchus mongolus"
+  },
+  {
+    "Species": "Tibetan Sand-Plover",
+    "ScientificName": "Anarhynchus atrifrons"
+  },
+  {
+    "Species": "Greater Sand-Plover",
+    "ScientificName": "Anarhynchus leschenaultii"
+  },
+  {
+    "Species": "Double-banded Plover",
+    "ScientificName": "Anarhynchus bicinctus"
+  },
+  {
+    "Species": "Red-capped Plover",
+    "ScientificName": "Anarhynchus ruficapillus"
+  },
+  {
+    "Species": "Kentish Plover",
+    "ScientificName": "Anarhynchus alexandrinus"
+  },
+  {
+    "Species": "Kentish Plover (Kentish)",
+    "ScientificName": "Anarhynchus alexandrinus alexandrinus/nihonensis"
+  },
+  {
+    "Species": "Plains-wanderer",
+    "ScientificName": "Pedionomus torquatus"
+  },
+  {
+    "Species": "Australian Painted-Snipe",
+    "ScientificName": "Rostratula australis"
+  },
+  {
+    "Species": "Pheasant-tailed Jacana",
+    "ScientificName": "Hydrophasianus chirurgus"
+  },
+  {
+    "Species": "Comb-crested Jacana",
+    "ScientificName": "Irediparra gallinacea"
+  },
+  {
+    "Species": "Upland Sandpiper",
+    "ScientificName": "Bartramia longicauda"
+  },
+  {
+    "Species": "Whimbrel",
+    "ScientificName": "Numenius phaeopus"
+  },
+  {
+    "Species": "Whimbrel (Hudsonian)",
+    "ScientificName": "Numenius phaeopus hudsonicus"
+  },
+  {
+    "Species": "Whimbrel (White-rumped)",
+    "ScientificName": "Numenius phaeopus [phaeopus Group]"
+  },
+  {
+    "Species": "Whimbrel (Siberian)",
+    "ScientificName": "Numenius phaeopus variegatus/rogachevae"
+  },
+  {
+    "Species": "Little Curlew",
+    "ScientificName": "Numenius minutus"
+  },
+  {
+    "Species": "Far Eastern Curlew",
+    "ScientificName": "Numenius madagascariensis"
+  },
+  {
+    "Species": "Eurasian Curlew",
+    "ScientificName": "Numenius arquata"
+  },
+  {
+    "Species": "Bar-tailed Godwit",
+    "ScientificName": "Limosa lapponica"
+  },
+  {
+    "Species": "Bar-tailed Godwit (European)",
+    "ScientificName": "Limosa lapponica [lapponica Group]"
+  },
+  {
+    "Species": "Bar-tailed Godwit (Siberian)",
+    "ScientificName": "Limosa lapponica [baueri Group]"
+  },
+  {
+    "Species": "Black-tailed Godwit",
+    "ScientificName": "Limosa limosa"
+  },
+  {
+    "Species": "Black-tailed Godwit (European)",
+    "ScientificName": "Limosa limosa limosa"
+  },
+  {
+    "Species": "Black-tailed Godwit (melanuroides)",
+    "ScientificName": "Limosa limosa melanuroides"
+  },
+  {
+    "Species": "Hudsonian Godwit",
+    "ScientificName": "Limosa haemastica"
+  },
+  {
+    "Species": "Bar-tailed x Hudsonian Godwit (hybrid)",
+    "ScientificName": "Limosa lapponica x haemastica"
+  },
+  {
+    "Species": "Asian Dowitcher",
+    "ScientificName": "Limnodromus semipalmatus"
+  },
+  {
+    "Species": "Short-billed Dowitcher",
+    "ScientificName": "Limnodromus griseus"
+  },
+  {
+    "Species": "Long-billed Dowitcher",
+    "ScientificName": "Limnodromus scolopaceus"
+  },
+  {
+    "Species": "Swinhoe's Snipe",
+    "ScientificName": "Gallinago megala"
+  },
+  {
+    "Species": "Pin-tailed Snipe",
+    "ScientificName": "Gallinago stenura"
+  },
+  {
+    "Species": "Latham's Snipe",
+    "ScientificName": "Gallinago hardwickii"
+  },
+  {
+    "Species": "Wilson's Phalarope",
+    "ScientificName": "Phalaropus tricolor"
+  },
+  {
+    "Species": "Red Phalarope",
+    "ScientificName": "Phalaropus fulicarius"
+  },
+  {
+    "Species": "Red-necked Phalarope",
+    "ScientificName": "Phalaropus lobatus"
+  },
+  {
+    "Species": "Terek Sandpiper",
+    "ScientificName": "Xenus cinereus"
+  },
+  {
+    "Species": "Common Sandpiper",
+    "ScientificName": "Actitis hypoleucos"
+  },
+  {
+    "Species": "Green Sandpiper",
+    "ScientificName": "Tringa ochropus"
+  },
+  {
+    "Species": "Gray-tailed Tattler",
+    "ScientificName": "Tringa brevipes"
+  },
+  {
+    "Species": "Wandering Tattler",
+    "ScientificName": "Tringa incana"
+  },
+  {
+    "Species": "Marsh Sandpiper",
+    "ScientificName": "Tringa stagnatilis"
+  },
+  {
+    "Species": "Wood Sandpiper",
+    "ScientificName": "Tringa glareola"
+  },
+  {
+    "Species": "Common Redshank",
+    "ScientificName": "Tringa totanus"
+  },
+  {
+    "Species": "Lesser Yellowlegs",
+    "ScientificName": "Tringa flavipes"
+  },
+  {
+    "Species": "Nordmann's Greenshank",
+    "ScientificName": "Tringa guttifer"
+  },
+  {
+    "Species": "Spotted Redshank",
+    "ScientificName": "Tringa erythropus"
+  },
+  {
+    "Species": "Common Greenshank",
+    "ScientificName": "Tringa nebularia"
+  },
+  {
+    "Species": "Ruddy Turnstone",
+    "ScientificName": "Arenaria interpres"
+  },
+  {
+    "Species": "Great Knot",
+    "ScientificName": "Calidris tenuirostris"
+  },
+  {
+    "Species": "Red Knot",
+    "ScientificName": "Calidris canutus"
+  },
+  {
+    "Species": "Ruff",
+    "ScientificName": "Calidris pugnax"
+  },
+  {
+    "Species": "Broad-billed Sandpiper",
+    "ScientificName": "Calidris falcinellus"
+  },
+  {
+    "Species": "Sharp-tailed Sandpiper",
+    "ScientificName": "Calidris acuminata"
+  },
+  {
+    "Species": "Curlew Sandpiper",
+    "ScientificName": "Calidris ferruginea"
+  },
+  {
+    "Species": "Stilt Sandpiper",
+    "ScientificName": "Calidris himantopus"
+  },
+  {
+    "Species": "Temminck's Stint",
+    "ScientificName": "Calidris temminckii"
+  },
+  {
+    "Species": "Long-toed Stint",
+    "ScientificName": "Calidris subminuta"
+  },
+  {
+    "Species": "Red-necked Stint",
+    "ScientificName": "Calidris ruficollis"
+  },
+  {
+    "Species": "Buff-breasted Sandpiper",
+    "ScientificName": "Calidris subruficollis"
+  },
+  {
+    "Species": "Sanderling",
+    "ScientificName": "Calidris alba"
+  },
+  {
+    "Species": "Dunlin",
+    "ScientificName": "Calidris alpina"
+  },
+  {
+    "Species": "Dunlin (sakhalina Group)",
+    "ScientificName": "Calidris alpina [sakhalina Group]"
+  },
+  {
+    "Species": "Baird's Sandpiper",
+    "ScientificName": "Calidris bairdii"
+  },
+  {
+    "Species": "Little Stint",
+    "ScientificName": "Calidris minuta"
+  },
+  {
+    "Species": "White-rumped Sandpiper",
+    "ScientificName": "Calidris fuscicollis"
+  },
+  {
+    "Species": "Pectoral Sandpiper",
+    "ScientificName": "Calidris melanotos"
+  },
+  {
+    "Species": "Curlew x Pectoral Sandpiper (hybrid)",
+    "ScientificName": "Calidris ferruginea x melanotos"
+  },
+  {
+    "Species": "Red-backed Buttonquail",
+    "ScientificName": "Turnix maculosus"
+  },
+  {
+    "Species": "Little Buttonquail",
+    "ScientificName": "Turnix velox"
+  },
+  {
+    "Species": "Red-chested Buttonquail",
+    "ScientificName": "Turnix pyrrhothorax"
+  },
+  {
+    "Species": "Chestnut-backed Buttonquail",
+    "ScientificName": "Turnix castanotus"
+  },
+  {
+    "Species": "Buff-breasted Buttonquail",
+    "ScientificName": "Turnix olivii"
+  },
+  {
+    "Species": "Painted Buttonquail",
+    "ScientificName": "Turnix varius"
+  },
+  {
+    "Species": "Black-breasted Buttonquail",
+    "ScientificName": "Turnix melanogaster"
+  },
+  {
+    "Species": "Australian Pratincole",
+    "ScientificName": "Glareola isabella"
+  },
+  {
+    "Species": "Collared Pratincole",
+    "ScientificName": "Glareola pratincola"
+  },
+  {
+    "Species": "Oriental Pratincole",
+    "ScientificName": "Glareola maldivarum"
+  },
+  {
+    "Species": "Long-tailed Jaeger",
+    "ScientificName": "Stercorarius longicaudus"
+  },
+  {
+    "Species": "Parasitic Jaeger",
+    "ScientificName": "Stercorarius parasiticus"
+  },
+  {
+    "Species": "Pomarine Jaeger",
+    "ScientificName": "Stercorarius pomarinus"
+  },
+  {
+    "Species": "Brown Skua",
+    "ScientificName": "Stercorarius antarcticus"
+  },
+  {
+    "Species": "Brown Skua (Subantarctic)",
+    "ScientificName": "Stercorarius antarcticus lonnbergi"
+  },
+  {
+    "Species": "South Polar Skua",
+    "ScientificName": "Stercorarius maccormicki"
+  },
+  {
+    "Species": "Sabine's Gull",
+    "ScientificName": "Xema sabini"
+  },
+  {
+    "Species": "Silver Gull",
+    "ScientificName": "Chroicocephalus novaehollandiae"
+  },
+  {
+    "Species": "Silver Gull (Silver)",
+    "ScientificName": "Chroicocephalus novaehollandiae novaehollandiae/forsteri"
+  },
+  {
+    "Species": "Silver Gull (Red-billed)",
+    "ScientificName": "Chroicocephalus novaehollandiae scopulinus"
+  },
+  {
+    "Species": "Black-headed Gull",
+    "ScientificName": "Chroicocephalus ridibundus"
+  },
+  {
+    "Species": "Laughing Gull",
+    "ScientificName": "Leucophaeus atricilla"
+  },
+  {
+    "Species": "Franklin's Gull",
+    "ScientificName": "Leucophaeus pipixcan"
+  },
+  {
+    "Species": "Pacific Gull",
+    "ScientificName": "Larus pacificus"
+  },
+  {
+    "Species": "Black-tailed Gull",
+    "ScientificName": "Larus crassirostris"
+  },
+  {
+    "Species": "Common Gull",
+    "ScientificName": "Larus canus"
+  },
+  {
+    "Species": "Common Gull (Kamchatka)",
+    "ScientificName": "Larus canus kamtschatschensis"
+  },
+  {
+    "Species": "Kelp Gull",
+    "ScientificName": "Larus dominicanus"
+  },
+  {
+    "Species": "Kelp Gull (dominicanus)",
+    "ScientificName": "Larus dominicanus dominicanus"
+  },
+  {
+    "Species": "Lesser Black-backed Gull",
+    "ScientificName": "Larus fuscus"
+  },
+  {
+    "Species": "Lesser Black-backed Gull (fuscus)",
+    "ScientificName": "Larus fuscus fuscus"
+  },
+  {
+    "Species": "Lesser Black-backed Gull (Heuglin's)",
+    "ScientificName": "Larus fuscus heuglini"
+  },
+  {
+    "Species": "Lesser Black-backed Gull (taimyrensis)",
+    "ScientificName": "Larus fuscus taimyrensis"
+  },
+  {
+    "Species": "Slaty-backed Gull",
+    "ScientificName": "Larus schistisagus"
+  },
+  {
+    "Species": "White Tern",
+    "ScientificName": "Gygis alba"
+  },
+  {
+    "Species": "White Tern (Pacific)",
+    "ScientificName": "Gygis alba candida/leucopes"
+  },
+  {
+    "Species": "Brown Noddy",
+    "ScientificName": "Anous stolidus"
+  },
+  {
+    "Species": "Lesser Noddy",
+    "ScientificName": "Anous tenuirostris"
+  },
+  {
+    "Species": "Black Noddy",
+    "ScientificName": "Anous minutus"
+  },
+  {
+    "Species": "Black Noddy (minutus Group)",
+    "ScientificName": "Anous minutus [minutus Group]"
+  },
+  {
+    "Species": "Gray Noddy",
+    "ScientificName": "Anous albivitta"
+  },
+  {
+    "Species": "Blue-gray Noddy",
+    "ScientificName": "Anous ceruleus"
+  },
+  {
+    "Species": "Aleutian Tern",
+    "ScientificName": "Onychoprion aleuticus"
+  },
+  {
+    "Species": "Sooty Tern",
+    "ScientificName": "Onychoprion fuscatus"
+  },
+  {
+    "Species": "Bridled Tern",
+    "ScientificName": "Onychoprion anaethetus"
+  },
+  {
+    "Species": "Little Tern",
+    "ScientificName": "Sternula albifrons"
+  },
+  {
+    "Species": "Saunders's Tern",
+    "ScientificName": "Sternula saundersi"
+  },
+  {
+    "Species": "Australian Fairy Tern",
+    "ScientificName": "Sternula nereis"
+  },
+  {
+    "Species": "Little x Australian Fairy Tern (hybrid)",
+    "ScientificName": "Sternula albifrons x nereis"
+  },
+  {
+    "Species": "Gull-billed Tern",
+    "ScientificName": "Gelochelidon nilotica"
+  },
+  {
+    "Species": "Australian Tern",
+    "ScientificName": "Gelochelidon macrotarsa"
+  },
+  {
+    "Species": "Caspian Tern",
+    "ScientificName": "Hydroprogne caspia"
+  },
+  {
+    "Species": "Whiskered Tern",
+    "ScientificName": "Chlidonias hybrida"
+  },
+  {
+    "Species": "Black-fronted Tern",
+    "ScientificName": "Chlidonias albostriatus"
+  },
+  {
+    "Species": "Black Tern",
+    "ScientificName": "Chlidonias niger"
+  },
+  {
+    "Species": "Black Tern (Eurasian)",
+    "ScientificName": "Chlidonias niger niger"
+  },
+  {
+    "Species": "Black Tern (American)",
+    "ScientificName": "Chlidonias niger surinamensis"
+  },
+  {
+    "Species": "White-winged Tern",
+    "ScientificName": "Chlidonias leucopterus"
+  },
+  {
+    "Species": "Arctic Tern",
+    "ScientificName": "Sterna paradisaea"
+  },
+  {
+    "Species": "Antarctic Tern",
+    "ScientificName": "Sterna vittata"
+  },
+  {
+    "Species": "Antarctic Tern (Antarctic)",
+    "ScientificName": "Sterna vittata [vittata Group]"
+  },
+  {
+    "Species": "Common Tern",
+    "ScientificName": "Sterna hirundo"
+  },
+  {
+    "Species": "Common Tern (longipennis)",
+    "ScientificName": "Sterna hirundo longipennis"
+  },
+  {
+    "Species": "Black-naped Tern",
+    "ScientificName": "Sterna sumatrana"
+  },
+  {
+    "Species": "Roseate Tern",
+    "ScientificName": "Sterna dougallii"
+  },
+  {
+    "Species": "White-fronted Tern",
+    "ScientificName": "Sterna striata"
+  },
+  {
+    "Species": "Lesser Crested Tern",
+    "ScientificName": "Thalasseus bengalensis"
+  },
+  {
+    "Species": "Great Crested Tern",
+    "ScientificName": "Thalasseus bergii"
+  },
+  {
+    "Species": "Greater Flamingo",
+    "ScientificName": "Phoenicopterus roseus"
+  },
+  {
+    "Species": "Little Grebe",
+    "ScientificName": "Tachybaptus ruficollis"
+  },
+  {
+    "Species": "Little Grebe (Tricolored)",
+    "ScientificName": "Tachybaptus ruficollis [tricolor Group]"
+  },
+  {
+    "Species": "Australasian Grebe",
+    "ScientificName": "Tachybaptus novaehollandiae"
+  },
+  {
+    "Species": "Hoary-headed Grebe",
+    "ScientificName": "Poliocephalus poliocephalus"
+  },
+  {
+    "Species": "Great Crested Grebe",
+    "ScientificName": "Podiceps cristatus"
+  },
+  {
+    "Species": "White-tailed Tropicbird",
+    "ScientificName": "Phaethon lepturus"
+  },
+  {
+    "Species": "White-tailed Tropicbird (Indian Ocean)",
+    "ScientificName": "Phaethon lepturus lepturus"
+  },
+  {
+    "Species": "White-tailed Tropicbird (Golden)",
+    "ScientificName": "Phaethon lepturus fulvus"
+  },
+  {
+    "Species": "White-tailed Tropicbird (Pacific)",
+    "ScientificName": "Phaethon lepturus dorotheae"
+  },
+  {
+    "Species": "Red-billed Tropicbird",
+    "ScientificName": "Phaethon aethereus"
+  },
+  {
+    "Species": "Red-tailed Tropicbird",
+    "ScientificName": "Phaethon rubricauda"
+  },
+  {
+    "Species": "King Penguin",
+    "ScientificName": "Aptenodytes patagonicus"
+  },
+  {
+    "Species": "Emperor Penguin",
+    "ScientificName": "Aptenodytes forsteri"
+  },
+  {
+    "Species": "Adelie Penguin",
+    "ScientificName": "Pygoscelis adeliae"
+  },
+  {
+    "Species": "Gentoo Penguin",
+    "ScientificName": "Pygoscelis papua"
+  },
+  {
+    "Species": "Chinstrap Penguin",
+    "ScientificName": "Pygoscelis antarcticus"
+  },
+  {
+    "Species": "Little Penguin",
+    "ScientificName": "Eudyptula minor"
+  },
+  {
+    "Species": "Magellanic Penguin",
+    "ScientificName": "Spheniscus magellanicus"
+  },
+  {
+    "Species": "Fiordland Penguin",
+    "ScientificName": "Eudyptes pachyrhynchus"
+  },
+  {
+    "Species": "Erect-crested Penguin",
+    "ScientificName": "Eudyptes sclateri"
+  },
+  {
+    "Species": "Macaroni Penguin",
+    "ScientificName": "Eudyptes chrysolophus"
+  },
+  {
+    "Species": "Royal Penguin",
+    "ScientificName": "Eudyptes schlegeli"
+  },
+  {
+    "Species": "Southern Rockhopper Penguin",
+    "ScientificName": "Eudyptes chrysocome"
+  },
+  {
+    "Species": "Southern Rockhopper Penguin (Western)",
+    "ScientificName": "Eudyptes chrysocome chrysocome"
+  },
+  {
+    "Species": "Southern Rockhopper Penguin (Eastern)",
+    "ScientificName": "Eudyptes chrysocome filholi"
+  },
+  {
+    "Species": "Moseley's Rockhopper Penguin",
+    "ScientificName": "Eudyptes moseleyi"
+  },
+  {
+    "Species": "Snares Penguin",
+    "ScientificName": "Eudyptes robustus"
+  },
+  {
+    "Species": "Northern Royal Albatross",
+    "ScientificName": "Diomedea sanfordi"
+  },
+  {
+    "Species": "Southern Royal Albatross",
+    "ScientificName": "Diomedea epomophora"
+  },
+  {
+    "Species": "Snowy Albatross",
+    "ScientificName": "Diomedea exulans"
+  },
+  {
+    "Species": "Tristan Albatross",
+    "ScientificName": "Diomedea dabbenena"
+  },
+  {
+    "Species": "Antipodean Albatross",
+    "ScientificName": "Diomedea antipodensis"
+  },
+  {
+    "Species": "Antipodean Albatross (New Zealand)",
+    "ScientificName": "Diomedea antipodensis antipodensis"
+  },
+  {
+    "Species": "Antipodean Albatross (Gibson's)",
+    "ScientificName": "Diomedea antipodensis gibsoni"
+  },
+  {
+    "Species": "Amsterdam Albatross",
+    "ScientificName": "Diomedea amsterdamensis"
+  },
+  {
+    "Species": "Laysan Albatross",
+    "ScientificName": "Phoebastria immutabilis"
+  },
+  {
+    "Species": "Sooty Albatross",
+    "ScientificName": "Phoebetria fusca"
+  },
+  {
+    "Species": "Light-mantled Albatross",
+    "ScientificName": "Phoebetria palpebrata"
+  },
+  {
+    "Species": "Atlantic Yellow-nosed Albatross",
+    "ScientificName": "Thalassarche chlororhynchos"
+  },
+  {
+    "Species": "Indian Yellow-nosed Albatross",
+    "ScientificName": "Thalassarche carteri"
+  },
+  {
+    "Species": "Gray-headed Albatross",
+    "ScientificName": "Thalassarche chrysostoma"
+  },
+  {
+    "Species": "Buller's Albatross",
+    "ScientificName": "Thalassarche bulleri"
+  },
+  {
+    "Species": "White-capped Albatross",
+    "ScientificName": "Thalassarche cauta"
+  },
+  {
+    "Species": "White-capped Albatross (cauta)",
+    "ScientificName": "Thalassarche cauta cauta"
+  },
+  {
+    "Species": "White-capped Albatross (steadi)",
+    "ScientificName": "Thalassarche cauta steadi"
+  },
+  {
+    "Species": "Salvin's Albatross",
+    "ScientificName": "Thalassarche salvini"
+  },
+  {
+    "Species": "Chatham Albatross",
+    "ScientificName": "Thalassarche eremita"
+  },
+  {
+    "Species": "Black-browed Albatross",
+    "ScientificName": "Thalassarche melanophris"
+  },
+  {
+    "Species": "Black-browed Albatross (Black-browed)",
+    "ScientificName": "Thalassarche melanophris melanophris"
+  },
+  {
+    "Species": "Black-browed Albatross (Campbell)",
+    "ScientificName": "Thalassarche melanophris impavida"
+  },
+  {
+    "Species": "Wilson's Storm-Petrel",
+    "ScientificName": "Oceanites oceanicus"
+  },
+  {
+    "Species": "Wilson's Storm-Petrel (Wilson's)",
+    "ScientificName": "Oceanites oceanicus oceanicus/exasperatus"
+  },
+  {
+    "Species": "Gray-backed Storm-Petrel",
+    "ScientificName": "Garrodia nereis"
+  },
+  {
+    "Species": "White-faced Storm-Petrel",
+    "ScientificName": "Pelagodroma marina"
+  },
+  {
+    "Species": "White-bellied Storm-Petrel",
+    "ScientificName": "Fregetta grallaria"
+  },
+  {
+    "Species": "White-bellied Storm-Petrel (White-bellied)",
+    "ScientificName": "Fregetta grallaria [grallaria Group]"
+  },
+  {
+    "Species": "New Zealand Storm-Petrel",
+    "ScientificName": "Fregetta maoriana"
+  },
+  {
+    "Species": "New Caledonian Storm-Petrel",
+    "ScientificName": "Fregetta lineata"
+  },
+  {
+    "Species": "Black-bellied Storm-Petrel",
+    "ScientificName": "Fregetta tropica"
+  },
+  {
+    "Species": "Black-bellied Storm-Petrel (Subantarctic)",
+    "ScientificName": "Fregetta tropica tropica"
+  },
+  {
+    "Species": "Polynesian Storm-Petrel",
+    "ScientificName": "Nesofregetta fuliginosa"
+  },
+  {
+    "Species": "Leach's Storm-Petrel",
+    "ScientificName": "Hydrobates leucorhous"
+  },
+  {
+    "Species": "Leach's Storm-Petrel (Leach's)",
+    "ScientificName": "Hydrobates leucorhous leucorhous"
+  },
+  {
+    "Species": "Swinhoe's Storm-Petrel",
+    "ScientificName": "Hydrobates monorhis"
+  },
+  {
+    "Species": "Band-rumped Storm-Petrel",
+    "ScientificName": "Hydrobates castro"
+  },
+  {
+    "Species": "Matsudaira's Storm-Petrel",
+    "ScientificName": "Hydrobates matsudairae"
+  },
+  {
+    "Species": "Tristram's Storm-Petrel",
+    "ScientificName": "Hydrobates tristrami"
+  },
+  {
+    "Species": "Southern Giant-Petrel",
+    "ScientificName": "Macronectes giganteus"
+  },
+  {
+    "Species": "Northern Giant-Petrel",
+    "ScientificName": "Macronectes halli"
+  },
+  {
+    "Species": "Southern Fulmar",
+    "ScientificName": "Fulmarus glacialoides"
+  },
+  {
+    "Species": "Antarctic Petrel",
+    "ScientificName": "Thalassoica antarctica"
+  },
+  {
+    "Species": "Pintado Petrel",
+    "ScientificName": "Daption capense"
+  },
+  {
+    "Species": "Pintado Petrel (Antarctic)",
+    "ScientificName": "Daption capense capense"
+  },
+  {
+    "Species": "Pintado Petrel (Snares)",
+    "ScientificName": "Daption capense australe"
+  },
+  {
+    "Species": "Snow Petrel",
+    "ScientificName": "Pagodroma nivea"
+  },
+  {
+    "Species": "Kerguelen Petrel",
+    "ScientificName": "Aphrodroma brevirostris"
+  },
+  {
+    "Species": "Great-winged Petrel",
+    "ScientificName": "Pterodroma macroptera"
+  },
+  {
+    "Species": "Gray-faced Petrel",
+    "ScientificName": "Pterodroma gouldi"
+  },
+  {
+    "Species": "Kermadec Petrel",
+    "ScientificName": "Pterodroma neglecta"
+  },
+  {
+    "Species": "Trindade Petrel",
+    "ScientificName": "Pterodroma arminjoniana"
+  },
+  {
+    "Species": "Herald Petrel",
+    "ScientificName": "Pterodroma heraldica"
+  },
+  {
+    "Species": "Providence Petrel",
+    "ScientificName": "Pterodroma solandri"
+  },
+  {
+    "Species": "Soft-plumaged Petrel",
+    "ScientificName": "Pterodroma mollis"
+  },
+  {
+    "Species": "Barau's Petrel",
+    "ScientificName": "Pterodroma baraui"
+  },
+  {
+    "Species": "White-headed Petrel",
+    "ScientificName": "Pterodroma lessonii"
+  },
+  {
+    "Species": "Mottled Petrel",
+    "ScientificName": "Pterodroma inexpectata"
+  },
+  {
+    "Species": "Juan Fernandez Petrel",
+    "ScientificName": "Pterodroma externa"
+  },
+  {
+    "Species": "Atlantic Petrel",
+    "ScientificName": "Pterodroma incerta"
+  },
+  {
+    "Species": "White-necked Petrel",
+    "ScientificName": "Pterodroma cervicalis"
+  },
+  {
+    "Species": "Black-winged Petrel",
+    "ScientificName": "Pterodroma nigripennis"
+  },
+  {
+    "Species": "Cook's Petrel",
+    "ScientificName": "Pterodroma cookii"
+  },
+  {
+    "Species": "Gould's Petrel",
+    "ScientificName": "Pterodroma leucoptera"
+  },
+  {
+    "Species": "Gould's Petrel (Gould's)",
+    "ScientificName": "Pterodroma leucoptera leucoptera"
+  },
+  {
+    "Species": "Gould's Petrel (New Caledonian)",
+    "ScientificName": "Pterodroma leucoptera caledonica"
+  },
+  {
+    "Species": "Collared Petrel",
+    "ScientificName": "Pterodroma brevipes"
+  },
+  {
+    "Species": "Collared Petrel (Collared)",
+    "ScientificName": "Pterodroma brevipes brevipes"
+  },
+  {
+    "Species": "Collared Petrel (Magnificent)",
+    "ScientificName": "Pterodroma brevipes magnificens"
+  },
+  {
+    "Species": "Stejneger's Petrel",
+    "ScientificName": "Pterodroma longirostris"
+  },
+  {
+    "Species": "Pycroft's Petrel",
+    "ScientificName": "Pterodroma pycrofti"
+  },
+  {
+    "Species": "Phoenix Petrel",
+    "ScientificName": "Pterodroma alba"
+  },
+  {
+    "Species": "Vanuatu Petrel",
+    "ScientificName": "Pterodroma occulta"
+  },
+  {
+    "Species": "Blue Petrel",
+    "ScientificName": "Halobaena caerulea"
+  },
+  {
+    "Species": "Fairy Prion",
+    "ScientificName": "Pachyptila turtur"
+  },
+  {
+    "Species": "Broad-billed Prion",
+    "ScientificName": "Pachyptila vittata"
+  },
+  {
+    "Species": "Salvin's Prion",
+    "ScientificName": "Pachyptila salvini"
+  },
+  {
+    "Species": "MacGillivray's Prion",
+    "ScientificName": "Pachyptila macgillivrayi"
+  },
+  {
+    "Species": "Antarctic Prion",
+    "ScientificName": "Pachyptila desolata"
+  },
+  {
+    "Species": "Slender-billed Prion",
+    "ScientificName": "Pachyptila belcheri"
+  },
+  {
+    "Species": "Fulmar Prion",
+    "ScientificName": "Pachyptila crassirostris"
+  },
+  {
+    "Species": "Bulwer's Petrel",
+    "ScientificName": "Bulweria bulwerii"
+  },
+  {
+    "Species": "Jouanin's Petrel",
+    "ScientificName": "Bulweria fallax"
+  },
+  {
+    "Species": "Tahiti Petrel",
+    "ScientificName": "Pseudobulweria rostrata"
+  },
+  {
+    "Species": "Gray Petrel",
+    "ScientificName": "Procellaria cinerea"
+  },
+  {
+    "Species": "White-chinned Petrel",
+    "ScientificName": "Procellaria aequinoctialis"
+  },
+  {
+    "Species": "Parkinson's Petrel",
+    "ScientificName": "Procellaria parkinsoni"
+  },
+  {
+    "Species": "Westland Petrel",
+    "ScientificName": "Procellaria westlandica"
+  },
+  {
+    "Species": "Streaked Shearwater",
+    "ScientificName": "Calonectris leucomelas"
+  },
+  {
+    "Species": "Cory's Shearwater",
+    "ScientificName": "Calonectris borealis"
+  },
+  {
+    "Species": "Pink-footed Shearwater",
+    "ScientificName": "Ardenna creatopus"
+  },
+  {
+    "Species": "Flesh-footed Shearwater",
+    "ScientificName": "Ardenna carneipes"
+  },
+  {
+    "Species": "Great Shearwater",
+    "ScientificName": "Ardenna gravis"
+  },
+  {
+    "Species": "Wedge-tailed Shearwater",
+    "ScientificName": "Ardenna pacifica"
+  },
+  {
+    "Species": "Buller's Shearwater",
+    "ScientificName": "Ardenna bulleri"
+  },
+  {
+    "Species": "Sooty Shearwater",
+    "ScientificName": "Ardenna grisea"
+  },
+  {
+    "Species": "Short-tailed Shearwater",
+    "ScientificName": "Ardenna tenuirostris"
+  },
+  {
+    "Species": "Manx Shearwater",
+    "ScientificName": "Puffinus puffinus"
+  },
+  {
+    "Species": "Hutton's Shearwater",
+    "ScientificName": "Puffinus huttoni"
+  },
+  {
+    "Species": "Newell's Shearwater",
+    "ScientificName": "Puffinus newelli"
+  },
+  {
+    "Species": "Fluttering Shearwater",
+    "ScientificName": "Puffinus gavia"
+  },
+  {
+    "Species": "Little Shearwater",
+    "ScientificName": "Puffinus assimilis"
+  },
+  {
+    "Species": "Little Shearwater (Tasman)",
+    "ScientificName": "Puffinus assimilis assimilis"
+  },
+  {
+    "Species": "Little Shearwater (West Australian)",
+    "ScientificName": "Puffinus assimilis tunneyi"
+  },
+  {
+    "Species": "Subantarctic Shearwater",
+    "ScientificName": "Puffinus elegans"
+  },
+  {
+    "Species": "Tropical Shearwater",
+    "ScientificName": "Puffinus bailloni"
+  },
+  {
+    "Species": "Tropical Shearwater (Mascarene)",
+    "ScientificName": "Puffinus bailloni bailloni"
+  },
+  {
+    "Species": "Tropical Shearwater (Indopacific)",
+    "ScientificName": "Puffinus bailloni [dichrous Group]"
+  },
+  {
+    "Species": "Heinroth's Shearwater",
+    "ScientificName": "Puffinus heinrothi"
+  },
+  {
+    "Species": "Common Diving-Petrel",
+    "ScientificName": "Pelecanoides urinatrix"
+  },
+  {
+    "Species": "South Georgia Diving-Petrel",
+    "ScientificName": "Pelecanoides georgicus"
+  },
+  {
+    "Species": "Black-necked Stork",
+    "ScientificName": "Ephippiorhynchus asiaticus"
+  },
+  {
+    "Species": "Lesser Frigatebird",
+    "ScientificName": "Fregata ariel"
+  },
+  {
+    "Species": "Lesser Frigatebird (Lesser)",
+    "ScientificName": "Fregata ariel ariel/iredalei"
+  },
+  {
+    "Species": "Great Frigatebird",
+    "ScientificName": "Fregata minor"
+  },
+  {
+    "Species": "Christmas Island Frigatebird",
+    "ScientificName": "Fregata andrewsi"
+  },
+  {
+    "Species": "Abbott's Booby",
+    "ScientificName": "Papasula abbotti"
+  },
+  {
+    "Species": "Cape Gannet",
+    "ScientificName": "Morus capensis"
+  },
+  {
+    "Species": "Australasian Gannet",
+    "ScientificName": "Morus serrator"
+  },
+  {
+    "Species": "Red-footed Booby",
+    "ScientificName": "Sula sula"
+  },
+  {
+    "Species": "Red-footed Booby (Indopacific)",
+    "ScientificName": "Sula sula rubripes"
+  },
+  {
+    "Species": "Red-footed Booby (Eastern Pacific)",
+    "ScientificName": "Sula sula websteri"
+  },
+  {
+    "Species": "Brown Booby",
+    "ScientificName": "Sula leucogaster"
+  },
+  {
+    "Species": "Brown Booby (Atlantic)",
+    "ScientificName": "Sula leucogaster leucogaster"
+  },
+  {
+    "Species": "Brown Booby (Forster's)",
+    "ScientificName": "Sula leucogaster plotus"
+  },
+  {
+    "Species": "Masked Booby",
+    "ScientificName": "Sula dactylatra"
+  },
+  {
+    "Species": "Nazca Booby",
+    "ScientificName": "Sula granti"
+  },
+  {
+    "Species": "African Darter",
+    "ScientificName": "Anhinga rufa"
+  },
+  {
+    "Species": "Australasian Darter",
+    "ScientificName": "Anhinga novaehollandiae"
+  },
+  {
+    "Species": "Little Pied Cormorant",
+    "ScientificName": "Microcarbo melanoleucos"
+  },
+  {
+    "Species": "Great Cormorant",
+    "ScientificName": "Phalacrocorax carbo"
+  },
+  {
+    "Species": "Great Cormorant (Australasian)",
+    "ScientificName": "Phalacrocorax carbo novaehollandiae"
+  },
+  {
+    "Species": "Spotted Shag",
+    "ScientificName": "Phalacrocorax punctatus"
+  },
+  {
+    "Species": "Little Black Cormorant",
+    "ScientificName": "Phalacrocorax sulcirostris"
+  },
+  {
+    "Species": "Pied Cormorant",
+    "ScientificName": "Phalacrocorax varius"
+  },
+  {
+    "Species": "Black-faced Cormorant",
+    "ScientificName": "Phalacrocorax fuscescens"
+  },
+  {
+    "Species": "Imperial Cormorant",
+    "ScientificName": "Leucocarbo atriceps"
+  },
+  {
+    "Species": "Imperial Cormorant (Blue-eyed)",
+    "ScientificName": "Leucocarbo atriceps (Blue-eyed)"
+  },
+  {
+    "Species": "Imperial Cormorant (King)",
+    "ScientificName": "Leucocarbo atriceps (King)"
+  },
+  {
+    "Species": "Macquarie Shag",
+    "ScientificName": "Leucocarbo purpurascens"
+  },
+  {
+    "Species": "Glossy Ibis",
+    "ScientificName": "Plegadis falcinellus"
+  },
+  {
+    "Species": "Australian Ibis",
+    "ScientificName": "Threskiornis molucca"
+  },
+  {
+    "Species": "Straw-necked Ibis",
+    "ScientificName": "Threskiornis spinicollis"
+  },
+  {
+    "Species": "Australian x Straw-necked Ibis (hybrid)",
+    "ScientificName": "Threskiornis molucca x spinicollis"
+  },
+  {
+    "Species": "Royal Spoonbill",
+    "ScientificName": "Platalea regia"
+  },
+  {
+    "Species": "Yellow-billed Spoonbill",
+    "ScientificName": "Platalea flavipes"
+  },
+  {
+    "Species": "Australian Pelican",
+    "ScientificName": "Pelecanus conspicillatus"
+  },
+  {
+    "Species": "Australasian Bittern",
+    "ScientificName": "Botaurus poiciloptilus"
+  },
+  {
+    "Species": "Black Bittern",
+    "ScientificName": "Botaurus flavicollis"
+  },
+  {
+    "Species": "Cinnamon Bittern",
+    "ScientificName": "Botaurus cinnamomeus"
+  },
+  {
+    "Species": "Schrenck's Bittern",
+    "ScientificName": "Botaurus eurhythmus"
+  },
+  {
+    "Species": "Yellow Bittern",
+    "ScientificName": "Botaurus sinensis"
+  },
+  {
+    "Species": "Black-backed Bittern",
+    "ScientificName": "Botaurus dubius"
+  },
+  {
+    "Species": "Black-crowned Night Heron",
+    "ScientificName": "Nycticorax nycticorax"
+  },
+  {
+    "Species": "Black-crowned Night Heron (Eurasian)",
+    "ScientificName": "Nycticorax nycticorax nycticorax"
+  },
+  {
+    "Species": "Nankeen Night Heron",
+    "ScientificName": "Nycticorax caledonicus"
+  },
+  {
+    "Species": "Malayan Night Heron",
+    "ScientificName": "Gorsachius melanolophus"
+  },
+  {
+    "Species": "Japanese Night Heron",
+    "ScientificName": "Gorsachius goisagi"
+  },
+  {
+    "Species": "Pacific Reef-Heron",
+    "ScientificName": "Egretta sacra"
+  },
+  {
+    "Species": "Little Egret",
+    "ScientificName": "Egretta garzetta"
+  },
+  {
+    "Species": "Little Egret (Western)",
+    "ScientificName": "Egretta garzetta garzetta"
+  },
+  {
+    "Species": "Little Egret (Australasian)",
+    "ScientificName": "Egretta garzetta immaculata"
+  },
+  {
+    "Species": "Western Reef-Heron",
+    "ScientificName": "Egretta gularis"
+  },
+  {
+    "Species": "Western Reef-Heron (Western)",
+    "ScientificName": "Egretta gularis gularis"
+  },
+  {
+    "Species": "Western Reef-Heron (Eastern)",
+    "ScientificName": "Egretta gularis schistacea"
+  },
+  {
+    "Species": "Pied Heron",
+    "ScientificName": "Egretta picata"
+  },
+  {
+    "Species": "White-faced Heron",
+    "ScientificName": "Egretta novaehollandiae"
+  },
+  {
+    "Species": "Striated Heron",
+    "ScientificName": "Butorides striata"
+  },
+  {
+    "Species": "Striated Heron (Old World)",
+    "ScientificName": "Butorides striata [atricapilla Group]"
+  },
+  {
+    "Species": "Chinese Pond-Heron",
+    "ScientificName": "Ardeola bacchus"
+  },
+  {
+    "Species": "Javan Pond-Heron",
+    "ScientificName": "Ardeola speciosa"
+  },
+  {
+    "Species": "Eastern Cattle-Egret",
+    "ScientificName": "Ardea coromanda"
+  },
+  {
+    "Species": "Pacific Heron",
+    "ScientificName": "Ardea pacifica"
+  },
+  {
+    "Species": "Great Egret",
+    "ScientificName": "Ardea alba"
+  },
+  {
+    "Species": "Great Egret (modesta)",
+    "ScientificName": "Ardea alba modesta"
+  },
+  {
+    "Species": "Medium Egret",
+    "ScientificName": "Ardea intermedia"
+  },
+  {
+    "Species": "Plumed Egret",
+    "ScientificName": "Ardea plumifera"
+  },
+  {
+    "Species": "Gray Heron",
+    "ScientificName": "Ardea cinerea"
+  },
+  {
+    "Species": "Gray Heron (Gray)",
+    "ScientificName": "Ardea cinerea cinerea/jouyi"
+  },
+  {
+    "Species": "Purple Heron",
+    "ScientificName": "Ardea purpurea"
+  },
+  {
+    "Species": "Purple Heron (Purple)",
+    "ScientificName": "Ardea purpurea [purpurea Group]"
+  },
+  {
+    "Species": "Great-billed Heron",
+    "ScientificName": "Ardea sumatrana"
+  },
+  {
+    "Species": "Osprey",
+    "ScientificName": "Pandion haliaetus"
+  },
+  {
+    "Species": "Osprey (Eurasian)",
+    "ScientificName": "Pandion haliaetus haliaetus"
+  },
+  {
+    "Species": "Osprey (Australasian)",
+    "ScientificName": "Pandion haliaetus cristatus"
+  },
+  {
+    "Species": "Black-shouldered Kite",
+    "ScientificName": "Elanus axillaris"
+  },
+  {
+    "Species": "Letter-winged Kite",
+    "ScientificName": "Elanus scriptus"
+  },
+  {
+    "Species": "Pacific Baza",
+    "ScientificName": "Aviceda subcristata"
+  },
+  {
+    "Species": "Oriental Honey-buzzard",
+    "ScientificName": "Pernis ptilorhynchus"
+  },
+  {
+    "Species": "Oriental Honey-buzzard (Northern)",
+    "ScientificName": "Pernis ptilorhynchus orientalis"
+  },
+  {
+    "Species": "Oriental Honey-buzzard (Indomalayan)",
+    "ScientificName": "Pernis ptilorhynchus ruficollis/philippensis"
+  },
+  {
+    "Species": "Black-breasted Kite",
+    "ScientificName": "Hamirostra melanosternon"
+  },
+  {
+    "Species": "Square-tailed Kite",
+    "ScientificName": "Lophoictinia isura"
+  },
+  {
+    "Species": "Long-tailed Honey-buzzard",
+    "ScientificName": "Henicopernis longicauda"
+  },
+  {
+    "Species": "Little Eagle",
+    "ScientificName": "Hieraaetus morphnoides"
+  },
+  {
+    "Species": "Gurney's Eagle",
+    "ScientificName": "Aquila gurneyi"
+  },
+  {
+    "Species": "Wedge-tailed Eagle",
+    "ScientificName": "Aquila audax"
+  },
+  {
+    "Species": "Collared Sparrowhawk",
+    "ScientificName": "Tachyspiza cirrocephala"
+  },
+  {
+    "Species": "Japanese Sparrowhawk",
+    "ScientificName": "Tachyspiza gularis"
+  },
+  {
+    "Species": "Chinese Sparrowhawk",
+    "ScientificName": "Tachyspiza soloensis"
+  },
+  {
+    "Species": "Gray Goshawk",
+    "ScientificName": "Tachyspiza novaehollandiae"
+  },
+  {
+    "Species": "Brown Goshawk",
+    "ScientificName": "Tachyspiza fasciata"
+  },
+  {
+    "Species": "Red Goshawk",
+    "ScientificName": "Erythrotriorchis radiatus"
+  },
+  {
+    "Species": "Swamp Harrier",
+    "ScientificName": "Circus approximans"
+  },
+  {
+    "Species": "Spotted Harrier",
+    "ScientificName": "Circus assimilis"
+  },
+  {
+    "Species": "Black Kite",
+    "ScientificName": "Milvus migrans"
+  },
+  {
+    "Species": "Black Kite (Black)",
+    "ScientificName": "Milvus migrans [migrans Group]"
+  },
+  {
+    "Species": "Black Kite (Black-eared)",
+    "ScientificName": "Milvus migrans lineatus/formosanus"
+  },
+  {
+    "Species": "Brahminy Kite",
+    "ScientificName": "Haliastur indus"
+  },
+  {
+    "Species": "Whistling Kite",
+    "ScientificName": "Haliastur sphenurus"
+  },
+  {
+    "Species": "White-bellied Sea-Eagle",
+    "ScientificName": "Icthyophaga leucogaster"
+  },
+  {
+    "Species": "Sooty Owl",
+    "ScientificName": "Tyto tenebricosa"
+  },
+  {
+    "Species": "Sooty Owl (Greater)",
+    "ScientificName": "Tyto tenebricosa tenebricosa/arfaki"
+  },
+  {
+    "Species": "Sooty Owl (Lesser)",
+    "ScientificName": "Tyto tenebricosa multipunctata"
+  },
+  {
+    "Species": "Australian Masked-Owl",
+    "ScientificName": "Tyto novaehollandiae"
+  },
+  {
+    "Species": "Australasian Grass-Owl",
+    "ScientificName": "Tyto longimembris"
+  },
+  {
+    "Species": "Eastern Barn Owl",
+    "ScientificName": "Tyto javanica"
+  },
+  {
+    "Species": "Eastern Barn Owl (Eastern)",
+    "ScientificName": "Tyto javanica [javanica Group]"
+  },
+  {
+    "Species": "Oriental Scops-Owl",
+    "ScientificName": "Otus sunia"
+  },
+  {
+    "Species": "Oriental Scops-Owl (Southern)",
+    "ScientificName": "Otus sunia [sunia Group]"
+  },
+  {
+    "Species": "Oriental Scops-Owl (Northern)",
+    "ScientificName": "Otus sunia [japonicus Group]"
+  },
+  {
+    "Species": "Buffy Fish-Owl",
+    "ScientificName": "Ketupa ketupu"
+  },
+  {
+    "Species": "Rufous Owl",
+    "ScientificName": "Ninox rufa"
+  },
+  {
+    "Species": "Powerful Owl",
+    "ScientificName": "Ninox strenua"
+  },
+  {
+    "Species": "Barking Owl",
+    "ScientificName": "Ninox connivens"
+  },
+  {
+    "Species": "Australian Boobook",
+    "ScientificName": "Ninox boobook"
+  },
+  {
+    "Species": "Australian Boobook (Boobook)",
+    "ScientificName": "Ninox boobook [boobook Group]"
+  },
+  {
+    "Species": "Australian Boobook (Red)",
+    "ScientificName": "Ninox boobook lurida"
+  },
+  {
+    "Species": "Timor Boobook",
+    "ScientificName": "Ninox fusca"
+  },
+  {
+    "Species": "Tasmanian Boobook",
+    "ScientificName": "Ninox leucopsis"
+  },
+  {
+    "Species": "Morepork",
+    "ScientificName": "Ninox novaeseelandiae"
+  },
+  {
+    "Species": "Northern Boobook",
+    "ScientificName": "Ninox japonica"
+  },
+  {
+    "Species": "Christmas Island Boobook",
+    "ScientificName": "Ninox natalis"
+  },
+  {
+    "Species": "Eurasian Hoopoe",
+    "ScientificName": "Upupa epops"
+  },
+  {
+    "Species": "Eurasian Hoopoe (Eurasian)",
+    "ScientificName": "Upupa epops [epops Group]"
+  },
+  {
+    "Species": "Blyth's Hornbill",
+    "ScientificName": "Rhyticeros plicatus"
+  },
+  {
+    "Species": "Rainbow Bee-eater",
+    "ScientificName": "Merops ornatus"
+  },
+  {
+    "Species": "Common Kingfisher",
+    "ScientificName": "Alcedo atthis"
+  },
+  {
+    "Species": "Common Kingfisher (Common)",
+    "ScientificName": "Alcedo atthis [atthis Group]"
+  },
+  {
+    "Species": "Azure Kingfisher",
+    "ScientificName": "Ceyx azureus"
+  },
+  {
+    "Species": "Little Kingfisher",
+    "ScientificName": "Ceyx pusillus"
+  },
+  {
+    "Species": "Laughing Kookaburra",
+    "ScientificName": "Dacelo novaeguineae"
+  },
+  {
+    "Species": "Blue-winged Kookaburra",
+    "ScientificName": "Dacelo leachii"
+  },
+  {
+    "Species": "Black-capped Kingfisher",
+    "ScientificName": "Halcyon pileata"
+  },
+  {
+    "Species": "Red-backed Kingfisher",
+    "ScientificName": "Todiramphus pyrrhopygius"
+  },
+  {
+    "Species": "Forest Kingfisher",
+    "ScientificName": "Todiramphus macleayii"
+  },
+  {
+    "Species": "Mewing Kingfisher",
+    "ScientificName": "Todiramphus ruficollaris"
+  },
+  {
+    "Species": "Torresian Kingfisher",
+    "ScientificName": "Todiramphus sordidus"
+  },
+  {
+    "Species": "Sacred Kingfisher",
+    "ScientificName": "Todiramphus sanctus"
+  },
+  {
+    "Species": "Sacred Kingfisher (Australasian)",
+    "ScientificName": "Todiramphus sanctus sanctus"
+  },
+  {
+    "Species": "Sacred Kingfisher (New Zealand)",
+    "ScientificName": "Todiramphus sanctus vagans"
+  },
+  {
+    "Species": "Collared Kingfisher",
+    "ScientificName": "Todiramphus chloris"
+  },
+  {
+    "Species": "Collared Kingfisher (Collared)",
+    "ScientificName": "Todiramphus chloris [chloris Group]"
+  },
+  {
+    "Species": "Yellow-billed Kingfisher",
+    "ScientificName": "Syma torotoro"
+  },
+  {
+    "Species": "Little Paradise-Kingfisher",
+    "ScientificName": "Tanysiptera hydrocharis"
+  },
+  {
+    "Species": "Buff-breasted Paradise-Kingfisher",
+    "ScientificName": "Tanysiptera sylvia"
+  },
+  {
+    "Species": "European Roller",
+    "ScientificName": "Coracias garrulus"
+  },
+  {
+    "Species": "Dollarbird",
+    "ScientificName": "Eurystomus orientalis"
+  },
+  {
+    "Species": "Nankeen Kestrel",
+    "ScientificName": "Falco cenchroides"
+  },
+  {
+    "Species": "Amur Falcon",
+    "ScientificName": "Falco amurensis"
+  },
+  {
+    "Species": "Eurasian Hobby",
+    "ScientificName": "Falco subbuteo"
+  },
+  {
+    "Species": "Australian Hobby",
+    "ScientificName": "Falco longipennis"
+  },
+  {
+    "Species": "Brown Falcon",
+    "ScientificName": "Falco berigora"
+  },
+  {
+    "Species": "Gray Falcon",
+    "ScientificName": "Falco hypoleucos"
+  },
+  {
+    "Species": "Black Falcon",
+    "ScientificName": "Falco subniger"
+  },
+  {
+    "Species": "Peregrine Falcon",
+    "ScientificName": "Falco peregrinus"
+  },
+  {
+    "Species": "Peregrine Falcon (Tundra)",
+    "ScientificName": "Falco peregrinus calidus/tundrius"
+  },
+  {
+    "Species": "Peregrine Falcon (Eurasian)",
+    "ScientificName": "Falco peregrinus [peregrinus Group]"
+  },
+  {
+    "Species": "Peregrine Falcon (Australian)",
+    "ScientificName": "Falco peregrinus macropus"
+  },
+  {
+    "Species": "Norfolk Island Kaka",
+    "ScientificName": "Nestor productus"
+  },
+  {
+    "Species": "Yellow-tailed Black-Cockatoo",
+    "ScientificName": "Zanda funerea"
+  },
+  {
+    "Species": "Carnaby's Black-Cockatoo",
+    "ScientificName": "Zanda latirostris"
+  },
+  {
+    "Species": "Baudin's Black-Cockatoo",
+    "ScientificName": "Zanda baudinii"
+  },
+  {
+    "Species": "Red-tailed Black-Cockatoo",
+    "ScientificName": "Calyptorhynchus banksii"
+  },
+  {
+    "Species": "Glossy Black-Cockatoo",
+    "ScientificName": "Calyptorhynchus lathami"
+  },
+  {
+    "Species": "Cockatiel",
+    "ScientificName": "Nymphicus hollandicus"
+  },
+  {
+    "Species": "Palm Cockatoo",
+    "ScientificName": "Probosciger aterrimus"
+  },
+  {
+    "Species": "Gang-gang Cockatoo",
+    "ScientificName": "Callocephalon fimbriatum"
+  },
+  {
+    "Species": "Galah",
+    "ScientificName": "Eolophus roseicapilla"
+  },
+  {
+    "Species": "Pink Cockatoo",
+    "ScientificName": "Cacatua leadbeateri"
+  },
+  {
+    "Species": "Western Corella",
+    "ScientificName": "Cacatua pastinator"
+  },
+  {
+    "Species": "Little Corella",
+    "ScientificName": "Cacatua sanguinea"
+  },
+  {
+    "Species": "Galah x Little Corella (hybrid)",
+    "ScientificName": "Eolophus roseicapilla x Cacatua sanguinea"
+  },
+  {
+    "Species": "Long-billed Corella",
+    "ScientificName": "Cacatua tenuirostris"
+  },
+  {
+    "Species": "Little x Long-billed Corella (hybrid)",
+    "ScientificName": "Cacatua sanguinea x tenuirostris"
+  },
+  {
+    "Species": "Sulphur-crested Cockatoo",
+    "ScientificName": "Cacatua galerita"
+  },
+  {
+    "Species": "Little Corella x Sulphur-crested Cockatoo (hybrid)",
+    "ScientificName": "Cacatua sanguinea x galerita"
+  },
+  {
+    "Species": "Superb Parrot",
+    "ScientificName": "Polytelis swainsonii"
+  },
+  {
+    "Species": "Regent Parrot",
+    "ScientificName": "Polytelis anthopeplus"
+  },
+  {
+    "Species": "Princess Parrot",
+    "ScientificName": "Polytelis alexandrae"
+  },
+  {
+    "Species": "Australian King-Parrot",
+    "ScientificName": "Alisterus scapularis"
+  },
+  {
+    "Species": "Red-winged Parrot",
+    "ScientificName": "Aprosmictus erythropterus"
+  },
+  {
+    "Species": "Papuan Eclectus",
+    "ScientificName": "Eclectus polychloros"
+  },
+  {
+    "Species": "Red-cheeked Parrot",
+    "ScientificName": "Geoffroyus geoffroyi"
+  },
+  {
+    "Species": "Ground Parrot",
+    "ScientificName": "Pezoporus wallicus"
+  },
+  {
+    "Species": "Ground Parrot (Western)",
+    "ScientificName": "Pezoporus wallicus flaviventris"
+  },
+  {
+    "Species": "Ground Parrot (Eastern)",
+    "ScientificName": "Pezoporus wallicus wallicus"
+  },
+  {
+    "Species": "Night Parrot",
+    "ScientificName": "Pezoporus occidentalis"
+  },
+  {
+    "Species": "Bourke's Parrot",
+    "ScientificName": "Neopsephotus bourkii"
+  },
+  {
+    "Species": "Blue-winged Parrot",
+    "ScientificName": "Neophema chrysostoma"
+  },
+  {
+    "Species": "Elegant Parrot",
+    "ScientificName": "Neophema elegans"
+  },
+  {
+    "Species": "Rock Parrot",
+    "ScientificName": "Neophema petrophila"
+  },
+  {
+    "Species": "Orange-bellied Parrot",
+    "ScientificName": "Neophema chrysogaster"
+  },
+  {
+    "Species": "Turquoise Parrot",
+    "ScientificName": "Neophema pulchella"
+  },
+  {
+    "Species": "Scarlet-chested Parrot",
+    "ScientificName": "Neophema splendida"
+  },
+  {
+    "Species": "Swift Parrot",
+    "ScientificName": "Lathamus discolor"
+  },
+  {
+    "Species": "Red-crowned Parakeet",
+    "ScientificName": "Cyanoramphus novaezelandiae"
+  },
+  {
+    "Species": "Norfolk Island Parakeet",
+    "ScientificName": "Cyanoramphus cookii"
+  },
+  {
+    "Species": "Australian Ringneck",
+    "ScientificName": "Barnardius zonarius"
+  },
+  {
+    "Species": "Australian Ringneck (Twenty-eight)",
+    "ScientificName": "Barnardius zonarius semitorquatus"
+  },
+  {
+    "Species": "Australian Ringneck (Port Lincoln)",
+    "ScientificName": "Barnardius zonarius zonarius"
+  },
+  {
+    "Species": "Australian Ringneck (Mallee)",
+    "ScientificName": "Barnardius zonarius barnardi"
+  },
+  {
+    "Species": "Australian Ringneck (Cloncurry)",
+    "ScientificName": "Barnardius zonarius macgillivrayi"
+  },
+  {
+    "Species": "Australian Ringneck (Twenty-eight x Port Lincoln)",
+    "ScientificName": "Barnardius zonarius semitorquatus x zonarius"
+  },
+  {
+    "Species": "Green Rosella",
+    "ScientificName": "Platycercus caledonicus"
+  },
+  {
+    "Species": "Crimson Rosella",
+    "ScientificName": "Platycercus elegans"
+  },
+  {
+    "Species": "Crimson Rosella (Crimson)",
+    "ScientificName": "Platycercus elegans [elegans Group]"
+  },
+  {
+    "Species": "Crimson Rosella (Yellow)",
+    "ScientificName": "Platycercus elegans flaveolus"
+  },
+  {
+    "Species": "Crimson Rosella (Crimson x Yellow)",
+    "ScientificName": "Platycercus elegans [elegans Group] x flaveolus"
+  },
+  {
+    "Species": "Crimson Rosella (Adelaide)",
+    "ScientificName": "Platycercus elegans adelaidae/subadelaidae"
+  },
+  {
+    "Species": "Northern Rosella",
+    "ScientificName": "Platycercus venustus"
+  },
+  {
+    "Species": "Eastern Rosella",
+    "ScientificName": "Platycercus eximius"
+  },
+  {
+    "Species": "Green x Eastern Rosella (hybrid)",
+    "ScientificName": "Platycercus caledonicus x eximius"
+  },
+  {
+    "Species": "Crimson x Eastern Rosella (hybrid)",
+    "ScientificName": "Platycercus elegans x eximius"
+  },
+  {
+    "Species": "Pale-headed Rosella",
+    "ScientificName": "Platycercus adscitus"
+  },
+  {
+    "Species": "Eastern x Pale-headed Rosella (hybrid)",
+    "ScientificName": "Platycercus eximius x adscitus"
+  },
+  {
+    "Species": "Crimson x Pale-headed Rosella (hybrid)",
+    "ScientificName": "Platycercus elegans x adscitus"
+  },
+  {
+    "Species": "Western Rosella",
+    "ScientificName": "Platycercus icterotis"
+  },
+  {
+    "Species": "Greater Bluebonnet",
+    "ScientificName": "Northiella haematogaster"
+  },
+  {
+    "Species": "Greater Bluebonnet (Yellow-vented)",
+    "ScientificName": "Northiella haematogaster haematogaster/pallescens"
+  },
+  {
+    "Species": "Greater Bluebonnet (Red-vented)",
+    "ScientificName": "Northiella haematogaster haematorrhoa"
+  },
+  {
+    "Species": "Naretha Bluebonnet",
+    "ScientificName": "Northiella narethae"
+  },
+  {
+    "Species": "Red-rumped Parrot",
+    "ScientificName": "Psephotus haematonotus"
+  },
+  {
+    "Species": "Mulga Parrot",
+    "ScientificName": "Psephotellus varius"
+  },
+  {
+    "Species": "Hooded Parrot",
+    "ScientificName": "Psephotellus dissimilis"
+  },
+  {
+    "Species": "Golden-shouldered Parrot",
+    "ScientificName": "Psephotellus chrysopterygius"
+  },
+  {
+    "Species": "Paradise Parrot",
+    "ScientificName": "Psephotellus pulcherrimus"
+  },
+  {
+    "Species": "Red-capped Parrot",
+    "ScientificName": "Purpureicephalus spurius"
+  },
+  {
+    "Species": "Double-eyed Fig-Parrot",
+    "ScientificName": "Cyclopsitta diophthalma"
+  },
+  {
+    "Species": "Double-eyed Fig-Parrot (Double-eyed)",
+    "ScientificName": "Cyclopsitta diophthalma [diophthalma Group]"
+  },
+  {
+    "Species": "Double-eyed Fig-Parrot (Coxen's)",
+    "ScientificName": "Cyclopsitta diophthalma coxeni"
+  },
+  {
+    "Species": "Budgerigar",
+    "ScientificName": "Melopsittacus undulatus"
+  },
+  {
+    "Species": "Varied Lorikeet",
+    "ScientificName": "Psitteuteles versicolor"
+  },
+  {
+    "Species": "Little Lorikeet",
+    "ScientificName": "Psitteuteles pusillus"
+  },
+  {
+    "Species": "Purple-crowned Lorikeet",
+    "ScientificName": "Psitteuteles porphyrocephalus"
+  },
+  {
+    "Species": "Musk Lorikeet",
+    "ScientificName": "Trichoglossus concinnus"
+  },
+  {
+    "Species": "Scaly-breasted Lorikeet",
+    "ScientificName": "Trichoglossus chlorolepidotus"
+  },
+  {
+    "Species": "Coconut Lorikeet",
+    "ScientificName": "Trichoglossus haematodus"
+  },
+  {
+    "Species": "Rainbow Lorikeet",
+    "ScientificName": "Trichoglossus moluccanus"
+  },
+  {
+    "Species": "Musk x Rainbow Lorikeet (hybrid)",
+    "ScientificName": "Trichoglossus concinnus x moluccanus"
+  },
+  {
+    "Species": "Scaly-breasted x Rainbow Lorikeet (hybrid)",
+    "ScientificName": "Trichoglossus chlorolepidotus x moluccanus"
+  },
+  {
+    "Species": "Red-collared Lorikeet",
+    "ScientificName": "Trichoglossus rubritorquis"
+  },
+  {
+    "Species": "Rainbow x Red-collared Lorikeet (hybrid)",
+    "ScientificName": "Trichoglossus moluccanus x rubritorquis"
+  },
+  {
+    "Species": "Papuan Pitta",
+    "ScientificName": "Erythropitta macklotii"
+  },
+  {
+    "Species": "Papuan Pitta (Southern)",
+    "ScientificName": "Erythropitta macklotii [macklotii Group]"
+  },
+  {
+    "Species": "Blue-winged Pitta",
+    "ScientificName": "Pitta moluccensis"
+  },
+  {
+    "Species": "Fairy Pitta",
+    "ScientificName": "Pitta nympha"
+  },
+  {
+    "Species": "Western Hooded Pitta",
+    "ScientificName": "Pitta sordida"
+  },
+  {
+    "Species": "Western Hooded Pitta (Chestnut-crowned)",
+    "ScientificName": "Pitta sordida cucullata"
+  },
+  {
+    "Species": "Noisy Pitta",
+    "ScientificName": "Pitta versicolor"
+  },
+  {
+    "Species": "Rainbow Pitta",
+    "ScientificName": "Pitta iris"
+  },
+  {
+    "Species": "Albert's Lyrebird",
+    "ScientificName": "Menura alberti"
+  },
+  {
+    "Species": "Superb Lyrebird",
+    "ScientificName": "Menura novaehollandiae"
+  },
+  {
+    "Species": "Rufous Scrub-bird",
+    "ScientificName": "Atrichornis rufescens"
+  },
+  {
+    "Species": "Noisy Scrub-bird",
+    "ScientificName": "Atrichornis clamosus"
+  },
+  {
+    "Species": "Spotted Catbird",
+    "ScientificName": "Ailuroedus maculosus"
+  },
+  {
+    "Species": "Black-eared Catbird",
+    "ScientificName": "Ailuroedus melanotis"
+  },
+  {
+    "Species": "Green Catbird",
+    "ScientificName": "Ailuroedus crassirostris"
+  },
+  {
+    "Species": "Tooth-billed Bowerbird",
+    "ScientificName": "Scenopoeetes dentirostris"
+  },
+  {
+    "Species": "Golden Bowerbird",
+    "ScientificName": "Prionodura newtoniana"
+  },
+  {
+    "Species": "Regent Bowerbird",
+    "ScientificName": "Sericulus chrysocephalus"
+  },
+  {
+    "Species": "Satin Bowerbird",
+    "ScientificName": "Ptilonorhynchus violaceus"
+  },
+  {
+    "Species": "Western Bowerbird",
+    "ScientificName": "Chlamydera guttata"
+  },
+  {
+    "Species": "Spotted Bowerbird",
+    "ScientificName": "Chlamydera maculata"
+  },
+  {
+    "Species": "Great Bowerbird",
+    "ScientificName": "Chlamydera nuchalis"
+  },
+  {
+    "Species": "Fawn-breasted Bowerbird",
+    "ScientificName": "Chlamydera cerviniventris"
+  },
+  {
+    "Species": "White-throated Treecreeper",
+    "ScientificName": "Cormobates leucophaea"
+  },
+  {
+    "Species": "White-throated Treecreeper (Little)",
+    "ScientificName": "Cormobates leucophaea minor"
+  },
+  {
+    "Species": "White-throated Treecreeper (White-throated)",
+    "ScientificName": "Cormobates leucophaea [leucophaea Group]"
+  },
+  {
+    "Species": "White-browed Treecreeper",
+    "ScientificName": "Climacteris affinis"
+  },
+  {
+    "Species": "Red-browed Treecreeper",
+    "ScientificName": "Climacteris erythrops"
+  },
+  {
+    "Species": "Brown Treecreeper",
+    "ScientificName": "Climacteris picumnus"
+  },
+  {
+    "Species": "Black-tailed Treecreeper",
+    "ScientificName": "Climacteris melanurus"
+  },
+  {
+    "Species": "Rufous Treecreeper",
+    "ScientificName": "Climacteris rufus"
+  },
+  {
+    "Species": "Gray Grasswren",
+    "ScientificName": "Amytornis barbatus"
+  },
+  {
+    "Species": "Pilbara Grasswren",
+    "ScientificName": "Amytornis whitei"
+  },
+  {
+    "Species": "Sandhill Grasswren",
+    "ScientificName": "Amytornis oweni"
+  },
+  {
+    "Species": "Opalton Grasswren",
+    "ScientificName": "Amytornis rowleyi"
+  },
+  {
+    "Species": "Striated Grasswren",
+    "ScientificName": "Amytornis striatus"
+  },
+  {
+    "Species": "White-throated Grasswren",
+    "ScientificName": "Amytornis woodwardi"
+  },
+  {
+    "Species": "Carpentarian Grasswren",
+    "ScientificName": "Amytornis dorotheae"
+  },
+  {
+    "Species": "Short-tailed Grasswren",
+    "ScientificName": "Amytornis merrotsyi"
+  },
+  {
+    "Species": "Western Grasswren",
+    "ScientificName": "Amytornis textilis"
+  },
+  {
+    "Species": "Western Grasswren (Western)",
+    "ScientificName": "Amytornis textilis textilis"
+  },
+  {
+    "Species": "Western Grasswren (Gawler Ranges)",
+    "ScientificName": "Amytornis textilis myall"
+  },
+  {
+    "Species": "Thick-billed Grasswren",
+    "ScientificName": "Amytornis modestus"
+  },
+  {
+    "Species": "Black Grasswren",
+    "ScientificName": "Amytornis housei"
+  },
+  {
+    "Species": "Eyrean Grasswren",
+    "ScientificName": "Amytornis goyderi"
+  },
+  {
+    "Species": "Dusky Grasswren",
+    "ScientificName": "Amytornis purnelli"
+  },
+  {
+    "Species": "Kalkadoon Grasswren",
+    "ScientificName": "Amytornis ballarae"
+  },
+  {
+    "Species": "Southern Emuwren",
+    "ScientificName": "Stipiturus malachurus"
+  },
+  {
+    "Species": "Rufous-crowned Emuwren",
+    "ScientificName": "Stipiturus ruficeps"
+  },
+  {
+    "Species": "Mallee Emuwren",
+    "ScientificName": "Stipiturus mallee"
+  },
+  {
+    "Species": "Purple-crowned Fairywren",
+    "ScientificName": "Malurus coronatus"
+  },
+  {
+    "Species": "Red-winged Fairywren",
+    "ScientificName": "Malurus elegans"
+  },
+  {
+    "Species": "Blue-breasted Fairywren",
+    "ScientificName": "Malurus pulcherrimus"
+  },
+  {
+    "Species": "Purple-backed Fairywren",
+    "ScientificName": "Malurus assimilis"
+  },
+  {
+    "Species": "Purple-backed Fairywren (Lavender-flanked)",
+    "ScientificName": "Malurus assimilis dulcis/rogersi"
+  },
+  {
+    "Species": "Purple-backed Fairywren (Purple-backed)",
+    "ScientificName": "Malurus assimilis assimilis/bernieri"
+  },
+  {
+    "Species": "Variegated Fairywren",
+    "ScientificName": "Malurus lamberti"
+  },
+  {
+    "Species": "Lovely Fairywren",
+    "ScientificName": "Malurus amabilis"
+  },
+  {
+    "Species": "Splendid Fairywren",
+    "ScientificName": "Malurus splendens"
+  },
+  {
+    "Species": "Splendid Fairywren (Western)",
+    "ScientificName": "Malurus splendens splendens"
+  },
+  {
+    "Species": "Splendid Fairywren (Central)",
+    "ScientificName": "Malurus splendens callainus"
+  },
+  {
+    "Species": "Splendid Fairywren (Eastern)",
+    "ScientificName": "Malurus splendens melanotus/emmottorum"
+  },
+  {
+    "Species": "Superb Fairywren",
+    "ScientificName": "Malurus cyaneus"
+  },
+  {
+    "Species": "White-winged Fairywren",
+    "ScientificName": "Malurus leucopterus"
+  },
+  {
+    "Species": "White-winged Fairywren (Blue-and-white)",
+    "ScientificName": "Malurus leucopterus leuconotus"
+  },
+  {
+    "Species": "White-winged Fairywren (Black-and-white)",
+    "ScientificName": "Malurus leucopterus leucopterus/edouardi"
+  },
+  {
+    "Species": "Red-backed Fairywren",
+    "ScientificName": "Malurus melanocephalus"
+  },
+  {
+    "Species": "Superb x Red-backed Fairywren (hybrid)",
+    "ScientificName": "Malurus cyaneus x melanocephalus"
+  },
+  {
+    "Species": "Eastern Spinebill",
+    "ScientificName": "Acanthorhynchus tenuirostris"
+  },
+  {
+    "Species": "Western Spinebill",
+    "ScientificName": "Acanthorhynchus superciliosus"
+  },
+  {
+    "Species": "Pied Honeyeater",
+    "ScientificName": "Certhionyx variegatus"
+  },
+  {
+    "Species": "Yellow-spotted Honeyeater",
+    "ScientificName": "Meliphaga notata"
+  },
+  {
+    "Species": "Lewin's Honeyeater",
+    "ScientificName": "Meliphaga lewinii"
+  },
+  {
+    "Species": "Kimberley Honeyeater",
+    "ScientificName": "Meliphaga fordiana"
+  },
+  {
+    "Species": "White-lined Honeyeater",
+    "ScientificName": "Meliphaga albilineata"
+  },
+  {
+    "Species": "Graceful Honeyeater",
+    "ScientificName": "Meliphaga gracilis"
+  },
+  {
+    "Species": "Cryptic Honeyeater",
+    "ScientificName": "Meliphaga imitatrix"
+  },
+  {
+    "Species": "Yellow Honeyeater",
+    "ScientificName": "Stomiopera flava"
+  },
+  {
+    "Species": "White-gaped Honeyeater",
+    "ScientificName": "Stomiopera unicolor"
+  },
+  {
+    "Species": "White-fronted Honeyeater",
+    "ScientificName": "Purnella albifrons"
+  },
+  {
+    "Species": "Yellow-faced Honeyeater",
+    "ScientificName": "Caligavis chrysops"
+  },
+  {
+    "Species": "Yellow-tufted Honeyeater",
+    "ScientificName": "Lichenostomus melanops"
+  },
+  {
+    "Species": "Yellow-tufted Honeyeater (Yellow-tufted)",
+    "ScientificName": "Lichenostomus melanops melanops/meltoni"
+  },
+  {
+    "Species": "Yellow-tufted Honeyeater (Helmeted)",
+    "ScientificName": "Lichenostomus melanops cassidix"
+  },
+  {
+    "Species": "Purple-gaped Honeyeater",
+    "ScientificName": "Lichenostomus cratitius"
+  },
+  {
+    "Species": "Bell Miner",
+    "ScientificName": "Manorina melanophrys"
+  },
+  {
+    "Species": "Noisy Miner",
+    "ScientificName": "Manorina melanocephala"
+  },
+  {
+    "Species": "Yellow-throated Miner",
+    "ScientificName": "Manorina flavigula"
+  },
+  {
+    "Species": "Black-eared Miner",
+    "ScientificName": "Manorina melanotis"
+  },
+  {
+    "Species": "Yellow-throated x Black-eared Miner (hybrid)",
+    "ScientificName": "Manorina flavigula x melanotis"
+  },
+  {
+    "Species": "Bridled Honeyeater",
+    "ScientificName": "Bolemoreus frenatus"
+  },
+  {
+    "Species": "Eungella Honeyeater",
+    "ScientificName": "Bolemoreus hindwoodi"
+  },
+  {
+    "Species": "Spiny-cheeked Honeyeater",
+    "ScientificName": "Acanthagenys rufogularis"
+  },
+  {
+    "Species": "Little Wattlebird",
+    "ScientificName": "Anthochaera chrysoptera"
+  },
+  {
+    "Species": "Western Wattlebird",
+    "ScientificName": "Anthochaera lunulata"
+  },
+  {
+    "Species": "Regent Honeyeater",
+    "ScientificName": "Anthochaera phrygia"
+  },
+  {
+    "Species": "Red Wattlebird",
+    "ScientificName": "Anthochaera carunculata"
+  },
+  {
+    "Species": "Yellow Wattlebird",
+    "ScientificName": "Anthochaera paradoxa"
+  },
+  {
+    "Species": "Varied Honeyeater",
+    "ScientificName": "Gavicalis versicolor"
+  },
+  {
+    "Species": "Mangrove Honeyeater",
+    "ScientificName": "Gavicalis fasciogularis"
+  },
+  {
+    "Species": "Singing Honeyeater",
+    "ScientificName": "Gavicalis virescens"
+  },
+  {
+    "Species": "Yellow-plumed Honeyeater",
+    "ScientificName": "Ptilotula ornata"
+  },
+  {
+    "Species": "White-plumed Honeyeater",
+    "ScientificName": "Ptilotula penicillata"
+  },
+  {
+    "Species": "Yellow-tinted Honeyeater",
+    "ScientificName": "Ptilotula flavescens"
+  },
+  {
+    "Species": "Fuscous Honeyeater",
+    "ScientificName": "Ptilotula fusca"
+  },
+  {
+    "Species": "Gray-headed Honeyeater",
+    "ScientificName": "Ptilotula keartlandi"
+  },
+  {
+    "Species": "Gray-fronted Honeyeater",
+    "ScientificName": "Ptilotula plumula"
+  },
+  {
+    "Species": "Brown-backed Honeyeater",
+    "ScientificName": "Ramsayornis modestus"
+  },
+  {
+    "Species": "Bar-breasted Honeyeater",
+    "ScientificName": "Ramsayornis fasciatus"
+  },
+  {
+    "Species": "Rufous-banded Honeyeater",
+    "ScientificName": "Conopophila albogularis"
+  },
+  {
+    "Species": "Rufous-throated Honeyeater",
+    "ScientificName": "Conopophila rufogularis"
+  },
+  {
+    "Species": "Gray Honeyeater",
+    "ScientificName": "Conopophila whitei"
+  },
+  {
+    "Species": "Gibberbird",
+    "ScientificName": "Ashbyia lovensis"
+  },
+  {
+    "Species": "Yellow Chat",
+    "ScientificName": "Epthianura crocea"
+  },
+  {
+    "Species": "Crimson Chat",
+    "ScientificName": "Epthianura tricolor"
+  },
+  {
+    "Species": "Orange Chat",
+    "ScientificName": "Epthianura aurifrons"
+  },
+  {
+    "Species": "White-fronted Chat",
+    "ScientificName": "Epthianura albifrons"
+  },
+  {
+    "Species": "Black Honeyeater",
+    "ScientificName": "Sugomel nigrum"
+  },
+  {
+    "Species": "Dusky Myzomela",
+    "ScientificName": "Myzomela obscura"
+  },
+  {
+    "Species": "Red-headed Myzomela",
+    "ScientificName": "Myzomela erythrocephala"
+  },
+  {
+    "Species": "Scarlet Myzomela",
+    "ScientificName": "Myzomela sanguinolenta"
+  },
+  {
+    "Species": "Tawny-crowned Honeyeater",
+    "ScientificName": "Gliciphila melanops"
+  },
+  {
+    "Species": "Green-backed Honeyeater",
+    "ScientificName": "Glycichaera fallax"
+  },
+  {
+    "Species": "Banded Honeyeater",
+    "ScientificName": "Cissomela pectoralis"
+  },
+  {
+    "Species": "Brown Honeyeater",
+    "ScientificName": "Lichmera indistincta"
+  },
+  {
+    "Species": "Crescent Honeyeater",
+    "ScientificName": "Phylidonyris pyrrhopterus"
+  },
+  {
+    "Species": "New Holland Honeyeater",
+    "ScientificName": "Phylidonyris novaehollandiae"
+  },
+  {
+    "Species": "White-cheeked Honeyeater",
+    "ScientificName": "Phylidonyris niger"
+  },
+  {
+    "Species": "New Holland x White-cheeked Honeyeater (hybrid)",
+    "ScientificName": "Phylidonyris novaehollandiae x niger"
+  },
+  {
+    "Species": "White-streaked Honeyeater",
+    "ScientificName": "Trichodere cockerelli"
+  },
+  {
+    "Species": "White-eared Honeyeater",
+    "ScientificName": "Nesoptilotis leucotis"
+  },
+  {
+    "Species": "Yellow-throated Honeyeater",
+    "ScientificName": "Nesoptilotis flavicollis"
+  },
+  {
+    "Species": "Blue-faced Honeyeater",
+    "ScientificName": "Entomyzon cyanotis"
+  },
+  {
+    "Species": "Blue-faced Honeyeater (White-quilled)",
+    "ScientificName": "Entomyzon cyanotis albipennis"
+  },
+  {
+    "Species": "Blue-faced Honeyeater (Blue-faced)",
+    "ScientificName": "Entomyzon cyanotis [cyanotis Group]"
+  },
+  {
+    "Species": "White-throated Honeyeater",
+    "ScientificName": "Melithreptus albogularis"
+  },
+  {
+    "Species": "Gilbert's Honeyeater",
+    "ScientificName": "Melithreptus chloropsis"
+  },
+  {
+    "Species": "White-naped Honeyeater",
+    "ScientificName": "Melithreptus lunatus"
+  },
+  {
+    "Species": "Black-headed Honeyeater",
+    "ScientificName": "Melithreptus affinis"
+  },
+  {
+    "Species": "Brown-headed Honeyeater",
+    "ScientificName": "Melithreptus brevirostris"
+  },
+  {
+    "Species": "Black-chinned Honeyeater",
+    "ScientificName": "Melithreptus gularis"
+  },
+  {
+    "Species": "Black-chinned Honeyeater (Golden-backed)",
+    "ScientificName": "Melithreptus gularis laetior"
+  },
+  {
+    "Species": "Black-chinned Honeyeater (Black-chinned)",
+    "ScientificName": "Melithreptus gularis gularis"
+  },
+  {
+    "Species": "Strong-billed Honeyeater",
+    "ScientificName": "Melithreptus validirostris"
+  },
+  {
+    "Species": "Tawny-breasted Honeyeater",
+    "ScientificName": "Xanthotis flaviventer"
+  },
+  {
+    "Species": "Macleay's Honeyeater",
+    "ScientificName": "Xanthotis macleayanus"
+  },
+  {
+    "Species": "Striped Honeyeater",
+    "ScientificName": "Plectorhyncha lanceolata"
+  },
+  {
+    "Species": "Painted Honeyeater",
+    "ScientificName": "Grantiella picta"
+  },
+  {
+    "Species": "Little Friarbird",
+    "ScientificName": "Philemon citreogularis"
+  },
+  {
+    "Species": "Helmeted Friarbird",
+    "ScientificName": "Philemon buceroides"
+  },
+  {
+    "Species": "Helmeted Friarbird (Hornbill)",
+    "ScientificName": "Philemon buceroides yorki"
+  },
+  {
+    "Species": "Helmeted Friarbird (Arnhem Land)",
+    "ScientificName": "Philemon buceroides gordoni/ammitophilus"
+  },
+  {
+    "Species": "Helmeted Friarbird (Tenggara)",
+    "ScientificName": "Philemon buceroides buceroides/neglectus"
+  },
+  {
+    "Species": "Silver-crowned Friarbird",
+    "ScientificName": "Philemon argenticeps"
+  },
+  {
+    "Species": "Noisy Friarbird",
+    "ScientificName": "Philemon corniculatus"
+  },
+  {
+    "Species": "Western Bristlebird",
+    "ScientificName": "Dasyornis longirostris"
+  },
+  {
+    "Species": "Eastern Bristlebird",
+    "ScientificName": "Dasyornis brachypterus"
+  },
+  {
+    "Species": "Rufous Bristlebird",
+    "ScientificName": "Dasyornis broadbenti"
+  },
+  {
+    "Species": "Spotted Pardalote",
+    "ScientificName": "Pardalotus punctatus"
+  },
+  {
+    "Species": "Spotted Pardalote (Wet Tropics)",
+    "ScientificName": "Pardalotus punctatus millitaris"
+  },
+  {
+    "Species": "Spotted Pardalote (Spotted)",
+    "ScientificName": "Pardalotus punctatus punctatus"
+  },
+  {
+    "Species": "Spotted Pardalote (Yellow-rumped)",
+    "ScientificName": "Pardalotus punctatus xanthopyge"
+  },
+  {
+    "Species": "Forty-spotted Pardalote",
+    "ScientificName": "Pardalotus quadragintus"
+  },
+  {
+    "Species": "Red-browed Pardalote",
+    "ScientificName": "Pardalotus rubricatus"
+  },
+  {
+    "Species": "Striated Pardalote",
+    "ScientificName": "Pardalotus striatus"
+  },
+  {
+    "Species": "Striated Pardalote (Black-headed)",
+    "ScientificName": "Pardalotus striatus [melanocephalus Group]"
+  },
+  {
+    "Species": "Striated Pardalote (Eastern)",
+    "ScientificName": "Pardalotus striatus ornatus"
+  },
+  {
+    "Species": "Striated Pardalote (Yellow-tipped)",
+    "ScientificName": "Pardalotus striatus striatus"
+  },
+  {
+    "Species": "Striated Pardalote (Striated)",
+    "ScientificName": "Pardalotus striatus substriatus"
+  },
+  {
+    "Species": "Fernwren",
+    "ScientificName": "Oreoscopus gutturalis"
+  },
+  {
+    "Species": "Pilotbird",
+    "ScientificName": "Pycnoptilus floccosus"
+  },
+  {
+    "Species": "Redthroat",
+    "ScientificName": "Pyrrholaemus brunneus"
+  },
+  {
+    "Species": "Speckled Warbler",
+    "ScientificName": "Pyrrholaemus sagittatus"
+  },
+  {
+    "Species": "Shy Heathwren",
+    "ScientificName": "Hylacola cauta"
+  },
+  {
+    "Species": "Chestnut-rumped Heathwren",
+    "ScientificName": "Hylacola pyrrhopygia"
+  },
+  {
+    "Species": "Striated Fieldwren",
+    "ScientificName": "Calamanthus fuliginosus"
+  },
+  {
+    "Species": "Rufous Fieldwren",
+    "ScientificName": "Calamanthus campestris"
+  },
+  {
+    "Species": "Western Fieldwren",
+    "ScientificName": "Calamanthus montanellus"
+  },
+  {
+    "Species": "Weebill",
+    "ScientificName": "Smicrornis brevirostris"
+  },
+  {
+    "Species": "Yellow-throated Scrubwren",
+    "ScientificName": "Neosericornis citreogularis"
+  },
+  {
+    "Species": "Rockwarbler",
+    "ScientificName": "Origma solitaria"
+  },
+  {
+    "Species": "Tasmanian Scrubwren",
+    "ScientificName": "Sericornis humilis"
+  },
+  {
+    "Species": "White-browed Scrubwren",
+    "ScientificName": "Sericornis frontalis"
+  },
+  {
+    "Species": "White-browed Scrubwren (Buff-breasted)",
+    "ScientificName": "Sericornis frontalis laevigaster"
+  },
+  {
+    "Species": "White-browed Scrubwren (White-browed)",
+    "ScientificName": "Sericornis frontalis [frontalis Group]"
+  },
+  {
+    "Species": "Spotted Scrubwren",
+    "ScientificName": "Sericornis maculatus"
+  },
+  {
+    "Species": "Atherton Scrubwren",
+    "ScientificName": "Sericornis keri"
+  },
+  {
+    "Species": "Tropical Scrubwren",
+    "ScientificName": "Sericornis beccarii"
+  },
+  {
+    "Species": "Large-billed Scrubwren",
+    "ScientificName": "Sericornis magnirostra"
+  },
+  {
+    "Species": "Scrubtit",
+    "ScientificName": "Acanthornis magna"
+  },
+  {
+    "Species": "Southern Whiteface",
+    "ScientificName": "Aphelocephala leucopsis"
+  },
+  {
+    "Species": "Banded Whiteface",
+    "ScientificName": "Aphelocephala nigricincta"
+  },
+  {
+    "Species": "Chestnut-breasted Whiteface",
+    "ScientificName": "Aphelocephala pectoralis"
+  },
+  {
+    "Species": "Yellow-rumped Thornbill",
+    "ScientificName": "Acanthiza chrysorrhoa"
+  },
+  {
+    "Species": "Yellow Thornbill",
+    "ScientificName": "Acanthiza nana"
+  },
+  {
+    "Species": "Striated Thornbill",
+    "ScientificName": "Acanthiza lineata"
+  },
+  {
+    "Species": "Inland Thornbill",
+    "ScientificName": "Acanthiza apicalis"
+  },
+  {
+    "Species": "Tasmanian Thornbill",
+    "ScientificName": "Acanthiza ewingii"
+  },
+  {
+    "Species": "Mountain Thornbill",
+    "ScientificName": "Acanthiza katherina"
+  },
+  {
+    "Species": "Brown Thornbill",
+    "ScientificName": "Acanthiza pusilla"
+  },
+  {
+    "Species": "Slaty-backed Thornbill",
+    "ScientificName": "Acanthiza robustirostris"
+  },
+  {
+    "Species": "Slender-billed Thornbill",
+    "ScientificName": "Acanthiza iredalei"
+  },
+  {
+    "Species": "Chestnut-rumped Thornbill",
+    "ScientificName": "Acanthiza uropygialis"
+  },
+  {
+    "Species": "Western Thornbill",
+    "ScientificName": "Acanthiza inornata"
+  },
+  {
+    "Species": "Buff-rumped Thornbill",
+    "ScientificName": "Acanthiza reguloides"
+  },
+  {
+    "Species": "Brown Gerygone",
+    "ScientificName": "Gerygone mouki"
+  },
+  {
+    "Species": "Green-backed Gerygone",
+    "ScientificName": "Gerygone chloronota"
+  },
+  {
+    "Species": "Fairy Gerygone",
+    "ScientificName": "Gerygone palpebrosa"
+  },
+  {
+    "Species": "Fairy Gerygone (Black-throated)",
+    "ScientificName": "Gerygone palpebrosa [palpebrosa Group]"
+  },
+  {
+    "Species": "Fairy Gerygone (Fairy)",
+    "ScientificName": "Gerygone palpebrosa flavida"
+  },
+  {
+    "Species": "Large-billed Gerygone",
+    "ScientificName": "Gerygone magnirostris"
+  },
+  {
+    "Species": "White-throated Gerygone",
+    "ScientificName": "Gerygone olivacea"
+  },
+  {
+    "Species": "Dusky Gerygone",
+    "ScientificName": "Gerygone tenebrosa"
+  },
+  {
+    "Species": "Mangrove Gerygone",
+    "ScientificName": "Gerygone levigaster"
+  },
+  {
+    "Species": "Western Gerygone",
+    "ScientificName": "Gerygone fusca"
+  },
+  {
+    "Species": "Lord Howe Gerygone",
+    "ScientificName": "Gerygone insularis"
+  },
+  {
+    "Species": "Norfolk Island Gerygone",
+    "ScientificName": "Gerygone modesta"
+  },
+  {
+    "Species": "Gray-crowned Babbler",
+    "ScientificName": "Pomatostomus temporalis"
+  },
+  {
+    "Species": "White-browed Babbler",
+    "ScientificName": "Pomatostomus superciliosus"
+  },
+  {
+    "Species": "Hall's Babbler",
+    "ScientificName": "Pomatostomus halli"
+  },
+  {
+    "Species": "Chestnut-crowned Babbler",
+    "ScientificName": "Pomatostomus ruficeps"
+  },
+  {
+    "Species": "Australian Logrunner",
+    "ScientificName": "Orthonyx temminckii"
+  },
+  {
+    "Species": "Chowchilla",
+    "ScientificName": "Orthonyx spaldingii"
+  },
+  {
+    "Species": "Spotted Quail-thrush",
+    "ScientificName": "Cinclosoma punctatum"
+  },
+  {
+    "Species": "Chestnut Quail-thrush",
+    "ScientificName": "Cinclosoma castanotum"
+  },
+  {
+    "Species": "Copperback Quail-thrush",
+    "ScientificName": "Cinclosoma clarum"
+  },
+  {
+    "Species": "Chestnut-breasted Quail-thrush",
+    "ScientificName": "Cinclosoma castaneothorax"
+  },
+  {
+    "Species": "Western Quail-thrush",
+    "ScientificName": "Cinclosoma marginatum"
+  },
+  {
+    "Species": "Cinnamon Quail-thrush",
+    "ScientificName": "Cinclosoma cinnamomeum"
+  },
+  {
+    "Species": "Nullarbor Quail-thrush",
+    "ScientificName": "Cinclosoma alisteri"
+  },
+  {
+    "Species": "Ground Cuckooshrike",
+    "ScientificName": "Coracina maxima"
+  },
+  {
+    "Species": "Barred Cuckooshrike",
+    "ScientificName": "Coracina lineata"
+  },
+  {
+    "Species": "Black-faced Cuckooshrike",
+    "ScientificName": "Coracina novaehollandiae"
+  },
+  {
+    "Species": "White-bellied Cuckooshrike",
+    "ScientificName": "Coracina papuensis"
+  },
+  {
+    "Species": "Long-tailed Triller",
+    "ScientificName": "Lalage leucopyga"
+  },
+  {
+    "Species": "White-winged Triller",
+    "ScientificName": "Lalage tricolor"
+  },
+  {
+    "Species": "Varied Triller",
+    "ScientificName": "Lalage leucomela"
+  },
+  {
+    "Species": "Sahul Cicadabird",
+    "ScientificName": "Edolisoma tenuirostre"
+  },
+  {
+    "Species": "Papuan Sittella",
+    "ScientificName": "Daphoenositta papuensis"
+  },
+  {
+    "Species": "Varied Sittella",
+    "ScientificName": "Daphoenositta chrysoptera"
+  },
+  {
+    "Species": "Varied Sittella (White-winged)",
+    "ScientificName": "Daphoenositta chrysoptera leucoptera"
+  },
+  {
+    "Species": "Varied Sittella (Striated)",
+    "ScientificName": "Daphoenositta chrysoptera striata"
+  },
+  {
+    "Species": "Varied Sittella (White-headed)",
+    "ScientificName": "Daphoenositta chrysoptera leucocephala"
+  },
+  {
+    "Species": "Varied Sittella (Orange-winged)",
+    "ScientificName": "Daphoenositta chrysoptera chrysoptera"
+  },
+  {
+    "Species": "Varied Sittella (Black-capped)",
+    "ScientificName": "Daphoenositta chrysoptera pileata"
+  },
+  {
+    "Species": "Eastern Whipbird",
+    "ScientificName": "Psophodes olivaceus"
+  },
+  {
+    "Species": "Western Whipbird",
+    "ScientificName": "Psophodes nigrogularis"
+  },
+  {
+    "Species": "Western Whipbird (Black-throated)",
+    "ScientificName": "Psophodes nigrogularis nigrogularis/oberon"
+  },
+  {
+    "Species": "Western Whipbird (White-bellied)",
+    "ScientificName": "Psophodes nigrogularis leucogaster/lashmari"
+  },
+  {
+    "Species": "Chiming Wedgebill",
+    "ScientificName": "Psophodes occidentalis"
+  },
+  {
+    "Species": "Chirruping Wedgebill",
+    "ScientificName": "Psophodes cristatus"
+  },
+  {
+    "Species": "Crested Bellbird",
+    "ScientificName": "Oreoica gutturalis"
+  },
+  {
+    "Species": "Eastern Shrike-tit",
+    "ScientificName": "Falcunculus frontatus"
+  },
+  {
+    "Species": "Western Shrike-tit",
+    "ScientificName": "Falcunculus leucogaster"
+  },
+  {
+    "Species": "Northern Shrike-tit",
+    "ScientificName": "Falcunculus whitei"
+  },
+  {
+    "Species": "Sandstone Shrikethrush",
+    "ScientificName": "Colluricincla woodwardi"
+  },
+  {
+    "Species": "Bower's Shrikethrush",
+    "ScientificName": "Colluricincla boweri"
+  },
+  {
+    "Species": "Gray Shrikethrush",
+    "ScientificName": "Colluricincla harmonica"
+  },
+  {
+    "Species": "Arafura Shrikethrush",
+    "ScientificName": "Colluricincla megarhyncha"
+  },
+  {
+    "Species": "Rufous Shrikethrush",
+    "ScientificName": "Colluricincla rufogaster"
+  },
+  {
+    "Species": "Olive Whistler",
+    "ScientificName": "Pachycephala olivacea"
+  },
+  {
+    "Species": "Red-lored Whistler",
+    "ScientificName": "Pachycephala rufogularis"
+  },
+  {
+    "Species": "Gilbert's Whistler",
+    "ScientificName": "Pachycephala inornata"
+  },
+  {
+    "Species": "Golden Whistler",
+    "ScientificName": "Pachycephala pectoralis"
+  },
+  {
+    "Species": "Golden Whistler (Western)",
+    "ScientificName": "Pachycephala pectoralis fuliginosa/occidentalis"
+  },
+  {
+    "Species": "Golden Whistler (Eastern)",
+    "ScientificName": "Pachycephala pectoralis [pectoralis Group]"
+  },
+  {
+    "Species": "Black-tailed Whistler",
+    "ScientificName": "Pachycephala melanura"
+  },
+  {
+    "Species": "Black-tailed Whistler (Black-tailed)",
+    "ScientificName": "Pachycephala melanura [melanura Group]"
+  },
+  {
+    "Species": "Gray Whistler",
+    "ScientificName": "Pachycephala simplex"
+  },
+  {
+    "Species": "Gray Whistler (Brown)",
+    "ScientificName": "Pachycephala simplex simplex/brunnescens"
+  },
+  {
+    "Species": "Gray Whistler (Gray-headed)",
+    "ScientificName": "Pachycephala simplex [griseiceps Group]"
+  },
+  {
+    "Species": "Rufous Whistler",
+    "ScientificName": "Pachycephala rufiventris"
+  },
+  {
+    "Species": "White-breasted Whistler",
+    "ScientificName": "Pachycephala lanioides"
+  },
+  {
+    "Species": "Olive-backed Oriole",
+    "ScientificName": "Oriolus sagittatus"
+  },
+  {
+    "Species": "Green Oriole",
+    "ScientificName": "Oriolus flavocinctus"
+  },
+  {
+    "Species": "Black-naped Oriole",
+    "ScientificName": "Oriolus chinensis"
+  },
+  {
+    "Species": "Australasian Figbird",
+    "ScientificName": "Sphecotheres vieilloti"
+  },
+  {
+    "Species": "Australasian Figbird (flaviventris Group)",
+    "ScientificName": "Sphecotheres vieilloti [flaviventris Group]"
+  },
+  {
+    "Species": "Australasian Figbird (salvadorii)",
+    "ScientificName": "Sphecotheres vieilloti salvadorii"
+  },
+  {
+    "Species": "Australasian Figbird (vieilloti)",
+    "ScientificName": "Sphecotheres vieilloti vieilloti"
+  },
+  {
+    "Species": "Yellow-breasted Boatbill",
+    "ScientificName": "Machaerirhynchus flaviventer"
+  },
+  {
+    "Species": "White-breasted Woodswallow",
+    "ScientificName": "Artamus leucorynchus"
+  },
+  {
+    "Species": "Masked Woodswallow",
+    "ScientificName": "Artamus personatus"
+  },
+  {
+    "Species": "White-browed Woodswallow",
+    "ScientificName": "Artamus superciliosus"
+  },
+  {
+    "Species": "Masked x White-browed Woodswallow (hybrid)",
+    "ScientificName": "Artamus personatus x superciliosus"
+  },
+  {
+    "Species": "Black-faced Woodswallow",
+    "ScientificName": "Artamus cinereus"
+  },
+  {
+    "Species": "Black-faced Woodswallow (White-vented)",
+    "ScientificName": "Artamus cinereus normani/inkermani"
+  },
+  {
+    "Species": "Black-faced Woodswallow (Black-vented)",
+    "ScientificName": "Artamus cinereus [cinereus Group]"
+  },
+  {
+    "Species": "Dusky Woodswallow",
+    "ScientificName": "Artamus cyanopterus"
+  },
+  {
+    "Species": "Little Woodswallow",
+    "ScientificName": "Artamus minor"
+  },
+  {
+    "Species": "Black-backed Butcherbird",
+    "ScientificName": "Cracticus mentalis"
+  },
+  {
+    "Species": "Gray Butcherbird",
+    "ScientificName": "Cracticus torquatus"
+  },
+  {
+    "Species": "Silver-backed Butcherbird",
+    "ScientificName": "Cracticus argenteus"
+  },
+  {
+    "Species": "Pied Butcherbird",
+    "ScientificName": "Cracticus nigrogularis"
+  },
+  {
+    "Species": "Black Butcherbird",
+    "ScientificName": "Melloria quoyi"
+  },
+  {
+    "Species": "Australian Magpie",
+    "ScientificName": "Gymnorhina tibicen"
+  },
+  {
+    "Species": "Australian Magpie (Black-backed)",
+    "ScientificName": "Gymnorhina tibicen [tibicen Group]"
+  },
+  {
+    "Species": "Australian Magpie (Western)",
+    "ScientificName": "Gymnorhina tibicen dorsalis"
+  },
+  {
+    "Species": "Australian Magpie (White-backed)",
+    "ScientificName": "Gymnorhina tibicen telonocua/tyrannica"
+  },
+  {
+    "Species": "Australian Magpie (Black-backed x White-backed)",
+    "ScientificName": "Gymnorhina tibicen [tibicen Group] x telonocua/tyrannica"
+  },
+  {
+    "Species": "Australian Magpie (Tasmanian)",
+    "ScientificName": "Gymnorhina tibicen hypoleuca"
+  },
+  {
+    "Species": "Pied Currawong",
+    "ScientificName": "Strepera graculina"
+  },
+  {
+    "Species": "Black Currawong",
+    "ScientificName": "Strepera fuliginosa"
+  },
+  {
+    "Species": "Gray Currawong",
+    "ScientificName": "Strepera versicolor"
+  },
+  {
+    "Species": "Gray Currawong (Gray)",
+    "ScientificName": "Strepera versicolor versicolor/plumbea"
+  },
+  {
+    "Species": "Gray Currawong (Clinking)",
+    "ScientificName": "Strepera versicolor arguta"
+  },
+  {
+    "Species": "Gray Currawong (Black-winged)",
+    "ScientificName": "Strepera versicolor melanoptera"
+  },
+  {
+    "Species": "Gray Currawong (Brown)",
+    "ScientificName": "Strepera versicolor intermedia"
+  },
+  {
+    "Species": "Northern Fantail",
+    "ScientificName": "Rhipidura rufiventris"
+  },
+  {
+    "Species": "Northern Fantail (Melanesian)",
+    "ScientificName": "Rhipidura rufiventris [setosa Group]"
+  },
+  {
+    "Species": "Northern Fantail (Northern)",
+    "ScientificName": "Rhipidura rufiventris isura"
+  },
+  {
+    "Species": "Willie-wagtail",
+    "ScientificName": "Rhipidura leucophrys"
+  },
+  {
+    "Species": "Supertramp Fantail",
+    "ScientificName": "Rhipidura semicollaris"
+  },
+  {
+    "Species": "Supertramp Fantail (Lesser Sundas)",
+    "ScientificName": "Rhipidura semicollaris [semicollaris Group]"
+  },
+  {
+    "Species": "Arafura Fantail",
+    "ScientificName": "Rhipidura dryas"
+  },
+  {
+    "Species": "Australian Rufous Fantail",
+    "ScientificName": "Rhipidura rufifrons"
+  },
+  {
+    "Species": "Gray Fantail",
+    "ScientificName": "Rhipidura albiscapa"
+  },
+  {
+    "Species": "Gray Fantail (Melanesian)",
+    "ScientificName": "Rhipidura albiscapa [pelzelni Group]"
+  },
+  {
+    "Species": "Gray Fantail (keasti)",
+    "ScientificName": "Rhipidura albiscapa keasti"
+  },
+  {
+    "Species": "Gray Fantail (alisteri)",
+    "ScientificName": "Rhipidura albiscapa alisteri"
+  },
+  {
+    "Species": "Gray Fantail (albiscapa)",
+    "ScientificName": "Rhipidura albiscapa albiscapa"
+  },
+  {
+    "Species": "Gray Fantail (preissi)",
+    "ScientificName": "Rhipidura albiscapa preissi"
+  },
+  {
+    "Species": "Gray Fantail (albicauda)",
+    "ScientificName": "Rhipidura albiscapa albicauda"
+  },
+  {
+    "Species": "Mangrove Fantail",
+    "ScientificName": "Rhipidura phasiana"
+  },
+  {
+    "Species": "New Zealand Fantail",
+    "ScientificName": "Rhipidura fuliginosa"
+  },
+  {
+    "Species": "Crow-billed Drongo",
+    "ScientificName": "Dicrurus annectens"
+  },
+  {
+    "Species": "Spangled Drongo",
+    "ScientificName": "Dicrurus bracteatus"
+  },
+  {
+    "Species": "Spangled Drongo (Papuan)",
+    "ScientificName": "Dicrurus bracteatus carbonarius"
+  },
+  {
+    "Species": "Spangled Drongo (Spangled)",
+    "ScientificName": "Dicrurus bracteatus [bracteatus Group]"
+  },
+  {
+    "Species": "Trumpet Manucode",
+    "ScientificName": "Phonygammus keraudrenii"
+  },
+  {
+    "Species": "Paradise Riflebird",
+    "ScientificName": "Ptiloris paradiseus"
+  },
+  {
+    "Species": "Victoria's Riflebird",
+    "ScientificName": "Ptiloris victoriae"
+  },
+  {
+    "Species": "Magnificent Riflebird",
+    "ScientificName": "Ptiloris magnificus"
+  },
+  {
+    "Species": "White-eared Monarch",
+    "ScientificName": "Carterornis leucotis"
+  },
+  {
+    "Species": "Island Monarch",
+    "ScientificName": "Monarcha cinerascens"
+  },
+  {
+    "Species": "Black-faced Monarch",
+    "ScientificName": "Monarcha melanopsis"
+  },
+  {
+    "Species": "Black-winged Monarch",
+    "ScientificName": "Monarcha frater"
+  },
+  {
+    "Species": "Black-winged Monarch (Pearly)",
+    "ScientificName": "Monarcha frater canescens"
+  },
+  {
+    "Species": "Australian Spectacled Monarch",
+    "ScientificName": "Symposiachrus trivirgatus"
+  },
+  {
+    "Species": "Australian Spectacled Monarch (Western)",
+    "ScientificName": "Symposiachrus trivirgatus [trivirgatus Group]"
+  },
+  {
+    "Species": "Australian Spectacled Monarch (Eastern)",
+    "ScientificName": "Symposiachrus trivirgatus gouldii/melanorrhous"
+  },
+  {
+    "Species": "Louisiade Spectacled Monarch",
+    "ScientificName": "Symposiachrus melanopterus"
+  },
+  {
+    "Species": "Frilled Monarch",
+    "ScientificName": "Arses telescopthalmus"
+  },
+  {
+    "Species": "Frill-necked Monarch",
+    "ScientificName": "Arses lorealis"
+  },
+  {
+    "Species": "Pied Monarch",
+    "ScientificName": "Arses kaupi"
+  },
+  {
+    "Species": "Magpie-lark",
+    "ScientificName": "Grallina cyanoleuca"
+  },
+  {
+    "Species": "Leaden Flycatcher",
+    "ScientificName": "Myiagra rubecula"
+  },
+  {
+    "Species": "Broad-billed Flycatcher",
+    "ScientificName": "Myiagra ruficollis"
+  },
+  {
+    "Species": "Satin Flycatcher",
+    "ScientificName": "Myiagra cyanoleuca"
+  },
+  {
+    "Species": "Restless Flycatcher",
+    "ScientificName": "Myiagra inquieta"
+  },
+  {
+    "Species": "Paperbark Flycatcher",
+    "ScientificName": "Myiagra nana"
+  },
+  {
+    "Species": "Shining Flycatcher",
+    "ScientificName": "Myiagra alecto"
+  },
+  {
+    "Species": "White-winged Chough",
+    "ScientificName": "Corcorax melanorhamphos"
+  },
+  {
+    "Species": "Apostlebird",
+    "ScientificName": "Struthidea cinerea"
+  },
+  {
+    "Species": "Tiger Shrike",
+    "ScientificName": "Lanius tigrinus"
+  },
+  {
+    "Species": "Brown Shrike",
+    "ScientificName": "Lanius cristatus"
+  },
+  {
+    "Species": "Brown Shrike (Brown)",
+    "ScientificName": "Lanius cristatus cristatus/confusus"
+  },
+  {
+    "Species": "Brown Shrike (Philippine)",
+    "ScientificName": "Lanius cristatus lucionensis"
+  },
+  {
+    "Species": "House Crow",
+    "ScientificName": "Corvus splendens"
+  },
+  {
+    "Species": "Torresian Crow",
+    "ScientificName": "Corvus orru"
+  },
+  {
+    "Species": "Little Crow",
+    "ScientificName": "Corvus bennetti"
+  },
+  {
+    "Species": "Australian Raven",
+    "ScientificName": "Corvus coronoides"
+  },
+  {
+    "Species": "Little Raven",
+    "ScientificName": "Corvus mellori"
+  },
+  {
+    "Species": "Forest Raven",
+    "ScientificName": "Corvus tasmanicus"
+  },
+  {
+    "Species": "Norfolk Robin",
+    "ScientificName": "Petroica multicolor"
+  },
+  {
+    "Species": "Red-capped Robin",
+    "ScientificName": "Petroica goodenovii"
+  },
+  {
+    "Species": "Rose Robin",
+    "ScientificName": "Petroica rosea"
+  },
+  {
+    "Species": "Pink Robin",
+    "ScientificName": "Petroica rodinogaster"
+  },
+  {
+    "Species": "Flame Robin",
+    "ScientificName": "Petroica phoenicea"
+  },
+  {
+    "Species": "Scarlet Robin",
+    "ScientificName": "Petroica boodang"
+  },
+  {
+    "Species": "Scarlet Robin (Campbell's)",
+    "ScientificName": "Petroica boodang campbelli"
+  },
+  {
+    "Species": "Scarlet Robin (Scarlet)",
+    "ScientificName": "Petroica boodang boodang/leggii"
+  },
+  {
+    "Species": "Yellow-legged Flyrobin",
+    "ScientificName": "Kempiella griseoceps"
+  },
+  {
+    "Species": "Lemon-bellied Flyrobin",
+    "ScientificName": "Microeca flavigaster"
+  },
+  {
+    "Species": "Lemon-bellied Flyrobin (Lemon-bellied)",
+    "ScientificName": "Microeca flavigaster [flavigaster Group]"
+  },
+  {
+    "Species": "Lemon-bellied Flyrobin (Kimberley)",
+    "ScientificName": "Microeca flavigaster tormenti"
+  },
+  {
+    "Species": "Jacky-winter",
+    "ScientificName": "Microeca fascinans"
+  },
+  {
+    "Species": "Southern Scrub-Robin",
+    "ScientificName": "Drymodes brunneopygia"
+  },
+  {
+    "Species": "Northern Scrub-Robin",
+    "ScientificName": "Drymodes superciliaris"
+  },
+  {
+    "Species": "Gray-headed Robin",
+    "ScientificName": "Heteromyias cinereifrons"
+  },
+  {
+    "Species": "White-browed Robin",
+    "ScientificName": "Poecilodryas superciliosa"
+  },
+  {
+    "Species": "Buff-sided Robin",
+    "ScientificName": "Poecilodryas cerviniventris"
+  },
+  {
+    "Species": "Dusky Robin",
+    "ScientificName": "Melanodryas vittata"
+  },
+  {
+    "Species": "Hooded Robin",
+    "ScientificName": "Melanodryas cucullata"
+  },
+  {
+    "Species": "Mangrove Robin",
+    "ScientificName": "Melanodryas pulverulenta"
+  },
+  {
+    "Species": "Eastern Yellow Robin",
+    "ScientificName": "Eopsaltria australis"
+  },
+  {
+    "Species": "Western Yellow Robin",
+    "ScientificName": "Eopsaltria griseogularis"
+  },
+  {
+    "Species": "White-breasted Robin",
+    "ScientificName": "Eopsaltria georgiana"
+  },
+  {
+    "Species": "Pale-yellow Robin",
+    "ScientificName": "Eopsaltria capito"
+  },
+  {
+    "Species": "White-faced Robin",
+    "ScientificName": "Eopsaltria leucops"
+  },
+  {
+    "Species": "Singing Bushlark",
+    "ScientificName": "Mirafra javanica"
+  },
+  {
+    "Species": "Singing Bushlark (Australasian)",
+    "ScientificName": "Mirafra javanica [javanica Group]"
+  },
+  {
+    "Species": "Eurasian Skylark",
+    "ScientificName": "Alauda arvensis"
+  },
+  {
+    "Species": "Eurasian Skylark (European)",
+    "ScientificName": "Alauda arvensis [arvensis Group]"
+  },
+  {
+    "Species": "Zitting Cisticola",
+    "ScientificName": "Cisticola juncidis"
+  },
+  {
+    "Species": "Zitting Cisticola (Double Zitting)",
+    "ScientificName": "Cisticola juncidis [tinnabulans Group]"
+  },
+  {
+    "Species": "Golden-headed Cisticola",
+    "ScientificName": "Cisticola exilis"
+  },
+  {
+    "Species": "Oriental Reed Warbler",
+    "ScientificName": "Acrocephalus orientalis"
+  },
+  {
+    "Species": "Australian Reed Warbler",
+    "ScientificName": "Acrocephalus australis"
+  },
+  {
+    "Species": "Pallas's Grasshopper Warbler",
+    "ScientificName": "Helopsaltes certhiola"
+  },
+  {
+    "Species": "Middendorff's Grasshopper Warbler",
+    "ScientificName": "Helopsaltes ochotensis"
+  },
+  {
+    "Species": "Spinifexbird",
+    "ScientificName": "Poodytes carteri"
+  },
+  {
+    "Species": "Little Grassbird",
+    "ScientificName": "Poodytes gramineus"
+  },
+  {
+    "Species": "Brown Songlark",
+    "ScientificName": "Cincloramphus cruralis"
+  },
+  {
+    "Species": "Rufous Songlark",
+    "ScientificName": "Cincloramphus mathewsi"
+  },
+  {
+    "Species": "Tawny Grassbird",
+    "ScientificName": "Cincloramphus timoriensis"
+  },
+  {
+    "Species": "White-backed Swallow",
+    "ScientificName": "Cheramoeca leucosterna"
+  },
+  {
+    "Species": "Welcome Swallow",
+    "ScientificName": "Hirundo neoxena"
+  },
+  {
+    "Species": "Barn Swallow",
+    "ScientificName": "Hirundo rustica"
+  },
+  {
+    "Species": "Barn Swallow (White-bellied)",
+    "ScientificName": "Hirundo rustica rustica"
+  },
+  {
+    "Species": "Barn Swallow (Tytler's)",
+    "ScientificName": "Hirundo rustica tytleri"
+  },
+  {
+    "Species": "Barn Swallow (Buff-bellied)",
+    "ScientificName": "Hirundo rustica gutturalis/mandschurica"
+  },
+  {
+    "Species": "Asian House-Martin",
+    "ScientificName": "Delichon dasypus"
+  },
+  {
+    "Species": "Eastern Red-rumped Swallow",
+    "ScientificName": "Cecropis daurica"
+  },
+  {
+    "Species": "Eastern Red-rumped Swallow (Daurian)",
+    "ScientificName": "Cecropis daurica [daurica Group]"
+  },
+  {
+    "Species": "Fairy Martin",
+    "ScientificName": "Petrochelidon ariel"
+  },
+  {
+    "Species": "Tree Martin",
+    "ScientificName": "Petrochelidon nigricans"
+  },
+  {
+    "Species": "Red-whiskered Bulbul",
+    "ScientificName": "Pycnonotus jocosus"
+  },
+  {
+    "Species": "Red-vented Bulbul",
+    "ScientificName": "Pycnonotus cafer"
+  },
+  {
+    "Species": "Yellow-browed Warbler",
+    "ScientificName": "Phylloscopus inornatus"
+  },
+  {
+    "Species": "Dusky Warbler",
+    "ScientificName": "Phylloscopus fuscatus"
+  },
+  {
+    "Species": "Willow Warbler",
+    "ScientificName": "Phylloscopus trochilus"
+  },
+  {
+    "Species": "Eastern Crowned Warbler",
+    "ScientificName": "Phylloscopus coronatus"
+  },
+  {
+    "Species": "Arctic Warbler",
+    "ScientificName": "Phylloscopus borealis"
+  },
+  {
+    "Species": "Kamchatka Leaf Warbler",
+    "ScientificName": "Phylloscopus examinandus"
+  },
+  {
+    "Species": "Ashy-bellied White-eye",
+    "ScientificName": "Zosterops citrinella"
+  },
+  {
+    "Species": "Ashy-bellied White-eye (Ashy-bellied)",
+    "ScientificName": "Zosterops citrinella [citrinella Group]"
+  },
+  {
+    "Species": "Australian Yellow White-eye",
+    "ScientificName": "Zosterops luteus"
+  },
+  {
+    "Species": "Silvereye",
+    "ScientificName": "Zosterops lateralis"
+  },
+  {
+    "Species": "Ashy-bellied White-eye x Silvereye (hybrid)",
+    "ScientificName": "Zosterops citrinella x lateralis"
+  },
+  {
+    "Species": "Christmas Island White-eye",
+    "ScientificName": "Zosterops natalis"
+  },
+  {
+    "Species": "White-chested White-eye",
+    "ScientificName": "Zosterops albogularis"
+  },
+  {
+    "Species": "Robust White-eye",
+    "ScientificName": "Zosterops strenuus"
+  },
+  {
+    "Species": "Slender-billed White-eye",
+    "ScientificName": "Zosterops tenuirostris"
+  },
+  {
+    "Species": "Metallic Starling",
+    "ScientificName": "Aplonis metallica"
+  },
+  {
+    "Species": "Metallic Starling (Metallic)",
+    "ScientificName": "Aplonis metallica [metallica Group]"
+  },
+  {
+    "Species": "Singing Starling",
+    "ScientificName": "Aplonis cantoroides"
+  },
+  {
+    "Species": "Tasman Starling",
+    "ScientificName": "Aplonis fusca"
+  },
+  {
+    "Species": "European Starling",
+    "ScientificName": "Sturnus vulgaris"
+  },
+  {
+    "Species": "Rosy Starling",
+    "ScientificName": "Pastor roseus"
+  },
+  {
+    "Species": "Daurian Starling",
+    "ScientificName": "Agropsar sturninus"
+  },
+  {
+    "Species": "Chestnut-cheeked Starling",
+    "ScientificName": "Agropsar philippensis"
+  },
+  {
+    "Species": "Common Myna",
+    "ScientificName": "Acridotheres tristis"
+  },
+  {
+    "Species": "Javan Myna",
+    "ScientificName": "Acridotheres javanicus"
+  },
+  {
+    "Species": "Bassian Thrush",
+    "ScientificName": "Zoothera lunulata"
+  },
+  {
+    "Species": "Russet-tailed Thrush",
+    "ScientificName": "Zoothera heinei"
+  },
+  {
+    "Species": "Russet-tailed Thrush (Russet-tailed)",
+    "ScientificName": "Zoothera heinei [heinei Group]"
+  },
+  {
+    "Species": "Siberian Thrush",
+    "ScientificName": "Geokichla sibirica"
+  },
+  {
+    "Species": "Siberian Thrush (Sakhalin)",
+    "ScientificName": "Geokichla sibirica davisoni"
+  },
+  {
+    "Species": "Song Thrush",
+    "ScientificName": "Turdus philomelos"
+  },
+  {
+    "Species": "Eurasian Blackbird",
+    "ScientificName": "Turdus merula"
+  },
+  {
+    "Species": "Eyebrowed Thrush",
+    "ScientificName": "Turdus obscurus"
+  },
+  {
+    "Species": "Christmas Island-Thrush",
+    "ScientificName": "Turdus erythropleurus"
+  },
+  {
+    "Species": "Tasman Sea Island-Thrush",
+    "ScientificName": "Turdus poliocephalus"
+  },
+  {
+    "Species": "Gray-streaked Flycatcher",
+    "ScientificName": "Muscicapa griseisticta"
+  },
+  {
+    "Species": "Dark-sided Flycatcher",
+    "ScientificName": "Muscicapa sibirica"
+  },
+  {
+    "Species": "Dark-sided Flycatcher (Siberian)",
+    "ScientificName": "Muscicapa sibirica sibirica"
+  },
+  {
+    "Species": "Asian Brown Flycatcher",
+    "ScientificName": "Muscicapa dauurica"
+  },
+  {
+    "Species": "Asian Brown Flycatcher (Northern)",
+    "ScientificName": "Muscicapa dauurica dauurica"
+  },
+  {
+    "Species": "Brown-streaked Flycatcher",
+    "ScientificName": "Muscicapa williamsoni"
+  },
+  {
+    "Species": "Blue-and-white Flycatcher",
+    "ScientificName": "Cyanoptila cyanomelana"
+  },
+  {
+    "Species": "Siberian Blue Robin",
+    "ScientificName": "Larvivora cyane"
+  },
+  {
+    "Species": "Siberian Rubythroat",
+    "ScientificName": "Calliope calliope"
+  },
+  {
+    "Species": "Narcissus Flycatcher",
+    "ScientificName": "Ficedula narcissina"
+  },
+  {
+    "Species": "Mugimaki Flycatcher",
+    "ScientificName": "Ficedula mugimaki"
+  },
+  {
+    "Species": "Blue Rock-Thrush",
+    "ScientificName": "Monticola solitarius"
+  },
+  {
+    "Species": "Blue Rock-Thrush (philippensis)",
+    "ScientificName": "Monticola solitarius philippensis"
+  },
+  {
+    "Species": "Amur Stonechat",
+    "ScientificName": "Saxicola stejnegeri"
+  },
+  {
+    "Species": "Northern Wheatear",
+    "ScientificName": "Oenanthe oenanthe"
+  },
+  {
+    "Species": "Isabelline Wheatear",
+    "ScientificName": "Oenanthe isabellina"
+  },
+  {
+    "Species": "Red-capped Flowerpecker",
+    "ScientificName": "Dicaeum geelvinkianum"
+  },
+  {
+    "Species": "Mistletoebird",
+    "ScientificName": "Dicaeum hirundinaceum"
+  },
+  {
+    "Species": "Mistletoebird (Australian)",
+    "ScientificName": "Dicaeum hirundinaceum hirundinaceum"
+  },
+  {
+    "Species": "Ornate Sunbird",
+    "ScientificName": "Cinnyris ornatus"
+  },
+  {
+    "Species": "Sahul Sunbird",
+    "ScientificName": "Cinnyris frenatus"
+  },
+  {
+    "Species": "Pictorella Munia",
+    "ScientificName": "Heteromunia pectoralis"
+  },
+  {
+    "Species": "Diamond Firetail",
+    "ScientificName": "Stagonopleura guttata"
+  },
+  {
+    "Species": "Red-eared Firetail",
+    "ScientificName": "Stagonopleura oculata"
+  },
+  {
+    "Species": "Beautiful Firetail",
+    "ScientificName": "Stagonopleura bella"
+  },
+  {
+    "Species": "Crimson Finch",
+    "ScientificName": "Neochmia phaeton"
+  },
+  {
+    "Species": "Crimson Finch (White-bellied)",
+    "ScientificName": "Neochmia phaeton evangelinae"
+  },
+  {
+    "Species": "Crimson Finch (Black-bellied)",
+    "ScientificName": "Neochmia phaeton phaeton"
+  },
+  {
+    "Species": "Red-browed Firetail",
+    "ScientificName": "Neochmia temporalis"
+  },
+  {
+    "Species": "Painted Firetail",
+    "ScientificName": "Emblema pictum"
+  },
+  {
+    "Species": "Star Finch",
+    "ScientificName": "Emblema ruficauda"
+  },
+  {
+    "Species": "Plum-headed Finch",
+    "ScientificName": "Emblema modesta"
+  },
+  {
+    "Species": "Double-barred Finch",
+    "ScientificName": "Stizoptera bichenovii"
+  },
+  {
+    "Species": "Zebra Finch",
+    "ScientificName": "Taeniopygia guttata"
+  },
+  {
+    "Species": "Zebra Finch (Australian)",
+    "ScientificName": "Taeniopygia guttata castanotis"
+  },
+  {
+    "Species": "Double-barred x Zebra Finch (hybrid)",
+    "ScientificName": "Stizoptera bichenovii x Taeniopygia guttata"
+  },
+  {
+    "Species": "Masked Finch",
+    "ScientificName": "Poephila personata"
+  },
+  {
+    "Species": "Masked Finch (Masked)",
+    "ScientificName": "Poephila personata personata"
+  },
+  {
+    "Species": "Masked Finch (White-eared)",
+    "ScientificName": "Poephila personata leucotis"
+  },
+  {
+    "Species": "Long-tailed Finch",
+    "ScientificName": "Poephila acuticauda"
+  },
+  {
+    "Species": "Black-throated Finch",
+    "ScientificName": "Poephila cincta"
+  },
+  {
+    "Species": "Black-throated Finch (Black-rumped)",
+    "ScientificName": "Poephila cincta atropygialis"
+  },
+  {
+    "Species": "Black-throated Finch (White-rumped)",
+    "ScientificName": "Poephila cincta cincta"
+  },
+  {
+    "Species": "Java Sparrow",
+    "ScientificName": "Padda oryzivora"
+  },
+  {
+    "Species": "Scaly-breasted Munia",
+    "ScientificName": "Lonchura punctulata"
+  },
+  {
+    "Species": "Scaly-breasted Munia (Scaled)",
+    "ScientificName": "Lonchura punctulata [nisoria Group]"
+  },
+  {
+    "Species": "Chestnut Munia",
+    "ScientificName": "Lonchura atricapilla"
+  },
+  {
+    "Species": "Pale-headed Munia",
+    "ScientificName": "Lonchura pallida"
+  },
+  {
+    "Species": "Yellow-rumped Munia",
+    "ScientificName": "Lonchura flaviprymna"
+  },
+  {
+    "Species": "Chestnut-breasted Munia",
+    "ScientificName": "Lonchura castaneothorax"
+  },
+  {
+    "Species": "Yellow-rumped x Chestnut-breasted Munia (hybrid)",
+    "ScientificName": "Lonchura flaviprymna x castaneothorax"
+  },
+  {
+    "Species": "Gouldian Finch",
+    "ScientificName": "Chloebia gouldiae"
+  },
+  {
+    "Species": "Blue-faced Parrotfinch",
+    "ScientificName": "Erythrura trichroa"
+  },
+  {
+    "Species": "House Sparrow",
+    "ScientificName": "Passer domesticus"
+  },
+  {
+    "Species": "House Sparrow (Gray-cheeked)",
+    "ScientificName": "Passer domesticus [domesticus Group]"
+  },
+  {
+    "Species": "Eurasian Tree Sparrow",
+    "ScientificName": "Passer montanus"
+  },
+  {
+    "Species": "House x Eurasian Tree Sparrow (hybrid)",
+    "ScientificName": "Passer domesticus x montanus"
+  },
+  {
+    "Species": "Forest Wagtail",
+    "ScientificName": "Dendronanthus indicus"
+  },
+  {
+    "Species": "Gray Wagtail",
+    "ScientificName": "Motacilla cinerea"
+  },
+  {
+    "Species": "Eastern Yellow Wagtail",
+    "ScientificName": "Motacilla tschutschensis"
+  },
+  {
+    "Species": "Eastern Yellow Wagtail (Eastern)",
+    "ScientificName": "Motacilla tschutschensis tschutschensis/plexa"
+  },
+  {
+    "Species": "Eastern Yellow Wagtail (Green-headed)",
+    "ScientificName": "Motacilla tschutschensis taivana"
+  },
+  {
+    "Species": "Eastern Yellow Wagtail (Manchurian)",
+    "ScientificName": "Motacilla tschutschensis macronyx"
+  },
+  {
+    "Species": "Citrine Wagtail",
+    "ScientificName": "Motacilla citreola"
+  },
+  {
+    "Species": "Citrine Wagtail (Gray-backed)",
+    "ScientificName": "Motacilla citreola citreola/werae"
+  },
+  {
+    "Species": "White Wagtail",
+    "ScientificName": "Motacilla alba"
+  },
+  {
+    "Species": "White Wagtail (White-faced)",
+    "ScientificName": "Motacilla alba alba/dukhunensis"
+  },
+  {
+    "Species": "White Wagtail (ocularis)",
+    "ScientificName": "Motacilla alba ocularis"
+  },
+  {
+    "Species": "White Wagtail (Transbaikalian)",
+    "ScientificName": "Motacilla alba baicalensis"
+  },
+  {
+    "Species": "White Wagtail (Black-backed)",
+    "ScientificName": "Motacilla alba lugens"
+  },
+  {
+    "Species": "White Wagtail (Chinese)",
+    "ScientificName": "Motacilla alba leucopsis"
+  },
+  {
+    "Species": "Australian Pipit",
+    "ScientificName": "Anthus australis"
+  },
+  {
+    "Species": "New Zealand Pipit",
+    "ScientificName": "Anthus novaeseelandiae"
+  },
+  {
+    "Species": "Tree Pipit",
+    "ScientificName": "Anthus trivialis"
+  },
+  {
+    "Species": "Pechora Pipit",
+    "ScientificName": "Anthus gustavi"
+  },
+  {
+    "Species": "Pechora Pipit (Pechora)",
+    "ScientificName": "Anthus gustavi gustavi/stejnegeri"
+  },
+  {
+    "Species": "Red-throated Pipit",
+    "ScientificName": "Anthus cervinus"
+  },
+  {
+    "Species": "Common Chaffinch",
+    "ScientificName": "Fringilla coelebs"
+  },
+  {
+    "Species": "European Greenfinch",
+    "ScientificName": "Chloris chloris"
+  },
+  {
+    "Species": "Redpoll",
+    "ScientificName": "Acanthis flammea"
+  },
+  {
+    "Species": "Redpoll (Common)",
+    "ScientificName": "Acanthis flammea flammea/rostrata/islandica"
+  },
+  {
+    "Species": "Redpoll (flammea)",
+    "ScientificName": "Acanthis flammea flammea"
+  },
+  {
+    "Species": "Redpoll (Lesser)",
+    "ScientificName": "Acanthis flammea cabaret"
+  },
+  {
+    "Species": "European Goldfinch",
+    "ScientificName": "Carduelis carduelis"
+  },
+  {
+    "Species": "Yellowhammer",
+    "ScientificName": "Emberiza citrinella"
+  },
+  {
+    "Species": "Yellow-breasted Bunting",
+    "ScientificName": "Emberiza aureola"
+  }
+]

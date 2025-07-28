@@ -1,4 +1,5 @@
 import { getRandomRecordingForSpecies } from './recording.js';
+import { loadSpeciesList } from './species.js';
 
 const response = (statusCode, responseBody) => ({
   statusCode,
@@ -24,4 +25,16 @@ export const getRecording = async (event) => {
     console.error("Error getting recording: ", error);
     return response(500, { "message": "Error getting recording" });
   }
+}
+
+export const getSpeciesList = async (event) => {
+  console.log("Event:", event);
+  const region = event.queryStringParameters["region"];
+  const species_list = await loadSpeciesList(region);
+  if (!species_list) {
+    return response(404, {"message": "No species list found for region"});
+  }
+
+  return response(200, {"species": species_list })
+
 }
