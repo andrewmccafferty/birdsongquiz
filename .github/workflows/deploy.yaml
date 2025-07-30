@@ -69,7 +69,7 @@ jobs:
       - name: Terraform plan
         id: plan
         if: github.event_name == 'pull_request'
-        run: terraform plan -no-color -input=false -var environment=${{ ENV_NAME }}
+        run: terraform plan -no-color -input=false -var environment=$ENV_NAME
         continue-on-error: true
       
       - uses: actions/github-script@v6
