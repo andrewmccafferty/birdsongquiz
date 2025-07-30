@@ -1,0 +1,10 @@
+{
+    "name": "birdsong-quiz-scripts",
+    "version": "1.0.0",
+    "scripts": {
+        "scrape-avibase": "node src/scrape-avibase.js"
+    },
+    "dependencies": {
+     "puppeteer": "24.15.0"
+    }
+}

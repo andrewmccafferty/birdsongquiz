@@ -4,6 +4,7 @@ import 'react-bootstrap-typeahead/css/Typeahead.css';
 import 'react-bootstrap-typeahead/css/Typeahead.bs5.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { callApi } from "./api.js";
 const speciesList = require('./species_list.js');
 
 class HeadToHeadSpeciesSelector extends Component {
@@ -32,6 +33,32 @@ class HeadToHeadSpeciesSelector extends Component {
 	onSoundTypeChanged = (soundType) => {
 		this.setState({soundType: soundType})
 	}
+	loadCountries = (country) => {
+		this.setState({
+			speciesListLoading: true,
+			errorLoadingSpecies: false
+		})
+		callApi(`species?region=${country}`)
+		.catch(err => {
+				this.setState({
+					speciesListLoading: false,
+					errorLoadingSpecies: true
+				})
+			})
+		.then(result => {
+			this.setState({
+				speciesList: result.species,
+				speciesListLoading: false
+			})
+		});
+	}
+	onCountryChanged = (country) => {
+		if (this.state.country == country) {
+			return
+		}		
+		this.setState({country: country})
+		this.loadCountries(country)
+	}
 	render() {
 		return (
 			<div>
@@ -44,7 +71,16 @@ class HeadToHeadSpeciesSelector extends Component {
 						<option value="call">Call</option>
 					</select>
 				</div>
-				<div className="input-container">
+				<div className="quiz-subheader">
+					<label htmlFor="sound-type" className="form-label">Country:</label>
+					<select id="country" onChange={e => this.onCountryChanged(e.target.value)}>
+						<option value="AU">Australia</option>
+						<option value="MY">Malaysia</option>
+						<option value="GB" selected>UK</option>
+						<option value="US">USA</option>
+					</select>
+				</div>
+				{!this.state.speciesListLoading && <div className="input-container">
 				
 				<Typeahead
 					multiple
@@ -64,7 +100,13 @@ class HeadToHeadSpeciesSelector extends Component {
 					<button className="action-button" onClick={() => this.onSelectionComplete()}>
 						<FontAwesomeIcon icon={faCheck} />
 					</button>
-				</div>
+				</div>}
+				{
+					this.state.speciesListLoading &&
+					<div>
+						Species list loading...
+					</div>	
+				}
 				{this.state.showValidationMessage && <div className="validation-message">
 					Please select at least two species to compare
 					</div>}
