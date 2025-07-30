@@ -72,4 +72,4 @@ jobs:
 
       - name: Terraform Apply
         if: github.event_name == 'pull_request'
-        run: terraform apply -auto-approve -input=false
+        run: terraform apply -auto-approve -input=false -var environment=$ENV_NAME
