@@ -3,7 +3,7 @@ on:
     branches: [ main ]
 env:
   TF_LOG: INFO
-  BUCKET_TF_STATE: terraform-state-bucket
+  BUCKET_TF_STATE: birdsongquiz-terraform-state-bucket
   AWS_REGION : eu-west-2
 
 permissions:
@@ -41,8 +41,8 @@ on:
 
 env: 
   TF_LOG: INFO
-  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  # AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  # AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   BUCKET_TF_STATE: ${{ secrets.BUCKET_TF_STATE}}
 
 jobs:
@@ -52,7 +52,6 @@ jobs:
     defaults:
       run:
         shell: bash
-        # We keep Terraform files in the terraform directory.
         working-directory: ./terraform
 
     steps:
@@ -66,7 +65,18 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
       - name: Checkout the repository to the runner
         uses: actions/checkout@v2
+      - uses: actions/github-script@v6
+        if: github.event_name == 'pull_request'
+        with:
+          script: |
+            # Extract part of the branch after the first slash
+            RAW_ENV_NAME=$(echo "$CI_COMMIT_REF_NAME" | cut -d'/' -f2-)
 
+            # Lowercase, replace non-alphanumerics with hyphens
+            CLEAN_ENV_NAME=$(echo "$RAW_ENV_NAME" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g')
+
+            # Trim to 15 characters
+            export ENV_NAME=${CLEAN_ENV_NAME:0:15}
       - name: Setup Terraform with specified version on the runner
         uses: hashicorp/setup-terraform@v2
         with:
@@ -87,7 +97,7 @@ jobs:
       - name: Terraform plan
         id: plan
         if: github.event_name == 'pull_request'
-        run: terraform plan -no-color -input=false
+        run: terraform plan -no-color -input=false -var environment=${{ ENV_NAME }}
         continue-on-error: true
       
       - uses: actions/github-script@v6
@@ -122,6 +132,6 @@ jobs:
         if: steps.plan.outcome == 'failure'
         run: exit 1
 
-      - name: Terraform Apply
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve -input=false
+      # - name: Terraform Apply
+      #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      #   run: terraform apply -auto-approve -input=false

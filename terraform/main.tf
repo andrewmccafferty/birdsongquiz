@@ -8,6 +8,7 @@ import {
 }
 
 resource "aws_s3_bucket" "frontend_bucket" {
+  bucket = var.environment == "prod" ? "birdsongquiz" : "birdsongquiz-${var.environment}"
 }
 
 resource "aws_s3_object" "birdsongquiz_frontend" {
@@ -38,7 +39,7 @@ resource "aws_s3_bucket_acl" "species_list_bucket" {
 }
 
 resource "aws_s3_bucket" "lambda_bucket" {
-  bucket = "birdsongquiz-bucket"
+  bucket = var.environment == "prod" ? "birdsongquiz-bucket" : "birdsongquiz-bucket-${var.environment}"
 }
 
 resource "aws_s3_bucket_ownership_controls" "lambda_bucket" {
@@ -98,7 +99,7 @@ resource "aws_cloudwatch_log_group" "get_species_list" {
 }
 
 resource "aws_lambda_function" "get_recording" {
-  function_name = "GetRecording"
+  function_name = var.environment == "prod" ? "GetRecording" : "GetRecording-${var.environment}"
   timeout = 30
   s3_bucket = aws_s3_bucket.lambda_bucket.id
   s3_key    = aws_s3_object.lambda_birdsongquiz.key
@@ -112,13 +113,13 @@ resource "aws_lambda_function" "get_recording" {
 }
 
 resource "aws_cloudwatch_log_group" "get_recording" {
-  name = "/aws/lambda/${aws_lambda_function.get_recording.function_name}"
+  name = var.environment == "prod" ? "/aws/lambda/GetRecording" : "/aws/lambda/GetRecording-${var.environment}"
 
   retention_in_days = 30
 }
 
 resource "aws_iam_role" "lambda_exec" {
-  name = "serverless_lambda"
+  name = var.environment == "prod" ? "serverless_lambda" : "serverless_lambda_${var.environment}"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -185,14 +186,14 @@ resource "aws_iam_role_policy" "species_list_s3_access" {
 
 
 resource "aws_apigatewayv2_api" "lambda" {
-  name          = "serverless_lambda_gw"
+  name          = var.environment == "prod" ? "serverless_lambda_gw" : "serverless_lambda_gw_${var.environment}"
   protocol_type = "HTTP"
 }
 
 resource "aws_apigatewayv2_stage" "lambda" {
   api_id = aws_apigatewayv2_api.lambda.id
 
-  name        = "serverless_lambda_stage"
+  name        = var.environment == "prod" ? "serverless_lambda_stage" : "serverless_lambda_stage_${var.environment}"
   auto_deploy = true
 
   access_log_settings {
@@ -245,7 +246,7 @@ resource "aws_apigatewayv2_route" "get_species_list" {
 }
 
 resource "aws_cloudwatch_log_group" "api_gw" {
-  name = "/aws/api_gw/${aws_apigatewayv2_api.lambda.name}"
+  name = var.environment == "prod" ? "/aws/api_gw/serverless_lambda_gw" : "/aws/api_gw/serverless_lambda_gw_${var.environment}"
 
   retention_in_days = 30
 }
