@@ -1,31 +1,3 @@
-on:
-  push:
-    branches: [ main ]
-env:
-  TF_LOG: INFO
-  BUCKET_TF_STATE: birdsongquiz-terraform-state-bucket
-  AWS_REGION : eu-west-2
-
-permissions:
-      id-token: write
-      contents: read
-jobs:
-  AssumeRoleAndCallIdentity:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Git clone the repository
-        uses: actions/checkout@v3
-      - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v1.7.0
-        with:
-          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
-          role-session-name: GitHub_to_AWS_via_FederatedOIDC
-          aws-region: ${{ env.AWS_REGION }}
-      - name: Sts GetCallerIdentity
-        run: |
-          aws sts get-caller-identity
-
-
 name: "Terraform Infrastructure Change Management Pipeline with GitHub Actions"
 on: 
   push: 
