@@ -16,7 +16,7 @@ resource "aws_s3_object" "birdsongquiz_frontend" {
 }
 
 resource "aws_s3_bucket" "species_list_bucket" {
-  bucket = "species-list-bucket"
+  bucket = var.environment == "prod" ? "species-list-bucket" : "${var.environment}-species-list-bucket"
 }
 
 resource "aws_s3_bucket_ownership_controls" "species_list_bucket" {
@@ -68,7 +68,7 @@ resource "aws_s3_object" "lambda_birdsongquiz" {
 }
 
 resource "aws_lambda_function" "get_species_list" {
-  function_name = "GetSpeciesList"
+  function_name = var.environment == "prod" ? "GetSpeciesList" : "GetSpeciesList-${var.environment}" 
   timeout = 30
   s3_bucket = aws_s3_bucket.lambda_bucket.id
   s3_key    = aws_s3_object.lambda_birdsongquiz.key
@@ -136,7 +136,7 @@ resource "aws_iam_role_policy_attachment" "lambda_policy" {
 }
 
 resource "aws_iam_role" "get_species_list_role" {
-  name = "get_species_list"
+  name = var.environment == "prod" ? "get_species_list" : "get_species_list_${var.environment}"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
