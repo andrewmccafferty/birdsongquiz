@@ -2,11 +2,6 @@ provider "aws" {
   region = var.aws_region
 }
 
-import {
-  to = aws_s3_bucket.frontend_bucket
-  id = "birdsongquiz"
-}
-
 resource "aws_s3_bucket" "frontend_bucket" {
   bucket = var.environment == "prod" ? "birdsongquiz" : "birdsongquiz-${var.environment}"
 }
