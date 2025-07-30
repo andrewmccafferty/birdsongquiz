@@ -11,6 +11,10 @@ on:
     paths:
     - terraform/**
 
+permissions:
+      id-token: write
+      contents: read
+
 env: 
   TF_LOG: INFO
   # AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
