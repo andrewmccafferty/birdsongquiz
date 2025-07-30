@@ -56,7 +56,7 @@ jobs:
           ENV_NAME="${BRANCH_NAME#*/}"
           echo "ENV_NAME=$ENV_NAME" >> $GITHUB_ENV
       - name: Install and build frontend
-        working-directory: ../frontend
+        working-directory: ./frontend
         run: |
           npm ci
           npm run build
