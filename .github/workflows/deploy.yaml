@@ -55,11 +55,6 @@ jobs:
           BRANCH_NAME="${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}"
           ENV_NAME="${BRANCH_NAME#*/}"
           echo "ENV_NAME=$ENV_NAME" >> $GITHUB_ENV
-      - name: Install and build frontend
-        working-directory: ./frontend
-        run: |
-          npm ci
-          npm run build
       - name: Terraform create workspace
         run: terraform workspace select -or-create $ENV_NAME
 
@@ -87,5 +82,6 @@ jobs:
             echo "Set $upper_key"
           done
       - name: Deploy frontend
+        working-directory: ./frontend
         if: github.event_name == 'pull_request'
-        run: 
+        run: ./deploy.sh

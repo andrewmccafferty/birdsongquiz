@@ -14,6 +14,9 @@ if [ -z "${FRONTEND_BUCKET:-}" ]; then
 fi
 
 # 2. Build the app
+echo "Running npm ci"
+npm ci
+
 echo "Running build with API_ROOT=$API_ROOT..."
 API_ROOT="$API_ROOT" npm run build
 
