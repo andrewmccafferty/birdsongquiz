@@ -76,7 +76,7 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           echo "API Base URL:"
-          API_ROOT=$(terraform output -raw api_root)
+          API_ROOT=$(terraform output -raw api_base_url)
           echo "$API_ROOT"
           echo "API_ROOT=$API_ROOT" >> $GITHUB_ENV
       - name: Output frontend bucket name  and set FRONTEND_BUCKET env var
