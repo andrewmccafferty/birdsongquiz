@@ -1,3 +1,13 @@
+terraform {
+  backend "s3" {
+    bucket = "birdsongquiz-terraform-state-bucket"
+    key    = "state/terraform.tfstate"
+    region = "eu-west-2"
+    dynamodb_table = null
+    encrypt = true
+  }
+}
+
 provider "aws" {
   region = var.aws_region
 }
@@ -50,6 +60,7 @@ resource "aws_s3_bucket_acl" "lambda_bucket" {
   bucket = aws_s3_bucket.lambda_bucket.id
   acl    = "private"
 }
+
 
 data "archive_file" "lambda_birdsongquiz" {
   type = "zip"
