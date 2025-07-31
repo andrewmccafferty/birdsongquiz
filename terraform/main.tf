@@ -194,6 +194,9 @@ resource "aws_iam_role_policy" "species_list_s3_access" {
 resource "aws_apigatewayv2_api" "lambda" {
   name          = var.environment == "prod" ? "serverless_lambda_gw" : "serverless_lambda_gw_${var.environment}"
   protocol_type = "HTTP"
+  cors_configuration {
+    allow_origins = ["*"]
+  }
 }
 
 resource "aws_apigatewayv2_stage" "lambda" {
