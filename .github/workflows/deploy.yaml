@@ -76,3 +76,9 @@ jobs:
       - name: Terraform Apply
         if: github.event_name == 'pull_request'
         run: terraform apply -auto-approve -input=false -var environment=$ENV_NAME
+      
+      - name: Output API Base URL
+        if: github.event_name == 'pull_request'
+        run: |
+          echo "API Base URL:"
+          terraform output -raw api_base_url
