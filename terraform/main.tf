@@ -13,7 +13,93 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "frontend_bucket" {
-  bucket = var.environment == "prod" ? "birdsongquiz" : "birdsongquiz-${var.environment}"
+  bucket = var.environment == "prod" ? "birdsongquiz-frontend" : "birdsongquiz-frontend-${var.environment}"
+}
+
+resource "aws_s3_bucket_website_configuration" "static_site" {
+  bucket = aws_s3_bucket.frontend_bucket.id
+
+  index_document {
+    suffix = "index.html"
+  }
+}
+
+resource "aws_s3_bucket_public_access_block" "static_site" {
+  bucket = aws_s3_bucket.frontend_bucket.id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
+resource "aws_cloudfront_origin_access_control" "oac" {
+  name                              = "static-site-oac"
+  description                       = "Access control for S3 bucket"
+  origin_access_control_origin_type = "s3"
+  signing_behavior                  = "always"
+  signing_protocol                  = "sigv4"
+}
+
+resource "aws_cloudfront_distribution" "static_site" {
+  origin {
+    domain_name = aws_s3_bucket.frontend_bucket.bucket_regional_domain_name
+    origin_id   = "s3-origin"
+
+    origin_access_control_id = aws_cloudfront_origin_access_control.oac.id
+  }
+
+  enabled             = true
+  default_root_object = "index.html"
+
+  default_cache_behavior {
+    allowed_methods  = ["GET", "HEAD"]
+    cached_methods   = ["GET", "HEAD"]
+    target_origin_id = "s3-origin"
+
+    viewer_protocol_policy = "redirect-to-https"
+
+    forwarded_values {
+      query_string = false
+
+      cookies {
+        forward = "none"
+      }
+    }
+  }
+
+  restrictions {
+    geo_restriction {
+      restriction_type = "none"
+    }
+  }
+
+  viewer_certificate {
+    cloudfront_default_certificate = true
+  }
+}
+
+data "aws_iam_policy_document" "s3_policy" {
+  statement {
+    actions = ["s3:GetObject"]
+    resources = ["${aws_s3_bucket.frontend_bucket.arn}/*"]
+
+    principals {
+      type        = "Service"
+      identifiers = ["cloudfront.amazonaws.com"]
+    }
+
+    condition {
+      test     = "StringEquals"
+      variable = "AWS:SourceArn"
+      values   = [aws_cloudfront_distribution.static_site.arn]
+    }
+  }
+}
+
+resource "aws_s3_bucket_policy" "allow_cloudfront" {
+  bucket = aws_s3_bucket.frontend_bucket.id
+  policy = data.aws_iam_policy_document.s3_policy.json
 }
 
 resource "aws_s3_object" "birdsongquiz_frontend" {
@@ -23,6 +109,16 @@ resource "aws_s3_object" "birdsongquiz_frontend" {
   source = "../frontend/dist/bundle.js"
 
   etag = filemd5("../frontend/dist/bundle.js")
+}
+
+resource "aws_s3_object" "birdsongquiz_frontend_index_page" {
+  bucket = aws_s3_bucket.frontend_bucket.id
+
+  key    = "index.html"
+  source = "../frontend/index.html"
+
+  etag = filemd5("../frontend/dist/bundle.js")
+  content_type = "text/html"
 }
 
 resource "aws_s3_bucket" "species_list_bucket" {
