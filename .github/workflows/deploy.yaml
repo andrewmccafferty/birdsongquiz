@@ -60,6 +60,9 @@ jobs:
         run: |
           npm ci
           npm run build
+      - name: Terraform create workspace
+        run: terraform workspace select -or-create $ENV_NAME
+
       - name: Terraform plan
         id: plan
         if: github.event_name == 'pull_request'
