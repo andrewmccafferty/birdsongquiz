@@ -102,25 +102,6 @@ resource "aws_s3_bucket_policy" "allow_cloudfront" {
   policy = data.aws_iam_policy_document.s3_policy.json
 }
 
-resource "aws_s3_object" "birdsongquiz_frontend" {
-  bucket = aws_s3_bucket.frontend_bucket.id
-
-  key    = "dist/bundle.js"
-  source = "../frontend/dist/bundle.js"
-
-  etag = filemd5("../frontend/dist/bundle.js")
-}
-
-resource "aws_s3_object" "birdsongquiz_frontend_index_page" {
-  bucket = aws_s3_bucket.frontend_bucket.id
-
-  key    = "index.html"
-  source = "../frontend/index.html"
-
-  etag = filemd5("../frontend/dist/bundle.js")
-  content_type = "text/html"
-}
-
 resource "aws_s3_bucket" "species_list_bucket" {
   bucket = var.environment == "prod" ? "species-list-bucket" : "${var.environment}-species-list-bucket"
 }

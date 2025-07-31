@@ -77,8 +77,15 @@ jobs:
         if: github.event_name == 'pull_request'
         run: terraform apply -auto-approve -input=false -var environment=$ENV_NAME
       
-      - name: Output API Base URL
+      - name: Export all Terraform outputs as env vars
         if: github.event_name == 'pull_request'
         run: |
-          echo "API Base URL:"
-          terraform output -raw api_base_url
+          echo "Exporting Terraform outputs as environment variables..."
+          terraform output -json | jq -r 'to_entries[] | "\(.key)=\(.value.value)"' | while IFS='=' read -r key value; do
+            upper_key=$(echo "$key" | tr '[:lower:]' '[:upper:]')
+            echo "$upper_key=$value" >> "$GITHUB_ENV"
+            echo "Set $upper_key"
+          done
+      - name: Deploy frontend
+        if: github.event_name == 'pull_request'
+        run: 
