@@ -34,7 +34,7 @@ resource "aws_s3_bucket_public_access_block" "static_site" {
 }
 
 resource "aws_cloudfront_origin_access_control" "oac" {
-  name                              = "static-site-oac"
+  name                              = var.environment == "prod" ? "static-site-oac" : "static-site-oac-${var.environment}"
   description                       = "Access control for S3 bucket"
   origin_access_control_origin_type = "s3"
   signing_behavior                  = "always"
@@ -77,8 +77,19 @@ resource "aws_cloudfront_distribution" "static_site" {
     }
   }
 
-  viewer_certificate {
-    cloudfront_default_certificate = true
+  dynamic "viewer_certificate" {
+    for_each = var.environment == "prod" ? [1] : []
+    content {
+      acm_certificate_arn      = var.acm_certificate_arn
+      ssl_support_method       = "sni-only"
+      minimum_protocol_version = "TLSv1.2_2021"
+    }
+  }
+  dynamic "viewer_certificate" {
+    for_each = var.environment != "prod" ? [1] : []
+    content {
+      cloudfront_default_certificate = true
+    }
   }
 }
 

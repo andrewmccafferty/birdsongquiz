@@ -9,3 +9,9 @@ variable "environment" {
   description = "Environment name (e.g. 'prod', 'dev', or a branch name for ephemeral environments)."
   type        = string
 }
+
+variable "acm_certificate_arn" {
+  description = "Certificate used for frontend website"
+  type = string
+  default = ""
+}
