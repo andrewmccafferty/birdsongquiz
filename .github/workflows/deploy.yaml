@@ -69,22 +69,21 @@ jobs:
         if: steps.plan.outcome == 'failure'
         run: exit 1
 
-      # - name: Terraform Apply
-      #   run: terraform apply -auto-approve -input=false -var environment=$ENV_NAME
-      # - name: Debug raw terraform output
-      #   run: terraform output -raw frontend_bucket
-      # - name: Set and echo FRONTEND_BUCKET env var
-      #   run: |
-      #     set -e
-      #     BUCKET=$(terraform output -raw frontend_bucket)
-      #     echo "Setting bucket: $BUCKET"
-      #     echo "FRONTEND_BUCKET=$BUCKET" >> "$GITHUB_ENV"
-      # - name: Set and echo API_ROOT env var
-      #   run: |
-      #     set -e
-      #     ROOT_URL=$(terraform output -raw api_base_url)
-      #     echo "API_ROOT=$ROOT_URL" >> "$GITHUB_ENV"
-      # - name: Deploy frontend
-      #   working-directory: ./frontend
-      #   if: github.event_name == 'pull_request'
-      #   run: ./deploy.sh
+      - name: Terraform Apply
+        run: terraform apply -auto-approve -input=false -var environment=$ENV_NAME
+      - name: Debug raw terraform output
+        run: terraform output -raw frontend_bucket
+      - name: Set and echo FRONTEND_BUCKET env var
+        run: |
+          set -e
+          BUCKET=$(terraform output -raw frontend_bucket)
+          echo "Setting bucket: $BUCKET"
+          echo "FRONTEND_BUCKET=$BUCKET" >> "$GITHUB_ENV"
+      - name: Set and echo API_ROOT env var
+        run: |
+          set -e
+          ROOT_URL=$(terraform output -raw api_base_url)
+          echo "API_ROOT=$ROOT_URL" >> "$GITHUB_ENV"
+      - name: Deploy frontend
+        working-directory: ./frontend
+        run: ./deploy.sh
