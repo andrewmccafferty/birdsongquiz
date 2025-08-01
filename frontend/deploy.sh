@@ -13,9 +13,6 @@ if [ -z "${FRONTEND_BUCKET:-}" ]; then
   exit 1
 fi
 
-echo "Bucket name is $FRONTEND_BUCKET"
-exit 1
-
 # 2. Build the app
 echo "Running npm ci"
 npm ci
