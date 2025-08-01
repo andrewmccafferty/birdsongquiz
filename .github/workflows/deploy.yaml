@@ -76,11 +76,19 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           set -e
-          BUCKET=$(terraform output -raw frontend_bucket 2>/dev/null | tr -d '\n')
+          BUCKET=$(terraform output -raw frontend_bucket)
           echo "Setting bucket: $BUCKET"
           echo "FRONTEND_BUCKET=$BUCKET" >> "$GITHUB_ENV"
+      - name: Set and echo API_ROOT env var
+        if: github.event_name == 'pull_request'
+        run: |
+          set -e
+          ROOT_URL=$(terraform output -raw api_base_url)
+          echo "API_ROOT=$ROOT_URL" >> "$GITHUB_ENV"
       - name: Echo bucket
         run: echo "$FRONTEND_BUCKET"
+      - name: Echo base url
+        run: echo "$API_ROOT"
       # - name: Deploy frontend
       #   working-directory: ./frontend
       #   if: github.event_name == 'pull_request'
