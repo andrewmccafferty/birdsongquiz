@@ -70,7 +70,7 @@ jobs:
         run: exit 1
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve -input=false -var environment=$ENV_NAME
+        run: terraform apply -auto-approve -input=false -var environment=$ENV_NAME -var acm_certificate_arn=${{ secrets.ACM_CERTIFICATE_ARN}}
       - name: Debug raw terraform output
         run: terraform output -raw frontend_bucket
       - name: Set and echo FRONTEND_BUCKET env var
