@@ -86,7 +86,11 @@ jobs:
           FRONTEND_BUCKET=$(terraform output -raw frontend_bucket | tr -d '\n')
           echo "$FRONTEND_BUCKET"
           echo "FRONTEND_BUCKET=$FRONTEND_BUCKET" >> "$GITHUB_ENV"
-      - name: Deploy frontend
-        working-directory: ./frontend
-        if: github.event_name == 'pull_request'
-        run: ./deploy.sh
+      - name: Echo bucket
+        run: echo "$FRONTEND_BUCKET"
+      - name: Echo url
+        run: echo "$API_ROOT"
+      # - name: Deploy frontend
+      #   working-directory: ./frontend
+      #   if: github.event_name == 'pull_request'
+      #   run: ./deploy.sh
