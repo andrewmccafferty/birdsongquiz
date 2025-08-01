@@ -42,6 +42,9 @@ resource "aws_cloudfront_origin_access_control" "oac" {
 }
 
 resource "aws_cloudfront_distribution" "static_site" {
+  tags = {
+    Name = var.environment == "prod" ? "birdsongquiz-frontend" : "birdsongquiz-frontend-${var.environment}"
+  }
   origin {
     domain_name = aws_s3_bucket.frontend_bucket.bucket_regional_domain_name
     origin_id   = "s3-origin"
