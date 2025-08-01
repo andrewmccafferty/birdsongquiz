@@ -72,10 +72,6 @@ jobs:
         if: github.event_name == 'pull_request'
         run: terraform apply -auto-approve -input=false -var environment=$ENV_NAME
       
-      - name: Set API_ROOT env var
-        if: github.event_name == 'pull_request'
-        run: echo "::set-env name=API_ROOT::$(terraform output -raw api_base_url | tr -d '\n')"
-
       - name: Output API Base URL and set API_ROOT env var
         if: github.event_name == 'pull_request'
         run: echo "API_ROOT=$(terraform output -raw api_base_url | tr -d '\n')" >> "$GITHUB_ENV"
