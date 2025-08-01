@@ -34,7 +34,7 @@ resource "aws_s3_bucket_public_access_block" "static_site" {
 }
 
 resource "aws_cloudfront_origin_access_control" "oac" {
-  name                              = "static-site-oac"
+  name                              = var.environment == "prod" ? "static-site-oac" : "static-site-oac-${var.environment}"
   description                       = "Access control for S3 bucket"
   origin_access_control_origin_type = "s3"
   signing_behavior                  = "always"
