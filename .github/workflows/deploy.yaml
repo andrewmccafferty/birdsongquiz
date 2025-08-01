@@ -44,6 +44,7 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.12.2
+          terraform_wrapper: false
       
       - name: Terraform init
         id: init
@@ -76,7 +77,7 @@ jobs:
         run: |
           set -e
           BUCKET=$(terraform output -raw frontend_bucket 2>/dev/null | tr -d '\n')
-          echo "TF output: $BUCKET"
+          echo "Setting bucket: $BUCKET"
           echo "FRONTEND_BUCKET=$BUCKET" >> "$GITHUB_ENV"
       - name: Echo bucket
         run: echo "$FRONTEND_BUCKET"
