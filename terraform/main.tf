@@ -200,7 +200,11 @@ resource "aws_lambda_function" "get_recording" {
   timeout = 30
   s3_bucket = aws_s3_bucket.lambda_bucket.id
   s3_key    = aws_s3_object.lambda_birdsongquiz.key
-
+  environment {
+    variables = {
+      XC_API_KEY = var.xc_api_key
+    }
+  }
   runtime = "nodejs20.x"
   handler = "handlers.getRecording"
 

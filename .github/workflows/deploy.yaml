@@ -6,8 +6,6 @@ on:
   pull_request:
     branches:
     - main
-    paths:
-    - terraform/**
 
 permissions:
       id-token: write
@@ -62,7 +60,7 @@ jobs:
 
       - name: Terraform plan
         id: plan
-        run: terraform plan -no-color -input=false -var environment=$ENV_NAME -var acm_certificate_arn=${{ secrets.ACM_CERTIFICATE_ARN}}
+        run: terraform plan -no-color -input=false -var environment=$ENV_NAME -var acm_certificate_arn=${{ secrets.ACM_CERTIFICATE_ARN }} -var xc_api_key=${{ secrets.XC_API_KEY }}
         continue-on-error: true
 
       - name: Terraform Plan Status
@@ -70,7 +68,7 @@ jobs:
         run: exit 1
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve -input=false -var environment=$ENV_NAME -var acm_certificate_arn=${{ secrets.ACM_CERTIFICATE_ARN}}
+        run: terraform apply -auto-approve -input=false -var environment=$ENV_NAME -var acm_certificate_arn=${{ secrets.ACM_CERTIFICATE_ARN }} -var xc_api_key=${{ secrets.XC_API_KEY }}
       - name: Debug raw terraform output
         run: terraform output -raw frontend_bucket
       - name: Set and echo FRONTEND_BUCKET env var

@@ -3,7 +3,7 @@ import * as https  from 'https';
 const formatTypeParameter = (soundType) => soundType ? encodeURIComponent(` type:"${soundType}"`) : ''
     
 const getXenoCantoQueryUrl = (species, soundType) => {
-    return `https://xeno-canto.org/api/2/recordings?query=${encodeURIComponent(species)}${encodeURIComponent(' q:"A"')}${formatTypeParameter(soundType)}`
+    return `https://xeno-canto.org/api/3/recordings?key=${process.env.XC_API_KEY}&query=sp:"${encodeURIComponent(species)}"${encodeURIComponent(' q:"A"')}${formatTypeParameter(soundType)}`
 }
 const getRecordingData = async (species, soundType) => {
     console.log(`Calling getXenoCantoQueryUrl with species: ${species}, soundType: ${soundType}`);
@@ -46,14 +46,12 @@ const getRecordingData = async (species, soundType) => {
 const getRandomRecordingForSpecies = async (species, soundType) => {
     console.log(`Calling getRecordingData with species: ${species}, soundType: ${soundType}`);
     const data = await getRecordingData(species, soundType);
-    console.log("Got data: ", data);
     if (data.recordings.length === 0) {
         throw new Error(`No recordings found for species ${species}`);
     }
     const randomIndex = Math.floor(Math.random() * data.recordings.length);
     console.log("Random index: ", randomIndex);
     const recording = data.recordings[randomIndex];
-    console.log("Got recording: ", recording);
     return {
         species: species,
         recording
