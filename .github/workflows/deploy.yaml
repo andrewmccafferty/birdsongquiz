@@ -69,22 +69,17 @@ jobs:
       - name: Terraform Apply
         if: github.event_name == 'pull_request'
         run: terraform apply -auto-approve -input=false -var environment=$ENV_NAME
-      
-      - name: Output API Base URL and set API_ROOT env var
-        if: github.event_name == 'pull_request'
-        run: echo "API_ROOT=$(terraform output -raw api_base_url | tr -d '\n')" >> "$GITHUB_ENV"
-      
+      - name: Debug raw terraform output
+        run: terraform output -raw frontend_bucket
       - name: Set and echo FRONTEND_BUCKET env var
         if: github.event_name == 'pull_request'
         run: |
           set -e
-          BUCKET=$(terraform output -raw frontend_bucket)
+          BUCKET=$(terraform output -raw frontend_bucket 2>/dev/null | tr -d '\n')
           echo "TF output: $BUCKET"
           echo "FRONTEND_BUCKET=$BUCKET" >> "$GITHUB_ENV"
       - name: Echo bucket
         run: echo "$FRONTEND_BUCKET"
-      - name: Echo url
-        run: echo "$API_ROOT"
       # - name: Deploy frontend
       #   working-directory: ./frontend
       #   if: github.event_name == 'pull_request'
