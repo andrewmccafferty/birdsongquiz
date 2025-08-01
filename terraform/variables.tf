@@ -15,3 +15,8 @@ variable "acm_certificate_arn" {
   type = string
   default = ""
 }
+
+variable "xc_api_key" {
+  description = "Xeno-Canto API key"
+  type = string
+}
