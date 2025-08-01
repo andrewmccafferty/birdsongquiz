@@ -85,11 +85,7 @@ jobs:
           set -e
           ROOT_URL=$(terraform output -raw api_base_url)
           echo "API_ROOT=$ROOT_URL" >> "$GITHUB_ENV"
-      - name: Echo bucket
-        run: echo "$FRONTEND_BUCKET"
-      - name: Echo base url
-        run: echo "$API_ROOT"
-      # - name: Deploy frontend
-      #   working-directory: ./frontend
-      #   if: github.event_name == 'pull_request'
-      #   run: ./deploy.sh
+      - name: Deploy frontend
+        working-directory: ./frontend
+        if: github.event_name == 'pull_request'
+        run: ./deploy.sh
