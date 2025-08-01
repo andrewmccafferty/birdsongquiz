@@ -62,7 +62,7 @@ jobs:
 
       - name: Terraform plan
         id: plan
-        run: terraform plan -no-color -input=false -var environment=$ENV_NAME
+        run: terraform plan -no-color -input=false -var environment=$ENV_NAME -var acm_certificate_arn=${{ secrets.ACM_CERTIFICATE_ARN}}
         continue-on-error: true
 
       - name: Terraform Plan Status
