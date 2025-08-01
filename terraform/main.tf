@@ -1,26 +1,112 @@
+terraform {
+  backend "s3" {
+    bucket = "birdsongquiz-terraform-state-bucket"
+    key    = "state/terraform.tfstate"
+    region = "eu-west-2"
+    dynamodb_table = null
+    encrypt = true
+  }
+}
+
 provider "aws" {
   region = var.aws_region
 }
 
-import {
-  to = aws_s3_bucket.frontend_bucket
-  id = "birdsongquiz"
-}
-
 resource "aws_s3_bucket" "frontend_bucket" {
+  bucket = var.environment == "prod" ? "birdsongquiz-frontend" : "birdsongquiz-frontend-${var.environment}"
 }
 
-resource "aws_s3_object" "birdsongquiz_frontend" {
+resource "aws_s3_bucket_website_configuration" "static_site" {
   bucket = aws_s3_bucket.frontend_bucket.id
 
-  key    = "dist/bundle.js"
-  source = "../frontend/dist/bundle.js"
+  index_document {
+    suffix = "index.html"
+  }
+}
 
-  etag = filemd5("../frontend/dist/bundle.js")
+resource "aws_s3_bucket_public_access_block" "static_site" {
+  bucket = aws_s3_bucket.frontend_bucket.id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
+resource "aws_cloudfront_origin_access_control" "oac" {
+  name                              = "static-site-oac"
+  description                       = "Access control for S3 bucket"
+  origin_access_control_origin_type = "s3"
+  signing_behavior                  = "always"
+  signing_protocol                  = "sigv4"
+}
+
+resource "aws_cloudfront_distribution" "static_site" {
+  tags = {
+    Name = var.environment == "prod" ? "birdsongquiz-frontend" : "birdsongquiz-frontend-${var.environment}"
+  }
+  origin {
+    domain_name = aws_s3_bucket.frontend_bucket.bucket_regional_domain_name
+    origin_id   = "s3-origin"
+
+    origin_access_control_id = aws_cloudfront_origin_access_control.oac.id
+  }
+
+  enabled             = true
+  default_root_object = "index.html"
+
+  default_cache_behavior {
+    allowed_methods  = ["GET", "HEAD"]
+    cached_methods   = ["GET", "HEAD"]
+    target_origin_id = "s3-origin"
+
+    viewer_protocol_policy = "redirect-to-https"
+
+    forwarded_values {
+      query_string = false
+
+      cookies {
+        forward = "none"
+      }
+    }
+  }
+
+  restrictions {
+    geo_restriction {
+      restriction_type = "none"
+    }
+  }
+
+  viewer_certificate {
+    cloudfront_default_certificate = true
+  }
+}
+
+data "aws_iam_policy_document" "s3_policy" {
+  statement {
+    actions = ["s3:GetObject"]
+    resources = ["${aws_s3_bucket.frontend_bucket.arn}/*"]
+
+    principals {
+      type        = "Service"
+      identifiers = ["cloudfront.amazonaws.com"]
+    }
+
+    condition {
+      test     = "StringEquals"
+      variable = "AWS:SourceArn"
+      values   = [aws_cloudfront_distribution.static_site.arn]
+    }
+  }
+}
+
+resource "aws_s3_bucket_policy" "allow_cloudfront" {
+  bucket = aws_s3_bucket.frontend_bucket.id
+  policy = data.aws_iam_policy_document.s3_policy.json
 }
 
 resource "aws_s3_bucket" "species_list_bucket" {
-  bucket = "species-list-bucket"
+  bucket = var.environment == "prod" ? "species-list-bucket" : "${var.environment}-species-list-bucket"
 }
 
 resource "aws_s3_bucket_ownership_controls" "species_list_bucket" {
@@ -38,7 +124,7 @@ resource "aws_s3_bucket_acl" "species_list_bucket" {
 }
 
 resource "aws_s3_bucket" "lambda_bucket" {
-  bucket = "birdsongquiz-bucket"
+  bucket = var.environment == "prod" ? "birdsongquiz-bucket" : "birdsongquiz-bucket-${var.environment}"
 }
 
 resource "aws_s3_bucket_ownership_controls" "lambda_bucket" {
@@ -54,6 +140,7 @@ resource "aws_s3_bucket_acl" "lambda_bucket" {
   bucket = aws_s3_bucket.lambda_bucket.id
   acl    = "private"
 }
+
 
 data "archive_file" "lambda_birdsongquiz" {
   type = "zip"
@@ -72,7 +159,7 @@ resource "aws_s3_object" "lambda_birdsongquiz" {
 }
 
 resource "aws_lambda_function" "get_species_list" {
-  function_name = "GetSpeciesList"
+  function_name = var.environment == "prod" ? "GetSpeciesList" : "GetSpeciesList-${var.environment}" 
   timeout = 30
   s3_bucket = aws_s3_bucket.lambda_bucket.id
   s3_key    = aws_s3_object.lambda_birdsongquiz.key
@@ -98,7 +185,7 @@ resource "aws_cloudwatch_log_group" "get_species_list" {
 }
 
 resource "aws_lambda_function" "get_recording" {
-  function_name = "GetRecording"
+  function_name = var.environment == "prod" ? "GetRecording" : "GetRecording-${var.environment}"
   timeout = 30
   s3_bucket = aws_s3_bucket.lambda_bucket.id
   s3_key    = aws_s3_object.lambda_birdsongquiz.key
@@ -112,13 +199,13 @@ resource "aws_lambda_function" "get_recording" {
 }
 
 resource "aws_cloudwatch_log_group" "get_recording" {
-  name = "/aws/lambda/${aws_lambda_function.get_recording.function_name}"
+  name = var.environment == "prod" ? "/aws/lambda/GetRecording" : "/aws/lambda/GetRecording-${var.environment}"
 
   retention_in_days = 30
 }
 
 resource "aws_iam_role" "lambda_exec" {
-  name = "serverless_lambda"
+  name = var.environment == "prod" ? "serverless_lambda" : "serverless_lambda_${var.environment}"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -140,7 +227,7 @@ resource "aws_iam_role_policy_attachment" "lambda_policy" {
 }
 
 resource "aws_iam_role" "get_species_list_role" {
-  name = "get_species_list"
+  name = var.environment == "prod" ? "get_species_list" : "get_species_list_${var.environment}"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -185,14 +272,17 @@ resource "aws_iam_role_policy" "species_list_s3_access" {
 
 
 resource "aws_apigatewayv2_api" "lambda" {
-  name          = "serverless_lambda_gw"
+  name          = var.environment == "prod" ? "serverless_lambda_gw" : "serverless_lambda_gw_${var.environment}"
   protocol_type = "HTTP"
+  cors_configuration {
+    allow_origins = ["*"]
+  }
 }
 
 resource "aws_apigatewayv2_stage" "lambda" {
   api_id = aws_apigatewayv2_api.lambda.id
 
-  name        = "serverless_lambda_stage"
+  name        = var.environment == "prod" ? "serverless_lambda_stage" : "serverless_lambda_stage_${var.environment}"
   auto_deploy = true
 
   access_log_settings {
@@ -245,7 +335,7 @@ resource "aws_apigatewayv2_route" "get_species_list" {
 }
 
 resource "aws_cloudwatch_log_group" "api_gw" {
-  name = "/aws/api_gw/${aws_apigatewayv2_api.lambda.name}"
+  name = var.environment == "prod" ? "/aws/api_gw/serverless_lambda_gw" : "/aws/api_gw/serverless_lambda_gw_${var.environment}"
 
   retention_in_days = 30
 }

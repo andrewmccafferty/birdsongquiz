@@ -1,21 +1,29 @@
-# Controls when the action will run. Invokes the workflow on push events but only for the main branch
+name: "Terraform Infrastructure Change Management Pipeline with GitHub Actions"
 on:
-  push:
-    branches: [ main ]
   pull_request:
-    branches: [ main ]
+    branches:
+    - main
+    paths:
+    - terraform/**
 
-env:
-  
-  AWS_REGION : eu-west-2 #Change to reflect your Region
-
-# Permission can be added at job level or workflow level    
 permissions:
-      id-token: write   # This is required for requesting the JWT
-      contents: read    # This is required for actions/checkout
+      id-token: write
+      contents: read
+
+env: 
+  TF_LOG: ""
+  AWS_REGION: eu-west-2
+  BUCKET_TF_STATE: ${{ secrets.BUCKET_TF_STATE}}
+
 jobs:
-  AssumeRoleAndCallIdentity:
+  terraform:
+    name: "Terraform Infrastructure Change Management"
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./terraform
+
     steps:
       - name: Git clone the repository
         uses: actions/checkout@v3
@@ -25,7 +33,54 @@ jobs:
           role-to-assume: arn:aws:iam::133351920298:role/GitHubAction-AssumeRoleWithAction
           role-session-name: GitHub_to_AWS_via_FederatedOIDC
           aws-region: ${{ env.AWS_REGION }}
-      # Hello from AWS: WhoAmI
-      - name: Sts GetCallerIdentity
+      - name: Checkout the repository to the runner
+        uses: actions/checkout@v2
+      - name: Setup Terraform with specified version on the runner
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.12.2
+          terraform_wrapper: false
+      
+      - name: Terraform init
+        id: init
+        run: terraform init -backend-config="bucket=$BUCKET_TF_STATE"
+      - name: Set environment name from branch
         run: |
-          aws sts get-caller-identity
+          BRANCH_NAME="${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}"
+          ENV_NAME="${BRANCH_NAME#*/}"
+          echo "ENV_NAME=$ENV_NAME" >> $GITHUB_ENV
+      - name: Terraform create workspace
+        run: terraform workspace select -or-create $ENV_NAME
+
+      - name: Terraform plan
+        id: plan
+        if: github.event_name == 'pull_request'
+        run: terraform plan -no-color -input=false -var environment=$ENV_NAME
+        continue-on-error: true
+
+      - name: Terraform Plan Status
+        if: steps.plan.outcome == 'failure'
+        run: exit 1
+
+      - name: Terraform Apply
+        if: github.event_name == 'pull_request'
+        run: terraform apply -auto-approve -input=false -var environment=$ENV_NAME
+      - name: Debug raw terraform output
+        run: terraform output -raw frontend_bucket
+      - name: Set and echo FRONTEND_BUCKET env var
+        if: github.event_name == 'pull_request'
+        run: |
+          set -e
+          BUCKET=$(terraform output -raw frontend_bucket)
+          echo "Setting bucket: $BUCKET"
+          echo "FRONTEND_BUCKET=$BUCKET" >> "$GITHUB_ENV"
+      - name: Set and echo API_ROOT env var
+        if: github.event_name == 'pull_request'
+        run: |
+          set -e
+          ROOT_URL=$(terraform output -raw api_base_url)
+          echo "API_ROOT=$ROOT_URL" >> "$GITHUB_ENV"
+      - name: Deploy frontend
+        working-directory: ./frontend
+        if: github.event_name == 'pull_request'
+        run: ./deploy.sh
