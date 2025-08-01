@@ -85,6 +85,12 @@ resource "aws_cloudfront_distribution" "static_site" {
       minimum_protocol_version = "TLSv1.2_2021"
     }
   }
+  dynamic "viewer_certificate" {
+    for_each = var.environment != "prod" ? [1] : []
+    content {
+      cloudfront_default_certificate = true
+    }
+  }
 }
 
 data "aws_iam_policy_document" "s3_policy" {
