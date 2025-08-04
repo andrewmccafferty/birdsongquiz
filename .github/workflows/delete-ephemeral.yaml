@@ -1,6 +1,8 @@
 name: "Delete ephemeral environments on branch delete"
 on:
   delete:
+    branches-ignore:
+      - main
 
 permissions:
       id-token: write
@@ -41,8 +43,9 @@ jobs:
         id: init
         run: terraform init -backend-config="bucket=$BUCKET_TF_STATE"
       - name: Set environment name from branch
+        env:
+          BRANCH_NAME: ${{ github.event.ref }}
         run: |
-          BRANCH_NAME="${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}"
           ENV_NAME="${BRANCH_NAME#*/}"
           echo "ENV_NAME=$ENV_NAME" >> $GITHUB_ENV
       - name: Empty buckets before deletion
