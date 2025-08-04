@@ -57,4 +57,4 @@ jobs:
         run: terraform workspace select $ENV_NAME
 
       - name: Terraform destroy
-        run: terraform plan -destroy -var environment=$ENV_NAME -var acm_certificate_arn=${{ secrets.ACM_CERTIFICATE_ARN }} -var xc_api_key=${{ secrets.XC_API_KEY }}
+        run: terraform destroy -auto-approve -input=false -var environment=$ENV_NAME -var acm_certificate_arn=${{ secrets.ACM_CERTIFICATE_ARN }} -var xc_api_key=${{ secrets.XC_API_KEY }}
