@@ -1,0 +1,57 @@
+name: "Delete ephemeral environments on branch delete"
+on:
+  delete:
+
+permissions:
+      id-token: write
+      contents: read
+
+env: 
+  TF_LOG: ""
+  AWS_REGION: eu-west-2
+  BUCKET_TF_STATE: ${{ secrets.BUCKET_TF_STATE}}
+
+jobs:
+  terraform:
+    name: "Delete ephemerals on branch delete"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./terraform
+
+    steps:
+      - name: Git clone the repository
+        uses: actions/checkout@v3
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1.7.0
+        with:
+          role-to-assume: arn:aws:iam::133351920298:role/GitHubAction-AssumeRoleWithAction
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC
+          aws-region: ${{ env.AWS_REGION }}
+      - name: Checkout the repository to the runner
+        uses: actions/checkout@v2
+      - name: Setup Terraform with specified version on the runner
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.12.2
+          terraform_wrapper: false
+      
+      - name: Terraform init
+        id: init
+        run: terraform init -backend-config="bucket=$BUCKET_TF_STATE"
+      - name: Set environment name from branch
+        run: |
+          BRANCH_NAME="${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}"
+          ENV_NAME="${BRANCH_NAME#*/}"
+          echo "ENV_NAME=$ENV_NAME" >> $GITHUB_ENV
+      - name: Empty buckets before deletion
+        run: |
+          aws s3 rm s3://birdsongquiz-frontend-$ENV_NAME --recursive
+          aws s3 rm s3://$ENV_NAME-species-list-bucket --recursive
+          aws s3 rm s3://birdsongquiz-bucket-$ENV_NAME --recursive
+      - name: Terraform select workspace for ephemeral environment
+        run: terraform workspace select $ENV_NAME
+
+      - name: Terraform destroy
+        run: terraform plan -destroy -var environment=$ENV_NAME -var acm_certificate_arn=${{ secrets.ACM_CERTIFICATE_ARN }} -var xc_api_key=${{ secrets.XC_API_KEY }}
