@@ -10,5 +10,5 @@ output "frontend_bucket" {
 
 output "frontend_url" {
   description = "Cloudfront URL for birdsong quiz website"
-  value = "https://${aws_cloudfront_distribution.domain_name}"
+  value = "https://${aws_cloudfront_distribution.static_site.domain_name}"
 }
