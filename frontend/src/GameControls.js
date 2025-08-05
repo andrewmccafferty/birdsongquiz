@@ -105,8 +105,7 @@ class GameControls extends Component {
                         species: recording.en,
                         recordist: recording.rec,
                         scientificName: recording.gen + ' ' + recording.sp,
-                        // TODO: reinstate when test complete
-                        //loading: false,
+                        loading: false,
                         showSpecies: false
                     }
                     return state
