@@ -91,6 +91,7 @@ resource "aws_cloudfront_distribution" "static_site" {
       cloudfront_default_certificate = true
     }
   }
+  aliases = var.environment == "prod" ? ["*.birdsongquiz.co.uk"] : []
 }
 
 data "aws_iam_policy_document" "s3_policy" {
