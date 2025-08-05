@@ -29,7 +29,7 @@ jobs:
       - name: Git clone the repository
         uses: actions/checkout@v3
       - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v1.7.0
+        uses: aws-actions/configure-aws-credentials@v4.3.1
         with:
           role-to-assume: arn:aws:iam::133351920298:role/GitHubAction-AssumeRoleWithAction
           role-session-name: GitHub_to_AWS_via_FederatedOIDC
@@ -91,6 +91,18 @@ jobs:
       - name: Set FRONTEND_URL name for prod branch
         if: ${{ github.ref == 'refs/heads/main' }}
         run: echo "FRONTEND_URL=https://www.birdsongquiz.co.uk" >> $GITHUB_ENV
+      - name: Set SPECIES_LIST_BUCKET env var for ephemerals
+        if: github.event_name == 'pull_request'
+        run: |
+          set -e
+          SPECIES_LIST_BUCKET=$(terraform output -raw species_list_bucket)
+          echo "SPECIES_LIST_BUCKET=$SPECIES_LIST_BUCKET" >> "$GITHUB_ENV"
+      - name: Populate species lists for ephemerals
+        if: github.event_name == 'pull_request'
+        working-directory: ./scripts
+        run: |
+          ./populate-species-list-bucket.sh GB
+          ./populate-species-list-bucket.sh AU
       - name: Deploy frontend
         working-directory: ./frontend
         run: ./deploy.sh

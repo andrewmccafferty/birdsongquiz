@@ -99,12 +99,12 @@ class App extends Component {
             {
                 this.gameActive() &&
                 <div>
-                    <button className="reset-button" onClick={() => this.resetQuiz()}>Reset Quiz</button>
+                    <button data-testid="reset" id="reset" className="reset-button" onClick={() => this.resetQuiz()}>Reset Quiz</button>
                 </div>
             }
             {
                 this.gameActive() &&
-                <a className="permalink" href={this.headToHeadSharingLink()}>permalink</a>
+                <a id="permalink" className="permalink" href={this.headToHeadSharingLink()}>permalink</a>
             }
             
             <GameExplanationModal isOpen={this.state.gameExplanationOpen} onClose={() => this.closeGameExplanation()} />

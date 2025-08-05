@@ -73,7 +73,7 @@ class HeadToHeadSpeciesSelector extends Component {
 				</div>
 				<div className="quiz-subheader">
 					<label htmlFor="sound-type" className="form-label">Country:</label>
-					<select id="country" onChange={e => this.onCountryChanged(e.target.value)}>
+					<select data-testid="country" id="country" onChange={e => this.onCountryChanged(e.target.value)}>
 						<option value="AU">Australia</option>
 						<option value="MY">Malaysia</option>
 						<option value="GB" selected>UK</option>
@@ -85,6 +85,7 @@ class HeadToHeadSpeciesSelector extends Component {
 				<Typeahead
 					multiple
 				id="species-selection"
+				data-testid="species-selection"
 				className={'Species-Selection'}
 				labelKey="Species"
 				options={this.state.speciesList}
@@ -97,7 +98,7 @@ class HeadToHeadSpeciesSelector extends Component {
 				selected={this.state.selectedSpeciesList}
 				ref={(ref) => this._typeahead = ref}
 			/>
-					<button className="action-button" onClick={() => this.onSelectionComplete()}>
+					<button data-testid="finish-selection" className="action-button" onClick={() => this.onSelectionComplete()}>
 						<FontAwesomeIcon icon={faCheck} />
 					</button>
 				</div>}
