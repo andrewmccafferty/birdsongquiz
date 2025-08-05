@@ -103,6 +103,7 @@ jobs:
         run: |
           ./populate-species-list-bucket-for-country.sh GB
           ./populate-species-list-bucket-for-country.sh AU
+          ./populate-species-list-bucket-for-list-id.sh common-uk-garden
       - name: Deploy frontend
         working-directory: ./frontend
         run: ./deploy.sh
