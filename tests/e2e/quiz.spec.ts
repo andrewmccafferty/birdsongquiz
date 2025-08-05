@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 const FRONTEND_URL = process.env.FRONTEND_URL as string
 
-test('Run quiz', async ({ page }) => {
+test('Run quiz with default species', async ({ page }) => {
   await page.goto(FRONTEND_URL);
   await page.getByLabel('Sound type:').selectOption('song');
   await page.getByRole('combobox', { name: 'Start typing to choose a' }).click();
@@ -14,6 +14,22 @@ test('Run quiz', async ({ page }) => {
   await page.getByRole('button', { name: 'Blackcap' }).click();
   await page.getByTestId('next-clip').click();
   await page.getByRole('button', { name: 'Garden Warbler' }).click();
+  await page.getByTestId('next-clip').click();
+  await page.getByTestId('reset').click();
+});
+
+test('Run quiz with Australian species', async ({ page }) => {
+  await page.goto(FRONTEND_URL);
+  await page.locator('#country').selectOption('AU');
+  await page.getByRole('combobox', { name: 'Start typing to choose a' }).click();
+  await page.getByRole('combobox', { name: 'Start typing to choose a' }).fill('White-throated Hon');
+  await page.getByRole('option', { name: 'White-throated Honeyeater' }).click();
+  await page.locator('input[type="text"]').fill('yellow-tuft');
+  await page.getByRole('option', { name: 'Yellow-tufted Honeyeater', exact: true }).click();
+  await page.getByTestId('finish-selection').click();
+  await page.getByRole('button', { name: 'Yellow-tufted Honeyeater' }).click();
+  await page.getByTestId('next-clip').click();
+  await page.getByRole('button', { name: 'White-throated Honeyeater' }).click();
   await page.getByTestId('next-clip').click();
   await page.getByTestId('reset').click();
 });

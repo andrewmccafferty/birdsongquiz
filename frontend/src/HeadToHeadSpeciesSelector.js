@@ -73,7 +73,7 @@ class HeadToHeadSpeciesSelector extends Component {
 				</div>
 				<div className="quiz-subheader">
 					<label htmlFor="sound-type" className="form-label">Country:</label>
-					<select id="country" onChange={e => this.onCountryChanged(e.target.value)}>
+					<select data-testid="country" id="country" onChange={e => this.onCountryChanged(e.target.value)}>
 						<option value="AU">Australia</option>
 						<option value="MY">Malaysia</option>
 						<option value="GB" selected>UK</option>
