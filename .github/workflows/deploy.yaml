@@ -106,9 +106,23 @@ jobs:
       - name: Deploy frontend
         working-directory: ./frontend
         run: ./deploy.sh
+      - name: Cache npm dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('./tests/e2e/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
       - name: Install dependencies for tests
         working-directory: ./tests/e2e
         run: npm ci
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('./tests/e2e/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
       - name: Install Playwright Browsers
         working-directory: ./tests/e2e
         run: npx playwright install --with-deps
