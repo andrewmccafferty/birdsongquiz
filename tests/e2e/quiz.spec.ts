@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
 
-const PAGE_URL = process.env.PAGE_URL as string
+const FRONTEND_URL = process.env.FRONTEND_URL as string
 
 test('Run quiz', async ({ page }) => {
-  await page.goto(PAGE_URL);
+  await page.goto(FRONTEND_URL);
   await page.getByLabel('Sound type:').selectOption('song');
   await page.getByRole('combobox', { name: 'Start typing to choose a' }).click();
   await page.getByRole('combobox', { name: 'Start typing to choose a' }).fill('Blackcap');
