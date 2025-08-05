@@ -9,7 +9,7 @@ if [ -z "$1" ]; then
 fi
 
 REGION_CODE=$1
-FILE_PATH="../data/species_lists/$REGION_CODE.json"
+FILE_PATH="../data/species_lists/countries/$REGION_CODE.json"
 
 aws s3api put-object \
   --bucket "$SPECIES_LIST_BUCKET" \

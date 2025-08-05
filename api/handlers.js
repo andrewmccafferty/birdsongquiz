@@ -1,5 +1,5 @@
 import { getRandomRecordingForSpecies } from './recording.js';
-import { loadSpeciesList } from './species.js';
+import { loadSpeciesListById, loadSpeciesListForRegion } from './species.js';
 
 const response = (statusCode, responseBody) => ({
   statusCode,
@@ -30,11 +30,22 @@ export const getRecording = async (event) => {
 export const getSpeciesList = async (event) => {
   console.log("Event:", event);
   const region = event.queryStringParameters["region"];
-  const species_list = await loadSpeciesList(region);
-  if (!species_list) {
-    return response(404, {"message": "No species list found for region"});
+  const listId = event.queryStringParameters["listId"];
+  if (region) {
+    const species_list = await loadSpeciesListForRegion(region);
+    if (!species_list) {
+      return response(404, {"message": "No species list found for region"});
+    }
+    return response(200, {"species": species_list })
   }
 
-  return response(200, {"species": species_list })
+  if (listId) {
+    const species_list = await loadSpeciesListById(listId);
+    if (!species_list) {
+      return response(404, {"message": "No species list found for given id"});
+    }
+    return response(200, {"species": species_list })
+  }
 
+  return response(400, {"message": "Must supply either 'region' or 'listId' parameters"})
 }
