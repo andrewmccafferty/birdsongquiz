@@ -13,6 +13,6 @@ FILE_PATH="../data/species_lists/countries/$REGION_CODE.json"
 
 aws s3api put-object \
   --bucket "$SPECIES_LIST_BUCKET" \
-  --key "$REGION_CODE.json" \
+  --key "countries/$REGION_CODE.json" \
   --body $FILE_PATH \
   --content-md5 "$(openssl md5 -binary "$FILE_PATH" | base64)"
