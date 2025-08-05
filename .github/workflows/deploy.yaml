@@ -77,11 +77,17 @@ jobs:
           BUCKET=$(terraform output -raw frontend_bucket)
           echo "Setting bucket: $BUCKET"
           echo "FRONTEND_BUCKET=$BUCKET" >> "$GITHUB_ENV"
-      - name: Set and echo API_ROOT env var
+      - name: Set and echo API_ROOT env var for ephemerals
+        if: github.event_name == 'pull_request'
         run: |
           set -e
           ROOT_URL=$(terraform output -raw api_base_url)
           echo "API_ROOT=$ROOT_URL" >> "$GITHUB_ENV"
+      - name: Set and echo API_ROOT env var for prod
+        if: ${{ github.ref == 'refs/heads/main' }}
+        run: |
+          set -e
+          echo "API_ROOT=https://api.birdsongquiz.co.uk" >> "$GITHUB_ENV"
       - name: Set and echo FRONTEND_URL env var for ephemerals
         if: github.event_name == 'pull_request'
         run: |
