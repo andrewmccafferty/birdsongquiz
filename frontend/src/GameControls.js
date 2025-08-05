@@ -181,7 +181,7 @@ class GameControls extends Component {
                     }}>
                         Recording courtesy of {this.state.recordist} via <a target="_blank" href={`http://xeno-canto.org/${this.state.birdsongId}`}>http://xeno-canto.org/{this.state.birdsongId}</a>
                     </div>
-                    {this.state.livesLeft > 0 && <button className="btn btn-info" onClick={() => this.getRandomBirdsong()}>Next -></button>}
+                    {this.state.livesLeft > 0 && <button data-testid="next-clip" className="btn btn-info" onClick={() => this.getRandomBirdsong()}>Next -></button>}
                 </div>
             }
         </div>

@@ -10,10 +10,10 @@ test('Run quiz', async ({ page }) => {
   await page.getByRole('option', { name: 'Blackcap' }).click();
   await page.locator('input[type="text"]').fill('Garden Warbler');
   await page.getByRole('option', { name: 'Garden Warbler' }).click();
-  await page.getByRole('button').filter({ hasText: /^$/ }).click();
+  await page.getByTestId('finish-selection').click();
   await page.getByRole('button', { name: 'Blackcap' }).click();
-  await page.getByRole('button', { name: 'Next ->' }).click();
+  await page.getByTestId('next-clip').click();
   await page.getByRole('button', { name: 'Garden Warbler' }).click();
-  await page.getByRole('button', { name: 'Next ->' }).click();
-  await page.getByRole('button', { name: 'Reset Quiz' }).click();
+  await page.getByTestId('next-clip').click();
+  await page.getByTestId('reset').click();
 });

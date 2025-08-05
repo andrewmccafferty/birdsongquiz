@@ -85,6 +85,7 @@ class HeadToHeadSpeciesSelector extends Component {
 				<Typeahead
 					multiple
 				id="species-selection"
+				data-testid="species-selection"
 				className={'Species-Selection'}
 				labelKey="Species"
 				options={this.state.speciesList}
@@ -97,7 +98,7 @@ class HeadToHeadSpeciesSelector extends Component {
 				selected={this.state.selectedSpeciesList}
 				ref={(ref) => this._typeahead = ref}
 			/>
-					<button className="action-button" onClick={() => this.onSelectionComplete()}>
+					<button data-testid="finish-selection" className="action-button" onClick={() => this.onSelectionComplete()}>
 						<FontAwesomeIcon icon={faCheck} />
 					</button>
 				</div>}
