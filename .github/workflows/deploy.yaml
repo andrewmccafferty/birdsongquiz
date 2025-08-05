@@ -103,3 +103,8 @@ jobs:
       - name: Run Playwright tests
         working-directory: ./tests/e2e
         run: npx playwright test
+      - name: Plan for prod
+        if: github.event_name == 'pull_request'
+        run: |
+          terraform workspace select default
+          terraform plan -var environment=prod -var acm_certificate_arn=${{ secrets.ACM_CERTIFICATE_ARN }} -var xc_api_key=${{ secrets.XC_API_KEY }}
