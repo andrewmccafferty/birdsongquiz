@@ -108,7 +108,6 @@ class GameControls extends Component {
                         loading: false,
                         showSpecies: false
                     }
-                    console.log("Got recording and setting state: ", state);
                     return state
                 });
             }).catch((err) => {

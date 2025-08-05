@@ -6,3 +6,11 @@ node_modules/
 coverage/
 birdsongquiz_lambdas.zip
 dist/
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+.last-run.json
+tests/e2e/playwright-report/index.html

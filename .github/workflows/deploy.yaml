@@ -1,4 +1,4 @@
-name: "Terraform Infrastructure Change Management Pipeline with GitHub Actions"
+name: "Deploy full application stack"
 on:
   push: 
     branches:
@@ -18,7 +18,7 @@ env:
 
 jobs:
   terraform:
-    name: "Terraform Infrastructure Change Management"
+    name: "Deploy to ephemeral or prod environment"
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -82,6 +82,24 @@ jobs:
           set -e
           ROOT_URL=$(terraform output -raw api_base_url)
           echo "API_ROOT=$ROOT_URL" >> "$GITHUB_ENV"
+      - name: Set and echo FRONTEND_URL env var for ephemerals
+        if: github.event_name == 'pull_request'
+        run: |
+          set -e
+          FRONTEND_URL_OUTPUT=$(terraform output -raw frontend_url)
+          echo "FRONTEND_URL=$FRONTEND_URL_OUTPUT" >> "$GITHUB_ENV"
+      - name: Set FRONTEND_URL name for prod branch
+        if: ${{ github.ref == 'refs/heads/main' }}
+        run: echo "FRONTEND_URL=https://www.birdsongquiz.co.uk" >> $GITHUB_ENV
       - name: Deploy frontend
         working-directory: ./frontend
         run: ./deploy.sh
+      - name: Install dependencies for tests
+        working-directory: ./tests/e2e
+        run: npm ci
+      - name: Install Playwright Browsers
+        working-directory: ./tests/e2e
+        run: npx playwright install --with-deps
+      - name: Run Playwright tests
+        working-directory: ./tests/e2e
+        run: npx playwright test
