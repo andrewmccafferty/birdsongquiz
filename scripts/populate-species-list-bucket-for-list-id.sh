@@ -8,7 +8,7 @@ if [ -z "$1" ]; then
   exit 1
 fi
 
-REGION_CODE=$1
+PRESET_CODE=$1
 FILE_PATH="../data/species_lists/presets/$PRESET_CODE.json"
 
 aws s3api put-object \
