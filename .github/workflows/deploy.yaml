@@ -101,8 +101,10 @@ jobs:
         if: github.event_name == 'pull_request'
         working-directory: ./scripts
         run: |
-          ./populate-species-list-bucket.sh GB
-          ./populate-species-list-bucket.sh AU
+          ./populate-species-list-bucket-for-country.sh GB
+          ./populate-species-list-bucket-for-country.sh AU
+          ./populate-species-list-bucket-for-list-id.sh common-uk-garden
+          ./populate-species-list-bucket-for-list-id.sh garden-warbler-vs-blackcap
       - name: Deploy frontend
         working-directory: ./frontend
         run: ./deploy.sh
