@@ -2,6 +2,10 @@ const COUNTRY_TO_PRESETS_MAPPING = {
     "GB": [{
         "name": "Common UK garden birds",
         "id": "common-uk-garden"
+    },
+    {
+        "name": "Garden Warbler vs Blackcap",
+        "id": "garden-warbler-vs-blackcap"
     }]
 }
 
