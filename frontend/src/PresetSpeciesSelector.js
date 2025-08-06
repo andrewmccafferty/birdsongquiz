@@ -7,6 +7,10 @@ class PresetSpeciesSelector extends Component {
       presetLists: props.presetLists,
     };
   }
+  
+  onSpeciesListChanged = (speciesListId) => {
+    this.props.onSpeciesListChanged(speciesListId)
+  }
 
   render() {
     return (
@@ -20,10 +24,11 @@ class PresetSpeciesSelector extends Component {
               <select
                 data-testid="preset-species-list"
                 className="species-selection"
+                onChange = { (e) => this.onSpeciesListChanged(e.target.value)}
               >
                 <option key="">(Please select)</option>
                 {this.state.presetLists.map((item) => (
-                  <option key={item.id}>{item.name}</option>
+                  <option key={item.id} value={item.id}>{item.name}</option>
                 ))}
               </select>
             </div>

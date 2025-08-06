@@ -56,6 +56,27 @@ class HeadToHeadSpeciesSelector extends Component {
         });
       });
   };
+  loadSpeciesForListId = (listId) => {
+    if (!listId) {
+      return
+    }
+    this.setState({
+      loadingPresetList: true,
+      errorLoadingPresetList: false,
+    });
+    callApi(`species?listId=${listId}`)
+      .catch((err) => {
+        this.setState({
+          errorLoadingPresetList: true,
+        });
+      })
+      .then((result) => {
+        this.setState({
+          selectedSpeciesList: result.species,
+          loadingPresetList: false,
+        });
+      });
+  };
   loadPresetListsForCountry = (country) => {
     const presetLists = presetListsForCountry(country);
     this.setState({ presetLists });
@@ -132,7 +153,7 @@ class HeadToHeadSpeciesSelector extends Component {
               </button>
             </div>
 			{this.state.presetLists && <div className="input-container">
-				<PresetSpeciesSelector presetLists={this.state.presetLists}></PresetSpeciesSelector>
+				<PresetSpeciesSelector presetLists={this.state.presetLists} onSpeciesListChanged={(listId) => {this.loadSpeciesForListId(listId)}}></PresetSpeciesSelector>
 			</div>}
           </div>
         )}
