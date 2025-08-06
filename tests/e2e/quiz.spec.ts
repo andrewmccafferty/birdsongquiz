@@ -7,9 +7,9 @@ test('Run quiz with default species', async ({ page }) => {
   await page.getByLabel('Sound type:').selectOption('song');
   await page.getByRole('combobox', { name: 'Start typing to choose a' }).click();
   await page.getByRole('combobox', { name: 'Start typing to choose a' }).fill('Blackcap');
-  await page.getByRole('option', { name: 'Blackcap' }).click();
+  await page.getByRole('option', { name: 'Blackcap', exact: true }).click();
   await page.locator('input[type="text"]').fill('Garden Warbler');
-  await page.getByRole('option', { name: 'Garden Warbler' }).click();
+  await page.getByRole('option', { name: 'Garden Warbler', exact: true }).click();
   await page.getByTestId('finish-selection').click();
   await page.getByRole('button', { name: 'Blackcap' }).click();
   await page.getByTestId('next-clip').click();
