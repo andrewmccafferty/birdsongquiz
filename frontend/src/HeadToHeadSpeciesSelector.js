@@ -8,6 +8,7 @@ import { callApi } from "./api.js";
 const speciesList = require("./species_list.js");
 import PresetSpeciesSelector from "./PresetSpeciesSelector.js";
 import { presetListsForCountry } from "./presets.js";
+import CountrySelector from "./CountrySelector.js";
 class HeadToHeadSpeciesSelector extends Component {
   constructor(props) {
     super(props);
@@ -112,18 +113,7 @@ class HeadToHeadSpeciesSelector extends Component {
           <label htmlFor="sound-type" className="form-label">
             Country:
           </label>
-          <select
-            data-testid="country"
-            id="country"
-            onChange={(e) => this.onCountryChanged(e.target.value)}
-          >
-            <option value="AU">Australia</option>
-            <option value="MY">Malaysia</option>
-            <option value="GB" selected>
-              UK
-            </option>
-            <option value="US">USA</option>
-          </select>
+          <CountrySelector onChange={ (countryCode) => this.onCountryChanged(countryCode)}></CountrySelector>
         </div>
         {!this.state.speciesListLoading && (
           <div>
