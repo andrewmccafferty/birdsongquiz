@@ -20,9 +20,9 @@ class HeadToHeadSpeciesSelector extends Component {
     };
   }
   componentDidMount() {
-	this.loadPresetListsForCountry("GB")
+    this.loadPresetListsForCountry("GB");
   }
-  
+
   onSelectionComplete = () => {
     if (this.state.selectedSpeciesList.length < 2) {
       this.setState({ showValidationMessage: true });
@@ -59,8 +59,8 @@ class HeadToHeadSpeciesSelector extends Component {
   };
   loadSpeciesForListId = (listId) => {
     if (!listId || listId == "") {
-      this.setState({selectedSpeciesList: []})
-      return
+      this.setState({ selectedSpeciesList: [] });
+      return;
     }
     this.setState({
       loadingPresetList: true,
@@ -69,6 +69,7 @@ class HeadToHeadSpeciesSelector extends Component {
     callApi(`species?listId=${listId}`)
       .catch((err) => {
         this.setState({
+          loadingPresetList: false,
           errorLoadingPresetList: true,
         });
       })
@@ -111,38 +112,62 @@ class HeadToHeadSpeciesSelector extends Component {
           <label htmlFor="sound-type" className="form-label">
             Country:
           </label>
-          <CountrySelector onChange={ (countryCode) => this.onCountryChanged(countryCode)}></CountrySelector>
+          <CountrySelector
+            onChange={(countryCode) => this.onCountryChanged(countryCode)}
+          ></CountrySelector>
         </div>
         {!this.state.speciesListLoading && (
-          <div style={{border: "solid black 1px", padding: "10px", borderRadius: "10px"}}>
+          <div
+            style={{
+              border: "solid black 1px",
+              padding: "10px",
+              borderRadius: "10px",
+            }}
+          >
             <div className="quiz-subheader">
-               <b>Species selection</b>
+              <b>Species selection</b>
             </div>
             <div>
-              {this.state.presetLists && "You can choose one of the presets below, or start typing in the box to make your own selection. "}
-              {!this.state.presetLists && "Start typing in the box below to make your selection. "}
-               Once you're happy with your list, press the blue button to start the quiz.
+              {this.state.presetLists &&
+                "You can choose one of the presets below, or start typing in the box to make your own selection. "}
+              {!this.state.presetLists &&
+                "Start typing in the box below to make your selection. "}
+              Once you're happy with your list, press the blue button to start
+              the quiz.
             </div>
-            {this.state.presetLists && <div className="input-container">
-				<PresetSpeciesSelector presetLists={this.state.presetLists} onSpeciesListChanged={(listId) => {this.loadSpeciesForListId(listId)}}></PresetSpeciesSelector>
-			</div>}
+            {this.state.presetLists && (
+              <div className="input-container">
+                <PresetSpeciesSelector
+                  presetLists={this.state.presetLists}
+                  onSpeciesListChanged={(listId) => {
+                    this.loadSpeciesForListId(listId);
+                  }}
+                ></PresetSpeciesSelector>
+              </div>
+            )}
             <div className="input-container">
-              <Typeahead
-                multiple
-                id="species-selection"
-                data-testid="species-selection"
-                className={"Species-Selection"}
-                labelKey="Species"
-                options={this.state.speciesList}
-                placeholder="Start typing to choose a species"
-                minLength={1}
-                clearButton={true}
-                onChange={(selected) => {
-                  this.setState({ selectedSpeciesList: selected });
-                }}
-                selected={this.state.selectedSpeciesList}
-                ref={(ref) => (this._typeahead = ref)}
-              />
+              <div className="species-selection-wrapper">
+                <Typeahead
+                  disabled={ this.state.loadingPresetList }
+                  multiple
+                  id="species-selection"
+                  data-testid="species-selection"
+                  className={"Species-Selection"}
+                  labelKey="Species"
+                  options={this.state.speciesList}
+                  placeholder="Start typing to choose a species"
+                  minLength={1}
+                  clearButton={true}
+                  onChange={(selected) => {
+                    this.setState({ selectedSpeciesList: selected });
+                  }}
+                  selected={this.state.selectedSpeciesList}
+                  ref={(ref) => (this._typeahead = ref)}
+                />
+                { this.state.loadingPresetList && <div className="spinner-overlay">
+                  <div className="spinner"></div>
+                </div>}
+              </div>
               <button
                 data-testid="finish-selection"
                 className="action-button"
