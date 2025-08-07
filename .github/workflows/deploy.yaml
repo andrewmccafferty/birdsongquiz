@@ -117,10 +117,17 @@ jobs:
         working-directory: ./tests/e2e
         id: playwright-version
         run: echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('./package-lock.json').dependencies['@playwright/test'].version)")" >> $GITHUB_ENV
-      - name: Cache playwright binaries
+      - name: Restore cache - playwright binaries
         working-directory: ./tests/e2e
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v4
         id: playwright-cache
+        with:
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
+      - name: Save cache - playwright binaries
+        if: always() && steps.playwright-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
         with:
           path: |
             ~/.cache/ms-playwright
