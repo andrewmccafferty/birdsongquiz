@@ -20,7 +20,7 @@ test('Run quiz with default species', async ({ page }) => {
 
 test('Run quiz with Australian species', async ({ page }) => {
   await page.goto(FRONTEND_URL);
-  await page.locator('#country').selectOption('AU');
+  await page.getByTestId("country").selectOption('AU');
   await page.getByRole('combobox', { name: 'Start typing to choose a' }).click();
   await page.getByRole('combobox', { name: 'Start typing to choose a' }).fill('White-throated Hon');
   await page.getByRole('option', { name: 'White-throated Honeyeater' }).click();

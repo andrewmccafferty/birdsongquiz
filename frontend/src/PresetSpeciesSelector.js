@@ -17,16 +17,13 @@ class PresetSpeciesSelector extends Component {
       <div>
         {this.state.presetLists && (
           <div>
-            <div className="quiz-subheader">
-              ...or select one of these presets
-            </div>
             <div className="input-container">
               <select
                 data-testid="preset-species-list"
                 className="species-selection"
                 onChange = { (e) => this.onSpeciesListChanged(e.target.value)}
               >
-                <option key="">(Please select)</option>
+                <option key="" value="">(Please select)</option>
                 {this.state.presetLists.map((item) => (
                   <option key={item.id} value={item.id}>{item.name}</option>
                 ))}
