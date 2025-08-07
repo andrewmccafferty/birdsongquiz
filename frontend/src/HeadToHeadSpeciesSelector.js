@@ -58,7 +58,8 @@ class HeadToHeadSpeciesSelector extends Component {
       });
   };
   loadSpeciesForListId = (listId) => {
-    if (!listId) {
+    if (!listId || listId == "") {
+      this.setState({selectedSpeciesList: []})
       return
     }
     this.setState({
@@ -94,9 +95,6 @@ class HeadToHeadSpeciesSelector extends Component {
     return (
       <div>
         <div className="quiz-subheader">
-          Select some species to go head to head
-        </div>
-        <div className="quiz-subheader">
           <label htmlFor="sound-type" className="form-label">
             Sound type:
           </label>
@@ -116,7 +114,18 @@ class HeadToHeadSpeciesSelector extends Component {
           <CountrySelector onChange={ (countryCode) => this.onCountryChanged(countryCode)}></CountrySelector>
         </div>
         {!this.state.speciesListLoading && (
-          <div>
+          <div style={{border: "solid black 1px", padding: "10px", borderRadius: "10px"}}>
+            <div className="quiz-subheader">
+               <b>Species selection</b>
+            </div>
+            <div>
+              {this.state.presetLists && "You can choose one of the presets below, or start typing in the box to make your own selection. "}
+              {!this.state.presetLists && "Start typing in the box below to make your selection. "}
+               Once you're happy with your list, press the blue button to start the quiz.
+            </div>
+            {this.state.presetLists && <div className="input-container">
+				<PresetSpeciesSelector presetLists={this.state.presetLists} onSpeciesListChanged={(listId) => {this.loadSpeciesForListId(listId)}}></PresetSpeciesSelector>
+			</div>}
             <div className="input-container">
               <Typeahead
                 multiple
@@ -142,9 +151,6 @@ class HeadToHeadSpeciesSelector extends Component {
                 <FontAwesomeIcon icon={faCheck} />
               </button>
             </div>
-			{this.state.presetLists && <div className="input-container">
-				<PresetSpeciesSelector presetLists={this.state.presetLists} onSpeciesListChanged={(listId) => {this.loadSpeciesForListId(listId)}}></PresetSpeciesSelector>
-			</div>}
           </div>
         )}
         {this.state.speciesListLoading && <div>Species list loading...</div>}

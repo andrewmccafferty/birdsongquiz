@@ -1,3 +1,4 @@
+
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f9;
@@ -16,7 +17,7 @@ body {
   padding: 20px;
   max-width: 400px;
   width: 100%;
-  text-align: center;
+  text-align: left;
 }
 
 .quiz-header {
@@ -24,12 +25,37 @@ body {
   font-weight: bold;
   color: #333333;
   margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
 }
 
 .quiz-subheader {
-  font-size: 1.1em;
+  font-size: 1em;
   color: #555555;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.quiz-subheader label {
+  font-weight: 800;
+  color: #333333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-width: 80px;
+  margin-bottom: 0;
+}
+
+.quiz-subheader select {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #cccccc;
+  font-size: 1em;
+  background: #ffffff;
+  cursor: pointer;
 }
 
 .quiz-stats {
@@ -101,13 +127,20 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  border: 1px solid #cccccc;
-  border-radius: 8px;
-  padding: 5px 10px;
-  background: #f9f9f9;
+  margin-top: 10px;
 }
 
-/* Modal Styles */
+.rbt-input-multi {
+  flex: 1;
+  min-height: 40px;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  padding: 5px 8px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+}
+
 .modal {
   position: fixed;
   top: 0;
@@ -161,7 +194,7 @@ body {
 }
 
 .action-button {
-  padding: 10px 20px;
+  padding: 10px 12px;
   font-size: 1em;
   font-weight: bold;
   border: none;
@@ -170,6 +203,9 @@ body {
   color: #ffffff;
   cursor: pointer;
   transition: background 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .action-button:hover {
@@ -205,19 +241,4 @@ body {
 
 .close-btn:hover {
   color: #ff0000;
-}
-
-label.quiz-subheader {
-  font-weight: 600;
-  margin-bottom: 5px;
-  display: block;
-}
-
-#sound-type {
-  padding: 8px 10px;
-  border-radius: 6px;
-  border: 1px solid #cccccc;
-  font-size: 1em;
-  background: #ffffff;
-  cursor: pointer;
 }
