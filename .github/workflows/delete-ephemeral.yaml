@@ -58,3 +58,8 @@ jobs:
 
       - name: Terraform destroy
         run: terraform destroy -auto-approve -input=false -var environment=$ENV_NAME -var acm_certificate_arn=${{ secrets.ACM_CERTIFICATE_ARN }} -var xc_api_key=${{ secrets.XC_API_KEY }}
+      
+      - name: Terraform delete workspace
+        run: |
+          terraform workspace select default
+          terraform workspace delete $ENV_NAME
