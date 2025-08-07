@@ -1,0 +1,22 @@
+[
+   {
+    "Species": "Black-headed Gull",
+    "ScientificName": "Chroicocephalus ridibundus"
+  },
+  {
+    "Species": "Common Gull",
+    "ScientificName": "Larus canus"
+  },
+  {
+    "Species": "Great Black-backed Gull",
+    "ScientificName": "Larus marinus"
+  },
+  {
+    "Species": "Herring Gull",
+    "ScientificName": "Larus argentatus"
+  },
+  {
+    "Species": "Lesser Black-backed Gull",
+    "ScientificName": "Larus fuscus"
+  }
+]
