@@ -70,12 +70,12 @@ jobs:
       - name: Terraform Apply
         run: terraform apply -auto-approve -input=false -var environment=$ENV_NAME -var acm_certificate_arn=${{ secrets.ACM_CERTIFICATE_ARN }} -var xc_api_key=${{ secrets.XC_API_KEY }}
       - name: Feed all Terraform output parameters into environment variables
-          run: |
-            for key in $(terraform output -json | jq -r 'keys[]'); do
-              value=$(terraform output -raw "$key" || echo "")
-              upper_key=$(echo "$key" | tr '[:lower:]' '[:upper:]')
-              echo "$upper_key=$value" >> "$GITHUB_ENV"
-            done
+        run: |
+          for key in $(terraform output -json | jq -r 'keys[]'); do
+            value=$(terraform output -raw "$key" || echo "")
+            upper_key=$(echo "$key" | tr '[:lower:]' '[:upper:]')
+            echo "$upper_key=$value" >> "$GITHUB_ENV"
+          done
       - name: Set FRONTEND_URL name for prod branch
         if: ${{ github.ref == 'refs/heads/main' }}
         run: echo "FRONTEND_URL=https://www.birdsongquiz.co.uk" >> $GITHUB_ENV
