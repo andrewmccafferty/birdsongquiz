@@ -80,7 +80,7 @@ jobs:
       - name: Set and echo API_ROOT env var
         run: |
           set -e
-          ROOT_URL=$(terraform output -raw api_base_url)
+          ROOT_URL=$(terraform output -raw api_root)
           echo "API_ROOT=$ROOT_URL" >> "$GITHUB_ENV"
       - name: Set and echo FRONTEND_URL env var for ephemerals
         if: github.event_name == 'pull_request'
