@@ -40,6 +40,9 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.12.2
+          # This line, turning off the Terraform Wrapper, is important
+          # because without it the steps which read TF output will fail,
+          # they end up with a load of debug output to filter out.
           terraform_wrapper: false
       
       - name: Terraform init
@@ -69,34 +72,16 @@ jobs:
 
       - name: Terraform Apply
         run: terraform apply -auto-approve -input=false -var environment=$ENV_NAME -var acm_certificate_arn=${{ secrets.ACM_CERTIFICATE_ARN }} -var xc_api_key=${{ secrets.XC_API_KEY }}
-      - name: Debug raw terraform output
-        run: terraform output -raw frontend_bucket
-      - name: Set and echo FRONTEND_BUCKET env var
+      - name: Feed all Terraform output parameters into environment variables
         run: |
-          set -e
-          BUCKET=$(terraform output -raw frontend_bucket)
-          echo "Setting bucket: $BUCKET"
-          echo "FRONTEND_BUCKET=$BUCKET" >> "$GITHUB_ENV"
-      - name: Set and echo API_ROOT env var
-        run: |
-          set -e
-          ROOT_URL=$(terraform output -raw api_base_url)
-          echo "API_ROOT=$ROOT_URL" >> "$GITHUB_ENV"
-      - name: Set and echo FRONTEND_URL env var for ephemerals
-        if: github.event_name == 'pull_request'
-        run: |
-          set -e
-          FRONTEND_URL_OUTPUT=$(terraform output -raw frontend_url)
-          echo "FRONTEND_URL=$FRONTEND_URL_OUTPUT" >> "$GITHUB_ENV"
+          for key in $(terraform output -json | jq -r 'keys[]'); do
+            value=$(terraform output -raw "$key" || echo "")
+            upper_key=$(echo "$key" | tr '[:lower:]' '[:upper:]')
+            echo "$upper_key=$value" >> "$GITHUB_ENV"
+          done
       - name: Set FRONTEND_URL name for prod branch
         if: ${{ github.ref == 'refs/heads/main' }}
         run: echo "FRONTEND_URL=https://www.birdsongquiz.co.uk" >> $GITHUB_ENV
-      - name: Set SPECIES_LIST_BUCKET env var for ephemerals
-        if: github.event_name == 'pull_request'
-        run: |
-          set -e
-          SPECIES_LIST_BUCKET=$(terraform output -raw species_list_bucket)
-          echo "SPECIES_LIST_BUCKET=$SPECIES_LIST_BUCKET" >> "$GITHUB_ENV"
       - name: Populate species lists for ephemerals
         if: github.event_name == 'pull_request'
         working-directory: ./scripts
