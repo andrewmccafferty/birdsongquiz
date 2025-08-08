@@ -71,7 +71,13 @@ jobs:
         run: exit 1
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve -input=false -var environment=$ENV_NAME -var acm_certificate_arn=${{ secrets.ACM_CERTIFICATE_ARN }} -var xc_api_key=${{ secrets.XC_API_KEY }}
+        run: |
+          terraform apply \
+            -auto-approve \
+            -input=false \
+            -var environment=$ENV_NAME \
+            -var acm_certificate_arn=${{ secrets.ACM_CERTIFICATE_ARN }} \
+            -var xc_api_key=${{ secrets.XC_API_KEY }}
       - name: Feed all Terraform output parameters into environment variables
         run: |
           for key in $(terraform output -json | jq -r 'keys[]'); do
@@ -85,16 +91,7 @@ jobs:
       - name: Populate species lists for ephemerals
         if: github.event_name == 'pull_request'
         working-directory: ./scripts
-        run: |
-          ./populate-species-list-bucket-for-country.sh AU
-          ./populate-species-list-bucket-for-country.sh CO
-          ./populate-species-list-bucket-for-country.sh ES
-          ./populate-species-list-bucket-for-country.sh EUR
-          ./populate-species-list-bucket-for-country.sh GB
-          ./populate-species-list-bucket-for-country.sh MY
-          ./populate-species-list-bucket-for-country.sh US
-          ./populate-species-list-bucket-for-list-id.sh common-uk-garden
-          ./populate-species-list-bucket-for-list-id.sh garden-warbler-vs-blackcap
+        run: ./populate-species-list-bucket-from-source.sh
       - name: Deploy frontend
         working-directory: ./frontend
         run: ./deploy.sh
