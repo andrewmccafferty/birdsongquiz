@@ -40,6 +40,9 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.12.2
+          # This line, turning off the Terraform Wrapper, is important
+          # because without it the steps which read TF output will fail,
+          # they end up with a load of debug output to filter out.
           terraform_wrapper: false
       
       - name: Terraform init
