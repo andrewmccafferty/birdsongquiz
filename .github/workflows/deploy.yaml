@@ -120,7 +120,3 @@ jobs:
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           path: plan-comment.md
-        if: github.event_name == 'pull_request'
-        run: |
-          terraform workspace select default
-          terraform plan -var environment=prod -var acm_certificate_arn=${{ secrets.ACM_CERTIFICATE_ARN }} -var xc_api_key=${{ secrets.XC_API_KEY }}
