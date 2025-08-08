@@ -104,7 +104,22 @@ jobs:
       - name: Run Playwright tests
         working-directory: ./tests/e2e
         run: npx playwright test
-      - name: Plan for prod
+      - name: Plan for prod and update PR
+        if: github.event_name == 'pull_request'
+        run: |
+          terraform workspace select default
+          terraform plan -no-color -var environment=prod -var acm_certificate_arn=${{ secrets.ACM_CERTIFICATE_ARN }} -var xc_api_key=${{ secrets.XC_API_KEY }} > tfplan.txt
+          echo '### Terraform Plan for prod' > plan-comment.md
+          echo '```' >> plan-comment.md
+          cat tfplan.txt >> plan-comment.md
+          echo '```' >> plan-comment.md
+        continue-on-error: true
+
+      - name: Add Terraform plan to PR
+        if: github.event_name == 'pull_request'
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          path: plan-comment.md
         if: github.event_name == 'pull_request'
         run: |
           terraform workspace select default
