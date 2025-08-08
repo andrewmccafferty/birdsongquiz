@@ -1,16 +1,23 @@
 import { getRandomRecordingForSpecies } from './recording.js';
 import { loadSpeciesListById, loadSpeciesListForRegion } from './species.js';
 
-const response = (statusCode, responseBody) => ({
-  statusCode,
-  headers: {
+const response = (statusCode, responseBody, addCacheHeader = false) => {
+  const headers = {
     'Content-Type': 'application/json',
     "Access-Control-Allow-Headers": "Content-Type",
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
-  },
-  body: JSON.stringify(responseBody),
-});
+  };
+  if (addCacheHeader) {
+    // Cache for the maximum time allowed, which is one year
+    headers["Cache-Control"] = "public, max-age=31536000";
+  }
+  return {
+    statusCode,
+    headers,
+    body: JSON.stringify(responseBody),
+  };
+};
 
 export const getRecording = async (event) => {
   console.log('Event: ', event);
@@ -36,7 +43,7 @@ export const getSpeciesList = async (event) => {
     if (!species_list) {
       return response(404, {"message": "No species list found for region"});
     }
-    return response(200, {"species": species_list })
+    return response(200, {"species": species_list }, true)
   }
 
   if (listId) {
@@ -44,7 +51,7 @@ export const getSpeciesList = async (event) => {
     if (!species_list) {
       return response(404, {"message": "No species list found for given id"});
     }
-    return response(200, {"species": species_list })
+    return response(200, {"species": species_list }, true)
   }
 
   return response(400, {"message": "Must supply either 'region' or 'listId' parameters"})
