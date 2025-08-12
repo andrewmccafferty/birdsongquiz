@@ -140,11 +140,11 @@ class GameControls extends Component {
                 
                     <div className="audio-player">
                         <audio autoPlay={true} controls
+                        src="https://xeno-canto.org/sounds/uploaded/AYKHDFBYIH/XC1024293-Lesser-Black-backed-Gull-call-juvenile-very-good-2025-07-28-Rainham-Marshes,-London,-England_644_Edited.mp3"
                         onError={(event) => console.log("Got error loading content", event)}
                         onStalled={(event) => console.log("Stalled event caught", event)}
                         onSuspend={(event) => console.log("Suspended event caught", event)}
                         >
-                        <source type="audio/wav" src={`https://www.xeno-canto.org/${this.state.birdsongId}/download`}></source>
                         Your browser does not support the audio element.
                         </audio>
                     </div>
