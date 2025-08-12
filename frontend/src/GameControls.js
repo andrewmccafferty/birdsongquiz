@@ -139,7 +139,7 @@ class GameControls extends Component {
                 !this.state.noRecordingFound &&
                 
                     <div className="audio-player">
-                        <audio autoPlay={true} controls src={`https://www.xeno-canto.org/${this.state.birdsongId}/download`}>
+                        <audio autoPlay={true} controls src={`https://www.xeno-canto.org/${this.state.birdsongId}/download`} preload="auto">
                         Your browser does not support the audio element.
                         </audio>
                     </div>
