@@ -102,6 +102,7 @@ class GameControls extends Component {
                     const state = {
                         ...props,
                         birdsongId: recording.id,
+                        soundUrl: result.soundUrl,
                         species: recording.en,
                         recordist: recording.rec,
                         scientificName: recording.gen + ' ' + recording.sp,
@@ -139,7 +140,7 @@ class GameControls extends Component {
                 !this.state.noRecordingFound &&
                 
                     <div className="audio-player">
-                        <audio autoPlay={true} controls src={`https://www.xeno-canto.org/${this.state.birdsongId}/download`}>
+                        <audio autoPlay={true} controls src={this.state.soundUrl}>
                         Your browser does not support the audio element.
                         </audio>
                     </div>
