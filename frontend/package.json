@@ -3,8 +3,8 @@
     "version": "1.0.0",
     "main": "index.js",
     "scripts": {
-        "start": "webpack serve --open",
-        "build": "webpack"
+        "start": "node addVersionNumberToFrontend.js & webpack serve --open",
+        "build": "node addVersionNumberToFrontend.js & webpack"
     },
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^6.7.2",

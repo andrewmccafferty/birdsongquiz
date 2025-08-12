@@ -3,6 +3,11 @@
 set -euo pipefail
 
 # 1. Check required env vars
+if [ -z "${CURRENT_APP_VERSION:-}" ]; then
+  echo "Error: CURRENT_APP_VERSION environment variable is not set."
+  exit 1
+fi
+
 if [ -z "${API_ROOT:-}" ]; then
   echo "Error: API_ROOT environment variable is not set."
   exit 1
