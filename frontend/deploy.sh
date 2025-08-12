@@ -27,7 +27,7 @@ API_ROOT="$API_ROOT" npm run build
 
 # 3. Compute MD5 of bundle.js
 BUNDLE_PATH="dist/bundle.js"
-INDEX_PATH="index.html"
+INDEX_PATH="dist/index.html"
 
 if [ ! -f "$BUNDLE_PATH" ]; then
   echo "Error: $BUNDLE_PATH not found after build."
