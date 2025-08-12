@@ -92,6 +92,8 @@ jobs:
         if: github.event_name == 'pull_request'
         working-directory: ./scripts
         run: ./populate-species-list-bucket-from-source.sh
+      - name: Set commit hash for version number
+        run: echo "CURRENT_APP_VERSION=$(git rev-parse --short ${{ github.sha }})" >> $GITHUB_ENV
       - name: Deploy frontend
         working-directory: ./frontend
         run: ./deploy.sh
