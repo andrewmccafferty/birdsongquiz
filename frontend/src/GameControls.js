@@ -101,7 +101,7 @@ class GameControls extends Component {
                     const recording = result.recording
                     const state = {
                         ...props,
-                        birdsongId: recording.id,
+                        birdsongId: "1024293",
                         species: recording.en,
                         recordist: recording.rec,
                         scientificName: recording.gen + ' ' + recording.sp,
