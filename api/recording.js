@@ -43,6 +43,19 @@ const getRecordingData = async (species, soundType) => {
     });
 };
 
+const constructSoundUrlFromRecordingData = (recording) => {
+    const mp3FileName = recording["file-name"].replace(/\.wav$/i, ".mp3");
+
+    const match = recording.sono.small.match(/uploaded\/([^/]+)\//);
+    if (!match) {
+        throw new Error("recordistId not found in sono.small");
+    }
+    const recordistId = match[1];
+
+    // 3. Construct final URL
+    return `https://xeno-canto.org/sounds/uploaded/${recordistId}/${mp3FileName}`;
+}
+
 const getRandomRecordingForSpecies = async (species, soundType) => {
     console.log(`Calling getRecordingData with species: ${species}, soundType: ${soundType}`);
     const data = await getRecordingData(species, soundType);
@@ -54,7 +67,8 @@ const getRandomRecordingForSpecies = async (species, soundType) => {
     const recording = data.recordings[randomIndex];
     return {
         species: species,
-        recording
+        recording,
+        soundUrl: constructSoundUrlFromRecordingData(recording)
     };
 }
 
