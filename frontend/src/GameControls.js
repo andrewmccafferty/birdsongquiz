@@ -139,11 +139,12 @@ class GameControls extends Component {
                 !this.state.noRecordingFound &&
                 
                     <div className="audio-player">
-                        <audio autoPlay={true} controls src={`https://www.xeno-canto.org/${this.state.birdsongId}/download`} preload="auto"
+                        <audio autoPlay={true} controls
                         onError={(event) => console.log("Got error loading content", event)}
                         onStalled={(event) => console.log("Stalled event caught", event)}
                         onSuspend={(event) => console.log("Suspended event caught", event)}
                         >
+                        <source type="audio/wav" src={`https://www.xeno-canto.org/${this.state.birdsongId}/download`}></source>
                         Your browser does not support the audio element.
                         </audio>
                     </div>
