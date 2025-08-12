@@ -10,6 +10,10 @@ const GameExplanationModal = ({ isOpen, onClose }) => {
     }
   };
 
+  const getCurrentAppVersion = () => {
+    return process.env.CURRENT_APP_VERSION
+  }
+
   return (
     <div className="modal" onClick={handleOverlayClick}>
       <div className="modal-box">
@@ -32,7 +36,9 @@ const GameExplanationModal = ({ isOpen, onClose }) => {
                         The data on Xeno-Canto is user-generated, so will sometimes be tagged incorrectly (e.g. a sound type tagged as call when it's song or vice versa), or include poor-quality recordings!
                     </p>
                     <p>Quiz built by Andrew McCafferty. If you've got any feedback/suggestions, feel free to get in touch with me at <a href="mailto:feedback@birdsongquiz.co.uk">feedback@birdsongquiz.co.uk</a></p>
+                    <p>(The current version running is {getCurrentAppVersion()})</p>
                     <button className="action-button" onClick={onClose}>OK</button>
+                    
       </div>
     </div>
   );
