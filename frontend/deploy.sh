@@ -3,6 +3,11 @@
 set -euo pipefail
 
 # 1. Check required env vars
+if [ -z "${CURRENT_APP_VERSION:-}" ]; then
+  echo "Error: CURRENT_APP_VERSION environment variable is not set."
+  exit 1
+fi
+
 if [ -z "${API_ROOT:-}" ]; then
   echo "Error: API_ROOT environment variable is not set."
   exit 1
@@ -22,7 +27,7 @@ API_ROOT="$API_ROOT" npm run build
 
 # 3. Compute MD5 of bundle.js
 BUNDLE_PATH="dist/bundle.js"
-INDEX_PATH="index.html"
+INDEX_PATH="dist/index.html"
 
 if [ ! -f "$BUNDLE_PATH" ]; then
   echo "Error: $BUNDLE_PATH not found after build."
