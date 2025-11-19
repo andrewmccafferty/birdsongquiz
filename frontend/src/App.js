@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import HeadToHeadSpeciesSelector from './HeadToHeadSpeciesSelector';
 import GameControls from './GameControls';
+import { initialiseGoogleAnalytics, sendPageViewEvent, sendEvent } from './analytics'
 import GameExplanationModal from './GameExplanationModal'
 import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+
 class App extends Component {
     constructor(props) {
         super(props);
+        initialiseGoogleAnalytics();
+        sendPageViewEvent("Homepage")
+        
         const permalinkData = this.decodePermalink()
         this.state = {
             headToHeadSpeciesList: permalinkData ? permalinkData.presetSpecies : [],
@@ -71,6 +76,7 @@ class App extends Component {
     }
 
     openGameExplanation = () => { 
+        sendEvent("", "", "")
         this.setState((prevState, props) => {
             return {
                 ...props,
