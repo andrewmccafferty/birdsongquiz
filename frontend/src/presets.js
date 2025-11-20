@@ -21,7 +21,10 @@ const COUNTRY_TO_PRESETS_MAPPING = {
 
 const presetListsForCountry = (countryCode) => {
   const presets = COUNTRY_TO_PRESETS_MAPPING[countryCode];
-  return presets.map(preset => `${countryCode}/${preset}`);
+  return presets.map(preset => ({
+    name: preset.name,
+    id: `${countryCode}/${preset}`
+  }));
 };
 
 export { presetListsForCountry };
