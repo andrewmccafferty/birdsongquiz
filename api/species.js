@@ -14,6 +14,7 @@ const getObjectFromS3AsString = async (bucketName, s3Key) => {
 }
 
 const loadSpeciesListFromS3Key = async (s3Key) => {
+    console.log("Loading species list from S3 key...", s3Key);
     const speciesData = await getObjectFromS3AsString(
         process.env.SPECIES_LIST_BUCKET_NAME,
         s3Key);
@@ -31,6 +32,10 @@ const loadSpeciesListForRegion = async (region) => {
 
 const loadSpeciesListById = async (listId) => {
     return loadSpeciesListFromS3Key(`presets/${listId}.json`)
+}
+
+const getSpeciesListsForRegion = async (region) => {
+    
 }
 
 export { loadSpeciesListForRegion, loadSpeciesListById }
