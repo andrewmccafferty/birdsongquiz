@@ -47,7 +47,7 @@ export const getSpeciesList = async (event) => {
   }
 
   if (listId) {
-    const species_list = await loadSpeciesListById(listId);
+    const species_list = await loadSpeciesListById(listId.toLower());
     if (!species_list) {
       return response(404, {"message": "No species list found for given id"});
     }
