@@ -45,7 +45,7 @@ const getSpeciesPresetListsForRegion = async (region) => {
             .join(' ');
 
         return {
-            id: filename,
+            id: `${region.toLowerCase()}/${filename}`,
             name
         };
     });
