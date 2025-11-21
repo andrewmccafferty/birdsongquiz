@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { callApi } from "./api.js";
 import PresetSpeciesSelector from "./PresetSpeciesSelector.js";
-import { presetListsForCountry } from "./presets.js";
 import CountrySelector from "./CountrySelector.js";
 class HeadToHeadSpeciesSelector extends Component {
   constructor(props) {
@@ -19,8 +18,7 @@ class HeadToHeadSpeciesSelector extends Component {
     };
   }
   componentDidMount() {
-    this.loadSpeciesForCountry("GB");
-    this.loadPresetListsForCountry("GB");
+    this.onCountryChanged("GB");
   }
 
   onSelectionComplete = () => {
@@ -81,9 +79,25 @@ class HeadToHeadSpeciesSelector extends Component {
       });
   };
   loadPresetListsForCountry = (country) => {
-    const presetLists = presetListsForCountry(country);
-    this.setState({ presetLists });
+    this.setState({
+      presetListsLoading: true,
+      errorLoadingPresetLists: false,
+    });
+    callApi(`presets/${country}`)
+      .catch((err) => {
+        this.setState({
+          presetListsLoading: false,
+          errorLoadingPresetLists: true,
+        });
+      })
+      .then((result) => {
+        this.setState({
+          presetLists: result.presets,
+          presetListsLoading: false,
+        });
+      });
   };
+
   onCountryChanged = (country) => {
     if (this.state.country == country) {
       return;
@@ -96,6 +110,10 @@ class HeadToHeadSpeciesSelector extends Component {
   shouldShowLoaderInSpeciesSelector = () => {
     return this.state.loadingPresetList || this.state.speciesListLoading;
   };
+
+  shouldShowLoaderInPresetListsSelector = () => {
+    return this.state.presetListsLoading
+  }
 
   render() {
     return (
@@ -139,7 +157,7 @@ class HeadToHeadSpeciesSelector extends Component {
             Once you're happy with your list, press the blue button to start the
             quiz.
           </div>
-          {this.state.presetLists && (
+          {this.state.presetLists && this.state.presetLists.length > 0 && (
             <div className="input-container">
               <PresetSpeciesSelector
                 presetLists={this.state.presetLists}
@@ -147,6 +165,11 @@ class HeadToHeadSpeciesSelector extends Component {
                   this.loadSpeciesForListId(listId);
                 }}
               ></PresetSpeciesSelector>
+              {this.shouldShowLoaderInPresetListsSelector() && (
+                <div className="spinner-overlay">
+                  <div className="spinner"></div>
+                </div>
+              )}
             </div>
           )}
           <div className="input-container">
