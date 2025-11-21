@@ -65,5 +65,5 @@ export const getSpeciesPresetLists = async (event) => {
     return response(400, {"message": "Missing required path parameter 'region'"});
   }
   console.log("Loading preset lists with region", region);
-  return getSpeciesPresetListsForRegion(region);
+  return await getSpeciesPresetListsForRegion(region);
 }
