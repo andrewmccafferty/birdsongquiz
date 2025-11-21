@@ -89,10 +89,6 @@ class App extends Component {
                 <HeadToHeadSpeciesSelector onSelectionComplete={(headToHeadSpeciesList, soundType) => this.onHeadToHeadSpeciesSelected(headToHeadSpeciesList, soundType)} />
             }
             {
-                this.state.headToHeadSpeciesList && this.state.headToHeadSpeciesList.length > 0 &&
-                <div className="quiz-subheader">{this.headToHeadLabel()}</div>
-            }
-            {
                 this.gameActive() &&
                 <GameControls headToHeadSpecies={this.state.headToHeadSpeciesList} soundType={this.state.soundType} />
             }
