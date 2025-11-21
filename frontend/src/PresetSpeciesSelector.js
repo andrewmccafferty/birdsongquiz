@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { presetListsForCountry } from "./presets";
 class PresetSpeciesSelector extends Component {
   constructor(props) {
     super(props);
