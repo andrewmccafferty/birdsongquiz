@@ -1,5 +1,5 @@
 import { getRandomRecordingForSpecies } from './recording.js';
-import { loadSpeciesListById, loadSpeciesListForRegion } from './species.js';
+import { loadSpeciesListById, loadSpeciesListForRegion, getSpeciesPresetListsForRegion } from './species.js';
 
 const response = (statusCode, responseBody, addCacheHeader = false) => {
   const headers = {
@@ -55,4 +55,14 @@ export const getSpeciesList = async (event) => {
   }
 
   return response(400, {"message": "Must supply either 'region' or 'listId' parameters"})
+}
+
+export const getSpeciesPresetLists = async (event) => {
+  const region = event.pathParameters?.region;
+
+  if (!region) {
+    return response(400, {"message": "Missing required path parameter 'region'"});
+  }
+
+  return getSpeciesPresetListsForRegion(region);
 }

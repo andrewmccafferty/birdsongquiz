@@ -47,6 +47,14 @@ resource "aws_apigatewayv2_integration" "get_species_list" {
   integration_method = "POST"
 }
 
+resource "aws_apigatewayv2_integration" "get_preset_lists" {
+  api_id = aws_apigatewayv2_api.lambda.id
+
+  integration_uri    = aws_lambda_function.get_preset_lists.invoke_arn
+  integration_type   = "AWS_PROXY"
+  integration_method = "POST"
+}
+
 resource "aws_apigatewayv2_route" "get_recording" {
   api_id = aws_apigatewayv2_api.lambda.id
 
@@ -59,6 +67,13 @@ resource "aws_apigatewayv2_route" "get_species_list" {
 
   route_key = "GET /species"
   target    = "integrations/${aws_apigatewayv2_integration.get_species_list.id}"
+}
+
+resource "aws_apigatewayv2_route" "get_preset_lists" {
+  api_id    = aws_apigatewayv2_api.lambda.id
+  route_key = "GET /presets/{region}"
+
+  target = "integrations/${aws_apigatewayv2_integration.get_preset_lists.id}"
 }
 
 resource "aws_cloudwatch_log_group" "api_gw" {

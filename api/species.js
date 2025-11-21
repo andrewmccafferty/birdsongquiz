@@ -2,6 +2,7 @@ import {
   S3Client,
   GetObjectCommand,
 } from "@aws-sdk/client-s3";
+import { listFilesForPrefix } from "./s3_utils.js";
 
 const getObjectFromS3AsString = async (bucketName, s3Key) => {
     const s3Client = new S3Client({region: "eu-west-2"});
@@ -34,8 +35,21 @@ const loadSpeciesListById = async (listId) => {
     return loadSpeciesListFromS3Key(`presets/${listId}.json`)
 }
 
-const getSpeciesListsForRegion = async (region) => {
-    
+const getSpeciesPresetListsForRegion = async (region) => {
+    const files = await listFilesForPrefix(process.env.SPECIES_LIST_BUCKET_NAME, `presets/${region}/`)
+    const mapped = files.map(path => {
+        const filename = path.split('/').pop().replace('.json', '');
+        const name = filename
+            .split('-')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
+
+        return {
+            id: filename,
+            name
+        };
+    });
+    return mapped
 }
 
-export { loadSpeciesListForRegion, loadSpeciesListById }
+export { loadSpeciesListForRegion, loadSpeciesListById, getSpeciesPresetListsForRegion }
