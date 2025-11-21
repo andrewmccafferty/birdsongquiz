@@ -58,11 +58,12 @@ export const getSpeciesList = async (event) => {
 }
 
 export const getSpeciesPresetLists = async (event) => {
+  console.log("Entering preset lists handler with event", event);
   const region = event.pathParameters?.region;
 
   if (!region) {
     return response(400, {"message": "Missing required path parameter 'region'"});
   }
-
+  console.log("Loading preset lists with region", region);
   return getSpeciesPresetListsForRegion(region);
 }

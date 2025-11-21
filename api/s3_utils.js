@@ -37,12 +37,4 @@ async function listFilesForPrefix(bucketName, prefix) {
   }
 }
 
-// (async () => {
-//   const bucketName = "allow-user-preset-suggestions-species-list-bucket";
-//   const folder = "presets/gb/";
-
-//   const files = await listFilesForPrefix(bucketName, folder);
-//   console.log("Files:", files);
-// })();
-
 export { listFilesForPrefix }
