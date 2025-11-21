@@ -36,7 +36,7 @@ const loadSpeciesListById = async (listId) => {
 }
 
 const getSpeciesPresetListsForRegion = async (region) => {
-    const files = await listFilesForPrefix(process.env.SPECIES_LIST_BUCKET_NAME, `presets/${region}/`)
+    const files = await listFilesForPrefix(process.env.SPECIES_LIST_BUCKET_NAME, `presets/${region}/`.toLowerCase())
     const mapped = files.map(path => {
         const filename = path.split('/').pop().replace('.json', '');
         const name = filename
