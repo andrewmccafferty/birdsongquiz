@@ -5,7 +5,6 @@ import "react-bootstrap-typeahead/css/Typeahead.bs5.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { callApi } from "./api.js";
-const speciesList = require("./species_list.js");
 import PresetSpeciesSelector from "./PresetSpeciesSelector.js";
 import { presetListsForCountry } from "./presets.js";
 import CountrySelector from "./CountrySelector.js";
@@ -14,12 +13,13 @@ class HeadToHeadSpeciesSelector extends Component {
     super(props);
     this.state = {
       selectedSpeciesList: [],
-      speciesList: speciesList,
+      speciesList: [],
       typeaheadRef: null,
       soundType: "any",
     };
   }
   componentDidMount() {
+    this.loadSpeciesForCountry("GB");
     this.loadPresetListsForCountry("GB");
   }
 
