@@ -21,8 +21,11 @@ class HeadToHeadSpeciesSelector extends Component {
 
   loadFrontendConfiguration = async () => {
     try {
-      const frontendConfiguration = await fetch("/frontend-configuration.json");
-      console.log("Got frontend configuration", frontendConfiguration);
+      const response = await fetch("/frontend-configuration.json");
+      const frontendConfiguration = await response.json();
+      
+      if (response.status !== 200) throw Error(body.message);
+
       this.setState({ frontendConfiguration })
     } catch (e) {
       console.error("Got error while trying to get frontend configuration", e);
