@@ -26,7 +26,7 @@ class HeadToHeadSpeciesSelector extends Component {
       
       if (response.status !== 200) throw Error(body.message);
       console.log("Got frontend config", frontendConfiguration);
-      this.setState({ frontendConfiguration })
+      this.setState({ frontendConfiguration: frontendConfiguration })
     } catch (e) {
       console.error("Got error while trying to get frontend configuration", e);
     }
