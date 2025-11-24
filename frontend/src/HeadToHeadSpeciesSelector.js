@@ -25,7 +25,7 @@ class HeadToHeadSpeciesSelector extends Component {
       const frontendConfiguration = await response.json();
       
       if (response.status !== 200) throw Error(body.message);
-
+      console.log("Got frontend config", frontendConfiguration);
       this.setState({ frontendConfiguration })
     } catch (e) {
       console.error("Got error while trying to get frontend configuration", e);
@@ -101,6 +101,7 @@ class HeadToHeadSpeciesSelector extends Component {
       presetListsLoading: true,
       errorLoadingPresetLists: false,
     });
+    console.log("frontend config", this.state.frontendConfiguration);
     callApi(`presets/${country}?v=${this.state.frontendConfiguration ? this.state.frontendConfiguration.presetsVersion : "default"}`)
       .catch((err) => {
         this.setState({
