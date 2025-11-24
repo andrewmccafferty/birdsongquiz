@@ -96,25 +96,13 @@ class App extends Component {
                             data-testid="reset"
                             id="reset"
                             onClick={() => this.resetQuiz()}
-                            style={{
-                            padding: "0.4rem 0.6rem",
-                            cursor: "pointer",
-                            background: "transparent",
-                            border: "none",
-                            fontSize: "1.2rem"
-                            }}
+                            className="small-button"
                             title="Reset"
                         >
                             <FontAwesomeIcon icon={faArrowsRotate} />
                         </button>
                         <CopyPermalinkButton permalink={this.headToHeadSharingLink()} />
-                        <button style={{
-                            padding: "0.4rem 0.6rem",
-                            cursor: "pointer",
-                            background: "transparent",
-                            border: "none",
-                            fontSize: "1.2rem"
-                            }}>
+                        <button className="small-button">
                             <FontAwesomeIcon icon={faClipboardCheck}/>
                         </button>
                     </div>
