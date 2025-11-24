@@ -26,7 +26,12 @@ class HeadToHeadSpeciesSelector extends Component {
       
       if (response.status !== 200) throw Error(body.message);
       console.log("Got frontend config", frontendConfiguration);
-      this.setState({ frontendConfiguration: frontendConfiguration })
+      this.setState((prevState, props) => {
+            return {
+                ...props,
+                frontendConfiguration: frontendConfiguration
+            }
+        });
     } catch (e) {
       console.error("Got error while trying to get frontend configuration", e);
     }
@@ -41,10 +46,20 @@ class HeadToHeadSpeciesSelector extends Component {
 
   onSelectionComplete = () => {
     if (this.state.selectedSpeciesList.length < 2) {
-      this.setState({ showValidationMessage: true });
+      this.setState((prevState, props) => {
+            return {
+                ...props,
+                showValidationMessage: true
+            }
+        });
       return;
     } else {
-      this.setState({ showValidationMessage: false });
+      this.setState((prevState, props) => {
+            return {
+                ...props,
+                showValidationMessage: false
+            }
+        });
     }
     this.props.onSelectionComplete(
       this.state.selectedSpeciesList,
@@ -55,64 +70,96 @@ class HeadToHeadSpeciesSelector extends Component {
     this.setState({ soundType: soundType });
   };
   loadSpeciesForCountry = (country) => {
-    this.setState({
-      speciesListLoading: true,
-      errorLoadingSpecies: false,
-    });
+    this.setState((prevState, props) => {
+            return {
+                ...props,
+                speciesListLoading: true,
+                errorLoadingSpecies: false,
+            }
+        });
     callApi(`species?region=${country}`)
       .catch((err) => {
-        this.setState({
-          speciesListLoading: false,
-          errorLoadingSpecies: true,
+        this.setState((prevState, props) => {
+            return {
+                ...props,
+                speciesListLoading: false,
+                errorLoadingSpecies: true,
+            }
         });
       })
       .then((result) => {
-        this.setState({
-          speciesList: result.species,
-          speciesListLoading: false,
+        this.setState((prevState, props) => {
+            return {
+                ...props,
+                speciesList: result.species,
+                speciesListLoading: false,
+            }
         });
       });
   };
   loadSpeciesForListId = (listId) => {
     if (!listId || listId == "") {
-      this.setState({ selectedSpeciesList: [] });
+      this.setState((prevState, props) => {
+            return {
+                ...props,
+                selectedSpeciesList: []
+            }
+        });
       return;
     }
-    this.setState({
-      loadingPresetList: true,
-      errorLoadingPresetList: false,
-    });
+    this.setState((prevState, props) => {
+            return {
+                ...props,
+                loadingPresetList: true,
+                errorLoadingPresetList: false,
+            }
+        });
     callApi(`species?listId=${listId}`)
       .catch((err) => {
-        this.setState({
-          loadingPresetList: false,
-          errorLoadingPresetList: true,
+        this.setState((prevState, props) => {
+            return {
+                ...props,
+                loadingPresetList: false,
+                errorLoadingPresetList: true,
+            }
         });
       })
       .then((result) => {
-        this.setState({
-          selectedSpeciesList: result.species,
-          loadingPresetList: false,
+        this.setState((prevState, props) => {
+            return {
+                ...props,
+                selectedSpeciesList: result.species,
+                loadingPresetList: false,
+            }
         });
       });
   };
   loadPresetListsForCountry = (country) => {
-    this.setState({
-      presetListsLoading: true,
-      errorLoadingPresetLists: false,
-    });
+    this.setState((prevState, props) => {
+            return {
+                ...props,
+                presetListsLoading: true,
+                errorLoadingPresetLists: false,
+            }
+        });
     console.log("frontend config", this.state.frontendConfiguration);
     callApi(`presets/${country}?v=${this.state.frontendConfiguration ? this.state.frontendConfiguration.presetsVersion : "default"}`)
       .catch((err) => {
-        this.setState({
-          presetListsLoading: false,
-          errorLoadingPresetLists: true,
+        this.setState((prevState, props) => {
+            return {
+                ...props,
+                presetListsLoading: false,
+                errorLoadingPresetLists: true,
+            }
         });
       })
       .then((result) => {
-        this.setState({
-          presetLists: result.presets,
-          presetListsLoading: false,
+        this.setState((prevState, props) => {
+            return {
+                ...props,
+                presetLists: result.presets,
+                presetListsLoading: false,
+            }
         });
       });
   };
@@ -122,7 +169,12 @@ class HeadToHeadSpeciesSelector extends Component {
     if (this.state.country == country) {
       return;
     }
-    this.setState({ country: country });
+    this.setState((prevState, props) => {
+            return {
+                ...props,
+                country: country
+            }
+        });
     this.loadSpeciesForCountry(country);
     this.loadPresetListsForCountry(country);
   };
