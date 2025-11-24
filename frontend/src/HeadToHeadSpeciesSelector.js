@@ -11,14 +11,28 @@ class HeadToHeadSpeciesSelector extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      frontendConfiguration: null,
       selectedSpeciesList: [],
       speciesList: [],
       typeaheadRef: null,
       soundType: "any",
     };
   }
+
+  loadFrontendConfiguration = async () => {
+    try {
+      const frontendConfiguration = await fetch("/frontend-configuration.json");
+      this.setState({ frontendConfiguration })
+    } catch (e) {
+      console.error("Got error while trying to get frontend configuration", e);
+    }
+    
+  }
+
   componentDidMount() {
-    this.onCountryChanged("GB");
+    this.loadFrontendConfiguration().then(() => {
+      this.onCountryChanged("GB");
+    })
   }
 
   onSelectionComplete = () => {
@@ -83,7 +97,7 @@ class HeadToHeadSpeciesSelector extends Component {
       presetListsLoading: true,
       errorLoadingPresetLists: false,
     });
-    callApi(`presets/${country}`)
+    callApi(`presets/${country}?v=${this.state.frontendConfiguration ? this.state.frontendConfiguration.presetsVersion : "default"}`)
       .catch((err) => {
         this.setState({
           presetListsLoading: false,
@@ -98,6 +112,7 @@ class HeadToHeadSpeciesSelector extends Component {
       });
   };
 
+  
   onCountryChanged = (country) => {
     if (this.state.country == country) {
       return;

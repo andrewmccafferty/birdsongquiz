@@ -42,9 +42,6 @@ class App extends Component {
         })
     }
 
-    headToHeadLabel = () =>
-        `Species: ${this.state.headToHeadSpeciesList.map(species => species.Species).join(", ")} ${this.state.soundType ? `(${this.state.soundType})` : ""}`
-
     headToHeadSharingLink = () => `${window.location.origin}?presets=${btoa(JSON.stringify({
         presetSpecies: this.state.headToHeadSpeciesList,
         soundType: this.state.soundType
