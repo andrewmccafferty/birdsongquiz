@@ -1,5 +1,5 @@
 import { getRandomRecordingForSpecies } from './recording.js';
-import { loadSpeciesListById, loadSpeciesListForRegion, getSpeciesPresetListsForRegion, storeSuggestedSpeciesList } from './species.js';
+import { loadSpeciesListById, loadSpeciesListForRegion, getSpeciesPresetListsForRegion, storeSuggestedSpeciesList, approveSuggestedSpeciesList } from './species.js';
 
 const response = (statusCode, responseBody, addCacheHeader = false) => {
   const headers = {
@@ -88,4 +88,15 @@ export const suggestPresetList = async (event) => {
   return response(200, {
     "suggestionId": suggestionId
   })
+}
+
+export const approvePresetList = async (event) => {
+  const body = event.body;
+  const listData = JSON.parse(body);
+  if (!listData.suggestionId) {
+    throw new Error("suggestionId property not set in event body")
+  }
+
+  const listPath = await approveSuggestedSpeciesList(listData.suggestionId)
+  return { listPath }
 }

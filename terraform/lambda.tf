@@ -114,6 +114,30 @@ resource "aws_cloudwatch_log_group" "suggest_preset_list" {
   retention_in_days = 30
 }
 
+resource "aws_lambda_function" "approve_preset_list" {
+  function_name = var.environment == "prod" ? "ApprovePresetList" : "ApprovePresetList-${var.environment}"
+  timeout = 30
+  s3_bucket = aws_s3_bucket.lambda_bucket.id
+  s3_key    = aws_s3_object.lambda_birdsongquiz.key
+  environment {
+    variables = {
+      SPECIES_LIST_BUCKET_NAME = aws_s3_bucket.species_list_bucket.id
+    }
+  }
+  runtime = "nodejs20.x"
+  handler = "handlers.approvePresetList"
+
+  source_code_hash = data.archive_file.lambda_birdsongquiz.output_base64sha256
+
+  role = aws_iam_role.approve_preset_list_role.arn
+}
+
+resource "aws_cloudwatch_log_group" "approve_preset_list" {
+  name = var.environment == "prod" ? "/aws/lambda/ApprovePresetList" : "/aws/lambda/ApprovePresetList-${var.environment}"
+
+  retention_in_days = 30
+}
+
 resource "aws_iam_role" "lambda_exec" {
   name = var.environment == "prod" ? "serverless_lambda" : "serverless_lambda_${var.environment}"
 
@@ -260,6 +284,48 @@ resource "aws_iam_role_policy" "add_suggestion_s3_access" {
         ]
         Resource = [
           "${aws_s3_bucket.species_list_bucket.arn}/suggestions/*"
+        ]
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role" "approve_preset_list_role" {
+  name = var.environment == "prod" ? "approve_preset_list" : "approve_preset_list_${var.environment}"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Action = "sts:AssumeRole"
+      Effect = "Allow"
+      Sid    = ""
+      Principal = {
+        Service = "lambda.amazonaws.com"
+      }
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "approve_preset_list_attach_policy" {
+  role       = aws_iam_role.approve_preset_list_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+}
+
+resource "aws_iam_role_policy" "approve_preset_list_s3_access" {
+  name = "AllowS3AccessToMyBucket"
+  role = aws_iam_role.approve_preset_list_role.name
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:PutObject"
+        ]
+        Resource = [
+          "${aws_s3_bucket.species_list_bucket.arn}/presets/*"
         ]
       }
     ]

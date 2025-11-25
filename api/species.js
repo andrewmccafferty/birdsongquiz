@@ -65,4 +65,29 @@ const storeSuggestedSpeciesList = async (presetListData) => {
     return suggestionId
 }
 
-export { loadSpeciesListForRegion, loadSpeciesListById, getSpeciesPresetListsForRegion, storeSuggestedSpeciesList }
+const loadSuggestion = async (suggestionId) => {
+    const suggestionRawData = getObjectFromS3AsString(process.env.SPECIES_LIST_BUCKET_NAME, `suggestions/${suggestionId}.json`);
+    return JSON.parse(suggestionRawData);
+}
+
+const mapListNameToFileKey = (listName) => {
+    return listName.split(' ').join('-');
+}
+
+const approveSuggestedSpeciesList = async (suggestionId) => {
+    const suggestion = loadSuggestion(suggestionId);
+    const region = suggestion.region;
+    const s3Key = `presets/${region}/${mapListNameToFileKey(suggestion.listName)}.json`;
+    const s3Client = new S3Client({region: "eu-west-2"});
+    const presetListData = suggestion.speciesList;
+    await s3Client.send(
+        new PutObjectCommand({
+        Bucket: process.env.SPECIES_LIST_BUCKET_NAME,
+        Key: s3Key,
+        Body: JSON.stringify(presetListData)
+    }));
+
+    return s3Key
+}
+
+export { loadSpeciesListForRegion, loadSpeciesListById, getSpeciesPresetListsForRegion, storeSuggestedSpeciesList, approveSuggestedSpeciesList }
