@@ -327,6 +327,15 @@ resource "aws_iam_role_policy" "approve_preset_list_s3_access" {
         Resource = [
           "${aws_s3_bucket.species_list_bucket.arn}/presets/*"
         ]
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:GetObject"
+        ]
+        Resource = [
+          "${aws_s3_bucket.species_list_bucket.arn}/suggestions/*"
+        ]
       }
     ]
   })
