@@ -11,7 +11,7 @@ resource "aws_apigatewayv2_stage" "lambda" {
 
   name        = var.environment == "prod" ? "serverless_lambda_stage" : "serverless_lambda_stage_${var.environment}"
   auto_deploy = true
-  default_route_settings = {
+  default_route_settings {
     throttling_rate_limit = 5
     throttling_burst_limit = 6
   }
