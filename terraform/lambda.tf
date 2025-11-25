@@ -90,6 +90,29 @@ resource "aws_cloudwatch_log_group" "get_recording" {
   retention_in_days = 30
 }
 
+resource "aws_lambda_function" suggest_preset_list" {
+  function_name = var.environment == "prod" ? "SuggestPresetList" : "SuggestPresetList-${var.environment}"
+  timeout = 30
+  s3_bucket = aws_s3_bucket.lambda_bucket.id
+  s3_key    = aws_s3_object.lambda_birdsongquiz.key
+  environment {
+    variables = {
+      SPECIES_LIST_BUCKET_NAME = aws_s3_bucket.species_list_bucket.id
+    }
+  }
+  runtime = "nodejs20.x"
+  handler = "handlers.suggestPresetList"
+
+  source_code_hash = data.archive_file.lambda_birdsongquiz.output_base64sha256
+
+  role = aws_iam_role.add_suggestion_role.arn
+}
+
+resource "aws_cloudwatch_log_group" "get_recording" {
+  name = var.environment == "prod" ? "/aws/lambda/GetRecording" : "/aws/lambda/GetRecording-${var.environment}"
+
+  retention_in_days = 30
+}
 resource "aws_iam_role" "lambda_exec" {
   name = var.environment == "prod" ? "serverless_lambda" : "serverless_lambda_${var.environment}"
 
@@ -194,6 +217,48 @@ resource "aws_iam_role_policy" "get_preset_lists_s3_access" {
         Resource = [
           "${aws_s3_bucket.species_list_bucket.arn}",
           "${aws_s3_bucket.species_list_bucket.arn}/*"
+        ]
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role" "add_suggestion_role" {
+  name = var.environment == "prod" ? "add_suggestion" : "add_suggestion_${var.environment}"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Action = "sts:AssumeRole"
+      Effect = "Allow"
+      Sid    = ""
+      Principal = {
+        Service = "lambda.amazonaws.com"
+      }
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "add_suggestion_attach_policy" {
+  role       = aws_iam_role.add_suggestion_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+}
+
+resource "aws_iam_role_policy" "add_suggestion_s3_access" {
+  name = "AllowS3AccessToMyBucket"
+  role = aws_iam_role.add_suggestion_role.name
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:PutObject"
+        ]
+        Resource = [
+          "${aws_s3_bucket.species_list_bucket.arn}/suggestions"
         ]
       }
     ]
