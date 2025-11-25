@@ -91,6 +91,7 @@ export const suggestPresetList = async (event) => {
 }
 
 export const approvePresetList = async (event) => {
+  console.log("Handling approval event", event)
   const body = event.body;
   const listData = JSON.parse(body);
   if (!listData.suggestionId) {
