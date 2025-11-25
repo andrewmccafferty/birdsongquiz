@@ -90,7 +90,7 @@ resource "aws_cloudwatch_log_group" "get_recording" {
   retention_in_days = 30
 }
 
-resource "aws_lambda_function" suggest_preset_list" {
+resource "aws_lambda_function" "suggest_preset_list" {
   function_name = var.environment == "prod" ? "SuggestPresetList" : "SuggestPresetList-${var.environment}"
   timeout = 30
   s3_bucket = aws_s3_bucket.lambda_bucket.id
@@ -258,7 +258,7 @@ resource "aws_iam_role_policy" "add_suggestion_s3_access" {
           "s3:PutObject"
         ]
         Resource = [
-          "${aws_s3_bucket.species_list_bucket.arn}/suggestions"
+          "${aws_s3_bucket.species_list_bucket.arn}/suggestions/*"
         ]
       }
     ]
