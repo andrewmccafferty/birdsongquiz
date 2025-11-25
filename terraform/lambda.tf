@@ -108,11 +108,12 @@ resource "aws_lambda_function" "suggest_preset_list" {
   role = aws_iam_role.add_suggestion_role.arn
 }
 
-resource "aws_cloudwatch_log_group" "get_recording" {
-  name = var.environment == "prod" ? "/aws/lambda/GetRecording" : "/aws/lambda/GetRecording-${var.environment}"
+resource "aws_cloudwatch_log_group" "suggest_preset_list" {
+  name = var.environment == "prod" ? "/aws/lambda/SuggestPresetList" : "/aws/lambda/SuggestPresetList-${var.environment}"
 
   retention_in_days = 30
 }
+
 resource "aws_iam_role" "lambda_exec" {
   name = var.environment == "prod" ? "serverless_lambda" : "serverless_lambda_${var.environment}"
 
