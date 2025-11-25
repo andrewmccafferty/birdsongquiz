@@ -91,11 +91,10 @@ export const suggestPresetList = async (event) => {
 }
 
 export const approvePresetList = async (event) => {
-  const listData = JSON.parse(event);
-  if (!listData.suggestionId) {
+  if (!event.suggestionId) {
     throw new Error("suggestionId property not set in event body")
   }
 
-  const listPath = await approveSuggestedSpeciesList(listData.suggestionId)
+  const listPath = await approveSuggestedSpeciesList(event.suggestionId)
   return { listPath }
 }
