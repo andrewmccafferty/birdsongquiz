@@ -1,5 +1,5 @@
 import { getRandomRecordingForSpecies } from './recording.js';
-import { loadSpeciesListById, loadSpeciesListForRegion, getSpeciesPresetListsForRegion } from './species.js';
+import { loadSpeciesListById, loadSpeciesListForRegion, getSpeciesPresetListsForRegion, storeSuggestedSpeciesList } from './species.js';
 
 const response = (statusCode, responseBody, addCacheHeader = false) => {
   const headers = {
@@ -66,4 +66,26 @@ export const getSpeciesPresetLists = async (event) => {
   }
   console.log("Loading preset lists with region", region);
   return response(200, {"presets": await getSpeciesPresetListsForRegion(region) }, true);
+}
+
+export const suggestPresetList = async (event) => {
+  const body = event.body;
+  const presetListData = JSON.parse(body);
+  const region = presetListData.region;
+  const listName = presetListData.listName;
+  const speciesList = presetListData.speciesList;
+  if (!listName || listName.length === 0) {
+    return response(400, {"message": "Missing listName property from request body"})
+  }
+  if (!region || region.length === 0) {
+    return response(400, {"message": "Missing region property from request body"})
+  }
+  if (!speciesList || speciesList.length < 2) {
+    return response(400, {"message": "Species list not found in speciesList, or has fewer than 2 species"})
+  }
+
+  const suggestionId = await storeSuggestedSpeciesList(presetListData);
+  return response(200, {
+    "suggestionId": suggestionId
+  })
 }

@@ -1,9 +1,10 @@
 import {
   S3Client,
   GetObjectCommand,
+  PutObjectCommand
 } from "@aws-sdk/client-s3";
 import { listFilesForPrefix } from "./s3_utils.js";
-
+import { randomUUID } from "crypto"
 const getObjectFromS3AsString = async (bucketName, s3Key) => {
     const s3Client = new S3Client({region: "eu-west-2"});
     const { Body } = await s3Client.send(
@@ -52,4 +53,16 @@ const getSpeciesPresetListsForRegion = async (region) => {
     return mapped
 }
 
-export { loadSpeciesListForRegion, loadSpeciesListById, getSpeciesPresetListsForRegion }
+const storeSuggestedSpeciesList = async (presetListData) => {
+    const s3Client = new S3Client({region: "eu-west-2"});
+    const suggestionId = randomUUID();
+    await s3Client.send(
+        new PutObjectCommand({
+        Bucket: process.env.SPECIES_LIST_BUCKET_NAME,
+        Key: `suggestions/${suggestionId}.json`,
+        Body: JSON.stringify(presetListData)
+    }));
+    return suggestionId
+}
+
+export { loadSpeciesListForRegion, loadSpeciesListById, getSpeciesPresetListsForRegion, storeSuggestedSpeciesList }
