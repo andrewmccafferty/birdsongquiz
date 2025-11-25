@@ -1,7 +1,8 @@
 import {
   S3Client,
   GetObjectCommand,
-  PutObjectCommand
+  PutObjectCommand,
+  DeleteObjectCommand
 } from "@aws-sdk/client-s3";
 import { listFilesForPrefix } from "./s3_utils.js";
 import { randomUUID } from "crypto"
@@ -13,6 +14,15 @@ const getObjectFromS3AsString = async (bucketName, s3Key) => {
         Key: s3Key,
     }));
     return Body.transformToString()
+}
+
+const deleteObjectFromS3 = async (bucketName, s3Key) => {
+    const s3Client = new S3Client({region: "eu-west-2"});
+    const { Body } = await s3Client.send(
+    new DeleteObjectCommand({
+        Bucket: bucketName,
+        Key: s3Key,
+    }));
 }
 
 const loadSpeciesListFromS3Key = async (s3Key) => {
@@ -53,21 +63,27 @@ const getSpeciesPresetListsForRegion = async (region) => {
     return mapped
 }
 
+const suggestionS3Key = (suggestionId) => `suggestions/${suggestionId}.json`
+
 const storeSuggestedSpeciesList = async (presetListData) => {
     const s3Client = new S3Client({region: "eu-west-2"});
     const suggestionId = randomUUID();
     await s3Client.send(
         new PutObjectCommand({
         Bucket: process.env.SPECIES_LIST_BUCKET_NAME,
-        Key: `suggestions/${suggestionId}.json`,
+        Key: suggestionS3Key(suggestionId),
         Body: JSON.stringify(presetListData)
     }));
     return suggestionId
 }
 
 const loadSuggestion = async (suggestionId) => {
-    const suggestionRawData = await getObjectFromS3AsString(process.env.SPECIES_LIST_BUCKET_NAME, `suggestions/${suggestionId}.json`);
+    const suggestionRawData = await getObjectFromS3AsString(process.env.SPECIES_LIST_BUCKET_NAME, suggestionS3Key(suggestionId));
     return JSON.parse(suggestionRawData);
+}
+
+const deleteSuggestion = async (suggestionId) => {
+    await deleteObjectFromS3(process.env.SPECIES_LIST_BUCKET_NAME, suggestionS3Key(suggestionId))
 }
 
 const mapListNameToFileKey = (listName) => {
@@ -87,6 +103,8 @@ const approveSuggestedSpeciesList = async (suggestionId) => {
         Key: s3Key,
         Body: JSON.stringify(presetListData)
     }));
+    
+    await deleteSuggestion(suggestionId);
 
     return s3Key
 }
