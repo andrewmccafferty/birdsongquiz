@@ -1,5 +1,6 @@
 import { getRandomRecordingForSpecies } from './recording.js';
 import { loadSpeciesListById, loadSpeciesListForRegion, getSpeciesPresetListsForRegion, storeSuggestedSpeciesList, approveSuggestedSpeciesList } from './species.js';
+import { sendEmailWithSuggestionData } from './preset_suggestions.js'
 
 const response = (statusCode, responseBody, addCacheHeader = false) => {
   const headers = {
@@ -97,4 +98,12 @@ export const approvePresetList = async (event) => {
 
   const listPath = await approveSuggestedSpeciesList(event.suggestionId)
   return { listPath }
+}
+
+export const notifyPresetListSuggested = async (event) => {
+    const record = event.Records[0];
+    const bucket = record.s3.bucket.name;
+    const key = record.s3.object.key;
+    console.log("Handling event with bucket and key", bucket, key)
+    await sendEmailWithSuggestionData(bucket, key)
 }

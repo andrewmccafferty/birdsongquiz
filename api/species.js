@@ -6,6 +6,7 @@ import {
 } from "@aws-sdk/client-s3";
 import { listFilesForPrefix } from "./s3_utils.js";
 import { randomUUID } from "crypto"
+
 const getObjectFromS3AsString = async (bucketName, s3Key) => {
     const s3Client = new S3Client({region: "eu-west-2"});
     const { Body } = await s3Client.send(

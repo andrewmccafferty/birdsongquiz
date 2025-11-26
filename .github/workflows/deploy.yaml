@@ -63,7 +63,7 @@ jobs:
 
       - name: Terraform plan
         id: plan
-        run: terraform plan -no-color -input=false -var environment=$ENV_NAME -var acm_certificate_arn=${{ secrets.ACM_CERTIFICATE_ARN }} -var xc_api_key=${{ secrets.XC_API_KEY }}
+        run: terraform plan -no-color -input=false -var environment=$ENV_NAME -var acm_certificate_arn=${{ secrets.ACM_CERTIFICATE_ARN }} -var xc_api_key=${{ secrets.XC_API_KEY }} -var mailer_send_api_key=${{ secrets.MAILER_SEND_API_KEY }}
         continue-on-error: true
 
       - name: Terraform Plan Status
@@ -77,7 +77,8 @@ jobs:
             -input=false \
             -var environment=$ENV_NAME \
             -var acm_certificate_arn=${{ secrets.ACM_CERTIFICATE_ARN }} \
-            -var xc_api_key=${{ secrets.XC_API_KEY }}
+            -var xc_api_key=${{ secrets.XC_API_KEY }} \
+            -var mailer_send_api_key=${{ secrets.MAILER_SEND_API_KEY }} 
       - name: Feed all Terraform output parameters into environment variables
         run: |
           for key in $(terraform output -json | jq -r 'keys[]'); do
@@ -110,4 +111,4 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           terraform workspace select default
-          terraform plan -var environment=prod -var acm_certificate_arn=${{ secrets.ACM_CERTIFICATE_ARN }} -var xc_api_key=${{ secrets.XC_API_KEY }}
+          terraform plan -var environment=prod -var acm_certificate_arn=${{ secrets.ACM_CERTIFICATE_ARN }} -var xc_api_key=${{ secrets.XC_API_KEY }} -var mailer_send_api_key=${{ secrets.MAILER_SEND_API_KEY }}

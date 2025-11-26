@@ -20,3 +20,8 @@ variable "xc_api_key" {
   description = "Xeno-Canto API key"
   type = string
 }
+
+variable "mailer_send_api_key" {
+  description = "MailerSend API key"
+  type = string
+}

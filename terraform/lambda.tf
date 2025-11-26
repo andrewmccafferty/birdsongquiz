@@ -114,6 +114,47 @@ resource "aws_cloudwatch_log_group" "suggest_preset_list" {
   retention_in_days = 30
 }
 
+resource "aws_lambda_function" "notify_preset_list_suggested" {
+  function_name = var.environment == "prod" ? "NotifyPresetListSuggested" : "NotifyPresetListSuggested-${var.environment}"
+  timeout = 30
+  s3_bucket = aws_s3_bucket.lambda_bucket.id
+  s3_key    = aws_s3_object.lambda_birdsongquiz.key
+  environment {
+    variables = {
+      SPECIES_LIST_BUCKET_NAME = aws_s3_bucket.species_list_bucket.id
+      MAILER_SEND_API_KEY = var.mailer_send_api_key
+    }
+  }
+  runtime = "nodejs20.x"
+  handler = "handlers.notifyPresetListSuggested"
+
+  source_code_hash = data.archive_file.lambda_birdsongquiz.output_base64sha256
+
+  role = aws_iam_role.notify_preset_list_suggested_role.arn
+}
+
+resource "aws_lambda_permission" "allow_notify_lambda_s3_access" {
+  statement_id  = "AllowExecutionFromS3"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.notify_preset_list_suggested.function_name
+  principal     = "s3.amazonaws.com"
+  source_arn    = aws_s3_bucket.species_list_bucket.arn
+}
+
+resource "aws_s3_bucket_notification" "species_list_notification" {
+  bucket = aws_s3_bucket.species_list_bucket.id
+
+  lambda_function {
+    lambda_function_arn = aws_lambda_function.notify_preset_list_suggested.arn
+    events              = ["s3:ObjectCreated:*"]
+    filter_prefix       = "suggestions/"
+  }
+
+  depends_on = [
+    aws_lambda_permission.allow_notify_lambda_s3_access
+  ]
+}
+
 resource "aws_lambda_function" "approve_preset_list" {
   function_name = var.environment == "prod" ? "ApprovePresetList" : "ApprovePresetList-${var.environment}"
   timeout = 30
@@ -333,6 +374,48 @@ resource "aws_iam_role_policy" "approve_preset_list_s3_access" {
         Action = [
           "s3:GetObject",
           "s3:DeleteObject"
+        ]
+        Resource = [
+          "${aws_s3_bucket.species_list_bucket.arn}/suggestions/*"
+        ]
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role" "notify_preset_list_suggested_role" {
+  name = var.environment == "prod" ? "notify_preset_list_suggested" : "notify_preset_list_suggested_${var.environment}"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Action = "sts:AssumeRole"
+      Effect = "Allow"
+      Sid    = ""
+      Principal = {
+        Service = "lambda.amazonaws.com"
+      }
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "notify_preset_list_suggested_attach_policy" {
+  role       = aws_iam_role.notify_preset_list_suggested_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+}
+
+resource "aws_iam_role_policy" "notify_preset_list_suggested_role_s3_access" {
+  name = "AllowS3AccessToMyBucket"
+  role = aws_iam_role.notify_preset_list_suggested_role.name
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:GetObject"
         ]
         Resource = [
           "${aws_s3_bucket.species_list_bucket.arn}/suggestions/*"

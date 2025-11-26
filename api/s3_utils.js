@@ -37,4 +37,14 @@ async function listFilesForPrefix(bucketName, prefix) {
   }
 }
 
-export { listFilesForPrefix }
+const getObjectFromS3AsString = async (bucketName, s3Key) => {
+    const s3Client = new S3Client({region: "eu-west-2"});
+    const { Body } = await s3Client.send(
+    new GetObjectCommand({
+        Bucket: bucketName,
+        Key: s3Key,
+    }));
+    return Body.transformToString()
+}
+
+export { listFilesForPrefix, getObjectFromS3AsString }
