@@ -3,7 +3,7 @@ import { sendEmail } from './email.js';
 
 const sendEmailWithSuggestionData = async (bucketName, suggestionS3Key) => {
     console.log("Retrieving suggestion for bucketName, suggestionS3Key", bucketName, suggestionS3Key);
-    const suggestionRawData = await getObjectFromS3AsString(bucketName, suggestionS3Key(suggestionId));
+    const suggestionRawData = await getObjectFromS3AsString(bucketName, suggestionS3Key);
     console.log("Suggestion retrieved, sending email");
     
     await sendEmail({
