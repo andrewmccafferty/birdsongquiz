@@ -24,9 +24,4 @@ const sendEmailWithSuggestionData = async (bucketName, suggestionS3Key) => {
     console.log("Email sent")
 }
 
-sendEmailWithSuggestionData("allow-user-preset-suggestions-species-list-bucket", "suggestions/ea6ef48d-2ba2-44d5-b6d1-ed6d06b32712.json")
-.then(() => {
-    console.log("Finished")
-})
-
 export { sendEmailWithSuggestionData }
