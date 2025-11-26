@@ -18,7 +18,7 @@ class HeadToHeadSpeciesSelector extends Component {
       soundType: "any",
     };
   }
-
+  
   loadFrontendConfiguration = async () => {
     try {
       const response = await fetch("/frontend-configuration.json");
@@ -26,12 +26,7 @@ class HeadToHeadSpeciesSelector extends Component {
       
       if (response.status !== 200) throw Error(body.message);
       console.log("Got frontend config", frontendConfiguration);
-      this.setState((prevState, props) => {
-            return {
-                ...props,
-                frontendConfiguration: frontendConfiguration
-            }
-        });
+      this.frontendConfiguration = frontendConfiguration
     } catch (e) {
       console.error("Got error while trying to get frontend configuration", e);
     }
@@ -143,7 +138,7 @@ class HeadToHeadSpeciesSelector extends Component {
             }
         });
     console.log("frontend config", this.state.frontendConfiguration);
-    callApi(`presets/${country}?v=${this.state.frontendConfiguration ? this.state.frontendConfiguration.presetsVersion : "default"}`)
+    callApi(`presets/${country}?v=${this.frontendConfiguration ? this.frontendConfiguration.presetsVersion : "default"}`)
       .catch((err) => {
         this.setState((prevState, props) => {
             return {
