@@ -1,6 +1,6 @@
 import * as https  from 'https';
 
-const MAILER_SEND_URL = "https://api.mailersend.com/v1";
+const MAILER_SEND_URL = "https://api.mailersend.com/v1/email";
 
 const sendEmail = (sendEmailRequest) => {
     return new Promise((resolve, reject) => {
@@ -31,11 +31,7 @@ const sendEmail = (sendEmailRequest) => {
 
             response.on('end', () => {
                 if (response.statusCode >= 200 && response.statusCode < 300) {
-                    try {
-                        resolve(JSON.parse(data));
-                    } catch (error) {
-                        reject(new Error(`Error parsing JSON: ${error.message}`));
-                    }
+                    resolve();
                 } else {
                     reject(
                         new Error(
