@@ -25,3 +25,11 @@ variable "mailer_send_api_key" {
   description = "MailerSend API key"
   type = string
 }
+
+variable "notifications_from_email_address" {
+  description = "The email address notifications will be sent from"
+}
+
+variable "notifications_to_email_address" {
+  description = "The email address notifications will be sent to"
+}

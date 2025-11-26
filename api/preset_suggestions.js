@@ -8,12 +8,12 @@ const sendEmailWithSuggestionData = async (bucketName, suggestionS3Key) => {
     
     await sendEmail({
         "from": {
-            "email": "info@birdsongquiz.co.uk",
+            "email": process.env.NOTIFICATIONS_FROM_EMAIL_ADDRESS,
             "name": "Website visitor"
         },
         "to": [
             {
-            "email": "andymccafferty@gmail.com",
+            "email": process.env.NOTIFICATIONS_TO_EMAIL_ADDRESS,
             "name": "Me"
             }
         ],
