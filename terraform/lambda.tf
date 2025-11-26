@@ -165,6 +165,7 @@ resource "aws_lambda_function" "approve_preset_list" {
   environment {
     variables = {
       SPECIES_LIST_BUCKET_NAME = aws_s3_bucket.species_list_bucket.id
+      FRONTEND_BUCKET_NAME = aws_s3_bucket.frontend_bucket.arn.id
     }
   }
   runtime = "nodejs20.x"
@@ -369,6 +370,15 @@ resource "aws_iam_role_policy" "approve_preset_list_s3_access" {
         ]
         Resource = [
           "${aws_s3_bucket.species_list_bucket.arn}/presets/*"
+        ]
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:PutObject"
+        ]
+        Resource = [
+          "${aws_s3_bucket.frontend_bucket.arn}/frontend-configuration.json"
         ]
       },
       {

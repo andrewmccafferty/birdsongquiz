@@ -87,6 +87,18 @@ const deleteSuggestion = async (suggestionId) => {
     await deleteObjectFromS3(process.env.SPECIES_LIST_BUCKET_NAME, suggestionS3Key(suggestionId))
 }
 
+const updatePresetListVersionToCurrentTimestamp = async () => {
+    const s3Client = new S3Client({region: "eu-west-2"});
+    await s3Client.send(
+        new PutObjectCommand({
+        Bucket: process.env.FRONTEND_BUCKET_NAME,
+        Key: "frontend-configuration.json",
+        Body: JSON.stringify({
+            "presetsVersion": `${Date.now()}`
+        })
+    }));
+}
+
 const mapListNameToFileKey = (listName) => {
     return listName.split(' ').join('-').toLowerCase();
 }
@@ -106,6 +118,7 @@ const approveSuggestedSpeciesList = async (suggestionId) => {
     }));
     
     await deleteSuggestion(suggestionId);
+    await updatePresetListVersionToCurrentTimestamp();
 
     return s3Key
 }
