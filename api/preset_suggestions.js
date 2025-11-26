@@ -1,22 +1,26 @@
 import { getObjectFromS3AsString } from './s3_utils.js'
-import { MailerSend, EmailParams, Sender, Recipient } from "mailersend";
+import { sendEmail } from './email.js';
 
 const sendEmailWithSuggestionData = async (bucketName, suggestionS3Key) => {
     console.log("Retrieving suggestion for bucketName, suggestionS3Key", bucketName, suggestionS3Key);
     const suggestionRawData = await getObjectFromS3AsString(bucketName, suggestionS3Key(suggestionId));
-    console.log("Suggestion retrieved, sending email")
-    const mailerSend = new MailerSend({
-        apiKey: process.env.MAILER_SEND_API_KEY,
-    });
-
-    const emailParams = new EmailParams()
-        .setFrom(new Sender("info@birdsongquiz.co.uk", "Test sender"))
-        .setTo([new Recipient("andymccafferty@gmail.com", "Test receipient")])
-        .setSubject("New preset list suggestion")
-        .setHtml(`Somebody has suggested the list ${suggestionRawData}`)
-        .setText(`Somebody has suggested the list ${suggestionRawData}`);
-
-    await mailerSend.email.send(emailParams);
+    console.log("Suggestion retrieved, sending email");
+    
+    await sendEmail({
+        "from": {
+            "email": "info@birdsongquiz.co.uk",
+            "name": "Website visitor"
+        },
+        "to": [
+            {
+            "email": "andymccafferty@gmail.com",
+            "name": "Me"
+            }
+        ],
+        "subject": "New preset list suggestion",
+        "text": `Somebody has suggested the list ${suggestionRawData}`,
+        "html": `Somebody has suggested the list ${suggestionRawData}`
+    })
     console.log("Email sent")
 }
 
