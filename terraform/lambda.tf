@@ -165,7 +165,7 @@ resource "aws_lambda_function" "approve_preset_list" {
   environment {
     variables = {
       SPECIES_LIST_BUCKET_NAME = aws_s3_bucket.species_list_bucket.id
-      FRONTEND_BUCKET_NAME = aws_s3_bucket.frontend_bucket.arn.id
+      FRONTEND_BUCKET_NAME = aws_s3_bucket.frontend_bucket.id
     }
   }
   runtime = "nodejs20.x"
