@@ -3,6 +3,19 @@ resource "aws_apigatewayv2_api" "lambda" {
   protocol_type = "HTTP"
   cors_configuration {
     allow_origins = ["*"]
+    allow_methods = [
+      "GET",
+      "POST",
+      "OPTIONS"
+    ]
+
+    allow_headers = [
+      "Content-Type",
+      "X-Amz-Date",
+      "Authorization",
+      "X-Api-Key",
+      "X-Amz-Security-Token"
+    ]
   }
 }
 
@@ -33,6 +46,7 @@ resource "aws_apigatewayv2_stage" "lambda" {
     )
   }
 }
+
 
 resource "aws_apigatewayv2_integration" "get_recording" {
   api_id = aws_apigatewayv2_api.lambda.id
