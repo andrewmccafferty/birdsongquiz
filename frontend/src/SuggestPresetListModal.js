@@ -1,7 +1,6 @@
 import React from "react";
 import "./Modal.css";
 import { postApi } from "./api.js";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 class SuggestPresetListModal extends React.Component {
   constructor(props) {
