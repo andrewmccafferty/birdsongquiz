@@ -365,10 +365,18 @@ resource "aws_iam_role_policy" "approve_preset_list_s3_access" {
     Version = "2012-10-17"
     Statement = [
       {
+        "Effect": "Allow",
+        "Action": [
+            "s3:ListBucket",
+            "s3:GetBucketLocation"
+          ],
+        "Resource": "${aws_s3_bucket.species_list_bucket.arn}"
+      },
+      {
         Effect = "Allow"
         Action = [
           "s3:PutObject",
-          "s3:ListObject"
+          "s3:HeadObject"
         ]
         Resource = [
           "${aws_s3_bucket.species_list_bucket.arn}/presets/*"
