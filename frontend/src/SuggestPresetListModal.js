@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Modal.css";
 import { postApi } from "./api.js";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
@@ -21,6 +21,7 @@ class SuggestPresetListModal extends React.Component {
   }
 
   submitList() {
+    this.setState({ submitting: true });
     postApi("presets/suggestion", {
       region: this.props.country,
       listName: this.state.listName,
@@ -28,7 +29,7 @@ class SuggestPresetListModal extends React.Component {
     })
       .then((result) => {
         console.log("Got result", result);
-        this.setState({ submitted: true });
+        this.setState({ submitted: true, submitting: false });
       })
       .catch(() => {
         alert("Something went wrong submitting your list. Try again.");
@@ -37,6 +38,10 @@ class SuggestPresetListModal extends React.Component {
 
   isReadyToSubmit() {
     return this.state.listName && this.state.listName.length > 5
+  }
+  
+  shouldShowSubmittingSpinner() {
+    return this.state.submitting
   }
 
   render() {
@@ -67,6 +72,11 @@ class SuggestPresetListModal extends React.Component {
           )}
           {!this.state.submitted && (
             <div>
+              {this.shouldShowSubmittingSpinner() && (
+                <div className="spinner-overlay">
+                  <div className="spinner"></div>
+                </div>
+              )}
               <p>
                 Like this list of species? Want to suggest it as a preset for
                 others to use?
