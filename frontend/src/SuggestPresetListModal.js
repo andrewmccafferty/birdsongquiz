@@ -1,50 +1,81 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Modal.css";
+import { postApi } from "./api.js";
 
-const SuggestPresetListModal = ({ isOpen, onClose, speciesList, country }) => {
-  if (!isOpen) return null;
-
-  const handleOverlayClick = (e) => {
-    if (e.target.className === "modal") {
-      onClose();
-    }
-  };
-
-  const submitList = () => {
-    const input = document.getElementById("list-name");
-    const listName = input ? input.value.trim() : "";
-    console.log(listName);
-    onClose();
+class SuggestPresetListModal extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      listName: ""
+    };
+    this.handleOverlayClick = this.handleOverlayClick.bind(this);
+    this.submitList = this.submitList.bind(this);
   }
 
-  return (
-    <div className="modal" onClick={handleOverlayClick}>
-            <div className="modal-box">
-                <span className="close-btn" onClick={onClose}>
-                    &times;
-                </span>
-                <h2>Suggest species list</h2>
-                <p>Like this list of species? Want to suggest it as a preset for others to use?</p>
-                <div>Species:</div>
-                {speciesList && speciesList.length ? (
-                    <ul>
-                        {speciesList.map((entry, i) => (
-                            <li key={entry.Species || i}>{entry.Species}</li>
-                        ))}
-                    </ul>
-                ) : (
-                    <p>No species available.</p>
-                )}
-                <div>Region: {country}</div>
-                <div className="input-container">
-                  <label for="list-name">Give your list a name:</label><input type="text" id="list-name"/>
-                </div>
-                <div>
-                  <button onClick={submitList}>Submit</button>
-                </div>
-            </div>
+  handleOverlayClick(e) {
+    if (e.target.className === "modal") {
+      this.props.onClose();
+    }
+  }
+
+  submitList() {
+    postApi("presets/suggestion", {
+    "region": this.props.country,
+    "listName": this.state.listName,
+    "speciesList": this.props.speciesList
+    }).then((result) => {
+      console.log("Got result", result);
+      this.props.onClose();
+    }).catch(() => {
+      alert("Something went wrong submitting your list. Try again.");
+    })
+    
+  }
+
+  render() {
+    const { isOpen, onClose, speciesList, country } = this.props;
+    const { listName } = this.state;
+
+    if (!isOpen) return null;
+
+    return (
+      <div className="modal" onClick={this.handleOverlayClick}>
+        <div className="modal-box">
+          <span className="close-btn" onClick={onClose}>&times;</span>
+
+          <h2>Suggest species list</h2>
+          <p>Like this list of species? Want to suggest it as a preset for others to use?</p>
+
+          <div>Species:</div>
+          {speciesList && speciesList.length ? (
+            <ul>
+              {speciesList.map((entry, i) => (
+                <li key={entry.Species || i}>{entry.Species}</li>
+              ))}
+            </ul>
+          ) : (
+            <p>No species available.</p>
+          )}
+
+          <div>Region: {country}</div>
+
+          <div className="input-container">
+            <label htmlFor="list-name">Give your list a name:</label>
+            <input
+              type="text"
+              id="list-name"
+              value={listName}
+              onChange={(e) => this.setState({ listName: e.target.value })}
+            />
+          </div>
+
+          <div>
+            <button onClick={this.submitList}>Submit</button>
+          </div>
         </div>
-  );
-};
+      </div>
+    );
+  }
+}
 
 export default SuggestPresetListModal;
