@@ -109,7 +109,7 @@ const approveSuggestedSpeciesList = async (suggestionId) => {
     console.log("Loaded suggestion", suggestion);
     const region = suggestion.region;
     const s3Key = `presets/${region.toLowerCase()}/${mapListNameToFileKey(suggestion.listName)}.json`;
-    if (s3KeyExists(process.env.SPECIES_LIST_BUCKET_NAME, s3Key)) {
+    if (await s3KeyExists(process.env.SPECIES_LIST_BUCKET_NAME, s3Key)) {
         throw new Error(`Preset already exists with the key ${s3Key}`)
     }
     const s3Client = new S3Client({region: "eu-west-2"});
