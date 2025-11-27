@@ -58,7 +58,8 @@ class HeadToHeadSpeciesSelector extends Component {
     }
     this.props.onSelectionComplete(
       this.state.selectedSpeciesList,
-      this.state.soundType
+      this.state.soundType,
+      this.state.country
     );
   };
   onSoundTypeChanged = (soundType) => {

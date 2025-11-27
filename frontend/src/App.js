@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import HeadToHeadSpeciesSelector from './HeadToHeadSpeciesSelector';
 import GameControls from './GameControls';
 import GameExplanationModal from './GameExplanationModal';
+import SuggestPresetListModal from './SuggestPresetListModal';
 import CopyPermalinkButton from './CopyPermalinkButton';
 import { faArrowsRotate, faInfoCircle, faClipboardCheck } from "@fortawesome/free-solid-svg-icons";
 import './App.css';
@@ -32,12 +33,13 @@ class App extends Component {
         }
     }
 
-    onHeadToHeadSpeciesSelected = (headToHeadSpeciesList, soundType) => {
+    onHeadToHeadSpeciesSelected = (headToHeadSpeciesList, soundType, country) => {
         this.setState((prevState, props) => {
             return {
                 ...props,
                 headToHeadSpeciesList,
-                soundType
+                soundType,
+                country
             }
         })
     }
@@ -67,6 +69,24 @@ class App extends Component {
             }
         })
     }
+    
+    openSuggestPresetListModal = () => {
+        this.setState((prevState, props) => {
+            return {
+                ...props,
+                suggestPresetListModalOpen: true
+            }
+        })
+    }
+
+    closeSuggestPresetListModal = () => {
+        this.setState((prevState, props) => {
+            return {
+                ...props,
+                suggestPresetListModalOpen: false
+            }
+        })
+    }
 
     openGameExplanation = () => { 
         this.setState((prevState, props) => {
@@ -84,7 +104,7 @@ class App extends Component {
             <FontAwesomeIcon className="info-link" icon={faInfoCircle} onClick={() => this.openGameExplanation()}/>
             </div>
             {(!this.state.headToHeadSpeciesList || this.state.headToHeadSpeciesList.length === 0) &&
-                <HeadToHeadSpeciesSelector onSelectionComplete={(headToHeadSpeciesList, soundType) => this.onHeadToHeadSpeciesSelected(headToHeadSpeciesList, soundType)} />
+                <HeadToHeadSpeciesSelector onSelectionComplete={(headToHeadSpeciesList, soundType, country) => this.onHeadToHeadSpeciesSelected(headToHeadSpeciesList, soundType, country)} />
             }
             {
                 this.gameActive() && (
@@ -99,7 +119,8 @@ class App extends Component {
                             <FontAwesomeIcon icon={faArrowsRotate} />
                         </button>
                         <CopyPermalinkButton permalink={this.headToHeadSharingLink()} />
-                        <button className="small-button">
+                        <button className="small-button"
+                        onClick={ () => this.openSuggestPresetListModal()}>
                             <FontAwesomeIcon icon={faClipboardCheck}/>
                         </button>
                     </div>
@@ -107,7 +128,13 @@ class App extends Component {
             }
             {
                 this.gameActive() &&
-                <GameControls headToHeadSpecies={this.state.headToHeadSpeciesList} soundType={this.state.soundType} />
+                <div>
+                    <GameControls headToHeadSpecies={this.state.headToHeadSpeciesList} soundType={this.state.soundType} />
+                    <SuggestPresetListModal isOpen={this.state.suggestPresetListModalOpen} 
+                        onClose={() => this.closeSuggestPresetListModal() } 
+                        speciesList={this.state.headToHeadSpeciesList}
+                        country={this.state.country}/>
+                </div>
             }
             <GameExplanationModal isOpen={this.state.gameExplanationOpen} onClose={() => this.closeGameExplanation()} />
 
