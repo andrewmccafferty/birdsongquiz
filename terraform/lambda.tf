@@ -121,6 +121,7 @@ resource "aws_lambda_function" "notify_preset_list_suggested" {
   s3_key    = aws_s3_object.lambda_birdsongquiz.key
   environment {
     variables = {
+      SHOULD_SEND_SUGGESTION_NOTIFICATION_EMAILS = var.environment == "prod" ? true : null
       SPECIES_LIST_BUCKET_NAME = aws_s3_bucket.species_list_bucket.id
       MAILER_SEND_API_KEY = var.mailer_send_api_key
       NOTIFICATIONS_FROM_EMAIL_ADDRESS = var.notifications_from_email_address
