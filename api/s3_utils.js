@@ -1,4 +1,4 @@
-import { S3Client, ListObjectsV2Command, GetObjectCommand } from "@aws-sdk/client-s3";
+import { S3Client, ListObjectsV2Command, GetObjectCommand, HeadObjectCommand } from "@aws-sdk/client-s3";
 
 const s3 = new S3Client({ region: "eu-west-2" });
 
@@ -47,4 +47,17 @@ const getObjectFromS3AsString = async (bucketName, s3Key) => {
     return Body.transformToString()
 }
 
-export { listFilesForPrefix, getObjectFromS3AsString }
+async function s3KeyExists(bucket, key) {
+  try {
+    await s3.send(new HeadObjectCommand({ Bucket: bucket, Key: key }));
+    return true;
+  } catch (err) {
+    if (err?.$metadata?.httpStatusCode === 404) {
+      return false;
+    }
+    // If it's some other error, rethrow to avoid hiding real problems
+    throw err;
+  }
+}
+
+export { listFilesForPrefix, getObjectFromS3AsString, s3KeyExists }

@@ -367,7 +367,8 @@ resource "aws_iam_role_policy" "approve_preset_list_s3_access" {
       {
         Effect = "Allow"
         Action = [
-          "s3:PutObject"
+          "s3:PutObject",
+          "s3:ListObject"
         ]
         Resource = [
           "${aws_s3_bucket.species_list_bucket.arn}/presets/*"

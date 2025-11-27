@@ -2,9 +2,10 @@ import {
   S3Client,
   GetObjectCommand,
   PutObjectCommand,
-  DeleteObjectCommand
+  DeleteObjectCommand,
+  HeadObjectCommand
 } from "@aws-sdk/client-s3";
-import { listFilesForPrefix } from "./s3_utils.js";
+import { listFilesForPrefix, s3KeyExists } from "./s3_utils.js";
 import { randomUUID } from "crypto"
 
 const getObjectFromS3AsString = async (bucketName, s3Key) => {
@@ -108,6 +109,9 @@ const approveSuggestedSpeciesList = async (suggestionId) => {
     console.log("Loaded suggestion", suggestion);
     const region = suggestion.region;
     const s3Key = `presets/${region.toLowerCase()}/${mapListNameToFileKey(suggestion.listName)}.json`;
+    if (s3KeyExists(process.env.SPECIES_LIST_BUCKET_NAME, s3Key)) {
+        throw new Error(`Preset already exists with the key ${s3Key}`)
+    }
     const s3Client = new S3Client({region: "eu-west-2"});
     const presetListData = suggestion.speciesList;
     await s3Client.send(
