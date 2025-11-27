@@ -5,90 +5,172 @@ import "react-bootstrap-typeahead/css/Typeahead.bs5.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { callApi } from "./api.js";
-const speciesList = require("./species_list.js");
 import PresetSpeciesSelector from "./PresetSpeciesSelector.js";
-import { presetListsForCountry } from "./presets.js";
 import CountrySelector from "./CountrySelector.js";
 class HeadToHeadSpeciesSelector extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      frontendConfiguration: null,
       selectedSpeciesList: [],
-      speciesList: speciesList,
+      speciesList: [],
       typeaheadRef: null,
       soundType: "any",
     };
   }
+  
+  loadFrontendConfiguration = async () => {
+    try {
+      const response = await fetch("/frontend-configuration.json");
+      const frontendConfiguration = await response.json();
+      
+      if (response.status !== 200) throw Error(body.message);
+      console.log("Got frontend config", frontendConfiguration);
+      this.frontendConfiguration = frontendConfiguration
+    } catch (e) {
+      console.error("Got error while trying to get frontend configuration", e);
+    }
+    
+  }
+
   componentDidMount() {
-    this.loadPresetListsForCountry("GB");
+    this.loadFrontendConfiguration().then(() => {
+      this.onCountryChanged("GB");
+    })
   }
 
   onSelectionComplete = () => {
     if (this.state.selectedSpeciesList.length < 2) {
-      this.setState({ showValidationMessage: true });
+      this.setState((prevState, props) => {
+            return {
+                ...props,
+                showValidationMessage: true
+            }
+        });
       return;
     } else {
-      this.setState({ showValidationMessage: false });
+      this.setState((prevState, props) => {
+            return {
+                ...props,
+                showValidationMessage: false
+            }
+        });
     }
     this.props.onSelectionComplete(
       this.state.selectedSpeciesList,
-      this.state.soundType
+      this.state.soundType,
+      this.state.country
     );
   };
   onSoundTypeChanged = (soundType) => {
     this.setState({ soundType: soundType });
   };
   loadSpeciesForCountry = (country) => {
-    this.setState({
-      speciesListLoading: true,
-      errorLoadingSpecies: false,
-    });
+    this.setState((prevState, props) => {
+            return {
+                ...props,
+                speciesListLoading: true,
+                errorLoadingSpecies: false,
+            }
+        });
     callApi(`species?region=${country}`)
       .catch((err) => {
-        this.setState({
-          speciesListLoading: false,
-          errorLoadingSpecies: true,
+        this.setState((prevState, props) => {
+            return {
+                ...props,
+                speciesListLoading: false,
+                errorLoadingSpecies: true,
+            }
         });
       })
       .then((result) => {
-        this.setState({
-          speciesList: result.species,
-          speciesListLoading: false,
+        this.setState((prevState, props) => {
+            return {
+                ...props,
+                speciesList: result.species,
+                speciesListLoading: false,
+            }
         });
       });
   };
   loadSpeciesForListId = (listId) => {
     if (!listId || listId == "") {
-      this.setState({ selectedSpeciesList: [] });
+      this.setState((prevState, props) => {
+            return {
+                ...props,
+                selectedSpeciesList: []
+            }
+        });
       return;
     }
-    this.setState({
-      loadingPresetList: true,
-      errorLoadingPresetList: false,
-    });
+    this.setState((prevState, props) => {
+            return {
+                ...props,
+                loadingPresetList: true,
+                errorLoadingPresetList: false,
+            }
+        });
     callApi(`species?listId=${listId}`)
       .catch((err) => {
-        this.setState({
-          loadingPresetList: false,
-          errorLoadingPresetList: true,
+        this.setState((prevState, props) => {
+            return {
+                ...props,
+                loadingPresetList: false,
+                errorLoadingPresetList: true,
+            }
         });
       })
       .then((result) => {
-        this.setState({
-          selectedSpeciesList: result.species,
-          loadingPresetList: false,
+        this.setState((prevState, props) => {
+            return {
+                ...props,
+                selectedSpeciesList: result.species,
+                loadingPresetList: false,
+            }
         });
       });
   };
   loadPresetListsForCountry = (country) => {
-    const presetLists = presetListsForCountry(country);
-    this.setState({ presetLists });
+    this.setState((prevState, props) => {
+            return {
+                ...props,
+                presetListsLoading: true,
+                errorLoadingPresetLists: false,
+            }
+        });
+    console.log("frontend config", this.state.frontendConfiguration);
+    callApi(`presets/${country}?v=${this.frontendConfiguration ? this.frontendConfiguration.presetsVersion : "default"}`)
+      .catch((err) => {
+        this.setState((prevState, props) => {
+            return {
+                ...props,
+                presetListsLoading: false,
+                errorLoadingPresetLists: true,
+            }
+        });
+      })
+      .then((result) => {
+        this.setState((prevState, props) => {
+            return {
+                ...props,
+                presetLists: result.presets,
+                presetListsLoading: false,
+            }
+        });
+      });
   };
+
+  
   onCountryChanged = (country) => {
     if (this.state.country == country) {
       return;
     }
-    this.setState({ country: country });
+    this.setState((prevState, props) => {
+            return {
+                ...props,
+                country: country
+            }
+        });
     this.loadSpeciesForCountry(country);
     this.loadPresetListsForCountry(country);
   };
@@ -96,6 +178,10 @@ class HeadToHeadSpeciesSelector extends Component {
   shouldShowLoaderInSpeciesSelector = () => {
     return this.state.loadingPresetList || this.state.speciesListLoading;
   };
+
+  shouldShowLoaderInPresetListsSelector = () => {
+    return this.state.presetListsLoading
+  }
 
   render() {
     return (
@@ -139,7 +225,7 @@ class HeadToHeadSpeciesSelector extends Component {
             Once you're happy with your list, press the blue button to start the
             quiz.
           </div>
-          {this.state.presetLists && (
+          {this.state.presetLists && this.state.presetLists.length > 0 && (
             <div className="input-container">
               <PresetSpeciesSelector
                 presetLists={this.state.presetLists}
@@ -147,6 +233,11 @@ class HeadToHeadSpeciesSelector extends Component {
                   this.loadSpeciesForListId(listId);
                 }}
               ></PresetSpeciesSelector>
+              {this.shouldShowLoaderInPresetListsSelector() && (
+                <div className="spinner-overlay">
+                  <div className="spinner"></div>
+                </div>
+              )}
             </div>
           )}
           <div className="input-container">

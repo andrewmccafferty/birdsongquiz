@@ -118,6 +118,14 @@ body {
   background: #c9302c;
 }
 
+.small-button {
+  padding: 0.4rem 0.6rem;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+}
+
 .info-link {
   margin: 5px;
   cursor: pointer;
@@ -208,6 +216,13 @@ body {
   justify-content: center;
 }
 
+.action-button:disabled {
+  background: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
 .action-button:hover {
   background: #005bb5;
 }
@@ -274,3 +289,24 @@ body {
     to { transform: rotate(360deg); }
 }
 
+.info-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  background: #e9f4ff;
+  border: 1px solid #c9e4ff;
+  padding: 1rem 1.2rem;
+  border-radius: 12px;
+  font-family: sans-serif;
+  max-width: 500px;
+}
+
+.info-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.info-text {
+  color: #336;
+  font-size: 0.95rem;
+}

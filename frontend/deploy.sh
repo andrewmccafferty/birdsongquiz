@@ -28,6 +28,7 @@ API_ROOT="$API_ROOT" npm run build
 # 3. Compute MD5 of bundle.js
 BUNDLE_PATH="dist/bundle.js"
 INDEX_PATH="dist/index.html"
+FRONTEND_CONFIGURATION_LOCAL_PATH="frontend-configuration.json"
 
 if [ ! -f "$BUNDLE_PATH" ]; then
   echo "Error: $BUNDLE_PATH not found after build."
@@ -52,4 +53,18 @@ echo "📰 Uploading $INDEX_PATH to s3://$FRONTEND_BUCKET/index.html"
 aws s3 cp "$INDEX_PATH" "s3://$FRONTEND_BUCKET/index.html" \
   --content-type "text/html"
 
+if ! aws s3api head-object --bucket "$FRONTEND_BUCKET" --key "frontend-configuration.json" >/dev/null 2>&1; then
+  echo "frontend-configuration.json not found — uploading..."
+
+  aws s3api put-object \
+    --bucket "$FRONTEND_BUCKET" \
+    --key "frontend-configuration.json" \
+    --body "$FRONTEND_CONFIGURATION_LOCAL_PATH" \
+    --content-type "application/json" \
+    --content-md5 "$(openssl md5 -binary "$FRONTEND_CONFIGURATION_LOCAL_PATH" | base64)"
+
+  echo "Upload complete."
+else
+  echo "frontend-configuration.json already exists — skipping upload."
+fi
 echo "Upload complete."

@@ -1,5 +1,6 @@
 import { getRandomRecordingForSpecies } from './recording.js';
-import { loadSpeciesListById, loadSpeciesListForRegion } from './species.js';
+import { loadSpeciesListById, loadSpeciesListForRegion, getSpeciesPresetListsForRegion, storeSuggestedSpeciesList, approveSuggestedSpeciesList } from './species.js';
+import { sendEmailWithSuggestionData } from './preset_suggestions.js'
 
 const response = (statusCode, responseBody, addCacheHeader = false) => {
   const headers = {
@@ -47,7 +48,7 @@ export const getSpeciesList = async (event) => {
   }
 
   if (listId) {
-    const species_list = await loadSpeciesListById(listId);
+    const species_list = await loadSpeciesListById(listId.toLowerCase());
     if (!species_list) {
       return response(404, {"message": "No species list found for given id"});
     }
@@ -55,4 +56,54 @@ export const getSpeciesList = async (event) => {
   }
 
   return response(400, {"message": "Must supply either 'region' or 'listId' parameters"})
+}
+
+export const getSpeciesPresetLists = async (event) => {
+  console.log("Entering preset lists handler with event", event);
+  const region = event.pathParameters?.region;
+
+  if (!region) {
+    return response(400, {"message": "Missing required path parameter 'region'"});
+  }
+  console.log("Loading preset lists with region", region);
+  return response(200, {"presets": await getSpeciesPresetListsForRegion(region) }, true);
+}
+
+export const suggestPresetList = async (event) => {
+  const body = event.body;
+  const presetListData = JSON.parse(body);
+  const region = presetListData.region;
+  const listName = presetListData.listName;
+  const speciesList = presetListData.speciesList;
+  if (!listName || listName.length === 0) {
+    return response(400, {"message": "Missing listName property from request body"})
+  }
+  if (!region || region.length === 0) {
+    return response(400, {"message": "Missing region property from request body"})
+  }
+  if (!speciesList || speciesList.length < 2) {
+    return response(400, {"message": "Species list not found in speciesList, or has fewer than 2 species"})
+  }
+
+  const suggestionId = await storeSuggestedSpeciesList(presetListData);
+  return response(200, {
+    "suggestionId": suggestionId
+  })
+}
+
+export const approvePresetList = async (event) => {
+  if (!event.suggestionId) {
+    throw new Error("suggestionId property not set in event body")
+  }
+
+  const listPath = await approveSuggestedSpeciesList(event.suggestionId)
+  return { listPath }
+}
+
+export const notifyPresetListSuggested = async (event) => {
+    const record = event.Records[0];
+    const bucket = record.s3.bucket.name;
+    const key = record.s3.object.key;
+    console.log("Handling event with bucket and key", bucket, key)
+    await sendEmailWithSuggestionData(bucket, key)
 }
