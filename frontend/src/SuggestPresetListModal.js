@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Modal.css";
 import { postApi } from "./api.js";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 class SuggestPresetListModal extends React.Component {
   constructor(props) {
@@ -32,6 +33,10 @@ class SuggestPresetListModal extends React.Component {
       .catch(() => {
         alert("Something went wrong submitting your list. Try again.");
       });
+  }
+
+  isReadyToSubmit() {
+    return this.state.listName && this.state.listName.length > 5
   }
 
   render() {
@@ -90,8 +95,13 @@ class SuggestPresetListModal extends React.Component {
                 />
               </div>
 
-              <div>
-                <button onClick={this.submitList}>Submit</button>
+              <div className="input-container">
+                <button className="action-button" disabled={!this.isReadyToSubmit()} onClick={this.submitList}>
+                  Submit
+                 </button>
+                 <button className="action-button" onClick={this.props.onClose}>
+                  Cancel
+                 </button>
               </div>
             </div>
           )}

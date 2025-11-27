@@ -120,7 +120,8 @@ class App extends Component {
                         </button>
                         <CopyPermalinkButton permalink={this.headToHeadSharingLink()} />
                         <button className="small-button"
-                        onClick={ () => this.openSuggestPresetListModal()}>
+                        onClick={ () => this.openSuggestPresetListModal()}
+                        title="Suggest this list of species as a preset">
                             <FontAwesomeIcon icon={faClipboardCheck}/>
                         </button>
                     </div>
