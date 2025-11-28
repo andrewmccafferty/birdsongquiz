@@ -57,7 +57,15 @@ jobs:
         run: terraform workspace select $ENV_NAME
 
       - name: Terraform destroy
-        run: terraform destroy -auto-approve -input=false -var environment=$ENV_NAME -var acm_certificate_arn=${{ secrets.ACM_CERTIFICATE_ARN }} -var xc_api_key=${{ secrets.XC_API_KEY }} -var mailer_send_api_key=${{ secrets.MAILER_SEND_API_KEY }}
+        run: |
+          terraform destroy -auto-approve \
+          -input=false \
+          -var environment=$ENV_NAME \
+          -var acm_certificate_arn=${{ secrets.ACM_CERTIFICATE_ARN }} \
+          -var xc_api_key=${{ secrets.XC_API_KEY }} \
+          -var mailer_send_api_key=${{ secrets.MAILER_SEND_API_KEY }}
+          -var notifications_from_email_address=${{ secrets.NOTIFICATIONS_FROM_EMAIL_ADDRESS }} \
+          -var notifications_to_email_address=${{ secrets.NOTIFICATIONS_TO_EMAIL_ADDRESS }}
       
       - name: Terraform delete workspace
         run: |
