@@ -5,6 +5,7 @@ const countries = [
     { code: 'CO', name: 'Colombia' },
     { code: 'EUR', name: 'Europe' },
     { code: 'MY', name: 'Malaysia' },
+    { code: 'ZA', name: 'South Africa' },
     { code: 'US', name: 'United States' }
 ];
 
