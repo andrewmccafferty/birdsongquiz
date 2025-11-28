@@ -1,3 +1,7 @@
+locals {
+  lambda_runtime = "nodejs24.x"
+}
+
 data "archive_file" "lambda_birdsongquiz" {
   type = "zip"
 
@@ -20,7 +24,7 @@ resource "aws_lambda_function" "get_preset_lists" {
   s3_bucket = aws_s3_bucket.lambda_bucket.id
   s3_key    = aws_s3_object.lambda_birdsongquiz.key
 
-  runtime = "nodejs20.x"
+  runtime = local.lambda_runtime
   handler = "handlers.getSpeciesPresetLists"
 
   source_code_hash = data.archive_file.lambda_birdsongquiz.output_base64sha256
@@ -46,7 +50,7 @@ resource "aws_lambda_function" "get_species_list" {
   s3_bucket = aws_s3_bucket.lambda_bucket.id
   s3_key    = aws_s3_object.lambda_birdsongquiz.key
 
-  runtime = "nodejs20.x"
+  runtime = local.lambda_runtime
   handler = "handlers.getSpeciesList"
 
   source_code_hash = data.archive_file.lambda_birdsongquiz.output_base64sha256
@@ -76,7 +80,7 @@ resource "aws_lambda_function" "get_recording" {
       XC_API_KEY = var.xc_api_key
     }
   }
-  runtime = "nodejs20.x"
+  runtime = local.lambda_runtime
   handler = "handlers.getRecording"
 
   source_code_hash = data.archive_file.lambda_birdsongquiz.output_base64sha256
@@ -100,7 +104,7 @@ resource "aws_lambda_function" "suggest_preset_list" {
       SPECIES_LIST_BUCKET_NAME = aws_s3_bucket.species_list_bucket.id
     }
   }
-  runtime = "nodejs20.x"
+  runtime = local.lambda_runtime
   handler = "handlers.suggestPresetList"
 
   source_code_hash = data.archive_file.lambda_birdsongquiz.output_base64sha256
@@ -128,7 +132,7 @@ resource "aws_lambda_function" "notify_preset_list_suggested" {
       NOTIFICATIONS_TO_EMAIL_ADDRESS = var.notifications_to_email_address
     }
   }
-  runtime = "nodejs20.x"
+  runtime = local.lambda_runtime
   handler = "handlers.notifyPresetListSuggested"
 
   source_code_hash = data.archive_file.lambda_birdsongquiz.output_base64sha256
@@ -169,7 +173,7 @@ resource "aws_lambda_function" "approve_preset_list" {
       FRONTEND_BUCKET_NAME = aws_s3_bucket.frontend_bucket.id
     }
   }
-  runtime = "nodejs20.x"
+  runtime = local.lambda_runtime
   handler = "handlers.approvePresetList"
 
   source_code_hash = data.archive_file.lambda_birdsongquiz.output_base64sha256
