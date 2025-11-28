@@ -310,3 +310,25 @@ body {
   color: #336;
   font-size: 0.95rem;
 }
+
+.error-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  background: #e9f4ff;
+  border: 1px solid #c9e4ff;
+  padding: 1rem 1.2rem;
+  border-radius: 12px;
+  font-family: sans-serif;
+  max-width: 500px;
+}
+
+.error-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.error-text {
+  color: #ff0000;
+  font-size: 0.95rem;
+}

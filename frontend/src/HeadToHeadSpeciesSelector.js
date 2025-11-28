@@ -3,7 +3,7 @@ import { Typeahead } from "react-bootstrap-typeahead";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import "react-bootstrap-typeahead/css/Typeahead.bs5.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { callApi } from "./api.js";
 import PresetSpeciesSelector from "./PresetSpeciesSelector.js";
 import CountrySelector from "./CountrySelector.js";
@@ -74,21 +74,20 @@ class HeadToHeadSpeciesSelector extends Component {
             }
         });
     callApi(`species?region=${country}`)
-      .catch((err) => {
-        this.setState((prevState, props) => {
-            return {
-                ...props,
-                speciesListLoading: false,
-                errorLoadingSpecies: true,
-            }
-        });
-      })
       .then((result) => {
         this.setState((prevState, props) => {
             return {
                 ...props,
                 speciesList: result.species,
                 speciesListLoading: false,
+            }
+        });
+      }).catch((err) => {
+        this.setState((prevState, props) => {
+            return {
+                ...props,
+                speciesListLoading: false,
+                errorLoadingSpecies: true,
             }
         });
       });
@@ -111,21 +110,21 @@ class HeadToHeadSpeciesSelector extends Component {
             }
         });
     callApi(`species?listId=${listId}`)
-      .catch((err) => {
-        this.setState((prevState, props) => {
-            return {
-                ...props,
-                loadingPresetList: false,
-                errorLoadingPresetList: true,
-            }
-        });
-      })
       .then((result) => {
         this.setState((prevState, props) => {
             return {
                 ...props,
                 selectedSpeciesList: result.species,
                 loadingPresetList: false,
+            }
+        });
+      })
+      .catch((err) => {
+        this.setState((prevState, props) => {
+            return {
+                ...props,
+                loadingPresetList: false,
+                errorLoadingPresetList: true,
             }
         });
       });
@@ -140,21 +139,22 @@ class HeadToHeadSpeciesSelector extends Component {
         });
     console.log("frontend config", this.state.frontendConfiguration);
     callApi(`presets/${country}?v=${this.frontendConfiguration ? this.frontendConfiguration.presetsVersion : "default"}`)
-      .catch((err) => {
-        this.setState((prevState, props) => {
-            return {
-                ...props,
-                presetListsLoading: false,
-                errorLoadingPresetLists: true,
-            }
-        });
-      })
       .then((result) => {
         this.setState((prevState, props) => {
             return {
                 ...props,
                 presetLists: result.presets,
                 presetListsLoading: false,
+            }
+        });
+      })
+      .catch((err) => {
+        console.error("Error loading presets", err);
+        this.setState((prevState, props) => {
+            return {
+                ...props,
+                presetListsLoading: false,
+                errorLoadingPresetLists: true,
             }
         });
       });
@@ -240,7 +240,23 @@ class HeadToHeadSpeciesSelector extends Component {
               )}
             </div>
           )}
-          <div className="input-container">
+          {
+            this.state.errorLoadingPresetLists && <div className="error-notice">
+              <span class="error-icon"><FontAwesomeIcon icon={faCircleExclamation}/></span>
+              <div class="error-text">
+                Error loading preset lists
+              </div>
+            </div>
+          }
+           {
+              this.state.errorLoadingSpecies && <div className="error-notice">
+              <span class="error-icon"><FontAwesomeIcon icon={faCircleExclamation}/></span>
+              <div class="error-text">
+                Error loading species list
+              </div>
+            </div>
+          }
+          {!this.state.errorLoadingSpecies && <div className="input-container">
             <div className="species-selection-wrapper">
               <Typeahead
                 disabled={this.shouldShowLoaderInSpeciesSelector()}
@@ -274,7 +290,9 @@ class HeadToHeadSpeciesSelector extends Component {
               <FontAwesomeIcon icon={faCheck} />
             </button>
           </div>
+        }
         </div>
+        
         {this.state.showValidationMessage && (
           <div className="validation-message">
             Please select at least two species to compare
