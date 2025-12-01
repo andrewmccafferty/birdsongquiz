@@ -259,7 +259,7 @@ class HeadToHeadSpeciesSelector extends Component {
           <div className="input-container">
             <div className="species-selection-wrapper">
               <Typeahead
-                disabled={this.shouldShowLoaderInSpeciesSelector()}
+                disabled={this.shouldShowLoaderInSpeciesSelector() || this.state.errorLoadingSpecies}
                 multiple
                 id="species-selection"
                 data-testid="species-selection"
