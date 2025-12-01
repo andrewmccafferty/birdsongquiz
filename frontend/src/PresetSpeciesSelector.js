@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactGA from 'react-ga4';
 class PresetSpeciesSelector extends Component {
   constructor(props) {
     super(props);
@@ -8,6 +9,10 @@ class PresetSpeciesSelector extends Component {
   }
   
   onSpeciesListChanged = (speciesListId) => {
+    ReactGA.event({
+          category: 'User',
+          action: `Used preset list:+${speciesListId}`
+        });
     this.props.onSpeciesListChanged(speciesListId)
   }
 

@@ -8,6 +8,11 @@ if [ -z "${CURRENT_APP_VERSION:-}" ]; then
   exit 1
 fi
 
+if [ -z "${GOOGLE_ANALYTICS_ID:-}" ]; then
+  echo "Error: GOOGLE_ANALYTICS_ID environment variable is not set."
+  exit 1
+fi
+
 if [ -z "${API_ROOT:-}" ]; then
   echo "Error: API_ROOT environment variable is not set."
   exit 1

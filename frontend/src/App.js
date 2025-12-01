@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactGA from 'react-ga4';
 import HeadToHeadSpeciesSelector from './HeadToHeadSpeciesSelector';
 import GameControls from './GameControls';
 import GameExplanationModal from './GameExplanationModal';
@@ -9,6 +10,8 @@ import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 class App extends Component {
     constructor(props) {
+        ReactGA.initialize(process.env.GOOGLE_ANALYTICS_ID);
+        ReactGA.send({ hitType: "pageview", page: window.location.pathname });
         super(props);
         const permalinkData = this.decodePermalink()
         this.state = {
@@ -25,6 +28,10 @@ class App extends Component {
             if (!permalinkDataBase64) {
                 return null
             }
+            ReactGA.event({
+                category: 'User',
+                action: "Used permalink"
+            });
             const permalinkData = JSON.parse(atob(permalinkDataBase64))
             return permalinkData
         } catch (e) {

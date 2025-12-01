@@ -3,8 +3,8 @@
     "version": "1.0.0",
     "main": "index.js",
     "scripts": {
-        "start": "node addVersionNumberToFrontend.js & webpack serve --open",
-        "build": "node addVersionNumberToFrontend.js & webpack"
+        "start": "node addVariablesToFrontend.js & webpack serve --open",
+        "build": "node addVariablesToFrontend.js & webpack"
     },
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^6.7.2",
@@ -14,7 +14,8 @@
         "react-bootstrap": "^2.10.8",
         "react-bootstrap-typeahead": "^6.3.4",
         "react-dom": "^18.0.0",
-        "react-typeahead": "^2.0.0-alpha.8"
+        "react-typeahead": "^2.0.0-alpha.8",
+        "react-ga4": "2.1.0"
     },
     "devDependencies": {
         "@babel/core": "^7.0.0",
