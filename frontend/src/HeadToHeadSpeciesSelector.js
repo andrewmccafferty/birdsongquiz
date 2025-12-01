@@ -256,7 +256,7 @@ class HeadToHeadSpeciesSelector extends Component {
               </div>
             </div>
           }
-          {!this.state.errorLoadingSpecies && <div className="input-container">
+          <div className="input-container">
             <div className="species-selection-wrapper">
               <Typeahead
                 disabled={this.shouldShowLoaderInSpeciesSelector()}
@@ -290,7 +290,7 @@ class HeadToHeadSpeciesSelector extends Component {
               <FontAwesomeIcon icon={faCheck} />
             </button>
           </div>
-        }
+        
         </div>
         
         {this.state.showValidationMessage && (
