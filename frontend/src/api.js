@@ -2,8 +2,10 @@ const callApi = async (path) => {
         console.log("Calling API with path: ", path);
         const response = await fetch(`${process.env.API_ROOT}/${path}`);
         const body = await response.json();
-
-        if (response.status !== 200) throw Error(body.message);
+        
+        if (response.status !== 200) {
+            throw Error(`Got status code '${response.status}' and error body '${body.message}' while GETing ${path}`);
+        }
 
         return body;
     };

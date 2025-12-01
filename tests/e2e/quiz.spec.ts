@@ -33,3 +33,17 @@ test('Run quiz with Australian species', async ({ page }) => {
   await page.getByTestId('next-clip').click();
   await page.getByTestId('reset').click();
 });
+
+test('test with presets', async ({ page }) => {
+  await page.goto(FRONTEND_URL);
+  await page.getByTestId("country").selectOption('GB');
+  await page.getByLabel('Sound type:').selectOption('call');
+  await page.getByTestId('preset-species-list').selectOption('gb/common-uk-garden');
+  await page.getByTestId('finish-selection').click();
+  await page.getByRole('button', { name: 'Blue Tit' }).click();
+  await page.getByTestId('next-clip').click();
+  await page.getByRole('button', { name: 'Great Tit' }).click();
+  await page.getByTestId('next-clip').click();
+  await page.getByRole('button', { name: 'Long-tailed Tit' }).click();
+  await page.getByTestId('next-clip').click();
+});
