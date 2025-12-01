@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactGA from 'react-ga4';
 import { Typeahead } from "react-bootstrap-typeahead";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import "react-bootstrap-typeahead/css/Typeahead.bs5.css";
@@ -165,6 +166,10 @@ class HeadToHeadSpeciesSelector extends Component {
     if (this.state.country == country) {
       return;
     }
+    ReactGA.event({
+          category: 'User',
+          action: `Selected country:+${country}`
+        });
     this.setState((prevState, props) => {
             return {
                 ...props,

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactGA from 'react-ga4';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faTimes, faCrow } from '@fortawesome/free-solid-svg-icons'
 import { callApi } from "./api";
@@ -46,11 +47,16 @@ class GameControls extends Component {
         if (this.state.selectedSpeciesGuess) {
             return
         }
+
         const guessCorrect = guess != null && guess.ScientificName.toLowerCase() === this.state.scientificName.toLowerCase();
         this.setState((prevState, props) => {
             let correctCount = guessCorrect ? prevState.correctCount + 1 : prevState.correctCount;
             const newCounter = prevState.counter + 1
             const newLivesLeft = !guessCorrect ? prevState.livesLeft - 1 : prevState.livesLeft
+            ReactGA.event({
+                category: 'User',
+                action: `Got ${correctCount} out of ${newCounter} correct`
+                });
             return {
                 ...props,
                 selectedSpeciesGuess: guess,
