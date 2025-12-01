@@ -11,7 +11,7 @@ let html = fs.readFileSync(htmlPath, 'utf8');
 
 // Replace the placeholders
 html = html.replace(/{CURRENT_APP_VERSION}/g, version);
-html = html.replace("/{GOOGLE_ANALYTICS_ID}/g", googleAnalyticsId);
+html = html.replace(/{GOOGLE_ANALYTICS_ID}/g, googleAnalyticsId);
 
 // Ensure dist directory exists
 const distDir = path.dirname(outputPath);
