@@ -12,7 +12,7 @@ export const callApi = async <T = object>(path: string): Promise<T> => {
   return body as T;
 };
 
-export const postApi = async <TRequest extends object, TResponse = object>(
+export const postApi = async <TRequest extends any, TResponse = object>(
   path: string,
   body: TRequest,
 ): Promise<TResponse> => {
