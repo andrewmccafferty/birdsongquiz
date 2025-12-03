@@ -1,4 +1,4 @@
-export const callApi = async <T = object>(path: string): Promise<T> => {
+export const callApi = async <T>(path: string): Promise<T> => {
   console.log('Calling API with path: ', path);
   const response = await fetch(`${process.env.API_ROOT}/${path}`);
   const body = await response.json();
@@ -12,7 +12,7 @@ export const callApi = async <T = object>(path: string): Promise<T> => {
   return body as T;
 };
 
-export const postApi = async <TRequest extends any, TResponse = object>(
+export const postApi = async <TRequest, TResponse>(
   path: string,
   body: TRequest,
 ): Promise<TResponse> => {
