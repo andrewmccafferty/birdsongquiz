@@ -1,46 +1,62 @@
-import React from "react";
-import "./Modal.css";
-import { postApi } from "./api.js";
+import React, { Component } from 'react';
+import './Modal.css';
+import { postApi } from './api';
+import { SpeciesEntry } from './types';
 
-class SuggestPresetListModal extends React.Component {
-  constructor(props) {
+interface SuggestPresetListModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  speciesList: SpeciesEntry[];
+  country: string;
+}
+
+interface SuggestPresetListModalState {
+  listName: string;
+  submitted: boolean;
+  submitting?: boolean;
+}
+
+class SuggestPresetListModal extends Component<
+  SuggestPresetListModalProps,
+  SuggestPresetListModalState
+> {
+  constructor(props: SuggestPresetListModalProps) {
     super(props);
     this.state = {
-      listName: "",
+      listName: '',
       submitted: false,
     };
-    this.handleOverlayClick = this.handleOverlayClick.bind(this);
-    this.submitList = this.submitList.bind(this);
   }
 
-  handleOverlayClick(e) {
-    if (e.target.className === "modal") {
+  handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if ((e.target as HTMLDivElement).className === 'modal') {
       this.props.onClose();
     }
-  }
+  };
 
-  submitList() {
+  submitList = () => {
     this.setState({ submitting: true });
-    postApi("presets/suggestion", {
+    postApi('presets/suggestion', {
       region: this.props.country,
       listName: this.state.listName,
       speciesList: this.props.speciesList,
     })
       .then((result) => {
-        console.log("Got result", result);
+        console.log('Got result', result);
         this.setState({ submitted: true, submitting: false });
       })
       .catch(() => {
-        alert("Something went wrong submitting your list. Try again.");
+        alert('Something went wrong submitting your list. Try again.');
+        this.setState({ submitting: false });
       });
-  }
+  };
 
   isReadyToSubmit() {
-    return this.state.listName && this.state.listName.length > 5
+    return this.state.listName && this.state.listName.length > 5;
   }
-  
+
   shouldShowSubmittingSpinner() {
-    return this.state.submitting
+    return this.state.submitting;
   }
 
   render() {
@@ -58,9 +74,9 @@ class SuggestPresetListModal extends React.Component {
 
           <h2>Suggest species list</h2>
           {this.state.submitted && (
-            <div class="info-notice">
-              <span class="info-icon">ℹ️</span>
-              <div class="info-text">
+            <div className="info-notice">
+              <span className="info-icon">ℹ️</span>
+              <div className="info-text">
                 Thanks for your list suggestion! It'll be reviewed by a human,
                 and should appear in the list soon.
                 <button className="action-button" onClick={this.props.onClose}>
@@ -100,17 +116,26 @@ class SuggestPresetListModal extends React.Component {
                   type="text"
                   id="list-name"
                   value={listName}
-                  onChange={(e) => this.setState({ listName: e.target.value })}
+                  onChange={(e) =>
+                    this.setState({ listName: e.target.value })
+                  }
                 />
               </div>
 
               <div className="input-container">
-                <button className="action-button" disabled={!this.isReadyToSubmit()} onClick={this.submitList}>
+                <button
+                  className="action-button"
+                  disabled={!this.isReadyToSubmit()}
+                  onClick={this.submitList}
+                >
                   Submit
-                 </button>
-                 <button className="action-button" onClick={this.props.onClose}>
+                </button>
+                <button
+                  className="action-button"
+                  onClick={this.props.onClose}
+                >
                   Cancel
-                 </button>
+                </button>
               </div>
             </div>
           )}
@@ -121,3 +146,5 @@ class SuggestPresetListModal extends React.Component {
 }
 
 export default SuggestPresetListModal;
+
+
