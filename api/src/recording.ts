@@ -1,6 +1,6 @@
 import * as http from 'http';
 import * as https from 'https';
-
+import { XenoCantoResponse, Recording } from './xeno_canto_responses';
 const formatTypeParameter = (soundType: string | null) =>
   soundType ? encodeURIComponent(` type:"${soundType}"`) : '';
 
@@ -13,7 +13,7 @@ const getXenoCantoQueryUrl = (species: string, soundType: string | null) => {
 const getRecordingData = async (
   species: string,
   soundType: string | null,
-): Promise<any> => {
+): Promise<XenoCantoResponse> => {
   console.log(
     `Calling getXenoCantoQueryUrl with species: ${species}, soundType: ${soundType}`,
   );
@@ -57,7 +57,7 @@ const getRecordingData = async (
   });
 };
 
-const constructSoundUrlFromRecordingData = (recording: any): string => {
+const constructSoundUrlFromRecordingData = (recording: Recording): string => {
   const mp3FileName = recording['file-name'].replace(/\.wav$/i, '.mp3');
 
   const match = recording.sono.small.match(/uploaded\/([^/]+)\//);
