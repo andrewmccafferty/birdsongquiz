@@ -3,6 +3,9 @@ import {
   ListObjectsV2Command,
   GetObjectCommand,
   HeadObjectCommand,
+  ListObjectsV2CommandOutput,
+  _Object,
+  S3ServiceException
 } from '@aws-sdk/client-s3';
 
 const s3 = new S3Client({ region: 'eu-west-2' });
@@ -21,7 +24,7 @@ export async function listFilesForPrefix(
 
   try {
     do {
-      const response: any = await s3.send(
+      const response: ListObjectsV2CommandOutput = await s3.send(
         new ListObjectsV2Command({
           ...params,
           ContinuationToken: continuationToken,
@@ -31,7 +34,7 @@ export async function listFilesForPrefix(
       if (response.Contents) {
         files.push(
           ...response.Contents
-            .map((obj: any) => obj.Key as string | undefined)
+            .map((obj: _Object) => obj.Key as string | undefined)
             .filter((k: string | undefined): k is string => !!k),
         );
       }
@@ -69,11 +72,11 @@ export async function s3KeyExists(
   try {
     await s3.send(new HeadObjectCommand({ Bucket: bucket, Key: key }));
     return true;
-  } catch (err: any) {
-    if (err?.$metadata?.httpStatusCode === 404) {
-      return false;
+  } catch (err) {
+    if (err instanceof S3ServiceException && 
+        err.$metadata?.httpStatusCode === 404) {
+        return false;
     }
-    // If it's some other error, rethrow to avoid hiding real problems
     throw err;
   }
 }

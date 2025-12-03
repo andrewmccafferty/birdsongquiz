@@ -7,25 +7,13 @@ import {
   approveSuggestedSpeciesList,
 } from './species';
 import { sendEmailWithSuggestionData } from './preset_suggestions';
-
-interface ApiGatewayEvent {
-  queryStringParameters?: Record<string, string | undefined>;
-  pathParameters?: Record<string, string | undefined>;
-  body?: string;
-  [key: string]: any;
-}
-
-interface LambdaResponse {
-  statusCode: number;
-  headers: Record<string, string>;
-  body: string;
-}
+import { APIGatewayEvent, APIGatewayProxyResult, S3Event } from 'aws-lambda';
 
 const response = (
   statusCode: number,
   responseBody: unknown,
   addCacheHeader = false,
-): LambdaResponse => {
+): APIGatewayProxyResult => {
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Headers': 'Content-Type',
@@ -43,7 +31,7 @@ const response = (
   };
 };
 
-export const getRecording = async (event: ApiGatewayEvent) => {
+export const getRecording = async (event: APIGatewayEvent): Promise<APIGatewayProxyResult> => {
   console.log('Event: ', event);
   const species = event.queryStringParameters
     ? event.queryStringParameters['species'] ?? null
@@ -64,7 +52,7 @@ export const getRecording = async (event: ApiGatewayEvent) => {
   }
 };
 
-export const getSpeciesList = async (event: ApiGatewayEvent) => {
+export const getSpeciesList = async (event: APIGatewayEvent): Promise<APIGatewayProxyResult> => {
   console.log('Event:', event);
   const region = event.queryStringParameters?.['region'];
   const listId = event.queryStringParameters?.['listId'];
@@ -89,7 +77,7 @@ export const getSpeciesList = async (event: ApiGatewayEvent) => {
   });
 };
 
-export const getSpeciesPresetLists = async (event: ApiGatewayEvent) => {
+export const getSpeciesPresetLists = async (event: APIGatewayEvent): Promise<APIGatewayProxyResult> => {
   console.log('Entering preset lists handler with event', event);
   const region = event.pathParameters?.region;
 
@@ -104,7 +92,7 @@ export const getSpeciesPresetLists = async (event: ApiGatewayEvent) => {
   );
 };
 
-export const suggestPresetList = async (event: ApiGatewayEvent) => {
+export const suggestPresetList = async (event: APIGatewayEvent): Promise<APIGatewayProxyResult> => {
   const body = event.body;
   const presetListData = body ? JSON.parse(body) : {};
   const region = presetListData.region;
@@ -138,7 +126,7 @@ export const approvePresetList = async (event: { suggestionId?: string }) => {
   return { listPath };
 };
 
-export const notifyPresetListSuggested = async (event: any) => {
+export const notifyPresetListSuggested = async (event: S3Event) => {
   const record = event.Records[0];
   const bucket = record.s3.bucket.name;
   const key = record.s3.object.key;

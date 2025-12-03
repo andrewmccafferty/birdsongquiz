@@ -36,8 +36,8 @@ const getRecordingData = async (
         if (response.statusCode === 200) {
           try {
             resolve(JSON.parse(data));
-          } catch (error: any) {
-            reject(new Error(`Error parsing JSON: ${error.message}`));
+          } catch (error: unknown) {
+            reject(new Error(`Error parsing JSON: ${error}`));
           }
         } else {
           reject(

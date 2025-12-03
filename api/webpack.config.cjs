@@ -25,7 +25,8 @@ module.exports = {
     ],
   },
   externals: {
-    '@aws-sdk/client-s3': 'commonjs2 @aws-sdk/client-s3'
+    '@aws-sdk/client-s3': 'commonjs2 @aws-sdk/client-s3',
+    '@aws-sdk/client-lambda': 'commonjs2 @aws-sdk/client-lambda'
   },
   optimization: {
     minimize: false,
