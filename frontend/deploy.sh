@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-# 1. Check required env vars
+# Check required env vars
 if [ -z "${CURRENT_APP_VERSION:-}" ]; then
   echo "Error: CURRENT_APP_VERSION environment variable is not set."
   exit 1
@@ -23,14 +23,17 @@ if [ -z "${FRONTEND_BUCKET:-}" ]; then
   exit 1
 fi
 
-# 2. Build the app
+# Build the app
 echo "Running npm ci"
 npm ci
+
+echo "Linting frontend"
+npx eslint .
 
 echo "Running build with API_ROOT=$API_ROOT..."
 API_ROOT="$API_ROOT" npm run build
 
-# 3. Compute MD5 of bundle.js
+# Compute MD5 of bundle.js
 BUNDLE_PATH="dist/bundle.js"
 INDEX_PATH="dist/index.html"
 FRONTEND_CONFIGURATION_LOCAL_PATH="frontend-configuration.json"
@@ -44,7 +47,7 @@ ETAG=$(openssl md5 -binary "$BUNDLE_PATH" | base64)
 
 echo "📦 Uploading $BUNDLE_PATH to s3://$FRONTEND_BUCKET/dist/bundle.js with ETag: $ETAG"
 
-# 4. Upload bundle.js with content-type and MD5
+# Upload bundle.js with content-type and MD5
 aws s3api put-object \
   --bucket "$FRONTEND_BUCKET" \
   --key "dist/bundle.js" \
@@ -52,7 +55,7 @@ aws s3api put-object \
   --content-type "application/javascript" \
   --content-md5 "$(openssl md5 -binary "$BUNDLE_PATH" | base64)"
 
-# 5. Upload index.html
+# Upload index.html
 echo "📰 Uploading $INDEX_PATH to s3://$FRONTEND_BUCKET/index.html"
 
 aws s3 cp "$INDEX_PATH" "s3://$FRONTEND_BUCKET/index.html" \
