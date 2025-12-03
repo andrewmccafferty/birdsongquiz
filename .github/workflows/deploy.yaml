@@ -116,7 +116,7 @@ jobs:
         run: npm ci
       - name: Lint frontend
         working-directory: ./frontend
-        run: npx lint .
+        run: npx eslint .
       - name: Deploy frontend
         working-directory: ./frontend
         run: ./deploy.sh
