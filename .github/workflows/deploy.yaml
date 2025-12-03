@@ -111,6 +111,12 @@ jobs:
       - name: Set Google analytics key dummy value for ephemereals
         if: github.event_name == 'pull_request'
         run: echo "GOOGLE_ANALYTICS_ID=DUMMY" >> $GITHUB_ENV
+      - name: Install frontend dependencies
+        working-directory: ./frontend
+        run: npm ci
+      - name: Lint frontend
+        working-directory: ./frontend
+        run: npx lint .
       - name: Deploy frontend
         working-directory: ./frontend
         run: ./deploy.sh
