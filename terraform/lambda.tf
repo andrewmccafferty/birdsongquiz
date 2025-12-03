@@ -5,7 +5,7 @@ locals {
 data "archive_file" "lambda_birdsongquiz" {
   type = "zip"
 
-  source_dir  = "../api"
+  source_dir  = "../api/dist"
   output_path = "${path.module}/birdsongquiz_lambdas.zip"
 }
 
@@ -25,7 +25,7 @@ resource "aws_lambda_function" "get_preset_lists" {
   s3_key    = aws_s3_object.lambda_birdsongquiz.key
 
   runtime = local.lambda_runtime
-  handler = "dist/handlers.getSpeciesPresetLists"
+  handler = "handlers.getSpeciesPresetLists"
 
   source_code_hash = data.archive_file.lambda_birdsongquiz.output_base64sha256
 
@@ -51,7 +51,7 @@ resource "aws_lambda_function" "get_species_list" {
   s3_key    = aws_s3_object.lambda_birdsongquiz.key
 
   runtime = local.lambda_runtime
-  handler = "dist/handlers.getSpeciesList"
+  handler = "handlers.getSpeciesList"
 
   source_code_hash = data.archive_file.lambda_birdsongquiz.output_base64sha256
 
@@ -81,7 +81,7 @@ resource "aws_lambda_function" "get_recording" {
     }
   }
   runtime = local.lambda_runtime
-  handler = "dist/handlers.getRecording"
+  handler = "handlers.getRecording"
 
   source_code_hash = data.archive_file.lambda_birdsongquiz.output_base64sha256
 
@@ -105,7 +105,7 @@ resource "aws_lambda_function" "suggest_preset_list" {
     }
   }
   runtime = local.lambda_runtime
-  handler = "dist/handlers.suggestPresetList"
+  handler = "handlers.suggestPresetList"
 
   source_code_hash = data.archive_file.lambda_birdsongquiz.output_base64sha256
 
@@ -133,7 +133,7 @@ resource "aws_lambda_function" "notify_preset_list_suggested" {
     }
   }
   runtime = local.lambda_runtime
-  handler = "dist/handlers.notifyPresetListSuggested"
+  handler = "handlers.notifyPresetListSuggested"
 
   source_code_hash = data.archive_file.lambda_birdsongquiz.output_base64sha256
 
@@ -174,7 +174,7 @@ resource "aws_lambda_function" "approve_preset_list" {
     }
   }
   runtime = local.lambda_runtime
-  handler = "dist/handlers.approvePresetList"
+  handler = "handlers.approvePresetList"
 
   source_code_hash = data.archive_file.lambda_birdsongquiz.output_base64sha256
 

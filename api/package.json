@@ -4,8 +4,7 @@
   "description": "",
   "main": "dist/handlers.cjs",
   "dependencies": {
-    "@aws-sdk/client-s3": "3.850.0",
-    "mailersend": "2.6.0"
+    "@aws-sdk/client-s3": "3.850.0"
   },
   "devDependencies": {
     "typescript": "^5.6.3",
@@ -14,7 +13,8 @@
     "webpack-cli": "^4.0.0"
   },
   "scripts": {
-    "build": "webpack",
+    "build": "webpack && npm run copy-deps",
+    "copy-deps": "cp -r node_modules dist/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

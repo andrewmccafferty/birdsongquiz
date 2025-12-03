@@ -25,8 +25,7 @@ module.exports = {
     ],
   },
   externals: {
-    '@aws-sdk/client-s3': 'commonjs2 @aws-sdk/client-s3',
-    mailersend: 'commonjs2 mailersend',
+    '@aws-sdk/client-s3': 'commonjs2 @aws-sdk/client-s3'
   },
   optimization: {
     minimize: false,
