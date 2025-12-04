@@ -2,7 +2,7 @@ locals {
   lambda_runtime = "nodejs24.x"
 }
 
-data "archive_file" "lambda_birdsongquiz" {
+resource "archive_file" "lambda_birdsongquiz" {
   type = "zip"
 
   source_dir  = "../api/dist"
@@ -13,9 +13,9 @@ resource "aws_s3_object" "lambda_birdsongquiz" {
   bucket = aws_s3_bucket.lambda_bucket.id
 
   key    = "birdsongquiz_lambdas.zip"
-  source = data.archive_file.lambda_birdsongquiz.output_path
+  source = archive_file.lambda_birdsongquiz.output_path
 
-  etag = filemd5(data.archive_file.lambda_birdsongquiz.output_path)
+  etag = filemd5(archive_file.lambda_birdsongquiz.output_path)
 }
 
 resource "aws_lambda_function" "get_preset_lists" {
@@ -27,7 +27,7 @@ resource "aws_lambda_function" "get_preset_lists" {
   runtime = local.lambda_runtime
   handler = "handlers.getSpeciesPresetLists"
 
-  source_code_hash = data.archive_file.lambda_birdsongquiz.output_base64sha256
+  source_code_hash = archive_file.lambda_birdsongquiz.output_base64sha256
 
   role = aws_iam_role.get_preset_lists_role.arn
 
@@ -53,7 +53,7 @@ resource "aws_lambda_function" "get_species_list" {
   runtime = local.lambda_runtime
   handler = "handlers.getSpeciesList"
 
-  source_code_hash = data.archive_file.lambda_birdsongquiz.output_base64sha256
+  source_code_hash = archive_file.lambda_birdsongquiz.output_base64sha256
 
   role = aws_iam_role.get_species_list_role.arn
 
@@ -83,7 +83,7 @@ resource "aws_lambda_function" "get_recording" {
   runtime = local.lambda_runtime
   handler = "handlers.getRecording"
 
-  source_code_hash = data.archive_file.lambda_birdsongquiz.output_base64sha256
+  source_code_hash = archive_file.lambda_birdsongquiz.output_base64sha256
 
   role = aws_iam_role.lambda_exec.arn
 }
@@ -107,7 +107,7 @@ resource "aws_lambda_function" "suggest_preset_list" {
   runtime = local.lambda_runtime
   handler = "handlers.suggestPresetList"
 
-  source_code_hash = data.archive_file.lambda_birdsongquiz.output_base64sha256
+  source_code_hash = archive_file.lambda_birdsongquiz.output_base64sha256
 
   role = aws_iam_role.add_suggestion_role.arn
 }
@@ -135,7 +135,7 @@ resource "aws_lambda_function" "notify_preset_list_suggested" {
   runtime = local.lambda_runtime
   handler = "handlers.notifyPresetListSuggested"
 
-  source_code_hash = data.archive_file.lambda_birdsongquiz.output_base64sha256
+  source_code_hash = archive_file.lambda_birdsongquiz.output_base64sha256
 
   role = aws_iam_role.notify_preset_list_suggested_role.arn
 }
@@ -176,7 +176,7 @@ resource "aws_lambda_function" "approve_preset_list" {
   runtime = local.lambda_runtime
   handler = "handlers.approvePresetList"
 
-  source_code_hash = data.archive_file.lambda_birdsongquiz.output_base64sha256
+  source_code_hash = archive_file.lambda_birdsongquiz.output_base64sha256
 
   role = aws_iam_role.approve_preset_list_role.arn
 }
