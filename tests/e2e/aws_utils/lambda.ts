@@ -3,6 +3,9 @@ import { LambdaClient, InvokeCommand } from "@aws-sdk/client-lambda";
 const lambda = new LambdaClient({ region: "eu-west-2"});
 
 const invokeLambda = async (functionName: string, payload: unknown) => {
+  if (!functionName) {
+    throw new Error("functionName parameter not set when trying to call Lambda")
+  }
   const command = new InvokeCommand({
     FunctionName: functionName,
     Payload: Buffer.from(JSON.stringify(payload)),
