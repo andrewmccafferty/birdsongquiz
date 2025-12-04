@@ -1,6 +1,6 @@
 import * as http from 'http';
 import * as https from 'https';
-import { XenoCantoResponse, Recording } from './xeno_canto_responses';
+import { XenoCantoResponse, Recording } from './model/xeno_canto_responses';
 const formatTypeParameter = (soundType: string | null) =>
   soundType ? encodeURIComponent(` type:"${soundType}"`) : '';
 

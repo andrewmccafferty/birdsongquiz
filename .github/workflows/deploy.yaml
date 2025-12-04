@@ -36,11 +36,15 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
       - name: Checkout the repository to the runner
         uses: actions/checkout@v2
+      - name: Load dependencies for api layer
+        working-directory: ./api
+        run: npm ci
+      - name: Lint api layer
+        working-directory: ./api
+        run: npm run lint
       - name: Build api layer
         working-directory: ./api
-        run: | 
-          npm ci
-          npm run build
+        run: npm run build
       - name: Setup Terraform with specified version on the runner
         uses: hashicorp/setup-terraform@v2
         with:

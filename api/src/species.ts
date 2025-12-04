@@ -6,6 +6,7 @@ import {
 } from '@aws-sdk/client-s3';
 import { listFilesForPrefix, s3KeyExists } from './s3_utils';
 import { randomUUID } from 'crypto';
+import { PresetListNameDetails, PresetListSuggestion } from './model/species_lists';
 
 const REGION = 'eu-west-2';
 
@@ -61,7 +62,7 @@ export const loadSpeciesListById = async (
   return loadSpeciesListFromS3Key(`presets/${listId}.json`);
 };
 
-export const getSpeciesPresetListsForRegion = async (region: string) => {
+export const getSpeciesPresetListsForRegion = async (region: string): Promise<PresetListNameDetails[]> => {
   const files = await listFilesForPrefix(
     process.env.SPECIES_LIST_BUCKET_NAME as string,
     `presets/${region}/`.toLowerCase(),
@@ -100,7 +101,7 @@ export const storeSuggestedSpeciesList = async (
   return suggestionId;
 };
 
-const loadSuggestion = async (suggestionId: string): Promise<any> => {
+const loadSuggestion = async (suggestionId: string): Promise<PresetListSuggestion> => {
   const suggestionRawData = await getObjectFromS3AsString(
     process.env.SPECIES_LIST_BUCKET_NAME as string,
     suggestionS3Key(suggestionId),
