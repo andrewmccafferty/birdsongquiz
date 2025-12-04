@@ -13,7 +13,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@aws-sdk/client-lambda": "3.943.0",
     "@playwright/test": "^1.54.2",
-    "@types/node": "^24.2.0"
+    "@types/node": "^24.10.1"
   }
 }
