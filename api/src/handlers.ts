@@ -92,7 +92,7 @@ export const getSpeciesPresetLists = async (event: APIGatewayEvent): Promise<API
   );
 };
 
-export const suggestPresetList = async (event: APIGatewayEvent): Promise<any> => {
+export const suggestPresetList = async (event: APIGatewayEvent): Promise<APIGatewayProxyResult> => {
   const body = event.body;
   const presetListData = body ? JSON.parse(body) : {};
   const region = presetListData.region;
