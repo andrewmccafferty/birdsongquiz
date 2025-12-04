@@ -2,14 +2,23 @@
   "name": "api",
   "version": "1.0.0",
   "description": "",
-  "main": "handlers.js",
-  "type": "module",
+  "main": "dist/handlers.cjs",
   "dependencies": {
-    "@aws-sdk/client-s3": "3.850.0",
-    "mailersend": "2.6.0"
+    "@aws-sdk/client-s3": "3.850.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "eslint": "^9.39.1",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.48.1",
+    "ts-loader": "^9.5.1",
+    "webpack": "^5.0.0",
+    "webpack-cli": "^4.0.0",
+    "@types/aws-lambda": "8.10.159"
+  },
   "scripts": {
+    "build": "webpack",
+    "lint": "npx eslint .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

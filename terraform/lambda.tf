@@ -5,7 +5,7 @@ locals {
 data "archive_file" "lambda_birdsongquiz" {
   type = "zip"
 
-  source_dir  = "../api"
+  source_dir  = "../api/dist"
   output_path = "${path.module}/birdsongquiz_lambdas.zip"
 }
 
