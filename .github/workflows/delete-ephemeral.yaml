@@ -55,7 +55,8 @@ jobs:
           aws s3 rm s3://birdsongquiz-bucket-$ENV_NAME --recursive
       - name: Terraform select workspace for ephemeral environment
         run: terraform workspace select $ENV_NAME
-
+      - name: Place dummy zip file in place to keep TF destroy happy
+        run: touch birdsongquiz_lambdas.zip
       - name: Terraform destroy
         run: |
           terraform destroy -auto-approve \
