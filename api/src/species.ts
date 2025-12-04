@@ -1,28 +1,13 @@
 import {
   S3Client,
-  GetObjectCommand,
   PutObjectCommand,
   DeleteObjectCommand,
 } from '@aws-sdk/client-s3';
-import { listFilesForPrefix, s3KeyExists } from './s3_utils';
+import { listFilesForPrefix, s3KeyExists, getObjectFromS3AsString } from './s3_utils';
 import { randomUUID } from 'crypto';
 import { PresetListNameDetails, PresetListSuggestion } from './model/species_lists';
 
 const REGION = 'eu-west-2';
-
-const getObjectFromS3AsString = async (
-  bucketName: string,
-  s3Key: string,
-): Promise<string> => {
-  const s3Client = new S3Client({ region: REGION });
-  const { Body } = await s3Client.send(
-    new GetObjectCommand({
-      Bucket: bucketName,
-      Key: s3Key,
-    }),
-  );
-  return Body!.transformToString();
-};
 
 const deleteObjectFromS3 = async (bucketName: string, s3Key: string) => {
   const s3Client = new S3Client({ region: REGION });
