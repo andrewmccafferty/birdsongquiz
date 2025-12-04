@@ -40,10 +40,7 @@ test("should be able to submit a suggestion, and on approval it shows up in the 
   request,
 }) => {  
   const testPresetListName = `Test List ${Date.now()}`;
-  const presetListSuggestion = {
-    region: "GB",
-    listName: testPresetListName,
-    speciesList: [
+  const testSpeciesList = [
       {
         Species: "Black Grouse",
         ScientificName: "Lyrurus tetrix",
@@ -52,7 +49,11 @@ test("should be able to submit a suggestion, and on approval it shows up in the 
         Species: "Ptarmigan",
         ScientificName: "Lagopus muta",
       },
-    ],
+    ]
+  const presetListSuggestion = {
+    region: "GB",
+    listName: testPresetListName,
+    speciesList: testSpeciesList,
   } as PresetListSuggestion;
   const suggestionResponse = await request.post(
     `${API_ROOT}/presets/suggestion`,
@@ -61,7 +62,9 @@ test("should be able to submit a suggestion, and on approval it shows up in the 
   expect(suggestionResponse.status()).toEqual(200);
   const suggestion = await suggestionResponse.json();
   expect(suggestion.suggestionId).toBeDefined();
+
   const suggestionId =  suggestion.suggestionId;
+  
   await invokeLambda(APPROVE_PRESET_LIST_LAMBDA, {
     "suggestionId": suggestionId
   })
@@ -71,11 +74,16 @@ test("should be able to submit a suggestion, and on approval it shows up in the 
   );
   expect(presetsListResponse.status()).toEqual(200);
   const presetsList = await presetsListResponse.json();
-  expect(
-    presetsList.presets.some(
+  const newPresetList = presetsList.presets.find(
       (preset: { name: string}) =>
         preset.name === testPresetListName
-    ),
-    `Presets list should contain ${testPresetListName}`
-  ).toBe(true);
+    )
+  expect(newPresetList).toBeDefined();
+  
+  const newPresetListGetResponse = await request.get(`${API_ROOT}/species?listId=${newPresetList.id}`)
+  expect(newPresetListGetResponse.status()).toEqual(200)
+  expect(await newPresetListGetResponse.json()).toEqual({
+    species: testSpeciesList
+  })
+
 });
