@@ -1,8 +1,22 @@
 import { test, expect } from "@playwright/test";
 import { invokeLambda } from "./aws_utils/lambda";
 
-const API_ROOT = process.env.API_ROOT as string;
-const APPROVE_PRESET_LIST_LAMBDA = process.env.APPROVE_PRESET_LIST_LAMBDA as string;
+const getEnvironmentVariable = (name: string): string => {
+  const result = process.env[name];
+  if (!result || result == "") {
+    throw Error(`No value set for environment variable ${name}`)
+  }
+  return result as string
+  
+}
+
+const getApiRoot = (): string => {
+  return getEnvironmentVariable("API_ROOT")
+}
+
+const getApprovePresetListLambdaName = (): string => {
+  return getEnvironmentVariable("APPROVE_PRESET_LIST_LAMBDA")
+}
 
 export interface SpeciesDetail {
   Species: string;
@@ -17,7 +31,7 @@ export interface PresetListSuggestion {
 
 test("should get a list of species for country", async ({ request }) => {
   const speciesListResponse = await request.get(
-    `${API_ROOT}/species?region=GB`
+    `${getApiRoot()}/species?region=GB`
   );
   expect(speciesListResponse.status()).toEqual(200);
   const speciesList = await speciesListResponse.json();
@@ -56,7 +70,7 @@ test("should be able to submit a suggestion, and on approval it shows up in the 
     speciesList: testSpeciesList,
   } as PresetListSuggestion;
   const suggestionResponse = await request.post(
-    `${API_ROOT}/presets/suggestion`,
+    `${getApiRoot()}/presets/suggestion`,
     { data: presetListSuggestion }
   );
   expect(suggestionResponse.status()).toEqual(200);
@@ -65,12 +79,12 @@ test("should be able to submit a suggestion, and on approval it shows up in the 
 
   const suggestionId =  suggestion.suggestionId;
   
-  await invokeLambda(APPROVE_PRESET_LIST_LAMBDA, {
+  await invokeLambda(getApprovePresetListLambdaName(), {
     "suggestionId": suggestionId
   })
   
   const presetsListResponse = await request.get(
-    `${API_ROOT}/presets/GB`
+    `${getApiRoot()}/presets/GB`
   );
   expect(presetsListResponse.status()).toEqual(200);
   const presetsList = await presetsListResponse.json();
@@ -80,7 +94,7 @@ test("should be able to submit a suggestion, and on approval it shows up in the 
     )
   expect(newPresetList).toBeDefined();
   
-  const newPresetListGetResponse = await request.get(`${API_ROOT}/species?listId=${newPresetList.id}`)
+  const newPresetListGetResponse = await request.get(`${getApiRoot()}/species?listId=${newPresetList.id}`)
   expect(newPresetListGetResponse.status()).toEqual(200)
   expect(await newPresetListGetResponse.json()).toEqual({
     species: testSpeciesList

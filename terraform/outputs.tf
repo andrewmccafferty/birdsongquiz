@@ -17,3 +17,8 @@ output "frontend_url" {
   description = "Cloudfront URL for birdsong quiz website"
   value = "https://${aws_cloudfront_distribution.static_site.domain_name}"
 }
+
+output "approve_preset_list_lambda" {
+  description = "Name of the preset list Lambda"
+  value = aws_lambda_function.approve_preset_list.function_name
+}
