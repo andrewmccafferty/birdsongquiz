@@ -18,6 +18,7 @@
   },
   "scripts": {
     "build": "webpack",
+    "package": "npm run build && cd dist && zip -r ../birdsongquiz_lambdas.zip . && cd .. && mv birdsongquiz_lambdas.zip ../terraform/",
     "lint": "npx eslint .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
