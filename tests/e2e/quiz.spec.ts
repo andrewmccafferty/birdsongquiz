@@ -1,8 +1,9 @@
 import { test, expect } from '@playwright/test';
+import { RUN_IN_PROD_TAG } from './constants';
 
 const FRONTEND_URL = process.env.FRONTEND_URL as string
 
-test('Run quiz with default species', async ({ page }) => {
+test('Run quiz with default species', { tag: RUN_IN_PROD_TAG }, async ({ page }) => {
   await page.goto(FRONTEND_URL);
   await page.getByLabel('Sound type:').selectOption('song');
   await page.getByRole('combobox', { name: 'Start typing to choose a' }).click();
@@ -18,7 +19,7 @@ test('Run quiz with default species', async ({ page }) => {
   await page.getByTestId('reset').click();
 });
 
-test('Run quiz with Australian species', async ({ page }) => {
+test('Run quiz with Australian species', { tag: RUN_IN_PROD_TAG }, async ({ page }) => {
   await page.goto(FRONTEND_URL);
   await page.getByTestId("country").selectOption('AU');
   await page.getByRole('combobox', { name: 'Start typing to choose a' }).click();
@@ -34,7 +35,7 @@ test('Run quiz with Australian species', async ({ page }) => {
   await page.getByTestId('reset').click();
 });
 
-test('test with presets', async ({ page }) => {
+test('test with presets', { tag: RUN_IN_PROD_TAG }, async ({ page }) => {
   await page.goto(FRONTEND_URL);
   await page.getByTestId("country").selectOption('GB');
   await page.getByLabel('Sound type:').selectOption('call');

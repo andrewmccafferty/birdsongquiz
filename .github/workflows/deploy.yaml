@@ -135,9 +135,14 @@ jobs:
       - name: Install Playwright Browsers
         working-directory: ./tests/e2e
         run: npx playwright install --with-deps chromium
-      - name: Run Playwright tests
+      - name: Run Playwright tests for ephemerals
+        if: github.event_name == 'pull_request'
         working-directory: ./tests/e2e
-        run: npx playwright test
+        run: npm run test
+      - name: Run Playwright Prod tests
+        if: ${{ github.ref == 'refs/heads/main' }}
+        working-directory: ./tests/e2e
+        run: npm run prod-test
       - name: Plan for prod
         if: github.event_name == 'pull_request'
         run: |
