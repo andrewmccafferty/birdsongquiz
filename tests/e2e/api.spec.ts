@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { invokeLambda } from "./aws_utils/lambda";
+import { RUN_IN_PROD_TAG } from "./constants";
 
 const getEnvironmentVariable = (name: string): string => {
   const result = process.env[name];
@@ -29,7 +30,7 @@ export interface PresetListSuggestion {
   speciesList: SpeciesDetail[];
 }
 
-test("should get a list of species for country", async ({ request }) => {
+test("should get a list of species for country", { tag: RUN_IN_PROD_TAG }, async ({ request }) => {
   const speciesListResponse = await request.get(
     `${getApiRoot()}/species?region=GB`
   );
