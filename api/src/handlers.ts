@@ -36,6 +36,10 @@ export const getRecording = async (event: APIGatewayEvent): Promise<APIGatewayPr
   const species = event.queryStringParameters
     ? event.queryStringParameters['species'] ?? null
     : null;
+  if (!species) {
+    return response(400, { message: "No species query string parameter provided"})
+  }
+  
   const soundType = event.queryStringParameters
     ? event.queryStringParameters['soundType'] ?? null
     : null;
