@@ -1,6 +1,5 @@
-import * as http from 'http';
-import * as https from 'https';
 import { XenoCantoResponse, Recording } from './model/xeno_canto_responses';
+import { getApiJsonData } from './api_helper';
 const formatTypeParameter = (soundType: string | null) =>
   soundType ? encodeURIComponent(` type:"${soundType}"`) : '';
 
@@ -17,44 +16,7 @@ const getRecordingData = async (
   console.log(
     `Calling getXenoCantoQueryUrl with species: ${species}, soundType: ${soundType}`,
   );
-  const url = getXenoCantoQueryUrl(species, soundType);
-
-  console.log('Calling with URL:', url);
-  // Tried to do this with fetch, but it didn't work in the Lambda
-  // for some reason.
-  return new Promise((resolve, reject) => {
-    const lib = url.startsWith('https') ? https : http;
-
-    const request = lib.get(url, (response) => {
-      let data = '';
-
-      response.on('data', (chunk) => {
-        data += chunk;
-      });
-
-      response.on('end', () => {
-        if (response.statusCode === 200) {
-          try {
-            resolve(JSON.parse(data));
-          } catch (error: unknown) {
-            reject(new Error(`Error parsing JSON: ${error}`));
-          }
-        } else {
-          reject(
-            new Error(
-              `Failed to fetch recording results: status code ${response.statusCode}, response body ${data}`,
-            ),
-          );
-        }
-      });
-    });
-
-    request.on('error', (error) => {
-      reject(new Error(`Request error: ${error.message}`));
-    });
-
-    request.end();
-  });
+  return getApiJsonData<XenoCantoResponse>(getXenoCantoQueryUrl(species, soundType))
 };
 
 const constructSoundUrlFromRecordingData = (recording: Recording): string => {
@@ -70,7 +32,7 @@ const constructSoundUrlFromRecordingData = (recording: Recording): string => {
   return `https://xeno-canto.org/sounds/uploaded/${recordistId}/${mp3FileName}`;
 };
 
-export const getRandomRecordingForSpecies = async (
+const getRandomRecordingForSpecies = async (
   species: string | null,
   soundType: string | null,
 ) => {
@@ -89,9 +51,15 @@ export const getRandomRecordingForSpecies = async (
   const recording = data.recordings[randomIndex];
   return {
     species: species,
-    recording,
+    recording: {
+      id: recording.id,
+      en: recording.en,
+      rec: recording.rec,
+      gen: recording.gen,
+      sp: recording.sp
+    },
     soundUrl: constructSoundUrlFromRecordingData(recording),
   };
 };
 
-
+export { getRandomRecordingForSpecies }

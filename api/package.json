@@ -3,25 +3,30 @@
   "version": "1.0.0",
   "description": "",
   "main": "dist/handlers.cjs",
+  "type": "module",
   "dependencies": {
     "@aws-sdk/client-s3": "3.850.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@types/aws-lambda": "8.10.159",
+    "@types/jest": "^30.0.0",
     "eslint": "^9.39.1",
+    "jest": "^30.2.0",
+    "ts-jest": "^29.4.6",
+    "ts-loader": "^9.5.1",
+    "ts-node": "^10.9.2",
     "typescript": "^5.6.3",
     "typescript-eslint": "^8.48.1",
-    "ts-loader": "^9.5.1",
     "webpack": "^5.0.0",
     "webpack-cli": "^4.0.0",
-    "@types/aws-lambda": "8.10.159",
     "yazl": "^3.3.1"
   },
   "scripts": {
     "build": "webpack",
-    "package": "npm run build && node ./scripts/package-zip.js",
+    "package": "npm run build && node ./scripts/package-zip.cjs",
     "lint": "npx eslint .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "",
   "license": "ISC"
