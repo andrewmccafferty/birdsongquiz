@@ -89,7 +89,13 @@ export const getRandomRecordingForSpecies = async (
   const recording = data.recordings[randomIndex];
   return {
     species: species,
-    recording,
+    recording: {
+      id: recording.id,
+      en: recording.en,
+      rec: recording.rec,
+      gen: recording.gen,
+      sp: recording.sp
+    },
     soundUrl: constructSoundUrlFromRecordingData(recording),
   };
 };

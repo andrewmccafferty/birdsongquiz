@@ -8,21 +8,33 @@ jest.mock('../src/recording', () => ({
 
 const mockGetRandomRecordingForSpecies = getRandomRecordingForSpecies as jest.Mock
 
+const TEST_SPECIES = "Testus specieus"
+const TEST_SOUND_URL = "https://xeno-canto.com/some-mp3.mp3"
+
 const givenRecordingAvailable = () => {
   const response = mockRecordingResponse(TEST_SPECIES, TEST_SOUND_URL)
   mockGetRandomRecordingForSpecies.mockResolvedValue(response)
   return response
 }
 
-const TEST_SPECIES = "Testus specieus"
-const TEST_SOUND_URL = "https://xeno-canto.com/some-mp3.mp3"
+
 describe("getRecording tests", () => {
     it("Should call through to getRandomRecordingForSpecies", async () => {
       const recordingData = givenRecordingAvailable();
       const recordingResponse = await getRecording(mockApiGatewayEvent(null, { species: TEST_SPECIES }))
       expect(getRandomRecordingForSpecies).toHaveBeenCalledWith(TEST_SPECIES, null);
       expect(recordingResponse.statusCode).toEqual(200)
-      expect(recordingResponse.body).toEqual(JSON.stringify(recordingData))
+      expect(recordingResponse.body).toEqual(JSON.stringify({
+        species: TEST_SPECIES,
+        recording: {
+          id: "737917",
+          en: "Great Black-backed Gull",
+          rec: "Alan Dalton",
+          gen: "Larus",
+          sp: "marinus"
+        },
+        soundUrl: TEST_SOUND_URL
+      }))
     })
 
     it("Should return a 400 status code when species isn't provided", async () => {
