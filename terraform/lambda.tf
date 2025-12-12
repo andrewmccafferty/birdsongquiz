@@ -1,5 +1,5 @@
 locals {
-  lambda_runtime = "nodejs24.x"
+  lambda_runtime  = "nodejs24.x"
   lambda_zip_path = "${path.module}/birdsongquiz_lambdas.zip"
 }
 
@@ -13,10 +13,10 @@ resource "aws_s3_object" "lambda_birdsongquiz" {
 }
 
 resource "aws_lambda_function" "get_preset_lists" {
-  function_name = var.environment == "prod" ? "GetPresetLists" : "GetPresetLists-${var.environment}" 
-  timeout = 30
-  s3_bucket = aws_s3_bucket.lambda_bucket.id
-  s3_key    = aws_s3_object.lambda_birdsongquiz.key
+  function_name = var.environment == "prod" ? "GetPresetLists" : "GetPresetLists-${var.environment}"
+  timeout       = 30
+  s3_bucket     = aws_s3_bucket.lambda_bucket.id
+  s3_key        = aws_s3_object.lambda_birdsongquiz.key
 
   runtime = local.lambda_runtime
   handler = "handlers.getSpeciesPresetLists"
@@ -25,7 +25,7 @@ resource "aws_lambda_function" "get_preset_lists" {
 
   role = aws_iam_role.get_preset_lists_role.arn
 
-   environment {
+  environment {
     variables = {
       SPECIES_LIST_BUCKET_NAME = aws_s3_bucket.species_list_bucket.id
     }
@@ -39,10 +39,10 @@ resource "aws_cloudwatch_log_group" "get_preset_lists" {
 }
 
 resource "aws_lambda_function" "get_species_list" {
-  function_name = var.environment == "prod" ? "GetSpeciesList" : "GetSpeciesList-${var.environment}" 
-  timeout = 30
-  s3_bucket = aws_s3_bucket.lambda_bucket.id
-  s3_key    = aws_s3_object.lambda_birdsongquiz.key
+  function_name = var.environment == "prod" ? "GetSpeciesList" : "GetSpeciesList-${var.environment}"
+  timeout       = 30
+  s3_bucket     = aws_s3_bucket.lambda_bucket.id
+  s3_key        = aws_s3_object.lambda_birdsongquiz.key
 
   runtime = local.lambda_runtime
   handler = "handlers.getSpeciesList"
@@ -51,7 +51,7 @@ resource "aws_lambda_function" "get_species_list" {
 
   role = aws_iam_role.get_species_list_role.arn
 
-   environment {
+  environment {
     variables = {
       SPECIES_LIST_BUCKET_NAME = aws_s3_bucket.species_list_bucket.id
     }
@@ -66,9 +66,9 @@ resource "aws_cloudwatch_log_group" "get_species_list" {
 
 resource "aws_lambda_function" "get_recording" {
   function_name = var.environment == "prod" ? "GetRecording" : "GetRecording-${var.environment}"
-  timeout = 30
-  s3_bucket = aws_s3_bucket.lambda_bucket.id
-  s3_key    = aws_s3_object.lambda_birdsongquiz.key
+  timeout       = 30
+  s3_bucket     = aws_s3_bucket.lambda_bucket.id
+  s3_key        = aws_s3_object.lambda_birdsongquiz.key
   environment {
     variables = {
       XC_API_KEY = var.xc_api_key
@@ -90,9 +90,9 @@ resource "aws_cloudwatch_log_group" "get_recording" {
 
 resource "aws_lambda_function" "suggest_preset_list" {
   function_name = var.environment == "prod" ? "SuggestPresetList" : "SuggestPresetList-${var.environment}"
-  timeout = 30
-  s3_bucket = aws_s3_bucket.lambda_bucket.id
-  s3_key    = aws_s3_object.lambda_birdsongquiz.key
+  timeout       = 30
+  s3_bucket     = aws_s3_bucket.lambda_bucket.id
+  s3_key        = aws_s3_object.lambda_birdsongquiz.key
   environment {
     variables = {
       SPECIES_LIST_BUCKET_NAME = aws_s3_bucket.species_list_bucket.id
@@ -114,16 +114,16 @@ resource "aws_cloudwatch_log_group" "suggest_preset_list" {
 
 resource "aws_lambda_function" "notify_preset_list_suggested" {
   function_name = var.environment == "prod" ? "NotifyPresetListSuggested" : "NotifyPresetListSuggested-${var.environment}"
-  timeout = 30
-  s3_bucket = aws_s3_bucket.lambda_bucket.id
-  s3_key    = aws_s3_object.lambda_birdsongquiz.key
+  timeout       = 30
+  s3_bucket     = aws_s3_bucket.lambda_bucket.id
+  s3_key        = aws_s3_object.lambda_birdsongquiz.key
   environment {
     variables = {
       SHOULD_SEND_SUGGESTION_NOTIFICATION_EMAILS = var.environment == "prod" ? true : null
-      SPECIES_LIST_BUCKET_NAME = aws_s3_bucket.species_list_bucket.id
-      MAILER_SEND_API_KEY = var.mailer_send_api_key
-      NOTIFICATIONS_FROM_EMAIL_ADDRESS = var.notifications_from_email_address
-      NOTIFICATIONS_TO_EMAIL_ADDRESS = var.notifications_to_email_address
+      SPECIES_LIST_BUCKET_NAME                   = aws_s3_bucket.species_list_bucket.id
+      MAILER_SEND_API_KEY                        = var.mailer_send_api_key
+      NOTIFICATIONS_FROM_EMAIL_ADDRESS           = var.notifications_from_email_address
+      NOTIFICATIONS_TO_EMAIL_ADDRESS             = var.notifications_to_email_address
     }
   }
   runtime = local.lambda_runtime
@@ -158,13 +158,13 @@ resource "aws_s3_bucket_notification" "species_list_notification" {
 
 resource "aws_lambda_function" "approve_preset_list" {
   function_name = var.environment == "prod" ? "ApprovePresetList" : "ApprovePresetList-${var.environment}"
-  timeout = 30
-  s3_bucket = aws_s3_bucket.lambda_bucket.id
-  s3_key    = aws_s3_object.lambda_birdsongquiz.key
+  timeout       = 30
+  s3_bucket     = aws_s3_bucket.lambda_bucket.id
+  s3_key        = aws_s3_object.lambda_birdsongquiz.key
   environment {
     variables = {
       SPECIES_LIST_BUCKET_NAME = aws_s3_bucket.species_list_bucket.id
-      FRONTEND_BUCKET_NAME = aws_s3_bucket.frontend_bucket.id
+      FRONTEND_BUCKET_NAME     = aws_s3_bucket.frontend_bucket.id
     }
   }
   runtime = local.lambda_runtime
@@ -239,7 +239,7 @@ resource "aws_iam_role_policy" "species_list_s3_access" {
           "s3:ListBucket"
         ]
         Resource = [
-          "${aws_s3_bucket.species_list_bucket.arn}",
+          aws_s3_bucket.species_list_bucket.arn,
           "${aws_s3_bucket.species_list_bucket.arn}/*"
         ]
       }
@@ -283,7 +283,7 @@ resource "aws_iam_role_policy" "get_preset_lists_s3_access" {
           "s3:ListBucket"
         ]
         Resource = [
-          "${aws_s3_bucket.species_list_bucket.arn}",
+          aws_s3_bucket.species_list_bucket.arn,
           "${aws_s3_bucket.species_list_bucket.arn}/*"
         ]
       }
@@ -363,12 +363,12 @@ resource "aws_iam_role_policy" "approve_preset_list_s3_access" {
     Version = "2012-10-17"
     Statement = [
       {
-        "Effect": "Allow",
-        "Action": [
-            "s3:ListBucket",
-            "s3:GetBucketLocation"
-          ],
-        "Resource": "${aws_s3_bucket.species_list_bucket.arn}"
+        "Effect" : "Allow",
+        "Action" : [
+          "s3:ListBucket",
+          "s3:GetBucketLocation"
+        ],
+        "Resource" : aws_s3_bucket.species_list_bucket.arn
       },
       {
         Effect = "Allow"
