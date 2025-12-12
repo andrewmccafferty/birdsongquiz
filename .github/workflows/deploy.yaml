@@ -1,17 +1,17 @@
 name: "Deploy full application stack"
 on:
-  push: 
+  push:
     branches:
-    - main
+      - main
   pull_request:
     branches:
-    - main
+      - main
 
 permissions:
-      id-token: write
-      contents: read
+  id-token: write
+  contents: read
 
-env: 
+env:
   TF_LOG: ""
   AWS_REGION: eu-west-2
   BUCKET_TF_STATE: ${{ secrets.BUCKET_TF_STATE}}
@@ -36,6 +36,10 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
       - name: Checkout the repository to the runner
         uses: actions/checkout@v2
+      - name: Install root dependencies (Prettier)
+        run: npm ci
+      - name: Check code formatting with Prettier
+        run: npm run format:check
       - name: Load dependencies for api layer
         working-directory: ./api
         run: npm ci
@@ -56,7 +60,7 @@ jobs:
           # because without it the steps which read TF output will fail,
           # they end up with a load of debug output to filter out.
           terraform_wrapper: false
-      
+
       - name: Terraform init
         id: init
         run: terraform init -backend-config="bucket=$BUCKET_TF_STATE"

@@ -1,14 +1,13 @@
-import { test, expect } from "@playwright/test";
-import { invokeLambda } from "./aws_utils/lambda";
-import { RUN_IN_PROD_TAG } from "./constants";
+import { test, expect } from "@playwright/test"
+import { invokeLambda } from "./aws_utils/lambda"
+import { RUN_IN_PROD_TAG } from "./constants"
 
 const getEnvironmentVariable = (name: string): string => {
-  const result = process.env[name];
+  const result = process.env[name]
   if (!result || result == "") {
     throw Error(`No value set for environment variable ${name}`)
   }
   return result as string
-  
 }
 
 const getApiRoot = (): string => {
@@ -20,85 +19,87 @@ const getApprovePresetListLambdaName = (): string => {
 }
 
 export interface SpeciesDetail {
-  Species: string;
-  ScientificName: string;
+  Species: string
+  ScientificName: string
 }
 
 export interface PresetListSuggestion {
-  region: string;
-  listName: string;
-  speciesList: SpeciesDetail[];
+  region: string
+  listName: string
+  speciesList: SpeciesDetail[]
 }
 
-test("should get a list of species for country", { tag: RUN_IN_PROD_TAG }, async ({ request }) => {
-  const speciesListResponse = await request.get(
-    `${getApiRoot()}/species?region=GB`
-  );
-  expect(speciesListResponse.status()).toEqual(200);
-  const speciesList = await speciesListResponse.json();
-  expect(speciesList.species).toBeInstanceOf(Array);
-  expect(
-    speciesList.species.length,
-    "Species list should have more than 200 entries"
-  ).toBeGreaterThan(200);
-  expect(
-    speciesList.species.some(
-      (species: SpeciesDetail) =>
-        species.Species === "Blackbird" &&
-        species.ScientificName == "Turdus merula"
-    ),
-    "Species list should contain Blackbird"
-  ).toBe(true);
-});
+test(
+  "should get a list of species for country",
+  { tag: RUN_IN_PROD_TAG },
+  async ({ request }) => {
+    const speciesListResponse = await request.get(
+      `${getApiRoot()}/species?region=GB`
+    )
+    expect(speciesListResponse.status()).toEqual(200)
+    const speciesList = await speciesListResponse.json()
+    expect(speciesList.species).toBeInstanceOf(Array)
+    expect(
+      speciesList.species.length,
+      "Species list should have more than 200 entries"
+    ).toBeGreaterThan(200)
+    expect(
+      speciesList.species.some(
+        (species: SpeciesDetail) =>
+          species.Species === "Blackbird" &&
+          species.ScientificName == "Turdus merula"
+      ),
+      "Species list should contain Blackbird"
+    ).toBe(true)
+  }
+)
 
 test("should be able to submit a suggestion, and on approval it shows up in the preset lists", async ({
   request,
-}) => {  
-  const testPresetListName = `Test List ${Date.now()}`;
+}) => {
+  const testPresetListName = `Test List ${Date.now()}`
   const testSpeciesList = [
-      {
-        Species: "Black Grouse",
-        ScientificName: "Lyrurus tetrix",
-      },
-      {
-        Species: "Ptarmigan",
-        ScientificName: "Lagopus muta",
-      },
-    ]
+    {
+      Species: "Black Grouse",
+      ScientificName: "Lyrurus tetrix",
+    },
+    {
+      Species: "Ptarmigan",
+      ScientificName: "Lagopus muta",
+    },
+  ]
   const presetListSuggestion = {
     region: "GB",
     listName: testPresetListName,
     speciesList: testSpeciesList,
-  } as PresetListSuggestion;
+  } as PresetListSuggestion
   const suggestionResponse = await request.post(
     `${getApiRoot()}/presets/suggestion`,
     { data: presetListSuggestion }
-  );
-  expect(suggestionResponse.status()).toEqual(200);
-  const suggestion = await suggestionResponse.json();
-  expect(suggestion.suggestionId).toBeDefined();
+  )
+  expect(suggestionResponse.status()).toEqual(200)
+  const suggestion = await suggestionResponse.json()
+  expect(suggestion.suggestionId).toBeDefined()
 
-  const suggestionId =  suggestion.suggestionId;
-  
+  const suggestionId = suggestion.suggestionId
+
   await invokeLambda(getApprovePresetListLambdaName(), {
-    "suggestionId": suggestionId
+    suggestionId: suggestionId,
   })
-  
-  const presetsListResponse = await request.get(
-    `${getApiRoot()}/presets/GB`
-  );
-  expect(presetsListResponse.status()).toEqual(200);
-  const presetsList = await presetsListResponse.json();
+
+  const presetsListResponse = await request.get(`${getApiRoot()}/presets/GB`)
+  expect(presetsListResponse.status()).toEqual(200)
+  const presetsList = await presetsListResponse.json()
   const newPresetList = presetsList.presets.find(
-      (preset: { name: string}) =>
-        preset.name === testPresetListName
-    )
-  expect(newPresetList).toBeDefined();
-  
-  const newPresetListGetResponse = await request.get(`${getApiRoot()}/species?listId=${newPresetList.id}`)
+    (preset: { name: string }) => preset.name === testPresetListName
+  )
+  expect(newPresetList).toBeDefined()
+
+  const newPresetListGetResponse = await request.get(
+    `${getApiRoot()}/species?listId=${newPresetList.id}`
+  )
   expect(newPresetListGetResponse.status()).toEqual(200)
   expect(await newPresetListGetResponse.json()).toEqual({
-    species: testSpeciesList
+    species: testSpeciesList,
   })
-
-});
+})

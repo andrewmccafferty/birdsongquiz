@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import './Modal.css';
-import { postApi } from './api';
-import { SpeciesEntry } from './types';
+import React, { Component } from "react"
+import "./Modal.css"
+import { postApi } from "./api"
+import { SpeciesEntry } from "./types"
 
 interface SuggestPresetListModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  speciesList: SpeciesEntry[];
-  country: string;
+  isOpen: boolean
+  onClose: () => void
+  speciesList: SpeciesEntry[]
+  country: string
 }
 
 interface SuggestPresetListModalState {
-  listName: string;
-  submitted: boolean;
-  submitting?: boolean;
+  listName: string
+  submitted: boolean
+  submitting?: boolean
 }
 
 class SuggestPresetListModal extends Component<
@@ -21,49 +21,49 @@ class SuggestPresetListModal extends Component<
   SuggestPresetListModalState
 > {
   constructor(props: SuggestPresetListModalProps) {
-    super(props);
+    super(props)
     this.state = {
-      listName: '',
+      listName: "",
       submitted: false,
-    };
+    }
   }
 
   handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if ((e.target as HTMLDivElement).className === 'modal') {
-      this.props.onClose();
+    if ((e.target as HTMLDivElement).className === "modal") {
+      this.props.onClose()
     }
-  };
+  }
 
   submitList = () => {
-    this.setState({ submitting: true });
-    postApi('presets/suggestion', {
+    this.setState({ submitting: true })
+    postApi("presets/suggestion", {
       region: this.props.country,
       listName: this.state.listName,
       speciesList: this.props.speciesList,
     })
       .then((result) => {
-        console.log('Got result', result);
-        this.setState({ submitted: true, submitting: false });
+        console.log("Got result", result)
+        this.setState({ submitted: true, submitting: false })
       })
       .catch(() => {
-        alert('Something went wrong submitting your list. Try again.');
-        this.setState({ submitting: false });
-      });
-  };
+        alert("Something went wrong submitting your list. Try again.")
+        this.setState({ submitting: false })
+      })
+  }
 
   isReadyToSubmit() {
-    return this.state.listName && this.state.listName.length > 5;
+    return this.state.listName && this.state.listName.length > 5
   }
 
   shouldShowSubmittingSpinner() {
-    return this.state.submitting;
+    return this.state.submitting
   }
 
   render() {
-    const { isOpen, onClose, speciesList, country } = this.props;
-    const { listName } = this.state;
+    const { isOpen, onClose, speciesList, country } = this.props
+    const { listName } = this.state
 
-    if (!isOpen) return null;
+    if (!isOpen) return null
 
     return (
       <div className="modal" onClick={this.handleOverlayClick}>
@@ -116,9 +116,7 @@ class SuggestPresetListModal extends Component<
                   type="text"
                   id="list-name"
                   value={listName}
-                  onChange={(e) =>
-                    this.setState({ listName: e.target.value })
-                  }
+                  onChange={(e) => this.setState({ listName: e.target.value })}
                 />
               </div>
 
@@ -130,10 +128,7 @@ class SuggestPresetListModal extends Component<
                 >
                   Submit
                 </button>
-                <button
-                  className="action-button"
-                  onClick={this.props.onClose}
-                >
+                <button className="action-button" onClick={this.props.onClose}>
                   Cancel
                 </button>
               </div>
@@ -141,10 +136,8 @@ class SuggestPresetListModal extends Component<
           )}
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default SuggestPresetListModal;
-
-
+export default SuggestPresetListModal

@@ -1,0 +1,16 @@
+{
+  "name": "birdsongquiz-lambda",
+  "version": "1.0.0",
+  "description": "Birdsong Quiz Lambda Project",
+  "private": true,
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "prettier": "^3.2.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

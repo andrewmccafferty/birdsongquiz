@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import ReactGA from 'react-ga4';
-import { PresetList } from './types';
+import React, { Component } from "react"
+import ReactGA from "react-ga4"
+import { PresetList } from "./types"
 
 interface PresetSpeciesSelectorProps {
-  presetLists: PresetList[];
-  onSpeciesListChanged: (speciesListId: string) => void;
+  presetLists: PresetList[]
+  onSpeciesListChanged: (speciesListId: string) => void
 }
 
 interface PresetSpeciesSelectorState {
-  presetLists: PresetList[];
+  presetLists: PresetList[]
 }
 
 class PresetSpeciesSelector extends Component<
@@ -16,19 +16,19 @@ class PresetSpeciesSelector extends Component<
   PresetSpeciesSelectorState
 > {
   constructor(props: PresetSpeciesSelectorProps) {
-    super(props);
+    super(props)
     this.state = {
       presetLists: props.presetLists,
-    };
+    }
   }
 
   onSpeciesListChanged = (speciesListId: string) => {
     ReactGA.event({
-      category: 'User',
+      category: "User",
       action: `Used preset list:+${speciesListId}`,
-    });
-    this.props.onSpeciesListChanged(speciesListId);
-  };
+    })
+    this.props.onSpeciesListChanged(speciesListId)
+  }
 
   render() {
     return (
@@ -54,10 +54,8 @@ class PresetSpeciesSelector extends Component<
           </div>
         )}
       </div>
-    );
+    )
   }
 }
 
-export default PresetSpeciesSelector;
-
-
+export default PresetSpeciesSelector

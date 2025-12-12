@@ -1,26 +1,26 @@
-import React from 'react';
-import './Modal.css';
+import React from "react"
+import "./Modal.css"
 
 interface GameExplanationModalProps {
-  isOpen: boolean;
-  onClose: () => void;
+  isOpen: boolean
+  onClose: () => void
 }
 
 const GameExplanationModal: React.FC<GameExplanationModalProps> = ({
   isOpen,
   onClose,
 }) => {
-  if (!isOpen) return null;
+  if (!isOpen) return null
 
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if ((e.target as HTMLDivElement).className === 'modal') {
-      onClose();
+    if ((e.target as HTMLDivElement).className === "modal") {
+      onClose()
     }
-  };
+  }
 
   const getCurrentAppVersion = () => {
-    return process.env.CURRENT_APP_VERSION;
-  };
+    return process.env.CURRENT_APP_VERSION
+  }
 
   return (
     <div className="modal" onClick={handleOverlayClick}>
@@ -40,7 +40,7 @@ const GameExplanationModal: React.FC<GameExplanationModalProps> = ({
         </p>
         <p>
           The quiz will then randomly select one of the species you select, and
-          then randomly select examples of that species from{' '}
+          then randomly select examples of that species from{" "}
           <a href="http://www.xeno-canto.org">Xeno-Canto</a>, a worldwide
           website for birdsound sharing
         </p>
@@ -60,7 +60,7 @@ const GameExplanationModal: React.FC<GameExplanationModalProps> = ({
         </p>
         <p>
           Quiz built by Andrew McCafferty. If you've got any
-          feedback/suggestions, feel free to get in touch with me at{' '}
+          feedback/suggestions, feel free to get in touch with me at{" "}
           <a href="mailto:feedback@birdsongquiz.co.uk">
             feedback@birdsongquiz.co.uk
           </a>
@@ -71,9 +71,7 @@ const GameExplanationModal: React.FC<GameExplanationModalProps> = ({
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default GameExplanationModal;
-
-
+export default GameExplanationModal

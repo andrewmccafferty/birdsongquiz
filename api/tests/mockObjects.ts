@@ -1,7 +1,12 @@
-import { APIGatewayProxyEvent, APIGatewayProxyEventQueryStringParameters } from "aws-lambda";
+import {
+  APIGatewayProxyEvent,
+  APIGatewayProxyEventQueryStringParameters,
+} from "aws-lambda"
 
-export const mockApiGatewayEvent =  (body: unknown = null, 
-    queryStringParameters: APIGatewayProxyEventQueryStringParameters | null = null): APIGatewayProxyEvent => ({
+export const mockApiGatewayEvent = (
+  body: unknown = null,
+  queryStringParameters: APIGatewayProxyEventQueryStringParameters | null = null
+): APIGatewayProxyEvent => ({
   body: body ? JSON.stringify(body) : null,
   resource: "/example",
   path: "/example",
@@ -27,7 +32,7 @@ export const mockApiGatewayEvent =  (body: unknown = null,
     protocol: "HTTP/1.1",
     httpMethod: "GET",
     identity: {
-    clientCert: null,
+      clientCert: null,
       accessKey: null,
       accountId: null,
       apiKey: null,
@@ -51,16 +56,16 @@ export const mockApiGatewayEvent =  (body: unknown = null,
     resourcePath: "/example",
   },
   isBase64Encoded: false,
-});
+})
 
 export const mockRecordingResponse = (species: string, soundUrl: string) => ({
-    species: species,
-    recording: {
-        id: "737917",
-        en: "Great Black-backed Gull",
-        rec: "Alan Dalton",
-        gen: "Larus",
-        sp: "marinus"
-    },
-    soundUrl: soundUrl
+  species: species,
+  recording: {
+    id: "737917",
+    en: "Great Black-backed Gull",
+    rec: "Alan Dalton",
+    gen: "Larus",
+    sp: "marinus",
+  },
+  soundUrl: soundUrl,
 })
