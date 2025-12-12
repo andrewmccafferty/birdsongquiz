@@ -6,14 +6,25 @@ import {
   ListObjectsV2CommandOutput,
   _Object,
   S3ServiceException,
+  DeleteObjectCommand,
+  PutObjectCommand,
 } from "@aws-sdk/client-s3"
 
 const s3 = new S3Client({ region: "eu-west-2" })
 
-export async function listFilesForPrefix(
+const deleteObjectFromS3 = async (bucketName: string, s3Key: string) => {
+  await s3.send(
+    new DeleteObjectCommand({
+      Bucket: bucketName,
+      Key: s3Key,
+    })
+  )
+}
+
+const listFilesForPrefix = async (
   bucketName: string,
   prefix: string
-): Promise<string[]> {
+): Promise<string[]> => {
   const params = {
     Bucket: bucketName,
     Prefix: prefix.endsWith("/") ? prefix : `${prefix}/`,
@@ -51,7 +62,7 @@ export async function listFilesForPrefix(
   }
 }
 
-export const getObjectFromS3AsString = async (
+const getObjectFromS3AsString = async (
   bucketName: string,
   s3Key: string
 ): Promise<string> => {
@@ -65,10 +76,7 @@ export const getObjectFromS3AsString = async (
   return Body!.transformToString()
 }
 
-export async function s3KeyExists(
-  bucket: string,
-  key: string
-): Promise<boolean> {
+const s3KeyExists = async (bucket: string, key: string): Promise<boolean> => {
   try {
     await s3.send(new HeadObjectCommand({ Bucket: bucket, Key: key }))
     return true
@@ -81,4 +89,22 @@ export async function s3KeyExists(
     }
     throw err
   }
+}
+
+const putObjectToS3 = async (object: unknown, bucket: string, key: string) => {
+  return s3.send(
+    new PutObjectCommand({
+      Bucket: bucket,
+      Key: key,
+      Body: JSON.stringify(object),
+    })
+  )
+}
+
+export {
+  deleteObjectFromS3,
+  listFilesForPrefix,
+  getObjectFromS3AsString,
+  s3KeyExists,
+  putObjectToS3,
 }
