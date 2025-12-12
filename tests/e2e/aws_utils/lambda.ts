@@ -1,10 +1,12 @@
 import { LambdaClient, InvokeCommand } from "@aws-sdk/client-lambda";
 
-const lambda = new LambdaClient({ region: "eu-west-2"});
+const lambda = new LambdaClient({ region: "eu-west-2" });
 
 const invokeLambda = async (functionName: string, payload: unknown) => {
   if (!functionName) {
-    throw new Error("functionName parameter not set when trying to call Lambda")
+    throw new Error(
+      "functionName parameter not set when trying to call Lambda"
+    );
   }
   const command = new InvokeCommand({
     FunctionName: functionName,
@@ -31,8 +33,10 @@ const invokeLambda = async (functionName: string, payload: unknown) => {
 
   // Non-200 status code (invocation issue)
   if (response.StatusCode !== 200) {
-    throw new Error(`Lambda invocation failed with status ${response.StatusCode}`);
+    throw new Error(
+      `Lambda invocation failed with status ${response.StatusCode}`
+    );
   }
-}
+};
 
-export { invokeLambda }
+export { invokeLambda };

@@ -1,28 +1,28 @@
-import { getRandomRecordingForSpecies } from './recording';
+import { getRandomRecordingForSpecies } from "./recording";
 import {
   loadSpeciesListById,
   loadSpeciesListForRegion,
   getSpeciesPresetListsForRegion,
   storeSuggestedSpeciesList,
   approveSuggestedSpeciesList,
-} from './species';
-import { sendEmailWithSuggestionData } from './preset_suggestions';
-import { APIGatewayEvent, APIGatewayProxyResult, S3Event } from 'aws-lambda';
+} from "./species";
+import { sendEmailWithSuggestionData } from "./preset_suggestions";
+import { APIGatewayEvent, APIGatewayProxyResult, S3Event } from "aws-lambda";
 
 const response = (
   statusCode: number,
   responseBody: unknown,
-  addCacheHeader = false,
+  addCacheHeader = false
 ): APIGatewayProxyResult => {
   const headers: Record<string, string> = {
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
   };
   if (addCacheHeader) {
     // Cache for the maximum time allowed, which is one year
-    headers['Cache-Control'] = 'public, max-age=31536000';
+    headers["Cache-Control"] = "public, max-age=31536000";
   }
   return {
     statusCode,
@@ -31,39 +31,45 @@ const response = (
   };
 };
 
-export const getRecording = async (event: APIGatewayEvent): Promise<APIGatewayProxyResult> => {
-  console.log('Event: ', event);
+export const getRecording = async (
+  event: APIGatewayEvent
+): Promise<APIGatewayProxyResult> => {
+  console.log("Event: ", event);
   const species = event.queryStringParameters
-    ? event.queryStringParameters['species'] ?? null
+    ? (event.queryStringParameters["species"] ?? null)
     : null;
   if (!species) {
-    return response(400, { message: "No species query string parameter provided"})
+    return response(400, {
+      message: "No species query string parameter provided",
+    });
   }
-  
+
   const soundType = event.queryStringParameters
-    ? event.queryStringParameters['soundType'] ?? null
+    ? (event.queryStringParameters["soundType"] ?? null)
     : null;
   console.log(
-    `Calling getRandomRecordingForSpecies with species: ${species}, soundType: ${soundType}`,
+    `Calling getRandomRecordingForSpecies with species: ${species}, soundType: ${soundType}`
   );
   try {
     const recording = await getRandomRecordingForSpecies(species, soundType);
-    console.log('Got recording: ', recording);
+    console.log("Got recording: ", recording);
     return response(200, recording);
   } catch (error) {
-    console.error('Error getting recording: ', error);
-    return response(500, { message: 'Error getting recording' });
+    console.error("Error getting recording: ", error);
+    return response(500, { message: "Error getting recording" });
   }
 };
 
-export const getSpeciesList = async (event: APIGatewayEvent): Promise<APIGatewayProxyResult> => {
-  console.log('Event:', event);
-  const region = event.queryStringParameters?.['region'];
-  const listId = event.queryStringParameters?.['listId'];
+export const getSpeciesList = async (
+  event: APIGatewayEvent
+): Promise<APIGatewayProxyResult> => {
+  console.log("Event:", event);
+  const region = event.queryStringParameters?.["region"];
+  const listId = event.queryStringParameters?.["listId"];
   if (region) {
     const species_list = await loadSpeciesListForRegion(region);
     if (!species_list) {
-      return response(404, { message: 'No species list found for region' });
+      return response(404, { message: "No species list found for region" });
     }
     return response(200, { species: species_list }, true);
   }
@@ -71,7 +77,7 @@ export const getSpeciesList = async (event: APIGatewayEvent): Promise<APIGateway
   if (listId) {
     const species_list = await loadSpeciesListById(listId.toLowerCase());
     if (!species_list) {
-      return response(404, { message: 'No species list found for given id' });
+      return response(404, { message: "No species list found for given id" });
     }
     return response(200, { species: species_list }, true);
   }
@@ -81,37 +87,47 @@ export const getSpeciesList = async (event: APIGatewayEvent): Promise<APIGateway
   });
 };
 
-export const getSpeciesPresetLists = async (event: APIGatewayEvent): Promise<APIGatewayProxyResult> => {
-  console.log('Entering preset lists handler with event', event);
+export const getSpeciesPresetLists = async (
+  event: APIGatewayEvent
+): Promise<APIGatewayProxyResult> => {
+  console.log("Entering preset lists handler with event", event);
   const region = event.pathParameters?.region;
 
   if (!region) {
-    return response(400, { message: "Missing required path parameter 'region'" });
+    return response(400, {
+      message: "Missing required path parameter 'region'",
+    });
   }
-  console.log('Loading preset lists with region', region);
+  console.log("Loading preset lists with region", region);
   return response(
     200,
     { presets: await getSpeciesPresetListsForRegion(region) },
-    true,
+    true
   );
 };
 
-export const suggestPresetList = async (event: APIGatewayEvent): Promise<APIGatewayProxyResult> => {
+export const suggestPresetList = async (
+  event: APIGatewayEvent
+): Promise<APIGatewayProxyResult> => {
   const body = event.body;
   const presetListData = body ? JSON.parse(body) : {};
   const region = presetListData.region;
   const listName = presetListData.listName;
   const speciesList = presetListData.speciesList;
   if (!listName || listName.length === 0) {
-    return response(400, { message: 'Missing listName property from request body' });
+    return response(400, {
+      message: "Missing listName property from request body",
+    });
   }
   if (!region || region.length === 0) {
-    return response(400, { message: 'Missing region property from request body' });
+    return response(400, {
+      message: "Missing region property from request body",
+    });
   }
   if (!speciesList || speciesList.length < 2) {
     return response(400, {
       message:
-        'Species list not found in speciesList, or has fewer than 2 species',
+        "Species list not found in speciesList, or has fewer than 2 species",
     });
   }
 
@@ -123,7 +139,7 @@ export const suggestPresetList = async (event: APIGatewayEvent): Promise<APIGate
 
 export const approvePresetList = async (event: { suggestionId?: string }) => {
   if (!event.suggestionId) {
-    throw new Error('suggestionId property not set in event body');
+    throw new Error("suggestionId property not set in event body");
   }
 
   const listPath = await approveSuggestedSpeciesList(event.suggestionId);
@@ -134,8 +150,6 @@ export const notifyPresetListSuggested = async (event: S3Event) => {
   const record = event.Records[0];
   const bucket = record.s3.bucket.name;
   const key = record.s3.object.key;
-  console.log('Handling event with bucket and key', bucket, key);
+  console.log("Handling event with bucket and key", bucket, key);
   await sendEmailWithSuggestionData(bucket, key);
 };
-
-

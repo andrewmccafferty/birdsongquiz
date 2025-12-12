@@ -1,14 +1,14 @@
-import React from 'react';
+import React from "react";
 
-type CountryCode = 'AU' | 'CO' | 'EUR' | 'MY' | 'ZA' | 'US' | 'GB';
+type CountryCode = "AU" | "CO" | "EUR" | "MY" | "ZA" | "US" | "GB";
 
-const countries: { code: Exclude<CountryCode, 'GB'>; name: string }[] = [
-  { code: 'AU', name: 'Australia' },
-  { code: 'CO', name: 'Colombia' },
-  { code: 'EUR', name: 'Europe' },
-  { code: 'MY', name: 'Malaysia' },
-  { code: 'ZA', name: 'South Africa' },
-  { code: 'US', name: 'United States' },
+const countries: { code: Exclude<CountryCode, "GB">; name: string }[] = [
+  { code: "AU", name: "Australia" },
+  { code: "CO", name: "Colombia" },
+  { code: "EUR", name: "Europe" },
+  { code: "MY", name: "Malaysia" },
+  { code: "ZA", name: "South Africa" },
+  { code: "US", name: "United States" },
 ];
 
 interface CountrySelectorProps {
@@ -32,5 +32,3 @@ function CountrySelector({ onChange }: CountrySelectorProps) {
 }
 
 export default CountrySelector;
-
-

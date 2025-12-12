@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Build outputs
+dist/
+built/
+*.tfstate
+*.tfstate.backup
+.terraform/
+.terraform.lock.hcl
+birdsongquiz_lambdas.zip
+
+# Test outputs
+coverage/
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+.last-run.json
+
+# Lock files
+package-lock.json
+**/package-lock.json
+
+# Generated files
+*.cjs.map
+*.js.map
+

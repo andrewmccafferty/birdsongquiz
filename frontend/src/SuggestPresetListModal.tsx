@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import './Modal.css';
-import { postApi } from './api';
-import { SpeciesEntry } from './types';
+import React, { Component } from "react";
+import "./Modal.css";
+import { postApi } from "./api";
+import { SpeciesEntry } from "./types";
 
 interface SuggestPresetListModalProps {
   isOpen: boolean;
@@ -23,30 +23,30 @@ class SuggestPresetListModal extends Component<
   constructor(props: SuggestPresetListModalProps) {
     super(props);
     this.state = {
-      listName: '',
+      listName: "",
       submitted: false,
     };
   }
 
   handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if ((e.target as HTMLDivElement).className === 'modal') {
+    if ((e.target as HTMLDivElement).className === "modal") {
       this.props.onClose();
     }
   };
 
   submitList = () => {
     this.setState({ submitting: true });
-    postApi('presets/suggestion', {
+    postApi("presets/suggestion", {
       region: this.props.country,
       listName: this.state.listName,
       speciesList: this.props.speciesList,
     })
       .then((result) => {
-        console.log('Got result', result);
+        console.log("Got result", result);
         this.setState({ submitted: true, submitting: false });
       })
       .catch(() => {
-        alert('Something went wrong submitting your list. Try again.');
+        alert("Something went wrong submitting your list. Try again.");
         this.setState({ submitting: false });
       });
   };
@@ -116,9 +116,7 @@ class SuggestPresetListModal extends Component<
                   type="text"
                   id="list-name"
                   value={listName}
-                  onChange={(e) =>
-                    this.setState({ listName: e.target.value })
-                  }
+                  onChange={(e) => this.setState({ listName: e.target.value })}
                 />
               </div>
 
@@ -130,10 +128,7 @@ class SuggestPresetListModal extends Component<
                 >
                   Submit
                 </button>
-                <button
-                  className="action-button"
-                  onClick={this.props.onClose}
-                >
+                <button className="action-button" onClick={this.props.onClose}>
                   Cancel
                 </button>
               </div>
@@ -146,5 +141,3 @@ class SuggestPresetListModal extends Component<
 }
 
 export default SuggestPresetListModal;
-
-

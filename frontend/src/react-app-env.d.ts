@@ -5,6 +5,3 @@ declare namespace NodeJS {
     readonly GOOGLE_ANALYTICS_ID?: string;
   }
 }
-
-
-

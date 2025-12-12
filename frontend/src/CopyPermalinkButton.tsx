@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCopy } from '@fortawesome/free-solid-svg-icons';
+import React, { Component } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCopy } from "@fortawesome/free-solid-svg-icons";
 
 interface CopyPermalinkButtonProps {
   permalink: string;
@@ -30,7 +30,7 @@ class CopyPermalinkButton extends Component<
 
       setTimeout(() => this.setState({ copied: false }), 2000);
     } catch (err) {
-      console.error('Failed to copy:', err);
+      console.error("Failed to copy:", err);
     }
   };
 
@@ -40,13 +40,13 @@ class CopyPermalinkButton extends Component<
     return (
       <button
         onClick={this.handleCopy}
-        title={copied ? 'Copied!' : 'Copy permalink'}
+        title={copied ? "Copied!" : "Copy permalink"}
         style={{
-          padding: '0.4rem 0.6rem',
-          cursor: 'pointer',
-          background: 'transparent',
-          border: 'none',
-          fontSize: '1.2rem',
+          padding: "0.4rem 0.6rem",
+          cursor: "pointer",
+          background: "transparent",
+          border: "none",
+          fontSize: "1.2rem",
         }}
       >
         <FontAwesomeIcon icon={faCopy} />
@@ -56,5 +56,3 @@ class CopyPermalinkButton extends Component<
 }
 
 export default CopyPermalinkButton;
-
-

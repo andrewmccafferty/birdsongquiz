@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import ReactGA from 'react-ga4';
-import HeadToHeadSpeciesSelector from './HeadToHeadSpeciesSelector';
-import GameControls from './GameControls';
-import GameExplanationModal from './GameExplanationModal';
-import SuggestPresetListModal from './SuggestPresetListModal';
-import CopyPermalinkButton from './CopyPermalinkButton';
+import React, { Component } from "react";
+import ReactGA from "react-ga4";
+import HeadToHeadSpeciesSelector from "./HeadToHeadSpeciesSelector";
+import GameControls from "./GameControls";
+import GameExplanationModal from "./GameExplanationModal";
+import SuggestPresetListModal from "./SuggestPresetListModal";
+import CopyPermalinkButton from "./CopyPermalinkButton";
 import {
   faArrowsRotate,
   faInfoCircle,
   faClipboardCheck,
-} from '@fortawesome/free-solid-svg-icons';
-import './App.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { SpeciesEntry, SoundType } from './types';
+} from "@fortawesome/free-solid-svg-icons";
+import "./App.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { SpeciesEntry, SoundType } from "./types";
 
 interface PermalinkData {
   presetSpecies: SpeciesEntry[];
@@ -31,7 +31,7 @@ class App extends Component<unknown, AppState> {
   constructor(props: unknown) {
     super(props);
     ReactGA.initialize(process.env.GOOGLE_ANALYTICS_ID as string | undefined);
-    ReactGA.send({ hitType: 'pageview', page: window.location.pathname });
+    ReactGA.send({ hitType: "pageview", page: window.location.pathname });
 
     const permalinkData = this.decodePermalink();
     this.state = {
@@ -45,20 +45,20 @@ class App extends Component<unknown, AppState> {
   decodePermalink = (): PermalinkData | null => {
     try {
       const urlParams = new URLSearchParams(window.location.search);
-      const permalinkDataBase64 = urlParams.get('presets');
+      const permalinkDataBase64 = urlParams.get("presets");
       if (!permalinkDataBase64) {
         return null;
       }
       ReactGA.event({
-        category: 'User',
-        action: 'Used permalink',
+        category: "User",
+        action: "Used permalink",
       });
       const permalinkData = JSON.parse(
-        atob(permalinkDataBase64),
+        atob(permalinkDataBase64)
       ) as PermalinkData;
       return permalinkData;
     } catch (e) {
-      console.error('error decoding permalink data', e);
+      console.error("error decoding permalink data", e);
       return null;
     }
   };
@@ -66,7 +66,7 @@ class App extends Component<unknown, AppState> {
   onHeadToHeadSpeciesSelected = (
     headToHeadSpeciesList: SpeciesEntry[],
     soundType: SoundType,
-    country: string,
+    country: string
   ) => {
     this.setState({
       headToHeadSpeciesList,
@@ -80,7 +80,7 @@ class App extends Component<unknown, AppState> {
       JSON.stringify({
         presetSpecies: this.state.headToHeadSpeciesList,
         soundType: this.state.soundType,
-      }),
+      })
     )}`;
 
   gameActive = () =>
@@ -136,7 +136,7 @@ class App extends Component<unknown, AppState> {
               this.onHeadToHeadSpeciesSelected(
                 headToHeadSpeciesList,
                 soundType,
-                country,
+                country
               )
             }
           />
@@ -166,13 +166,13 @@ class App extends Component<unknown, AppState> {
           <div>
             <GameControls
               headToHeadSpecies={this.state.headToHeadSpeciesList}
-              soundType={this.state.soundType || 'any'}
+              soundType={this.state.soundType || "any"}
             />
             <SuggestPresetListModal
               isOpen={!!this.state.suggestPresetListModalOpen}
               onClose={() => this.closeSuggestPresetListModal()}
               speciesList={this.state.headToHeadSpeciesList}
-              country={this.state.country || 'GB'}
+              country={this.state.country || "GB"}
             />
           </div>
         )}
@@ -186,5 +186,3 @@ class App extends Component<unknown, AppState> {
 }
 
 export default App;
-
-

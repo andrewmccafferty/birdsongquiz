@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import ReactGA from 'react-ga4';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { callApi } from './api';
-import { RecordingApiResponse, SpeciesEntry, SoundType } from './types';
+import React, { Component } from "react";
+import ReactGA from "react-ga4";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { callApi } from "./api";
+import { RecordingApiResponse, SpeciesEntry, SoundType } from "./types";
 
 interface GameControlsProps {
   headToHeadSpecies: SpeciesEntry[];
@@ -38,8 +38,8 @@ class GameControls extends Component<GameControlsProps, GameControlsState> {
       headToHeadSpecies: props.headToHeadSpecies,
       soundType: props.soundType,
       isInitialised: false,
-      birdsongId: '',
-      species: '',
+      birdsongId: "",
+      species: "",
       noRecordingFound: false,
       loading: false,
       showSpecies: false,
@@ -84,7 +84,7 @@ class GameControls extends Component<GameControlsProps, GameControlsState> {
         ? prevState.livesLeft - 1
         : prevState.livesLeft;
       ReactGA.event({
-        category: 'User',
+        category: "User",
         action: `Got ${correctCount} out of ${newCounter} correct`,
       });
       return {
@@ -104,14 +104,14 @@ class GameControls extends Component<GameControlsProps, GameControlsState> {
   };
 
   buildApiUrl = () => {
-    let soundTypeUrlSegment = '';
-    if (this.state.soundType && this.state.soundType !== 'any') {
+    let soundTypeUrlSegment = "";
+    if (this.state.soundType && this.state.soundType !== "any") {
       soundTypeUrlSegment = `&soundType=${encodeURIComponent(
-        this.state.soundType,
+        this.state.soundType
       )}`;
     }
     return `recording?species=${encodeURIComponent(
-      this.getRandomSpecies(),
+      this.getRandomSpecies()
     )}${soundTypeUrlSegment}`;
   };
 
@@ -123,7 +123,7 @@ class GameControls extends Component<GameControlsProps, GameControlsState> {
       guessCorrect: false,
     });
     const url = this.buildApiUrl();
-    console.log('Calling API...', url);
+    console.log("Calling API...", url);
     callApi<RecordingApiResponse>(url)
       .then((result) => {
         if (result.noRecordings) {
@@ -154,7 +154,7 @@ class GameControls extends Component<GameControlsProps, GameControlsState> {
         });
       })
       .catch((err) => {
-        console.log('Error getting recording', err);
+        console.log("Error getting recording", err);
         this.setState({
           loading: false,
           errorLoading: true,
@@ -174,7 +174,7 @@ class GameControls extends Component<GameControlsProps, GameControlsState> {
         {/* Error indicator */}
         {this.state.errorLoading && (
           <div>
-            Error loading data. Please{' '}
+            Error loading data. Please{" "}
             <button
               onClick={() => {
                 this.getRandomBirdsong();
@@ -204,9 +204,9 @@ class GameControls extends Component<GameControlsProps, GameControlsState> {
         {!this.state.loading && this.state.headToHeadSpecies && (
           <div className="options">
             {this.state.headToHeadSpecies.map((option) => {
-              let backgroundColour = 'gray';
+              let backgroundColour = "gray";
               if (option === this.state.selectedSpeciesGuess) {
-                backgroundColour = this.state.guessCorrect ? 'green' : 'red';
+                backgroundColour = this.state.guessCorrect ? "green" : "red";
               }
               if (
                 this.state.selectedSpeciesGuess &&
@@ -215,7 +215,7 @@ class GameControls extends Component<GameControlsProps, GameControlsState> {
                 option.ScientificName.toLowerCase() ===
                   this.state.scientificName.toLowerCase()
               ) {
-                backgroundColour = 'green';
+                backgroundColour = "green";
               }
               return (
                 <button
@@ -223,19 +223,19 @@ class GameControls extends Component<GameControlsProps, GameControlsState> {
                   style={{
                     backgroundColor: backgroundColour,
                   }}
-                  className={'option-button'}
+                  className={"option-button"}
                   onClick={() => this.onSpeciesGuessMade(option)}
                 >
                   {option.Species}
-                  {backgroundColour === 'green' && (
+                  {backgroundColour === "green" && (
                     <FontAwesomeIcon
-                      style={{ marginLeft: '5px' }}
+                      style={{ marginLeft: "5px" }}
                       icon={faCheck}
                     />
                   )}
-                  {backgroundColour === 'red' && (
+                  {backgroundColour === "red" && (
                     <FontAwesomeIcon
-                      style={{ marginLeft: '5px' }}
+                      style={{ marginLeft: "5px" }}
                       icon={faTimes}
                     />
                   )}
@@ -248,14 +248,14 @@ class GameControls extends Component<GameControlsProps, GameControlsState> {
           <div>
             <div
               style={{
-                border: 'solid 1px',
-                width: '50%',
-                marginLeft: '25%',
-                marginTop: '10px',
-                marginBottom: '5px',
+                border: "solid 1px",
+                width: "50%",
+                marginLeft: "25%",
+                marginTop: "10px",
+                marginBottom: "5px",
               }}
             >
-              Recording courtesy of {this.state.recordist} via{' '}
+              Recording courtesy of {this.state.recordist} via{" "}
               <a
                 target="_blank"
                 rel="noreferrer"
@@ -281,5 +281,3 @@ class GameControls extends Component<GameControlsProps, GameControlsState> {
 }
 
 export default GameControls;
-
-

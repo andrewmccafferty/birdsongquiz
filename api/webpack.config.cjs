@@ -1,36 +1,34 @@
-const path = require('path');
+const path = require("path");
 
 /** @type {import('webpack').Configuration} */
 module.exports = {
-  target: 'node',
-  mode: 'production',
+  target: "node",
+  mode: "production",
   entry: {
-    handlers: './src/handlers.ts',
+    handlers: "./src/handlers.ts",
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name].cjs',
-    libraryTarget: 'commonjs2',
+    path: path.resolve(__dirname, "dist"),
+    filename: "[name].cjs",
+    libraryTarget: "commonjs2",
   },
   resolve: {
-    extensions: ['.ts', '.js'],
+    extensions: [".ts", ".js"],
   },
   module: {
     rules: [
       {
         test: /\.ts$/,
-        use: 'ts-loader',
+        use: "ts-loader",
         exclude: /node_modules/,
       },
     ],
   },
   externals: {
-    '@aws-sdk/client-s3': 'commonjs2 @aws-sdk/client-s3',
-    '@aws-sdk/client-lambda': 'commonjs2 @aws-sdk/client-lambda'
+    "@aws-sdk/client-s3": "commonjs2 @aws-sdk/client-s3",
+    "@aws-sdk/client-lambda": "commonjs2 @aws-sdk/client-lambda",
   },
   optimization: {
     minimize: false,
   },
 };
-
-

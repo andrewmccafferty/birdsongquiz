@@ -1,19 +1,22 @@
-import React, { Component } from 'react';
-import ReactGA from 'react-ga4';
-import { Typeahead } from 'react-bootstrap-typeahead';
-import 'react-bootstrap-typeahead/css/Typeahead.css';
-import 'react-bootstrap-typeahead/css/Typeahead.bs5.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
-import { callApi } from './api';
-import PresetSpeciesSelector from './PresetSpeciesSelector';
-import CountrySelector from './CountrySelector';
+import React, { Component } from "react";
+import ReactGA from "react-ga4";
+import { Typeahead } from "react-bootstrap-typeahead";
+import "react-bootstrap-typeahead/css/Typeahead.css";
+import "react-bootstrap-typeahead/css/Typeahead.bs5.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCheck,
+  faCircleExclamation,
+} from "@fortawesome/free-solid-svg-icons";
+import { callApi } from "./api";
+import PresetSpeciesSelector from "./PresetSpeciesSelector";
+import CountrySelector from "./CountrySelector";
 import {
   PresetsApiResponse,
   SpeciesEntry,
   SpeciesListResponse,
   SoundType,
-} from './types';
+} from "./types";
 
 interface FrontendConfiguration {
   presetsVersion?: string;
@@ -23,7 +26,7 @@ interface HeadToHeadSpeciesSelectorProps {
   onSelectionComplete: (
     selectedSpeciesList: SpeciesEntry[],
     soundType: SoundType,
-    country: string,
+    country: string
   ) => void;
 }
 
@@ -38,7 +41,7 @@ interface HeadToHeadSpeciesSelectorState {
   errorLoadingPresetList?: boolean;
   presetListsLoading?: boolean;
   errorLoadingPresetLists?: boolean;
-  presetLists?: PresetsApiResponse['presets'];
+  presetLists?: PresetsApiResponse["presets"];
   showValidationMessage?: boolean;
   country?: string;
 }
@@ -56,28 +59,28 @@ class HeadToHeadSpeciesSelector extends Component<
       frontendConfiguration: null,
       selectedSpeciesList: [],
       speciesList: [],
-      soundType: 'any',
+      soundType: "any",
     };
   }
 
   loadFrontendConfiguration = async () => {
     try {
-      const response = await fetch('/frontend-configuration.json');
+      const response = await fetch("/frontend-configuration.json");
       const frontendConfiguration =
         (await response.json()) as FrontendConfiguration;
 
-      if (response.status !== 200) throw Error('Error loading config');
-      console.log('Got frontend config', frontendConfiguration);
+      if (response.status !== 200) throw Error("Error loading config");
+      console.log("Got frontend config", frontendConfiguration);
       this.frontendConfiguration = frontendConfiguration;
       this.setState({ frontendConfiguration });
     } catch (e) {
-      console.error('Got error while trying to get frontend configuration', e);
+      console.error("Got error while trying to get frontend configuration", e);
     }
   };
 
   componentDidMount() {
     this.loadFrontendConfiguration().then(() => {
-      this.onCountryChanged('GB');
+      this.onCountryChanged("GB");
     });
   }
 
@@ -95,7 +98,7 @@ class HeadToHeadSpeciesSelector extends Component<
     this.props.onSelectionComplete(
       this.state.selectedSpeciesList,
       this.state.soundType,
-      this.state.country || 'GB',
+      this.state.country || "GB"
     );
   };
 
@@ -124,7 +127,7 @@ class HeadToHeadSpeciesSelector extends Component<
   };
 
   loadSpeciesForListId = (listId: string) => {
-    if (!listId || listId === '') {
+    if (!listId || listId === "") {
       this.setState({
         selectedSpeciesList: [],
       });
@@ -154,13 +157,13 @@ class HeadToHeadSpeciesSelector extends Component<
       presetListsLoading: true,
       errorLoadingPresetLists: false,
     });
-    console.log('frontend config', this.state.frontendConfiguration);
+    console.log("frontend config", this.state.frontendConfiguration);
     callApi<PresetsApiResponse>(
       `presets/${country}?v=${
         this.frontendConfiguration
           ? this.frontendConfiguration.presetsVersion
-          : 'default'
-      }`,
+          : "default"
+      }`
     )
       .then((result) => {
         this.setState({
@@ -169,7 +172,7 @@ class HeadToHeadSpeciesSelector extends Component<
         });
       })
       .catch((err) => {
-        console.error('Error loading presets', err);
+        console.error("Error loading presets", err);
         this.setState({
           presetListsLoading: false,
           errorLoadingPresetLists: true,
@@ -182,7 +185,7 @@ class HeadToHeadSpeciesSelector extends Component<
       return;
     }
     ReactGA.event({
-      category: 'User',
+      category: "User",
       action: `Selected country:+${country}`,
     });
     this.setState({
@@ -228,9 +231,9 @@ class HeadToHeadSpeciesSelector extends Component<
         </div>
         <div
           style={{
-            border: 'solid black 1px',
-            padding: '10px',
-            borderRadius: '10px',
+            border: "solid black 1px",
+            padding: "10px",
+            borderRadius: "10px",
           }}
         >
           <div className="quiz-subheader">
@@ -238,9 +241,9 @@ class HeadToHeadSpeciesSelector extends Component<
           </div>
           <div>
             {this.state.presetLists &&
-              'You can choose one of the presets below, or start typing in the box to make your own selection. '}
+              "You can choose one of the presets below, or start typing in the box to make your own selection. "}
             {!this.state.presetLists &&
-              'Start typing in the box below to make your selection. '}
+              "Start typing in the box below to make your selection. "}
             Once you're happy with your list, press the blue button to start the
             quiz.
           </div>
@@ -285,7 +288,7 @@ class HeadToHeadSpeciesSelector extends Component<
                 multiple
                 id="species-selection"
                 data-testid="species-selection"
-                className={'Species-Selection'}
+                className={"Species-Selection"}
                 labelKey="Species"
                 options={this.state.speciesList}
                 placeholder="Start typing to choose a species"
@@ -327,5 +330,3 @@ class HeadToHeadSpeciesSelector extends Component<
 }
 
 export default HeadToHeadSpeciesSelector;
-
-

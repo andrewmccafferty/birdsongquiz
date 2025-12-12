@@ -30,6 +30,4 @@ export interface PresetsApiResponse {
   presets: PresetList[];
 }
 
-export type SoundType = 'any' | 'song' | 'call';
-
-
+export type SoundType = "any" | "song" | "call";
