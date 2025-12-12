@@ -50,10 +50,6 @@ module.exports = {
   },
   mode: "development",
   plugins: [
-    new HtmlWebpackPlugin({
-      template: "dist/index.html",
-      filename: "index.html",
-    }),
     new webpack.DefinePlugin({
       "process.env.API_ROOT": JSON.stringify(process.env.API_ROOT),
       "process.env.CURRENT_APP_VERSION": JSON.stringify(
