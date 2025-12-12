@@ -5,3 +5,9 @@ if git diff --cached --name-only --diff-filter=ACM | grep -q "^api/"; then
   echo "Running API unit tests..."
   cd api && npm test && cd ..
 fi
+
+# Run tflint if any Terraform files are staged
+if git diff --cached --name-only --diff-filter=ACM | grep -q "^terraform/"; then
+  echo "Running tflint..."
+  cd terraform && tflint && cd ..
+fi
