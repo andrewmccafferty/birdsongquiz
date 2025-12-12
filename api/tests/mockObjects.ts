@@ -1,7 +1,7 @@
 import {
   APIGatewayProxyEvent,
   APIGatewayProxyEventQueryStringParameters,
-} from "aws-lambda";
+} from "aws-lambda"
 
 export const mockApiGatewayEvent = (
   body: unknown = null,
@@ -56,7 +56,7 @@ export const mockApiGatewayEvent = (
     resourcePath: "/example",
   },
   isBase64Encoded: false,
-});
+})
 
 export const mockRecordingResponse = (species: string, soundUrl: string) => ({
   species: species,
@@ -68,4 +68,4 @@ export const mockRecordingResponse = (species: string, soundUrl: string) => ({
     sp: "marinus",
   },
   soundUrl: soundUrl,
-});
+})

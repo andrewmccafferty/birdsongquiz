@@ -1,26 +1,26 @@
-import React from "react";
-import "./Modal.css";
+import React from "react"
+import "./Modal.css"
 
 interface GameExplanationModalProps {
-  isOpen: boolean;
-  onClose: () => void;
+  isOpen: boolean
+  onClose: () => void
 }
 
 const GameExplanationModal: React.FC<GameExplanationModalProps> = ({
   isOpen,
   onClose,
 }) => {
-  if (!isOpen) return null;
+  if (!isOpen) return null
 
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if ((e.target as HTMLDivElement).className === "modal") {
-      onClose();
+      onClose()
     }
-  };
+  }
 
   const getCurrentAppVersion = () => {
-    return process.env.CURRENT_APP_VERSION;
-  };
+    return process.env.CURRENT_APP_VERSION
+  }
 
   return (
     <div className="modal" onClick={handleOverlayClick}>
@@ -71,7 +71,7 @@ const GameExplanationModal: React.FC<GameExplanationModalProps> = ({
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default GameExplanationModal;
+export default GameExplanationModal

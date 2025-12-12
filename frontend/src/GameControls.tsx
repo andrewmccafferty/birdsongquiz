@@ -1,39 +1,39 @@
-import React, { Component } from "react";
-import ReactGA from "react-ga4";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { callApi } from "./api";
-import { RecordingApiResponse, SpeciesEntry, SoundType } from "./types";
+import React, { Component } from "react"
+import ReactGA from "react-ga4"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons"
+import { callApi } from "./api"
+import { RecordingApiResponse, SpeciesEntry, SoundType } from "./types"
 
 interface GameControlsProps {
-  headToHeadSpecies: SpeciesEntry[];
-  soundType: SoundType;
+  headToHeadSpecies: SpeciesEntry[]
+  soundType: SoundType
 }
 
 interface GameControlsState {
-  headToHeadSpecies: SpeciesEntry[];
-  soundType: SoundType;
-  isInitialised: boolean;
-  birdsongId: string;
-  species: string;
-  noRecordingFound: boolean;
-  loading: boolean;
-  showSpecies: boolean;
-  speciesList: SpeciesEntry[];
-  selectedSpeciesGuess: SpeciesEntry | null;
-  counter: number;
-  correctCount: number;
-  livesLeft: number;
-  errorLoading: boolean;
-  guessCorrect: boolean;
-  soundUrl?: string;
-  recordist?: string;
-  scientificName?: string;
+  headToHeadSpecies: SpeciesEntry[]
+  soundType: SoundType
+  isInitialised: boolean
+  birdsongId: string
+  species: string
+  noRecordingFound: boolean
+  loading: boolean
+  showSpecies: boolean
+  speciesList: SpeciesEntry[]
+  selectedSpeciesGuess: SpeciesEntry | null
+  counter: number
+  correctCount: number
+  livesLeft: number
+  errorLoading: boolean
+  guessCorrect: boolean
+  soundUrl?: string
+  recordist?: string
+  scientificName?: string
 }
 
 class GameControls extends Component<GameControlsProps, GameControlsState> {
   constructor(props: GameControlsProps) {
-    super(props);
+    super(props)
     this.state = {
       headToHeadSpecies: props.headToHeadSpecies,
       soundType: props.soundType,
@@ -50,80 +50,80 @@ class GameControls extends Component<GameControlsProps, GameControlsState> {
       livesLeft: 5,
       errorLoading: false,
       guessCorrect: false,
-    };
+    }
   }
 
   componentDidMount() {
-    this.getRandomBirdsong();
+    this.getRandomBirdsong()
   }
 
   clearGuess = () => {
     if (this.state.selectedSpeciesGuess) {
       this.setState({
         selectedSpeciesGuess: null,
-      });
+      })
     }
-  };
+  }
 
   onSpeciesGuessMade = (guess: SpeciesEntry | null) => {
     if (this.state.selectedSpeciesGuess || !this.state.scientificName) {
-      return;
+      return
     }
 
     const guessCorrect =
       !!guess &&
       guess.ScientificName.toLowerCase() ===
-        this.state.scientificName.toLowerCase();
+        this.state.scientificName.toLowerCase()
 
     this.setState((prevState) => {
       const correctCount = guessCorrect
         ? prevState.correctCount + 1
-        : prevState.correctCount;
-      const newCounter = prevState.counter + 1;
+        : prevState.correctCount
+      const newCounter = prevState.counter + 1
       const newLivesLeft = !guessCorrect
         ? prevState.livesLeft - 1
-        : prevState.livesLeft;
+        : prevState.livesLeft
       ReactGA.event({
         category: "User",
         action: `Got ${correctCount} out of ${newCounter} correct`,
-      });
+      })
       return {
         selectedSpeciesGuess: guess,
         guessCorrect,
         correctCount,
         counter: newCounter,
         livesLeft: newLivesLeft,
-      } as Partial<GameControlsState> as GameControlsState;
-    });
-  };
+      } as Partial<GameControlsState> as GameControlsState
+    })
+  }
 
   getRandomSpecies = () => {
-    const speciesList = this.state.headToHeadSpecies;
-    const randomIndex = Math.floor(Math.random() * speciesList.length);
-    return speciesList[randomIndex].ScientificName;
-  };
+    const speciesList = this.state.headToHeadSpecies
+    const randomIndex = Math.floor(Math.random() * speciesList.length)
+    return speciesList[randomIndex].ScientificName
+  }
 
   buildApiUrl = () => {
-    let soundTypeUrlSegment = "";
+    let soundTypeUrlSegment = ""
     if (this.state.soundType && this.state.soundType !== "any") {
       soundTypeUrlSegment = `&soundType=${encodeURIComponent(
         this.state.soundType
-      )}`;
+      )}`
     }
     return `recording?species=${encodeURIComponent(
       this.getRandomSpecies()
-    )}${soundTypeUrlSegment}`;
-  };
+    )}${soundTypeUrlSegment}`
+  }
 
   getRandomBirdsong = async () => {
-    this.clearGuess();
+    this.clearGuess()
     this.setState({
       errorLoading: false,
       loading: true,
       guessCorrect: false,
-    });
-    const url = this.buildApiUrl();
-    console.log("Calling API...", url);
+    })
+    const url = this.buildApiUrl()
+    console.log("Calling API...", url)
     callApi<RecordingApiResponse>(url)
       .then((result) => {
         if (result.noRecordings) {
@@ -131,16 +131,16 @@ class GameControls extends Component<GameControlsProps, GameControlsState> {
             noRecordingFound: true,
             loading: false,
             showSpecies: false,
-          });
-          return;
+          })
+          return
         }
-        const recording = result.recording;
+        const recording = result.recording
         if (!recording) {
           this.setState({
             loading: false,
             errorLoading: true,
-          });
-          return;
+          })
+          return
         }
         this.setState({
           birdsongId: recording.id,
@@ -151,16 +151,16 @@ class GameControls extends Component<GameControlsProps, GameControlsState> {
           loading: false,
           showSpecies: false,
           noRecordingFound: false,
-        });
+        })
       })
       .catch((err) => {
-        console.log("Error getting recording", err);
+        console.log("Error getting recording", err)
         this.setState({
           loading: false,
           errorLoading: true,
-        });
-      });
-  };
+        })
+      })
+  }
 
   render() {
     return (
@@ -177,7 +177,7 @@ class GameControls extends Component<GameControlsProps, GameControlsState> {
             Error loading data. Please{" "}
             <button
               onClick={() => {
-                this.getRandomBirdsong();
+                this.getRandomBirdsong()
               }}
             >
               try again
@@ -204,9 +204,9 @@ class GameControls extends Component<GameControlsProps, GameControlsState> {
         {!this.state.loading && this.state.headToHeadSpecies && (
           <div className="options">
             {this.state.headToHeadSpecies.map((option) => {
-              let backgroundColour = "gray";
+              let backgroundColour = "gray"
               if (option === this.state.selectedSpeciesGuess) {
-                backgroundColour = this.state.guessCorrect ? "green" : "red";
+                backgroundColour = this.state.guessCorrect ? "green" : "red"
               }
               if (
                 this.state.selectedSpeciesGuess &&
@@ -215,7 +215,7 @@ class GameControls extends Component<GameControlsProps, GameControlsState> {
                 option.ScientificName.toLowerCase() ===
                   this.state.scientificName.toLowerCase()
               ) {
-                backgroundColour = "green";
+                backgroundColour = "green"
               }
               return (
                 <button
@@ -240,7 +240,7 @@ class GameControls extends Component<GameControlsProps, GameControlsState> {
                     />
                   )}
                 </button>
-              );
+              )
             })}
           </div>
         )}
@@ -276,8 +276,8 @@ class GameControls extends Component<GameControlsProps, GameControlsState> {
           </div>
         )}
       </div>
-    );
+    )
   }
 }
 
-export default GameControls;
+export default GameControls

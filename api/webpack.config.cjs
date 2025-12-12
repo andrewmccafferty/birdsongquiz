@@ -1,4 +1,4 @@
-const path = require("path");
+const path = require("path")
 
 /** @type {import('webpack').Configuration} */
 module.exports = {
@@ -31,4 +31,4 @@ module.exports = {
   optimization: {
     minimize: false,
   },
-};
+}

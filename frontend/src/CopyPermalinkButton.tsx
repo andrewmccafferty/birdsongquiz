@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCopy } from "@fortawesome/free-solid-svg-icons";
+import React, { Component } from "react"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faCopy } from "@fortawesome/free-solid-svg-icons"
 
 interface CopyPermalinkButtonProps {
-  permalink: string;
+  permalink: string
 }
 
 interface CopyPermalinkButtonState {
-  copied: boolean;
+  copied: boolean
 }
 
 class CopyPermalinkButton extends Component<
@@ -15,27 +15,27 @@ class CopyPermalinkButton extends Component<
   CopyPermalinkButtonState
 > {
   constructor(props: CopyPermalinkButtonProps) {
-    super(props);
+    super(props)
     this.state = {
       copied: false,
-    };
+    }
   }
 
   handleCopy = async () => {
-    const { permalink } = this.props;
+    const { permalink } = this.props
 
     try {
-      await navigator.clipboard.writeText(permalink);
-      this.setState({ copied: true });
+      await navigator.clipboard.writeText(permalink)
+      this.setState({ copied: true })
 
-      setTimeout(() => this.setState({ copied: false }), 2000);
+      setTimeout(() => this.setState({ copied: false }), 2000)
     } catch (err) {
-      console.error("Failed to copy:", err);
+      console.error("Failed to copy:", err)
     }
-  };
+  }
 
   render() {
-    const { copied } = this.state;
+    const { copied } = this.state
 
     return (
       <button
@@ -51,8 +51,8 @@ class CopyPermalinkButton extends Component<
       >
         <FontAwesomeIcon icon={faCopy} />
       </button>
-    );
+    )
   }
 }
 
-export default CopyPermalinkButton;
+export default CopyPermalinkButton

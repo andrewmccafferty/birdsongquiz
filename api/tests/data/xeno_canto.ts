@@ -5289,4 +5289,4 @@ export const MOCK_XENO_CANTO_RESPONSE = {
       smp: "44100",
     },
   ],
-};
+}
