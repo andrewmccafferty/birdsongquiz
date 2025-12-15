@@ -8,7 +8,7 @@ test(
   { tag: RUN_IN_PROD_TAG },
   async ({ page }) => {
     await page.goto(FRONTEND_URL)
-    await page.getByLabel("Sound type:").selectOption("song")
+    await page.getByLabel("Pick your own").click()
     await page
       .getByRole("combobox", { name: "Start typing to choose a" })
       .click()
@@ -35,6 +35,7 @@ test(
   async ({ page }) => {
     await page.goto(FRONTEND_URL)
     await page.getByTestId("country").selectOption("AU")
+    await page.getByLabel("Pick your own").click()
     await page
       .getByRole("combobox", { name: "Start typing to choose a" })
       .click()
@@ -62,7 +63,7 @@ test(
 test("test with presets", { tag: RUN_IN_PROD_TAG }, async ({ page }) => {
   await page.goto(FRONTEND_URL)
   await page.getByTestId("country").selectOption("GB")
-  await page.getByLabel("Sound type:").selectOption("call")
+  await page.getByLabel("Choose preset").click()
   await page
     .getByTestId("preset-species-list")
     .selectOption("gb/common-uk-garden")
