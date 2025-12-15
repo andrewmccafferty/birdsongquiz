@@ -8,6 +8,7 @@ import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons"
 import { callApi } from "./api"
 import PresetSpeciesSelector from "./PresetSpeciesSelector"
 import CountrySelector from "./CountrySelector"
+import LoadingSpinner from "./LoadingSpinner"
 import {
   PresetsApiResponse,
   SpeciesEntry,
@@ -283,12 +284,12 @@ class HeadToHeadSpeciesSelector extends Component<
                     this.loadSpeciesForListId(listId)
                   }}
                 ></PresetSpeciesSelector>
-                {(this.shouldShowLoaderInPresetListsSelector() ||
-                  this.state.loadingPresetList) && (
-                  <div className="spinner-overlay">
-                    <div className="spinner"></div>
-                  </div>
-                )}
+                <LoadingSpinner
+                  isLoading={
+                    this.shouldShowLoaderInPresetListsSelector() ||
+                    !!this.state.loadingPresetList
+                  }
+                />
               </div>
             )}
             {this.state.selectionMode === "preset" &&
@@ -330,11 +331,9 @@ class HeadToHeadSpeciesSelector extends Component<
                   selected={this.state.selectedSpeciesList}
                   ref={(ref) => (this._typeahead = ref)}
                 />
-                {this.shouldShowLoaderInSpeciesSelector() && (
-                  <div className="spinner-overlay">
-                    <div className="spinner"></div>
-                  </div>
-                )}
+                <LoadingSpinner
+                  isLoading={this.shouldShowLoaderInSpeciesSelector()}
+                />
               </div>
             )}
           </div>
