@@ -4,7 +4,7 @@ import { Typeahead } from "react-bootstrap-typeahead"
 import "react-bootstrap-typeahead/css/Typeahead.css"
 import "react-bootstrap-typeahead/css/Typeahead.bs5.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCheck, faCircleExclamation } from "@fortawesome/free-solid-svg-icons"
+import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons"
 import { callApi } from "./api"
 import PresetSpeciesSelector from "./PresetSpeciesSelector"
 import CountrySelector from "./CountrySelector"
@@ -41,6 +41,7 @@ interface HeadToHeadSpeciesSelectorState {
   presetLists?: PresetsApiResponse["presets"]
   showValidationMessage?: boolean
   country?: string
+  selectionMode: "preset" | "free"
 }
 
 class HeadToHeadSpeciesSelector extends Component<
@@ -57,6 +58,7 @@ class HeadToHeadSpeciesSelector extends Component<
       selectedSpeciesList: [],
       speciesList: [],
       soundType: "any",
+      selectionMode: "preset",
     }
   }
 
@@ -204,6 +206,162 @@ class HeadToHeadSpeciesSelector extends Component<
     return (
       <div>
         <div className="quiz-subheader">
+          <label htmlFor="country" className="form-label">
+            Country:
+          </label>
+          <CountrySelector
+            onChange={(countryCode) => this.onCountryChanged(countryCode)}
+          ></CountrySelector>
+        </div>
+        {this.state.presetLists && this.state.presetLists.length > 0 && (
+          <div className="species-selection-container">
+            <div style={{ marginBottom: "8px" }}>
+              <label
+                htmlFor="species-list"
+                className="form-label"
+                style={{
+                  display: "block",
+                  marginBottom: "8px",
+                  fontWeight: 800,
+                  color: "#333333",
+                  fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif',
+                  fontSize: "1em",
+                }}
+              >
+                Species:
+              </label>
+              <div style={{ display: "flex", gap: "16px" }}>
+                <label
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    cursor: "pointer",
+                  }}
+                >
+                  <input
+                    type="radio"
+                    value="preset"
+                    checked={this.state.selectionMode === "preset"}
+                    onChange={(e) =>
+                      this.setState({
+                        selectionMode: e.target.value as "preset" | "free",
+                        selectedSpeciesList: [],
+                      })
+                    }
+                    style={{ marginRight: "6px" }}
+                  />
+                  Choose preset
+                </label>
+                <label
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    cursor: "pointer",
+                  }}
+                >
+                  <input
+                    type="radio"
+                    value="free"
+                    checked={this.state.selectionMode === "free"}
+                    onChange={(e) =>
+                      this.setState({
+                        selectionMode: e.target.value as "preset" | "free",
+                        selectedSpeciesList: [],
+                      })
+                    }
+                    style={{ marginRight: "6px" }}
+                  />
+                  Pick your own
+                </label>
+              </div>
+            </div>
+            {this.state.selectionMode === "preset" && (
+              <div className="quiz-subheader">
+                <PresetSpeciesSelector
+                  presetLists={this.state.presetLists}
+                  onSpeciesListChanged={(listId) => {
+                    this.loadSpeciesForListId(listId)
+                  }}
+                ></PresetSpeciesSelector>
+                {this.shouldShowLoaderInPresetListsSelector() && (
+                  <div className="spinner-overlay">
+                    <div className="spinner"></div>
+                  </div>
+                )}
+              </div>
+            )}
+            {this.state.selectionMode === "preset" &&
+              this.state.selectedSpeciesList.length > 0 && (
+                <div className="selected-species-display">
+                  <div className="selected-species-label">
+                    Selected species ({this.state.selectedSpeciesList.length}):
+                  </div>
+                  <div className="selected-species-list">
+                    {this.state.selectedSpeciesList.map((species, index) => (
+                      <span key={index} className="species-tag">
+                        {species.Species}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            {this.state.selectionMode === "free" && (
+              <div className="species-selection-wrapper">
+                <Typeahead
+                  disabled={
+                    this.shouldShowLoaderInSpeciesSelector() ||
+                    !!this.state.errorLoadingSpecies
+                  }
+                  multiple
+                  id="species-selection"
+                  data-testid="species-selection"
+                  className={"Species-Selection"}
+                  labelKey="Species"
+                  options={this.state.speciesList}
+                  placeholder="Start typing to choose a species"
+                  minLength={1}
+                  clearButton={true}
+                  onChange={(selected) => {
+                    this.setState({
+                      selectedSpeciesList: selected as SpeciesEntry[],
+                    })
+                  }}
+                  selected={this.state.selectedSpeciesList}
+                  ref={(ref) => (this._typeahead = ref)}
+                />
+                {this.shouldShowLoaderInSpeciesSelector() && (
+                  <div className="spinner-overlay">
+                    <div className="spinner"></div>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        )}
+        {this.state.errorLoadingPresetLists && (
+          <div className="error-notice">
+            <span className="error-icon">
+              <FontAwesomeIcon icon={faCircleExclamation} />
+            </span>
+            <div className="error-text">Error loading preset lists</div>
+          </div>
+        )}
+        {this.state.errorLoadingSpecies && (
+          <div className="error-notice">
+            <span className="error-icon">
+              <FontAwesomeIcon icon={faCircleExclamation} />
+            </span>
+            <div className="error-text">Error loading species list</div>
+          </div>
+        )}
+
+        {this.state.showValidationMessage && (
+          <div className="validation-message">
+            Please select at least two species to compare
+          </div>
+        )}
+
+        <div className="quiz-subheader" style={{ marginTop: "16px" }}>
           <label htmlFor="sound-type" className="form-label">
             Sound type:
           </label>
@@ -218,109 +376,26 @@ class HeadToHeadSpeciesSelector extends Component<
             <option value="call">Call</option>
           </select>
         </div>
-        <div className="quiz-subheader">
-          <label htmlFor="country" className="form-label">
-            Country:
-          </label>
-          <CountrySelector
-            onChange={(countryCode) => this.onCountryChanged(countryCode)}
-          ></CountrySelector>
-        </div>
-        <div
-          style={{
-            border: "solid black 1px",
-            padding: "10px",
-            borderRadius: "10px",
-          }}
-        >
-          <div className="quiz-subheader">
-            <b>Species selection</b>
-          </div>
-          <div>
-            {this.state.presetLists &&
-              "You can choose one of the presets below, or start typing in the box to make your own selection. "}
-            {!this.state.presetLists &&
-              "Start typing in the box below to make your selection. "}
-            Once you're happy with your list, press the blue button to start the
-            quiz.
-          </div>
-          {this.state.presetLists && this.state.presetLists.length > 0 && (
-            <div className="input-container">
-              <PresetSpeciesSelector
-                presetLists={this.state.presetLists}
-                onSpeciesListChanged={(listId) => {
-                  this.loadSpeciesForListId(listId)
-                }}
-              ></PresetSpeciesSelector>
-              {this.shouldShowLoaderInPresetListsSelector() && (
-                <div className="spinner-overlay">
-                  <div className="spinner"></div>
-                </div>
-              )}
-            </div>
-          )}
-          {this.state.errorLoadingPresetLists && (
-            <div className="error-notice">
-              <span className="error-icon">
-                <FontAwesomeIcon icon={faCircleExclamation} />
-              </span>
-              <div className="error-text">Error loading preset lists</div>
-            </div>
-          )}
-          {this.state.errorLoadingSpecies && (
-            <div className="error-notice">
-              <span className="error-icon">
-                <FontAwesomeIcon icon={faCircleExclamation} />
-              </span>
-              <div className="error-text">Error loading species list</div>
-            </div>
-          )}
-          <div className="input-container">
-            <div className="species-selection-wrapper">
-              <Typeahead
-                disabled={
-                  this.shouldShowLoaderInSpeciesSelector() ||
-                  !!this.state.errorLoadingSpecies
-                }
-                multiple
-                id="species-selection"
-                data-testid="species-selection"
-                className={"Species-Selection"}
-                labelKey="Species"
-                options={this.state.speciesList}
-                placeholder="Start typing to choose a species"
-                minLength={1}
-                clearButton={true}
-                onChange={(selected) => {
-                  this.setState({
-                    selectedSpeciesList: selected as SpeciesEntry[],
-                  })
-                }}
-                selected={this.state.selectedSpeciesList}
-                ref={(ref) => (this._typeahead = ref)}
-              />
-              {this.shouldShowLoaderInSpeciesSelector() && (
-                <div className="spinner-overlay">
-                  <div className="spinner"></div>
-                </div>
-              )}
-            </div>
-            <button
-              disabled={this.shouldShowLoaderInSpeciesSelector()}
-              data-testid="finish-selection"
-              className="action-button"
-              onClick={() => this.onSelectionComplete()}
-            >
-              <FontAwesomeIcon icon={faCheck} />
-            </button>
-          </div>
-        </div>
 
-        {this.state.showValidationMessage && (
-          <div className="validation-message">
-            Please select at least two species to compare
-          </div>
-        )}
+        <button
+          disabled={
+            this.shouldShowLoaderInSpeciesSelector() ||
+            this.state.selectedSpeciesList.length < 2
+          }
+          title={
+            this.state.selectedSpeciesList.length < 2
+              ? this.state.selectionMode === "preset"
+                ? "Please pick a preset"
+                : "Please choose at least two species"
+              : ""
+          }
+          data-testid="finish-selection"
+          className="action-button"
+          onClick={() => this.onSelectionComplete()}
+          style={{ marginTop: "16px", width: "100%" }}
+        >
+          Start Quiz
+        </button>
       </div>
     )
   }
