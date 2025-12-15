@@ -156,8 +156,8 @@ class HeadToHeadSpeciesSelector extends Component<
     this.setState({
       presetListsLoading: true,
       errorLoadingPresetLists: false,
+      presetLists: undefined,
     })
-    console.log("frontend config", this.state.frontendConfiguration)
     callApi<PresetsApiResponse>(
       `presets/${country}?v=${
         this.frontendConfiguration
@@ -169,8 +169,8 @@ class HeadToHeadSpeciesSelector extends Component<
         this.setState({
           presetLists: result.presets,
           presetListsLoading: false,
-          selectionMode:
-            result.presets.length === 0 ? "free" : this.state.selectionMode,
+          selectionMode: result.presets.length > 0 ? "preset" : "free",
+          selectedSpeciesList: [],
         })
       })
       .catch((err) => {
@@ -192,6 +192,7 @@ class HeadToHeadSpeciesSelector extends Component<
     })
     this.setState({
       country,
+      selectedSpeciesList: [],
     })
     this.loadSpeciesForCountry(country)
     this.loadPresetListsForCountry(country)
