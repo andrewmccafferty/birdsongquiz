@@ -276,14 +276,15 @@ class HeadToHeadSpeciesSelector extends Component<
               </div>
             </div>
             {this.state.selectionMode === "preset" && (
-              <div className="quiz-subheader">
+              <div className="quiz-subheader" style={{ position: "relative" }}>
                 <PresetSpeciesSelector
                   presetLists={this.state.presetLists}
                   onSpeciesListChanged={(listId) => {
                     this.loadSpeciesForListId(listId)
                   }}
                 ></PresetSpeciesSelector>
-                {this.shouldShowLoaderInPresetListsSelector() && (
+                {(this.shouldShowLoaderInPresetListsSelector() ||
+                  this.state.loadingPresetList) && (
                   <div className="spinner-overlay">
                     <div className="spinner"></div>
                   </div>
