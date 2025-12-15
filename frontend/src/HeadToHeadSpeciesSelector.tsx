@@ -169,6 +169,8 @@ class HeadToHeadSpeciesSelector extends Component<
         this.setState({
           presetLists: result.presets,
           presetListsLoading: false,
+          selectionMode:
+            result.presets.length === 0 ? "free" : this.state.selectionMode,
         })
       })
       .catch((err) => {
@@ -214,69 +216,86 @@ class HeadToHeadSpeciesSelector extends Component<
             onChange={(countryCode) => this.onCountryChanged(countryCode)}
           ></CountrySelector>
         </div>
-        {this.state.presetLists && this.state.presetLists.length > 0 && (
-          <div className="species-selection-container">
-            <div style={{ marginBottom: "8px" }}>
+        <div className="species-selection-container">
+          <div style={{ marginBottom: "8px" }}>
+            <label
+              htmlFor="species-list"
+              className="form-label"
+              style={{
+                display: "block",
+                marginBottom: "8px",
+                fontWeight: 800,
+                color: "#333333",
+                fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif',
+                fontSize: "1em",
+              }}
+            >
+              Species:
+            </label>
+            <div style={{ display: "flex", gap: "16px" }}>
               <label
-                htmlFor="species-list"
-                className="form-label"
                 style={{
-                  display: "block",
-                  marginBottom: "8px",
-                  fontWeight: 800,
-                  color: "#333333",
-                  fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif',
-                  fontSize: "1em",
+                  display: "flex",
+                  alignItems: "center",
+                  cursor:
+                    this.state.presetLists && this.state.presetLists.length > 0
+                      ? "pointer"
+                      : "not-allowed",
+                  opacity:
+                    this.state.presetLists && this.state.presetLists.length > 0
+                      ? 1
+                      : 0.5,
+                }}
+                title={
+                  !this.state.presetLists || this.state.presetLists.length === 0
+                    ? "No preset lists available for this country"
+                    : ""
+                }
+              >
+                <input
+                  type="radio"
+                  value="preset"
+                  checked={this.state.selectionMode === "preset"}
+                  disabled={
+                    !this.state.presetLists ||
+                    this.state.presetLists.length === 0
+                  }
+                  onChange={(e) =>
+                    this.setState({
+                      selectionMode: e.target.value as "preset" | "free",
+                      selectedSpeciesList: [],
+                    })
+                  }
+                  style={{ marginRight: "6px" }}
+                />
+                Choose preset
+              </label>
+              <label
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  cursor: "pointer",
                 }}
               >
-                Species:
+                <input
+                  type="radio"
+                  value="free"
+                  checked={this.state.selectionMode === "free"}
+                  onChange={(e) =>
+                    this.setState({
+                      selectionMode: e.target.value as "preset" | "free",
+                      selectedSpeciesList: [],
+                    })
+                  }
+                  style={{ marginRight: "6px" }}
+                />
+                Pick your own
               </label>
-              <div style={{ display: "flex", gap: "16px" }}>
-                <label
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    cursor: "pointer",
-                  }}
-                >
-                  <input
-                    type="radio"
-                    value="preset"
-                    checked={this.state.selectionMode === "preset"}
-                    onChange={(e) =>
-                      this.setState({
-                        selectionMode: e.target.value as "preset" | "free",
-                        selectedSpeciesList: [],
-                      })
-                    }
-                    style={{ marginRight: "6px" }}
-                  />
-                  Choose preset
-                </label>
-                <label
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    cursor: "pointer",
-                  }}
-                >
-                  <input
-                    type="radio"
-                    value="free"
-                    checked={this.state.selectionMode === "free"}
-                    onChange={(e) =>
-                      this.setState({
-                        selectionMode: e.target.value as "preset" | "free",
-                        selectedSpeciesList: [],
-                      })
-                    }
-                    style={{ marginRight: "6px" }}
-                  />
-                  Pick your own
-                </label>
-              </div>
             </div>
-            {this.state.selectionMode === "preset" && (
+          </div>
+          {this.state.selectionMode === "preset" &&
+            this.state.presetLists &&
+            this.state.presetLists.length > 0 && (
               <div className="quiz-subheader" style={{ position: "relative" }}>
                 <PresetSpeciesSelector
                   presetLists={this.state.presetLists}
@@ -292,52 +311,53 @@ class HeadToHeadSpeciesSelector extends Component<
                 />
               </div>
             )}
-            {this.state.selectionMode === "preset" &&
-              this.state.selectedSpeciesList.length > 0 && (
-                <div className="selected-species-display">
-                  <div className="selected-species-label">
-                    Selected species ({this.state.selectedSpeciesList.length}):
-                  </div>
-                  <div className="selected-species-list">
-                    {this.state.selectedSpeciesList.map((species, index) => (
-                      <span key={index} className="species-tag">
-                        {species.Species}
-                      </span>
-                    ))}
-                  </div>
+          {this.state.selectionMode === "preset" &&
+            this.state.presetLists &&
+            this.state.presetLists.length > 0 &&
+            this.state.selectedSpeciesList.length > 0 && (
+              <div className="selected-species-display">
+                <div className="selected-species-label">
+                  Selected species ({this.state.selectedSpeciesList.length}):
                 </div>
-              )}
-            {this.state.selectionMode === "free" && (
-              <div className="species-selection-wrapper">
-                <Typeahead
-                  disabled={
-                    this.shouldShowLoaderInSpeciesSelector() ||
-                    !!this.state.errorLoadingSpecies
-                  }
-                  multiple
-                  id="species-selection"
-                  data-testid="species-selection"
-                  className={"Species-Selection"}
-                  labelKey="Species"
-                  options={this.state.speciesList}
-                  placeholder="Start typing to choose a species"
-                  minLength={1}
-                  clearButton={true}
-                  onChange={(selected) => {
-                    this.setState({
-                      selectedSpeciesList: selected as SpeciesEntry[],
-                    })
-                  }}
-                  selected={this.state.selectedSpeciesList}
-                  ref={(ref) => (this._typeahead = ref)}
-                />
-                <LoadingSpinner
-                  isLoading={this.shouldShowLoaderInSpeciesSelector()}
-                />
+                <div className="selected-species-list">
+                  {this.state.selectedSpeciesList.map((species, index) => (
+                    <span key={index} className="species-tag">
+                      {species.Species}
+                    </span>
+                  ))}
+                </div>
               </div>
             )}
-          </div>
-        )}
+          {this.state.selectionMode === "free" && (
+            <div className="species-selection-wrapper">
+              <Typeahead
+                disabled={
+                  this.shouldShowLoaderInSpeciesSelector() ||
+                  !!this.state.errorLoadingSpecies
+                }
+                multiple
+                id="species-selection"
+                data-testid="species-selection"
+                className={"Species-Selection"}
+                labelKey="Species"
+                options={this.state.speciesList}
+                placeholder="Start typing to choose a species"
+                minLength={1}
+                clearButton={true}
+                onChange={(selected) => {
+                  this.setState({
+                    selectedSpeciesList: selected as SpeciesEntry[],
+                  })
+                }}
+                selected={this.state.selectedSpeciesList}
+                ref={(ref) => (this._typeahead = ref)}
+              />
+              <LoadingSpinner
+                isLoading={this.shouldShowLoaderInSpeciesSelector()}
+              />
+            </div>
+          )}
+        </div>
         {this.state.errorLoadingPresetLists && (
           <div className="error-notice">
             <span className="error-icon">
