@@ -20,5 +20,5 @@ output "frontend_url" {
 
 output "approve_preset_list_lambda" {
   description = "Name of the preset list Lambda"
-  value = aws_lambda_function.approve_preset_list.function_name
+  value = aws_lambda_function.lambdas["approve_preset_list"].function_name
 }
