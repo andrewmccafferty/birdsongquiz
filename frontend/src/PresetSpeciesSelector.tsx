@@ -42,7 +42,7 @@ class PresetSpeciesSelector extends Component<
                 onChange={(e) => this.onSpeciesListChanged(e.target.value)}
               >
                 <option key="" value="">
-                  (Please select)
+                  (Please select a preset)
                 </option>
                 {this.state.presetLists.map((item) => (
                   <option key={item.id} value={item.id}>
