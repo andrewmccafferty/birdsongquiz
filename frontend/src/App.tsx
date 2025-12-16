@@ -25,6 +25,7 @@ interface AppState {
   gameExplanationOpen: boolean
   suggestPresetListModalOpen?: boolean
   country?: string
+  isFirstVisit: boolean
 }
 
 class App extends Component<unknown, AppState> {
@@ -34,11 +35,13 @@ class App extends Component<unknown, AppState> {
     ReactGA.send({ hitType: "pageview", page: window.location.pathname })
 
     const permalinkData = this.decodePermalink()
+    const hasVisited = localStorage.getItem("hasVisitedBefore")
     this.state = {
       headToHeadSpeciesList: permalinkData ? permalinkData.presetSpecies : [],
       soundType: permalinkData ? permalinkData.soundType : null,
       gameExplanationOpen: false,
       suggestPresetListModalOpen: false,
+      isFirstVisit: !hasVisited,
     }
   }
 
@@ -113,8 +116,23 @@ class App extends Component<unknown, AppState> {
   }
 
   openGameExplanation = () => {
+    if (this.state.isFirstVisit) {
+      localStorage.setItem("hasVisitedBefore", "true")
+    }
+    ReactGA.event({
+      category: "User",
+      action: `Opened game explanation. FirstTime:+${this.state.isFirstVisit}`,
+    })
     this.setState({
       gameExplanationOpen: true,
+      isFirstVisit: false,
+    })
+  }
+
+  dismissFirstVisitPrompt = () => {
+    localStorage.setItem("hasVisitedBefore", "true")
+    this.setState({
+      isFirstVisit: false,
     })
   }
 
@@ -123,11 +141,28 @@ class App extends Component<unknown, AppState> {
       <div className="quiz-container">
         <div className="quiz-header">
           Head-to-Head Birdsong Quiz
-          <FontAwesomeIcon
-            className="info-link"
-            icon={faInfoCircle}
-            onClick={() => this.openGameExplanation()}
-          />
+          <div className="info-icon-container">
+            <FontAwesomeIcon
+              className={`info-link ${this.state.isFirstVisit ? "pulse" : ""}`}
+              icon={faInfoCircle}
+              onClick={() => this.openGameExplanation()}
+            />
+            {this.state.isFirstVisit && (
+              <div className="first-visit-prompt">
+                <div className="first-visit-arrow"></div>
+                <div className="first-visit-text">
+                  First time? See how the game works here!
+                </div>
+                <button
+                  className="first-visit-dismiss"
+                  onClick={() => this.dismissFirstVisitPrompt()}
+                  aria-label="Dismiss"
+                >
+                  ×
+                </button>
+              </div>
+            )}
+          </div>
         </div>
         {(!this.state.headToHeadSpeciesList ||
           this.state.headToHeadSpeciesList.length === 0) && (
