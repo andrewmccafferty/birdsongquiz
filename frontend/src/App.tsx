@@ -119,6 +119,10 @@ class App extends Component<unknown, AppState> {
     if (this.state.isFirstVisit) {
       localStorage.setItem("hasVisitedBefore", "true")
     }
+    ReactGA.event({
+      category: "User",
+      action: `Opened game explanation. FirstTime:+${this.state.isFirstVisit}`,
+    })
     this.setState({
       gameExplanationOpen: true,
       isFirstVisit: false,
