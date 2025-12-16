@@ -32,9 +32,9 @@ export const sendEmail = async (
   })
 
   if (!response.ok) {
-    const data = await response.text()
+    const errorText = await response.text()
     throw new Error(
-      `Failed to send email: status code ${response.status}, response body ${data}`
+      `Failed to send email: status code ${response.status}, response body ${errorText}`
     )
   }
 }
