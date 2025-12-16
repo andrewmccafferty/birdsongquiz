@@ -51,7 +51,7 @@ resource "aws_apigatewayv2_stage" "lambda" {
 resource "aws_apigatewayv2_integration" "get_recording" {
   api_id = aws_apigatewayv2_api.lambda.id
 
-  integration_uri    = aws_lambda_function.get_recording.invoke_arn
+  integration_uri    = aws_lambda_function.lambdas["get_recording"].invoke_arn
   integration_type   = "AWS_PROXY"
   integration_method = "POST"
 }
@@ -59,7 +59,7 @@ resource "aws_apigatewayv2_integration" "get_recording" {
 resource "aws_apigatewayv2_integration" "get_species_list" {
   api_id = aws_apigatewayv2_api.lambda.id
 
-  integration_uri    = aws_lambda_function.get_species_list.invoke_arn
+  integration_uri    = aws_lambda_function.lambdas["get_species_list"].invoke_arn
   integration_type   = "AWS_PROXY"
   integration_method = "POST"
 }
@@ -67,7 +67,7 @@ resource "aws_apigatewayv2_integration" "get_species_list" {
 resource "aws_apigatewayv2_integration" "get_preset_lists" {
   api_id = aws_apigatewayv2_api.lambda.id
 
-  integration_uri    = aws_lambda_function.get_preset_lists.invoke_arn
+  integration_uri    = aws_lambda_function.lambdas["get_preset_lists"].invoke_arn
   integration_type   = "AWS_PROXY"
   integration_method = "POST"
 }
@@ -75,7 +75,7 @@ resource "aws_apigatewayv2_integration" "get_preset_lists" {
 resource "aws_apigatewayv2_integration" "suggest_preset_list" {
   api_id = aws_apigatewayv2_api.lambda.id
 
-  integration_uri    = aws_lambda_function.suggest_preset_list.invoke_arn
+  integration_uri    = aws_lambda_function.lambdas["suggest_preset_list"].invoke_arn
   integration_type   = "AWS_PROXY"
   integration_method = "POST"
 }
@@ -117,7 +117,7 @@ resource "aws_cloudwatch_log_group" "api_gw" {
 resource "aws_lambda_permission" "api_gw" {
   statement_id  = "AllowExecutionFromAPIGateway"
   action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.get_recording.function_name
+  function_name = aws_lambda_function.lambdas["get_recording"].function_name
   principal     = "apigateway.amazonaws.com"
 
   source_arn = "${aws_apigatewayv2_api.lambda.execution_arn}/*/*"
@@ -126,7 +126,7 @@ resource "aws_lambda_permission" "api_gw" {
 resource "aws_lambda_permission" "api_gw_call_species_list" {
   statement_id  = "AllowExecutionFromAPIGateway"
   action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.get_species_list.function_name
+  function_name = aws_lambda_function.lambdas["get_species_list"].function_name
   principal     = "apigateway.amazonaws.com"
 
   source_arn = "${aws_apigatewayv2_api.lambda.execution_arn}/*/*"
@@ -135,7 +135,7 @@ resource "aws_lambda_permission" "api_gw_call_species_list" {
 resource "aws_lambda_permission" "api_gw_call_preset_list" {
   statement_id  = "AllowExecutionFromAPIGateway"
   action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.get_preset_lists.function_name
+  function_name = aws_lambda_function.lambdas["get_preset_lists"].function_name
   principal     = "apigateway.amazonaws.com"
 
   source_arn = "${aws_apigatewayv2_api.lambda.execution_arn}/*/*"
@@ -144,7 +144,7 @@ resource "aws_lambda_permission" "api_gw_call_preset_list" {
 resource "aws_lambda_permission" "api_gw_suggest_preset_list" {
   statement_id  = "AllowExecutionFromAPIGateway"
   action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.suggest_preset_list.function_name
+  function_name = aws_lambda_function.lambdas["suggest_preset_list"].function_name
   principal     = "apigateway.amazonaws.com"
 
   source_arn = "${aws_apigatewayv2_api.lambda.execution_arn}/*/*"
