@@ -4,6 +4,7 @@ import HeadToHeadSpeciesSelector from "./HeadToHeadSpeciesSelector"
 import GameControls from "./GameControls"
 import GameExplanationModal from "./GameExplanationModal"
 import SuggestPresetListModal from "./SuggestPresetListModal"
+import FeedbackModal from "./FeedbackModal"
 import CopyPermalinkButton from "./CopyPermalinkButton"
 import {
   faArrowsRotate,
@@ -25,6 +26,7 @@ interface AppState {
   soundType: SoundType | null
   gameExplanationOpen: boolean
   suggestPresetListModalOpen?: boolean
+  feedbackModalOpen: boolean
   country?: string
   isFirstVisit: boolean
   showPresetPrompt: boolean
@@ -44,6 +46,7 @@ class App extends Component<unknown, AppState> {
       soundType: permalinkData ? permalinkData.soundType : null,
       gameExplanationOpen: false,
       suggestPresetListModalOpen: false,
+      feedbackModalOpen: false,
       isFirstVisit: !hasVisited,
       showPresetPrompt: false,
     }
@@ -150,6 +153,18 @@ class App extends Component<unknown, AppState> {
     })
   }
 
+  openFeedbackModal = () => {
+    this.setState({
+      feedbackModalOpen: true,
+    })
+  }
+
+  closeFeedbackModal = () => {
+    this.setState({
+      feedbackModalOpen: false,
+    })
+  }
+
   render() {
     return (
       <div className="quiz-container">
@@ -240,6 +255,16 @@ class App extends Component<unknown, AppState> {
           isOpen={this.state.gameExplanationOpen}
           onClose={() => this.closeGameExplanation()}
         />
+        <FeedbackModal
+          isOpen={this.state.feedbackModalOpen}
+          onClose={() => this.closeFeedbackModal()}
+        />
+        <button
+          className="feedback-trigger"
+          onClick={() => this.openFeedbackModal()}
+        >
+          💬 Feedback
+        </button>
       </div>
     )
   }
