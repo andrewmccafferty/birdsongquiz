@@ -147,7 +147,6 @@ export const approvePresetList = async (event: { suggestionId?: string }) => {
 }
 
 export const notifyPresetListSuggested = async (event: S3Event) => {
-  console.log("Handling event with body", JSON.stringify(event))
   const record = event.Records[0]
   const bucket = record.s3.bucket.name
   const key = record.s3.object.key
