@@ -46,6 +46,7 @@ export const sendEmailWithSuggestionData = async (
     </ul>
     <p><strong>Submitted by:</strong> ${suggestion.name || "Anonymous"}</p>
     <p><strong>Email:</strong> ${suggestion.email || "Not provided"}</p>
+    <p><strong>Comments:</strong> ${suggestion.comments || "None provided"}</p>
     `,
   })
   console.log("Email sent")
