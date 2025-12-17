@@ -478,3 +478,70 @@ body {
 .first-visit-dismiss:hover {
   opacity: 1;
 }
+
+/* Preset suggestion prompt styles */
+.suggest-button-container {
+  position: relative;
+  display: inline-block;
+}
+
+.preset-prompt {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 10px;
+  background: #28a745;
+  color: white;
+  padding: 12px 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  min-width: 200px;
+  max-width: 280px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: slideDown 0.3s ease-out;
+  white-space: normal;
+}
+
+.preset-prompt-arrow {
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid #28a745;
+}
+
+.preset-prompt-text {
+  flex: 1;
+  font-size: 0.9em;
+  line-height: 1.4;
+}
+
+.preset-prompt-dismiss {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5em;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.preset-prompt-dismiss:hover {
+  opacity: 1;
+}

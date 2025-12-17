@@ -23,6 +23,7 @@ interface FrontendConfiguration {
 interface HeadToHeadSpeciesSelectorProps {
   onSelectionComplete: (
     selectedSpeciesList: SpeciesEntry[],
+    usedFreeSpeciesSelection: boolean,
     soundType: SoundType,
     country: string
   ) => void
@@ -31,6 +32,7 @@ interface HeadToHeadSpeciesSelectorProps {
 interface HeadToHeadSpeciesSelectorState {
   frontendConfiguration: FrontendConfiguration | null
   selectedSpeciesList: SpeciesEntry[]
+  usedFreeSpeciesSelection: boolean
   speciesList: SpeciesEntry[]
   soundType: SoundType
   speciesListLoading?: boolean
@@ -57,6 +59,7 @@ class HeadToHeadSpeciesSelector extends Component<
     this.state = {
       frontendConfiguration: null,
       selectedSpeciesList: [],
+      usedFreeSpeciesSelection: false,
       speciesList: [],
       soundType: "any",
       selectionMode: "preset",
@@ -97,6 +100,7 @@ class HeadToHeadSpeciesSelector extends Component<
     }
     this.props.onSelectionComplete(
       this.state.selectedSpeciesList,
+      this.state.usedFreeSpeciesSelection,
       this.state.soundType,
       this.state.country || "GB"
     )
@@ -141,6 +145,7 @@ class HeadToHeadSpeciesSelector extends Component<
       .then((result) => {
         this.setState({
           selectedSpeciesList: result.species,
+          usedFreeSpeciesSelection: false,
           loadingPresetList: false,
         })
       })
@@ -265,6 +270,7 @@ class HeadToHeadSpeciesSelector extends Component<
                     this.setState({
                       selectionMode: e.target.value as "preset" | "free",
                       selectedSpeciesList: [],
+                      usedFreeSpeciesSelection: false,
                     })
                   }
                   style={{ marginRight: "6px" }}
@@ -286,6 +292,7 @@ class HeadToHeadSpeciesSelector extends Component<
                     this.setState({
                       selectionMode: e.target.value as "preset" | "free",
                       selectedSpeciesList: [],
+                      usedFreeSpeciesSelection: true,
                     })
                   }
                   style={{ marginRight: "6px" }}
