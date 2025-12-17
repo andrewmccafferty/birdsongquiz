@@ -276,6 +276,7 @@ class SuggestPresetListModal extends Component<
                   value={this.state.comments}
                   placeholder="Any additional context or suggestions..."
                   onChange={(e) => this.setState({ comments: e.target.value })}
+                  maxLength={1000}
                   rows={3}
                   style={{
                     width: "100%",
@@ -288,6 +289,17 @@ class SuggestPresetListModal extends Component<
                     fontFamily: "inherit",
                   }}
                 />
+                <div
+                  style={{
+                    fontSize: "0.85em",
+                    marginTop: "4px",
+                    textAlign: "right",
+                    color:
+                      this.state.comments.length > 900 ? "#d9534f" : "#777",
+                  }}
+                >
+                  {1000 - this.state.comments.length} characters remaining
+                </div>
               </div>
 
               <div
