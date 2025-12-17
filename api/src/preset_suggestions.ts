@@ -37,6 +37,7 @@ export const sendEmailWithSuggestionData = async (
     subject: "New preset list suggestion",
     text: `Somebody has suggested the list ${suggestionRawData}`,
     html: `<h2>New Preset List Suggestion</h2>
+    <p><strong>Region:</strong> ${suggestion.region}</p>
     <p><strong>List Name:</strong> ${suggestion.name}</p>
     <p><strong>Suggestion ID</strong>: ${suggestion.suggestionId}</p>
     <p><strong>Species:</strong></p>
