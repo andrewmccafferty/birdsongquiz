@@ -9,7 +9,11 @@ export interface SpeciesDetail {
 }
 
 export interface PresetListSuggestion {
+  suggestionId: string
   region: string
   listName: string
   speciesList: SpeciesDetail[]
+  name: string
+  email: string
+  comments: string
 }

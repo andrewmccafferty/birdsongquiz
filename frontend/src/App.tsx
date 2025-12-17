@@ -21,11 +21,13 @@ interface PermalinkData {
 
 interface AppState {
   headToHeadSpeciesList: SpeciesEntry[]
+  usedFreeSpeciesSelection: boolean
   soundType: SoundType | null
   gameExplanationOpen: boolean
   suggestPresetListModalOpen?: boolean
   country?: string
   isFirstVisit: boolean
+  showPresetPrompt: boolean
 }
 
 class App extends Component<unknown, AppState> {
@@ -38,10 +40,12 @@ class App extends Component<unknown, AppState> {
     const hasVisited = localStorage.getItem("hasVisitedBefore")
     this.state = {
       headToHeadSpeciesList: permalinkData ? permalinkData.presetSpecies : [],
+      usedFreeSpeciesSelection: false,
       soundType: permalinkData ? permalinkData.soundType : null,
       gameExplanationOpen: false,
       suggestPresetListModalOpen: false,
       isFirstVisit: !hasVisited,
+      showPresetPrompt: false,
     }
   }
 
@@ -68,13 +72,16 @@ class App extends Component<unknown, AppState> {
 
   onHeadToHeadSpeciesSelected = (
     headToHeadSpeciesList: SpeciesEntry[],
+    usedFreeSpeciesSelection: boolean,
     soundType: SoundType,
     country: string
   ) => {
     this.setState({
       headToHeadSpeciesList,
+      usedFreeSpeciesSelection,
       soundType,
       country,
+      showPresetPrompt: usedFreeSpeciesSelection,
     })
   }
 
@@ -106,6 +113,7 @@ class App extends Component<unknown, AppState> {
   openSuggestPresetListModal = () => {
     this.setState({
       suggestPresetListModalOpen: true,
+      showPresetPrompt: false,
     })
   }
 
@@ -133,6 +141,12 @@ class App extends Component<unknown, AppState> {
     localStorage.setItem("hasVisitedBefore", "true")
     this.setState({
       isFirstVisit: false,
+    })
+  }
+
+  dismissPresetPrompt = () => {
+    this.setState({
+      showPresetPrompt: false,
     })
   }
 
@@ -167,9 +181,15 @@ class App extends Component<unknown, AppState> {
         {(!this.state.headToHeadSpeciesList ||
           this.state.headToHeadSpeciesList.length === 0) && (
           <HeadToHeadSpeciesSelector
-            onSelectionComplete={(headToHeadSpeciesList, soundType, country) =>
+            onSelectionComplete={(
+              headToHeadSpeciesList,
+              usedFreeSpeciesSelection,
+              soundType,
+              country
+            ) =>
               this.onHeadToHeadSpeciesSelected(
                 headToHeadSpeciesList,
+                usedFreeSpeciesSelection,
                 soundType,
                 country
               )
@@ -188,13 +208,18 @@ class App extends Component<unknown, AppState> {
               <FontAwesomeIcon icon={faArrowsRotate} />
             </button>
             <CopyPermalinkButton permalink={this.headToHeadSharingLink()} />
-            <button
-              className="small-button"
-              onClick={() => this.openSuggestPresetListModal()}
-              title="Suggest this list of species as a preset"
-            >
-              <FontAwesomeIcon icon={faClipboardCheck} />
-            </button>
+            {this.state.usedFreeSpeciesSelection && (
+              <div className="suggest-button-container">
+                <button
+                  className={`small-button ${this.state.showPresetPrompt ? "pulse" : ""}`}
+                  id="suggest-preset-list"
+                  onClick={() => this.openSuggestPresetListModal()}
+                  title="Suggest this list of species as a preset"
+                >
+                  <FontAwesomeIcon icon={faClipboardCheck} />
+                </button>
+              </div>
+            )}
           </div>
         )}
         {this.gameActive() && (

@@ -42,19 +42,19 @@ const loadSpeciesListFromS3Key = async (
   return species_list
 }
 
-export const loadSpeciesListForRegion = async (
+const loadSpeciesListForRegion = async (
   region: string
 ): Promise<unknown[] | null> => {
   return loadSpeciesListFromS3Key(`countries/${region}.json`)
 }
 
-export const loadSpeciesListById = async (
+const loadSpeciesListById = async (
   listId: string
 ): Promise<unknown[] | null> => {
   return loadSpeciesListFromS3Key(`presets/${listId}.json`)
 }
 
-export const getSpeciesPresetListsForRegion = async (
+const getSpeciesPresetListsForRegion = async (
   region: string
 ): Promise<PresetListNameDetails[]> => {
   const files = await listFilesForPrefix(
@@ -81,8 +81,8 @@ export const getSpeciesPresetListsForRegion = async (
 const suggestionS3Key = (suggestionId: string) =>
   `suggestions/${suggestionId}.json`
 
-export const storeSuggestedSpeciesList = async (
-  presetListData: unknown
+const storeSuggestedSpeciesList = async (
+  presetListData: object
 ): Promise<string> => {
   const s3Client = new S3Client({ region: REGION })
   const suggestionId = randomUUID()
@@ -90,7 +90,10 @@ export const storeSuggestedSpeciesList = async (
     new PutObjectCommand({
       Bucket: process.env.SPECIES_LIST_BUCKET_NAME as string,
       Key: suggestionS3Key(suggestionId),
-      Body: JSON.stringify(presetListData),
+      Body: JSON.stringify({
+        ...presetListData,
+        suggestionId,
+      }),
     })
   )
   return suggestionId
@@ -130,7 +133,7 @@ const mapListNameToFileKey = (listName: string) => {
   return listName.split(" ").join("-").toLowerCase()
 }
 
-export const approveSuggestedSpeciesList = async (
+const approveSuggestedSpeciesList = async (
   suggestionId: string
 ): Promise<string> => {
   const suggestion = await loadSuggestion(suggestionId)
@@ -158,4 +161,13 @@ export const approveSuggestedSpeciesList = async (
   await updatePresetListVersionToCurrentTimestamp()
 
   return s3Key
+}
+
+export {
+  loadSpeciesListForRegion,
+  loadSpeciesListById,
+  getSpeciesPresetListsForRegion,
+  storeSuggestedSpeciesList,
+  approveSuggestedSpeciesList,
+  loadSuggestion,
 }
