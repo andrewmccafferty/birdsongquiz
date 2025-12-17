@@ -40,7 +40,7 @@ export const sendEmailWithSuggestionData = async (
     <p><strong>List Name:</strong> ${suggestion.name}</p>
     <p><strong>Species:</strong></p>
     <ul>
-      ${suggestion.speciesList?.map((s) => `<li>${s}</li>`).join("") || "<li>None</li>"}
+      ${suggestion.speciesList?.map((s) => `<li>${s.Species}</li>`).join("") || "<li>None</li>"}
     </ul>
     <p><strong>Submitted by:</strong> ${suggestion.name || "Anonymous"}</p>
     <p><strong>Email:</strong> ${suggestion.email || "Not provided"}</p>
