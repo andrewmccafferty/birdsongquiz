@@ -391,9 +391,42 @@ body {
   background: #fafafa;
 }
 
-/* First-visit prompt styles */
 .info-link.pulse {
   animation: pulse 2s infinite;
+  position: relative;
+}
+
+.info-link.pulse::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 32px;
+  height: 32px;
+  border: 2px dotted #0078d4;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: rotateBorder 3s linear infinite;
+  pointer-events: none;
+}
+
+.small-button.pulse {
+  animation: pulse 2s infinite;
+  position: relative;
+}
+
+.small-button.pulse::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 38px;
+  height: 38px;
+  border: 2px dotted #28a745;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: rotateBorder 3s linear infinite;
+  pointer-events: none;
 }
 
 @keyframes pulse {
@@ -408,6 +441,15 @@ body {
   100% {
     transform: scale(1);
     opacity: 1;
+  }
+}
+
+@keyframes rotateBorder {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
   }
 }
 

@@ -208,33 +208,18 @@ class App extends Component<unknown, AppState> {
               <FontAwesomeIcon icon={faArrowsRotate} />
             </button>
             <CopyPermalinkButton permalink={this.headToHeadSharingLink()} />
-            <div className="suggest-button-container">
-              <button
-                className={`small-button ${this.state.showPresetPrompt && this.state.usedFreeSpeciesSelection ? "pulse" : ""}`}
-                id="suggest-preset-list"
-                onClick={() => this.openSuggestPresetListModal()}
-                title="Suggest this list of species as a preset"
-              >
-                <FontAwesomeIcon icon={faClipboardCheck} />
-              </button>
-              {this.state.showPresetPrompt &&
-                this.state.usedFreeSpeciesSelection && (
-                  <div className="preset-prompt">
-                    <div className="preset-prompt-arrow"></div>
-                    <div className="preset-prompt-text">
-                      You picked this list of species manually. If you like, you
-                      can suggest this as a preset for future use.
-                    </div>
-                    <button
-                      className="preset-prompt-dismiss"
-                      onClick={() => this.dismissPresetPrompt()}
-                      aria-label="Dismiss"
-                    >
-                      ×
-                    </button>
-                  </div>
-                )}
-            </div>
+            {this.state.usedFreeSpeciesSelection && (
+              <div className="suggest-button-container">
+                <button
+                  className={`small-button ${this.state.showPresetPrompt ? "pulse" : ""}`}
+                  id="suggest-preset-list"
+                  onClick={() => this.openSuggestPresetListModal()}
+                  title="Suggest this list of species as a preset"
+                >
+                  <FontAwesomeIcon icon={faClipboardCheck} />
+                </button>
+              </div>
+            )}
           </div>
         )}
         {this.gameActive() && (
