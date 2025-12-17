@@ -1,5 +1,5 @@
-import { getObjectFromS3AsString } from "./s3_utils"
 import { sendEmail } from "./email"
+import { loadSuggestion } from "./species"
 
 export const sendEmailWithSuggestionData = async (
   bucketName: string,
@@ -10,10 +10,7 @@ export const sendEmailWithSuggestionData = async (
     bucketName,
     suggestionS3Key
   )
-  const suggestionRawData = await getObjectFromS3AsString(
-    bucketName,
-    suggestionS3Key
-  )
+  const suggestionRawData = await loadSuggestion(suggestionS3Key)
   console.log("Suggestion retrieved, sending email")
   if (!process.env.SHOULD_SEND_SUGGESTION_NOTIFICATION_EMAILS) {
     console.log(
@@ -24,7 +21,7 @@ export const sendEmailWithSuggestionData = async (
   await sendEmail({
     from: {
       email: process.env.NOTIFICATIONS_FROM_EMAIL_ADDRESS as string,
-      name: "Website visitor",
+      name: suggestionRawData.name || "Anonymous website visitor",
     },
     to: [
       {
@@ -34,7 +31,15 @@ export const sendEmailWithSuggestionData = async (
     ],
     subject: "New preset list suggestion",
     text: `Somebody has suggested the list ${suggestionRawData}`,
-    html: `Somebody has suggested the list ${suggestionRawData}`,
+    html: `<h2>New Preset List Suggestion</h2>
+    <p><strong>List Name:</strong> ${suggestionRawData.name}</p>
+    <p><strong>Species:</strong></p>
+    <ul>
+      ${suggestionRawData.speciesList?.map((s) => `<li>${s}</li>`).join("") || "<li>None</li>"}
+    </ul>
+    <p><strong>Submitted by:</strong> ${suggestionRawData.name || "Anonymous"}</p>
+    <p><strong>Email:</strong> ${suggestionRawData.email || "Not provided"}</p>
+    `,
   })
   console.log("Email sent")
 }

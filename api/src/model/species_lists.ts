@@ -12,4 +12,7 @@ export interface PresetListSuggestion {
   region: string
   listName: string
   speciesList: SpeciesDetail[]
+  name: string
+  email: string
+  comments: string
 }
