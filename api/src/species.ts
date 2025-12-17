@@ -82,7 +82,7 @@ const suggestionS3Key = (suggestionId: string) =>
   `suggestions/${suggestionId}.json`
 
 const storeSuggestedSpeciesList = async (
-  presetListData: unknown
+  presetListData: object
 ): Promise<string> => {
   const s3Client = new S3Client({ region: REGION })
   const suggestionId = randomUUID()
@@ -90,7 +90,10 @@ const storeSuggestedSpeciesList = async (
     new PutObjectCommand({
       Bucket: process.env.SPECIES_LIST_BUCKET_NAME as string,
       Key: suggestionS3Key(suggestionId),
-      Body: JSON.stringify(presetListData),
+      Body: JSON.stringify({
+        ...presetListData,
+        suggestionId,
+      }),
     })
   )
   return suggestionId
