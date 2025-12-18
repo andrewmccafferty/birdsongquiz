@@ -1,30 +1,15 @@
 import {
-  S3Client,
-  PutObjectCommand,
-  DeleteObjectCommand,
-} from "@aws-sdk/client-s3"
-import {
   listFilesForPrefix,
   s3KeyExists,
   getObjectFromS3AsString,
+  deleteObjectFromS3,
+  putObjectToS3,
 } from "./s3_utils"
 import { randomUUID } from "crypto"
 import {
   PresetListNameDetails,
   PresetListSuggestion,
 } from "./model/species_lists"
-
-const REGION = "eu-west-2"
-
-const deleteObjectFromS3 = async (bucketName: string, s3Key: string) => {
-  const s3Client = new S3Client({ region: REGION })
-  await s3Client.send(
-    new DeleteObjectCommand({
-      Bucket: bucketName,
-      Key: s3Key,
-    })
-  )
-}
 
 const loadSpeciesListFromS3Key = async (
   s3Key: string
@@ -84,17 +69,11 @@ const suggestionS3Key = (suggestionId: string) =>
 const storeSuggestedSpeciesList = async (
   presetListData: object
 ): Promise<string> => {
-  const s3Client = new S3Client({ region: REGION })
   const suggestionId = randomUUID()
-  await s3Client.send(
-    new PutObjectCommand({
-      Bucket: process.env.SPECIES_LIST_BUCKET_NAME as string,
-      Key: suggestionS3Key(suggestionId),
-      Body: JSON.stringify({
-        ...presetListData,
-        suggestionId,
-      }),
-    })
+  await putObjectToS3(
+    presetListData,
+    process.env.SPECIES_LIST_BUCKET_NAME as string,
+    suggestionS3Key(suggestionId)
   )
   return suggestionId
 }
@@ -117,15 +96,12 @@ const deleteSuggestion = async (suggestionId: string) => {
 }
 
 const updatePresetListVersionToCurrentTimestamp = async () => {
-  const s3Client = new S3Client({ region: REGION })
-  await s3Client.send(
-    new PutObjectCommand({
-      Bucket: process.env.FRONTEND_BUCKET_NAME as string,
-      Key: "frontend-configuration.json",
-      Body: JSON.stringify({
-        presetsVersion: `${Date.now()}`,
-      }),
-    })
+  putObjectToS3(
+    {
+      presetsVersion: `${Date.now()}`,
+    },
+    process.env.FRONTEND_BUCKET_NAME as string,
+    "frontend-configuration.json"
   )
 }
 
@@ -147,14 +123,11 @@ const approveSuggestedSpeciesList = async (
   ) {
     throw new Error(`Preset already exists with the key ${s3Key}`)
   }
-  const s3Client = new S3Client({ region: REGION })
-  const presetListData = suggestion.speciesList
-  await s3Client.send(
-    new PutObjectCommand({
-      Bucket: process.env.SPECIES_LIST_BUCKET_NAME as string,
-      Key: s3Key,
-      Body: JSON.stringify(presetListData),
-    })
+
+  await putObjectToS3(
+    suggestion.speciesList,
+    process.env.SPECIES_LIST_BUCKET_NAME as string,
+    s3Key
   )
 
   await deleteSuggestion(suggestionId)

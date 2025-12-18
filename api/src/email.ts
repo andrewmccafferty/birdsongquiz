@@ -1,5 +1,3 @@
-import * as https from "https"
-
 const MAILER_SEND_URL = "https://api.mailersend.com/v1/email"
 
 export interface SendEmailRequest {
@@ -16,57 +14,27 @@ export interface SendEmailRequest {
   html?: string
 }
 
-export const sendEmail = (
+export const sendEmail = async (
   sendEmailRequest: SendEmailRequest
 ): Promise<void> => {
-  return new Promise((resolve, reject) => {
-    const apiKey = process.env.MAILER_SEND_API_KEY
-    if (!apiKey) {
-      reject(new Error("MAILER_SEND_API_KEY environment variable is not set."))
-      return
-    }
+  const apiKey = process.env.MAILER_SEND_API_KEY
+  if (!apiKey) {
+    throw new Error("MAILER_SEND_API_KEY environment variable is not set.")
+  }
 
-    const body = JSON.stringify(sendEmailRequest)
-
-    const options: https.RequestOptions = {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-        "Content-Length": Buffer.byteLength(body),
-      },
-    }
-
-    const request = https.request(MAILER_SEND_URL, options, (response) => {
-      let data = ""
-
-      response.on("data", (chunk) => {
-        data += chunk
-      })
-
-      response.on("end", () => {
-        if (
-          response.statusCode &&
-          response.statusCode >= 200 &&
-          response.statusCode < 300
-        ) {
-          resolve()
-        } else {
-          reject(
-            new Error(
-              `Failed to post: status code ${response.statusCode}, response body ${data}`
-            )
-          )
-        }
-      })
-    })
-
-    request.on("error", (error) => {
-      reject(new Error(`Request error: ${error.message}`))
-    })
-
-    // Write POST body
-    request.write(body)
-    request.end()
+  const response = await fetch(MAILER_SEND_URL, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(sendEmailRequest),
   })
+
+  if (!response.ok) {
+    const data = await response.text()
+    throw new Error(
+      `Failed to send email: status code ${response.status}, response body ${data}`
+    )
+  }
 }
