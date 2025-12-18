@@ -29,8 +29,13 @@ const storeSuggestedSpeciesList = async (
   presetListData: object
 ): Promise<string> => {
   const suggestionId = randomUUID()
+  const approvalId = randomUUID()
   await putObjectToS3(
-    presetListData,
+    {
+      ...presetListData,
+      suggestionId,
+      approvalId,
+    },
     process.env.SPECIES_LIST_BUCKET_NAME as string,
     suggestionS3Key(suggestionId)
   )
@@ -126,6 +131,7 @@ const sendEmailWithSuggestionData = async (
     <p><strong>Submitted by:</strong> ${suggestion.name || "Anonymous"}</p>
     <p><strong>Email:</strong> ${suggestion.email || "Not provided"}</p>
     <p><strong>Comments:</strong> ${suggestion.comments || "None provided"}</p>
+    <p><string>Approval link:</strong>https://${process.env.API_BASE_URL}/presets/approve/${suggestion.suggestionId}?approvalId=${suggestion.approvalId}</p>
     `,
   })
   console.log("Email sent")
