@@ -159,6 +159,9 @@ const approvePresetList = async (
   }
 
   const listPath = await approveSuggestedSpeciesList(suggestionId, approvalId)
+  if (!listPath) {
+    return response(403, { message: "access denied" })
+  }
   return response(200, { listPath })
 }
 

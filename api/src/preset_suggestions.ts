@@ -62,15 +62,17 @@ const deleteSuggestion = async (suggestionId: string) => {
 const approveSuggestedSpeciesList = async (
   suggestionId: string,
   approvalId: string
-): Promise<string> => {
+): Promise<string | null> => {
   const suggestion = await loadSuggestion(suggestionId)
   if (!suggestion) {
-    throw new Error(`No suggestion with ID ${suggestionId}`)
+    console.error(`No suggestion with ID ${suggestionId}`)
+    return null
   }
   if (suggestion.approvalId != approvalId) {
-    throw new Error(
+    console.error(
       `Incorrect approvalId supplied for suggestionId ${suggestionId}`
     )
+    return null
   }
   const region = suggestion.region
   const s3Key = `presets/${region.toLowerCase()}/${mapListNameToFileKey(
