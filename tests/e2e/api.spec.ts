@@ -55,6 +55,15 @@ test(
   }
 )
 
+const callApprovalEndpoint = async (
+  suggestionId: string,
+  approvalId: string
+): Promise<Response> => {
+  return fetch(
+    `${getApiRoot()}/presets/approve/${suggestionId}?approvalId=${approvalId}`
+  )
+}
+
 test("should be able to submit a suggestion, and on approval it shows up in the preset lists", async ({
   request,
 }) => {
@@ -94,12 +103,19 @@ test("should be able to submit a suggestion, and on approval it shows up in the 
 
   const approvalId = suggestionsData["approvalId"]
 
-  // Approve the suggestion
-  const approvalResponse = await fetch(
-    `${getApiRoot()}/presets/approve/${suggestionId}?approvalId=${approvalId}`
-  )
+  // Check that using the wrong suggestionId gives a 403
+  expect(
+    (await callApprovalEndpoint("someSuggestionId", approvalId)).status
+  ).toEqual(403)
 
-  expect(approvalResponse.status).toEqual(200)
+  // Check that using the wrong approvalId gives a 403
+  expect(
+    (await callApprovalEndpoint(suggestionId, "someApprovalId")).status
+  ).toEqual(403)
+  // Approve the suggestion
+  expect((await callApprovalEndpoint(suggestionId, approvalId)).status).toEqual(
+    200
+  )
 
   const presetsListResponse = await request.get(`${getApiRoot()}/presets/GB`)
   expect(presetsListResponse.status()).toEqual(200)

@@ -49,6 +49,9 @@ const loadSuggestion = async (
     process.env.SPECIES_LIST_BUCKET_NAME as string,
     suggestionS3Key(suggestionId)
   )
+  if (!suggestionRawData) {
+    throw new Error(`No suggestion found with ID ${suggestionId}`)
+  }
   return JSON.parse(suggestionRawData)
 }
 
@@ -109,6 +112,9 @@ const sendEmailWithSuggestionData = async (
     bucketName,
     suggestionS3Key
   )
+  if (!suggestionRawData) {
+    throw new Error(`No object found with key ${suggestionS3Key}`)
+  }
   const suggestion = JSON.parse(suggestionRawData) as PresetListSuggestion
   console.log("Suggestion retrieved, sending email")
   if (!process.env.SHOULD_SEND_SUGGESTION_NOTIFICATION_EMAILS) {

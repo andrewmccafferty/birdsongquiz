@@ -65,15 +65,26 @@ const listFilesForPrefix = async (
 const getObjectFromS3AsString = async (
   bucketName: string,
   s3Key: string
-): Promise<string> => {
+): Promise<string | null> => {
   const s3Client = new S3Client({ region: "eu-west-2" })
-  const { Body } = await s3Client.send(
-    new GetObjectCommand({
-      Bucket: bucketName,
-      Key: s3Key,
-    })
-  )
-  return Body!.transformToString()
+  try {
+    const { Body } = await s3Client.send(
+      new GetObjectCommand({
+        Bucket: bucketName,
+        Key: s3Key,
+      })
+    )
+    return Body!.transformToString()
+  } catch (err) {
+    if (
+      err instanceof S3ServiceException &&
+      err.$metadata?.httpStatusCode === 404
+    ) {
+      return null
+    } else {
+      throw err
+    }
+  }
 }
 
 const s3KeyExists = async (bucket: string, key: string): Promise<boolean> => {
