@@ -3,9 +3,11 @@ import {
   loadSpeciesListById,
   loadSpeciesListForRegion,
   getSpeciesPresetListsForRegion,
+} from "./species"
+import {
   storeSuggestedSpeciesList,
   approveSuggestedSpeciesList,
-} from "./species"
+} from "./preset_suggestions"
 import { sendEmailWithSuggestionData } from "./preset_suggestions"
 import { APIGatewayEvent, APIGatewayProxyResult, S3Event } from "aws-lambda"
 

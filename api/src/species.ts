@@ -1,15 +1,5 @@
-import {
-  listFilesForPrefix,
-  s3KeyExists,
-  getObjectFromS3AsString,
-  deleteObjectFromS3,
-  putObjectToS3,
-} from "./s3_utils"
-import { randomUUID } from "crypto"
-import {
-  PresetListNameDetails,
-  PresetListSuggestion,
-} from "./model/species_lists"
+import { listFilesForPrefix, getObjectFromS3AsString } from "./s3_utils"
+import { PresetListNameDetails } from "./model/species_lists"
 
 const loadSpeciesListFromS3Key = async (
   s3Key: string
@@ -63,84 +53,8 @@ const getSpeciesPresetListsForRegion = async (
   return mapped
 }
 
-const suggestionS3Key = (suggestionId: string) =>
-  `suggestions/${suggestionId}.json`
-
-const storeSuggestedSpeciesList = async (
-  presetListData: object
-): Promise<string> => {
-  const suggestionId = randomUUID()
-  await putObjectToS3(
-    presetListData,
-    process.env.SPECIES_LIST_BUCKET_NAME as string,
-    suggestionS3Key(suggestionId)
-  )
-  return suggestionId
-}
-
-const loadSuggestion = async (
-  suggestionId: string
-): Promise<PresetListSuggestion> => {
-  const suggestionRawData = await getObjectFromS3AsString(
-    process.env.SPECIES_LIST_BUCKET_NAME as string,
-    suggestionS3Key(suggestionId)
-  )
-  return JSON.parse(suggestionRawData)
-}
-
-const deleteSuggestion = async (suggestionId: string) => {
-  await deleteObjectFromS3(
-    process.env.SPECIES_LIST_BUCKET_NAME as string,
-    suggestionS3Key(suggestionId)
-  )
-}
-
-const updatePresetListVersionToCurrentTimestamp = async () => {
-  putObjectToS3(
-    {
-      presetsVersion: `${Date.now()}`,
-    },
-    process.env.FRONTEND_BUCKET_NAME as string,
-    "frontend-configuration.json"
-  )
-}
-
-const mapListNameToFileKey = (listName: string) => {
-  return listName.split(" ").join("-").toLowerCase()
-}
-
-const approveSuggestedSpeciesList = async (
-  suggestionId: string
-): Promise<string> => {
-  const suggestion = await loadSuggestion(suggestionId)
-  console.log("Loaded suggestion", suggestion)
-  const region = suggestion.region
-  const s3Key = `presets/${region.toLowerCase()}/${mapListNameToFileKey(
-    suggestion.listName
-  )}.json`
-  if (
-    await s3KeyExists(process.env.SPECIES_LIST_BUCKET_NAME as string, s3Key)
-  ) {
-    throw new Error(`Preset already exists with the key ${s3Key}`)
-  }
-
-  await putObjectToS3(
-    suggestion.speciesList,
-    process.env.SPECIES_LIST_BUCKET_NAME as string,
-    s3Key
-  )
-
-  await deleteSuggestion(suggestionId)
-  await updatePresetListVersionToCurrentTimestamp()
-
-  return s3Key
-}
-
 export {
   loadSpeciesListForRegion,
   loadSpeciesListById,
   getSpeciesPresetListsForRegion,
-  storeSuggestedSpeciesList,
-  approveSuggestedSpeciesList,
-  loadSuggestion,
 }

@@ -12,9 +12,11 @@ import {
   loadSpeciesListById,
   loadSpeciesListForRegion,
   getSpeciesPresetListsForRegion,
+} from "../src/species"
+import {
   storeSuggestedSpeciesList,
   approveSuggestedSpeciesList,
-} from "../src/species"
+} from "../src/preset_suggestions"
 import { sendEmailWithSuggestionData } from "../src/preset_suggestions"
 import { S3Event } from "aws-lambda"
 
