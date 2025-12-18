@@ -95,9 +95,11 @@ test("should be able to submit a suggestion, and on approval it shows up in the 
   const approvalId = suggestionsData["approvalId"]
 
   // Approve the suggestion
-  await fetch(
+  const approvalResponse = await fetch(
     `${getApiRoot()}/presets/approve/${suggestionId}?approvalId=${approvalId}`
   )
+
+  expect(approvalResponse.status).toEqual(200)
 
   const presetsListResponse = await request.get(`${getApiRoot()}/presets/GB`)
   expect(presetsListResponse.status()).toEqual(200)
