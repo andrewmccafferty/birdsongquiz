@@ -44,13 +44,13 @@ const storeSuggestedSpeciesList = async (
 
 const loadSuggestion = async (
   suggestionId: string
-): Promise<PresetListSuggestion> => {
+): Promise<PresetListSuggestion | null> => {
   const suggestionRawData = await getObjectFromS3AsString(
     process.env.SPECIES_LIST_BUCKET_NAME as string,
     suggestionS3Key(suggestionId)
   )
   if (!suggestionRawData) {
-    throw new Error(`No suggestion found with ID ${suggestionId}`)
+    return null
   }
   return JSON.parse(suggestionRawData)
 }
