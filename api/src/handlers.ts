@@ -31,7 +31,7 @@ const response = (
   }
 }
 
-export const getRecording = async (
+const getRecording = async (
   event: APIGatewayEvent
 ): Promise<APIGatewayProxyResult> => {
   console.log("Event: ", event)
@@ -60,7 +60,7 @@ export const getRecording = async (
   }
 }
 
-export const getSpeciesList = async (
+const getSpeciesList = async (
   event: APIGatewayEvent
 ): Promise<APIGatewayProxyResult> => {
   console.log("Event:", event)
@@ -87,7 +87,7 @@ export const getSpeciesList = async (
   })
 }
 
-export const getSpeciesPresetLists = async (
+const getSpeciesPresetLists = async (
   event: APIGatewayEvent
 ): Promise<APIGatewayProxyResult> => {
   console.log("Entering preset lists handler with event", event)
@@ -106,7 +106,7 @@ export const getSpeciesPresetLists = async (
   )
 }
 
-export const suggestPresetList = async (
+const suggestPresetList = async (
   event: APIGatewayEvent
 ): Promise<APIGatewayProxyResult> => {
   const body = event.body
@@ -137,7 +137,7 @@ export const suggestPresetList = async (
   })
 }
 
-export const approvePresetList = async (event: { suggestionId?: string }) => {
+const approvePresetList = async (event: { suggestionId?: string }) => {
   if (!event.suggestionId) {
     throw new Error("suggestionId property not set in event body")
   }
@@ -146,10 +146,19 @@ export const approvePresetList = async (event: { suggestionId?: string }) => {
   return { listPath }
 }
 
-export const notifyPresetListSuggested = async (event: S3Event) => {
+const notifyPresetListSuggested = async (event: S3Event) => {
   const record = event.Records[0]
   const bucket = record.s3.bucket.name
   const key = record.s3.object.key
   console.log("Handling event with bucket and key", bucket, key)
   await sendEmailWithSuggestionData(bucket, key)
+}
+
+export {
+  getRecording,
+  getSpeciesList,
+  getSpeciesPresetLists,
+  suggestPresetList,
+  approvePresetList,
+  notifyPresetListSuggested,
 }
