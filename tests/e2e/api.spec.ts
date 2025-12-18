@@ -87,7 +87,7 @@ test("should be able to submit a suggestion, and on approval it shows up in the 
   // Get the suggestion data from the bucket
   const suggestionsData = JSON.parse(
     await getObjectFromS3AsString(
-      getEnvironmentVariable("SPECIES_LIST_BUCKET_NAME"),
+      getEnvironmentVariable("SPECIES_LIST_BUCKET"),
       `suggestions/${suggestionId}.json`
     )
   )
