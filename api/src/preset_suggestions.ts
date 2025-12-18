@@ -139,7 +139,7 @@ const sendEmailWithSuggestionData = async (
     <p><strong>Submitted by:</strong> ${suggestion.name || "Anonymous"}</p>
     <p><strong>Email:</strong> ${suggestion.email || "Not provided"}</p>
     <p><strong>Comments:</strong> ${suggestion.comments || "None provided"}</p>
-    <p><string>Approval link:</strong>https://${process.env.API_BASE_URL}/presets/approve/${suggestion.suggestionId}?approvalId=${suggestion.approvalId}</p>
+    <p><string>Approval link:</strong> <a href="https://${process.env.API_BASE_URL}/presets/approve/${suggestion.suggestionId}?approvalId=${suggestion.approvalId}">click here</a></p>
     `,
   })
   console.log("Email sent")
