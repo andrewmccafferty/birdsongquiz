@@ -1,8 +1,105 @@
+import { randomUUID } from "crypto"
 import { sendEmail } from "./email"
 import { PresetListSuggestion } from "./model/species_lists"
-import { getObjectFromS3AsString } from "./s3_utils"
+import {
+  deleteObjectFromS3,
+  getObjectFromS3AsString,
+  putObjectToS3,
+  s3KeyExists,
+} from "./s3_utils"
 
-export const sendEmailWithSuggestionData = async (
+const updatePresetListVersionToCurrentTimestamp = async () => {
+  putObjectToS3(
+    {
+      presetsVersion: `${Date.now()}`,
+    },
+    process.env.FRONTEND_BUCKET_NAME as string,
+    "frontend-configuration.json"
+  )
+}
+
+const mapListNameToFileKey = (listName: string) => {
+  return listName.split(" ").join("-").toLowerCase()
+}
+
+const suggestionS3Key = (suggestionId: string) =>
+  `suggestions/${suggestionId}.json`
+
+const storeSuggestedSpeciesList = async (
+  presetListData: object
+): Promise<string> => {
+  const suggestionId = randomUUID()
+  const approvalId = randomUUID()
+  await putObjectToS3(
+    {
+      ...presetListData,
+      suggestionId,
+      approvalId,
+    },
+    process.env.SPECIES_LIST_BUCKET_NAME as string,
+    suggestionS3Key(suggestionId)
+  )
+  return suggestionId
+}
+
+const loadSuggestion = async (
+  suggestionId: string
+): Promise<PresetListSuggestion | null> => {
+  const suggestionRawData = await getObjectFromS3AsString(
+    process.env.SPECIES_LIST_BUCKET_NAME as string,
+    suggestionS3Key(suggestionId)
+  )
+  if (!suggestionRawData) {
+    return null
+  }
+  return JSON.parse(suggestionRawData)
+}
+
+const deleteSuggestion = async (suggestionId: string) => {
+  await deleteObjectFromS3(
+    process.env.SPECIES_LIST_BUCKET_NAME as string,
+    suggestionS3Key(suggestionId)
+  )
+}
+
+const approveSuggestedSpeciesList = async (
+  suggestionId: string,
+  approvalId: string
+): Promise<string | null> => {
+  const suggestion = await loadSuggestion(suggestionId)
+  if (!suggestion) {
+    console.error(`No suggestion with ID ${suggestionId}`)
+    return null
+  }
+  if (suggestion.approvalId != approvalId) {
+    console.error(
+      `Incorrect approvalId supplied for suggestionId ${suggestionId}`
+    )
+    return null
+  }
+  const region = suggestion.region
+  const s3Key = `presets/${region.toLowerCase()}/${mapListNameToFileKey(
+    suggestion.listName
+  )}.json`
+  if (
+    await s3KeyExists(process.env.SPECIES_LIST_BUCKET_NAME as string, s3Key)
+  ) {
+    throw new Error(`Preset already exists with the key ${s3Key}`)
+  }
+
+  await putObjectToS3(
+    suggestion.speciesList,
+    process.env.SPECIES_LIST_BUCKET_NAME as string,
+    s3Key
+  )
+
+  await deleteSuggestion(suggestionId)
+  await updatePresetListVersionToCurrentTimestamp()
+
+  return s3Key
+}
+
+const sendEmailWithSuggestionData = async (
   bucketName: string,
   suggestionS3Key: string
 ) => {
@@ -15,6 +112,9 @@ export const sendEmailWithSuggestionData = async (
     bucketName,
     suggestionS3Key
   )
+  if (!suggestionRawData) {
+    throw new Error(`No object found with key ${suggestionS3Key}`)
+  }
   const suggestion = JSON.parse(suggestionRawData) as PresetListSuggestion
   console.log("Suggestion retrieved, sending email")
   if (!process.env.SHOULD_SEND_SUGGESTION_NOTIFICATION_EMAILS) {
@@ -47,7 +147,14 @@ export const sendEmailWithSuggestionData = async (
     <p><strong>Submitted by:</strong> ${suggestion.name || "Anonymous"}</p>
     <p><strong>Email:</strong> ${suggestion.email || "Not provided"}</p>
     <p><strong>Comments:</strong> ${suggestion.comments || "None provided"}</p>
+    <p><string>Approval link:</strong> <a href="${process.env.API_BASE_URL}/presets/approve/${suggestion.suggestionId}?approvalId=${suggestion.approvalId}">click here</a></p>
     `,
   })
   console.log("Email sent")
+}
+
+export {
+  approveSuggestedSpeciesList,
+  sendEmailWithSuggestionData,
+  storeSuggestedSpeciesList,
 }

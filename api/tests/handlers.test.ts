@@ -12,9 +12,11 @@ import {
   loadSpeciesListById,
   loadSpeciesListForRegion,
   getSpeciesPresetListsForRegion,
+} from "../src/species"
+import {
   storeSuggestedSpeciesList,
   approveSuggestedSpeciesList,
-} from "../src/species"
+} from "../src/preset_suggestions"
 import { sendEmailWithSuggestionData } from "../src/preset_suggestions"
 import { S3Event } from "aws-lambda"
 
@@ -26,12 +28,12 @@ jest.mock("../src/species", () => ({
   loadSpeciesListById: jest.fn(),
   loadSpeciesListForRegion: jest.fn(),
   getSpeciesPresetListsForRegion: jest.fn(),
-  storeSuggestedSpeciesList: jest.fn(),
-  approveSuggestedSpeciesList: jest.fn(),
 }))
 
 jest.mock("../src/preset_suggestions", () => ({
   sendEmailWithSuggestionData: jest.fn(),
+  storeSuggestedSpeciesList: jest.fn(),
+  approveSuggestedSpeciesList: jest.fn(),
 }))
 
 const mockGetRandomRecordingForSpecies =
@@ -402,24 +404,78 @@ describe("approvePresetList tests", () => {
     const mockListPath = "presets/gb/my-list.json"
     mockApproveSuggestedSpeciesList.mockResolvedValue(mockListPath)
 
-    const result = await approvePresetList({ suggestionId: "suggestion-123" })
+    const event = mockApiGatewayEvent()
+    event.pathParameters = { suggestionId: "suggestion-123" }
+    event.queryStringParameters = { approvalId: "approval-456" }
 
-    expect(approveSuggestedSpeciesList).toHaveBeenCalledWith("suggestion-123")
-    expect(result).toEqual({ listPath: mockListPath })
+    const response = await approvePresetList(event)
+
+    expect(approveSuggestedSpeciesList).toHaveBeenCalledWith(
+      "suggestion-123",
+      "approval-456"
+    )
+    expect(response.statusCode).toEqual(200)
+    expect(JSON.parse(response.body)).toEqual({ listPath: mockListPath })
   })
 
-  it("should throw error when suggestionId is missing", async () => {
-    await expect(approvePresetList({})).rejects.toThrow(
-      "suggestionId property not set in event body"
-    )
+  it("should return 400 when suggestionId path parameter is missing", async () => {
+    const event = mockApiGatewayEvent()
+    event.pathParameters = null
+    event.queryStringParameters = { approvalId: "approval-456" }
+
+    const response = await approvePresetList(event)
 
     expect(approveSuggestedSpeciesList).not.toHaveBeenCalled()
+    expect(response.statusCode).toEqual(400)
+    expect(JSON.parse(response.body)).toEqual({
+      message: "Missing required path parameter 'suggestionId'",
+    })
   })
 
-  it("should throw error when suggestionId is undefined", async () => {
-    await expect(
-      approvePresetList({ suggestionId: undefined })
-    ).rejects.toThrow("suggestionId property not set in event body")
+  it("should return 400 when approvalId query parameter is missing", async () => {
+    const event = mockApiGatewayEvent()
+    event.pathParameters = { suggestionId: "suggestion-123" }
+    event.queryStringParameters = null
+
+    const response = await approvePresetList(event)
+
+    expect(approveSuggestedSpeciesList).not.toHaveBeenCalled()
+    expect(response.statusCode).toEqual(400)
+    expect(JSON.parse(response.body)).toEqual({
+      message: "Missing required query parameter 'approvalId'",
+    })
+  })
+
+  it("should return 400 when both parameters are missing", async () => {
+    const event = mockApiGatewayEvent()
+    event.pathParameters = null
+    event.queryStringParameters = null
+
+    const response = await approvePresetList(event)
+
+    expect(approveSuggestedSpeciesList).not.toHaveBeenCalled()
+    expect(response.statusCode).toEqual(400)
+    expect(JSON.parse(response.body)).toEqual({
+      message: "Missing required path parameter 'suggestionId'",
+    })
+  })
+
+  it("should include CORS headers in response", async () => {
+    const mockListPath = "presets/gb/my-list.json"
+    mockApproveSuggestedSpeciesList.mockResolvedValue(mockListPath)
+
+    const event = mockApiGatewayEvent()
+    event.pathParameters = { suggestionId: "suggestion-123" }
+    event.queryStringParameters = { approvalId: "approval-456" }
+
+    const response = await approvePresetList(event)
+
+    expect(response.headers).toMatchObject({
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+    })
   })
 })
 

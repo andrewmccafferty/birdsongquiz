@@ -53,6 +53,7 @@ locals {
         MAILER_SEND_API_KEY                        = var.mailer_send_api_key
         NOTIFICATIONS_FROM_EMAIL_ADDRESS           = var.notifications_from_email_address
         NOTIFICATIONS_TO_EMAIL_ADDRESS             = var.notifications_to_email_address
+        API_BASE_URL                               = "https://${aws_apigatewayv2_api.lambda.id}.execute-api.eu-west-2.amazonaws.com/${aws_apigatewayv2_stage.lambda.name}"
       }
       role_name = "notify_preset_list_suggested_role"
     }
@@ -252,6 +253,7 @@ resource "aws_iam_role_policy" "approve_preset_list_s3_access" {
         Effect = "Allow"
         Action = [
           "s3:GetObject",
+          "s3:ListObject",
           "s3:DeleteObject"
         ]
         Resource = [

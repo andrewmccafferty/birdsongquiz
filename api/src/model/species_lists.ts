@@ -10,6 +10,7 @@ export interface SpeciesDetail {
 
 export interface PresetListSuggestion {
   suggestionId: string
+  approvalId: string
   region: string
   listName: string
   speciesList: SpeciesDetail[]
