@@ -253,6 +253,7 @@ resource "aws_iam_role_policy" "approve_preset_list_s3_access" {
         Effect = "Allow"
         Action = [
           "s3:GetObject",
+          "s3:ListObject",
           "s3:DeleteObject"
         ]
         Resource = [
