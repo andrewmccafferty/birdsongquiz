@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test"
 import { invokeLambda } from "./aws_utils/lambda"
 import { RUN_IN_PROD_TAG } from "./constants"
+import { getObjectFromS3AsString } from "./aws_utils/s3"
 
 const getEnvironmentVariable = (name: string): string => {
   const result = process.env[name]
@@ -83,9 +84,20 @@ test("should be able to submit a suggestion, and on approval it shows up in the 
 
   const suggestionId = suggestion.suggestionId
 
-  await invokeLambda(getApprovePresetListLambdaName(), {
-    suggestionId: suggestionId,
-  })
+  // Get the suggestion data from the bucket
+  const suggestionsData = JSON.parse(
+    await getObjectFromS3AsString(
+      getEnvironmentVariable("SPECIES_LIST_BUCKET_NAME"),
+      `suggestions/${suggestionId}.json`
+    )
+  )
+
+  const approvalId = suggestionsData["approvalId"]
+
+  // Approve the suggestion
+  await fetch(
+    `${getApiRoot()}/presets/approve/${suggestionId}?approvalId=${approvalId}`
+  )
 
   const presetsListResponse = await request.get(`${getApiRoot()}/presets/GB`)
   expect(presetsListResponse.status()).toEqual(200)
