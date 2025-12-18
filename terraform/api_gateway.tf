@@ -118,7 +118,7 @@ resource "aws_apigatewayv2_route" "suggest_preset_list" {
 
 resource "aws_apigatewayv2_route" "approve_preset_list" {
   api_id    = aws_apigatewayv2_api.lambda.id
-  route_key = "POST /presets/approve/{suggestionId}"
+  route_key = "GET /presets/approve/{suggestionId}"
 
   target = "integrations/${aws_apigatewayv2_integration.approve_preset_list.id}"
 }
