@@ -28,12 +28,12 @@ jest.mock("../src/species", () => ({
   loadSpeciesListById: jest.fn(),
   loadSpeciesListForRegion: jest.fn(),
   getSpeciesPresetListsForRegion: jest.fn(),
-  storeSuggestedSpeciesList: jest.fn(),
-  approveSuggestedSpeciesList: jest.fn(),
 }))
 
 jest.mock("../src/preset_suggestions", () => ({
   sendEmailWithSuggestionData: jest.fn(),
+  storeSuggestedSpeciesList: jest.fn(),
+  approveSuggestedSpeciesList: jest.fn(),
 }))
 
 const mockGetRandomRecordingForSpecies =
