@@ -139,13 +139,27 @@ const suggestPresetList = async (
   })
 }
 
-const approvePresetList = async (event: { suggestionId?: string }) => {
-  if (!event.suggestionId) {
-    throw new Error("suggestionId property not set in event body")
+const approvePresetList = async (
+  event: APIGatewayEvent
+): Promise<APIGatewayProxyResult> => {
+  console.log("Entering approve preset list handler with event", event)
+  const suggestionId = event.pathParameters?.suggestionId
+  const approvalId = event.queryStringParameters?.approvalId
+
+  if (!suggestionId) {
+    return response(400, {
+      message: "Missing required path parameter 'suggestionId'",
+    })
   }
 
-  const listPath = await approveSuggestedSpeciesList(event.suggestionId)
-  return { listPath }
+  if (!approvalId) {
+    return response(400, {
+      message: "Missing required query parameter 'approvalId'",
+    })
+  }
+
+  const listPath = await approveSuggestedSpeciesList(suggestionId, approvalId)
+  return response(200, { listPath })
 }
 
 const notifyPresetListSuggested = async (event: S3Event) => {
