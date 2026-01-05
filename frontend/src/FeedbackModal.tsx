@@ -31,8 +31,8 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpen, onClose }) => {
 
     try {
       await postApi("feedback", {
-        name,
-        email,
+        fromName: name,
+        fromEmail: email,
         message,
       })
       setSubmitStatus("success")
