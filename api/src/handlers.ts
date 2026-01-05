@@ -11,6 +11,7 @@ import {
 import { sendEmailWithSuggestionData } from "./preset_suggestions"
 import { APIGatewayEvent, APIGatewayProxyResult, S3Event } from "aws-lambda"
 import { FeedbackRequest, isFeedbackRequest } from "./model/feedback"
+import { sendFeedbackEmail } from "./feedback"
 
 const response = (
   statusCode: number,
@@ -194,7 +195,7 @@ const sendFeedback = async (
   if (!feedbackRequest) {
     return response(400, { message: "Invalid feedback request" })
   }
-  console.log("Valid feedback request", feedbackRequest)
+  await sendFeedbackEmail(feedbackRequest)
   return response(204, null)
 }
 
