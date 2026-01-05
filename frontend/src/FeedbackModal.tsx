@@ -30,7 +30,7 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpen, onClose }) => {
     setSubmitStatus(null)
 
     try {
-      await postApi("send-email", {
+      await postApi("feedback", {
         name,
         email,
         message,
