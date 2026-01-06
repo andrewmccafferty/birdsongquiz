@@ -9,7 +9,7 @@ const sendFeedbackEmail = async (feedbackRequest: FeedbackRequest) => {
     )
     return
   }
-  const messageText = `From ${feedbackRequest.fromName}<${feedbackRequest.fromEmail}>: ${feedbackRequest.message}`
+  const messageText = `From ${feedbackRequest.fromName}(<a href="mailto:${feedbackRequest.fromEmail}">${feedbackRequest.fromEmail}</a>): ${feedbackRequest.message}`
   await sendEmail({
     from: {
       email: process.env.NOTIFICATIONS_FROM_EMAIL_ADDRESS as string,
