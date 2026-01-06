@@ -101,13 +101,15 @@ jobs:
         run: echo "CLOUDFLARE_SITE_KEY=${{ secrets.CLOUDFLARE_SITE_KEY }}" >> $GITHUB_ENV
       - name: Set Cloudflare site key dummy value for ephemereals
         if: github.event_name == 'pull_request'
-        run: echo "CLOUDFLARE_SITE_KEY=1x00000000000000000000AA" >> $GITHUB_ENV
+        run: echo "CLOUDFLARE_SITE_KEY=${{ secrets.CLOUDFLARE_SITE_KEY }}" >> $GITHUB_ENV
+        # run: echo "CLOUDFLARE_SITE_KEY=1x00000000000000000000AA" >> $GITHUB_ENV
       - name: Set Cloudflare secret key from secrets for prod
         if: ${{ github.ref == 'refs/heads/main' }}
         run: echo "CLOUDFLARE_SECRET_KEY=${{ secrets.CLOUDFLARE_SECRET_KEY }}" >> $GITHUB_ENV
       - name: Set Cloudflare site key dummy value for ephemereals
         if: github.event_name == 'pull_request'
-        run: echo "CLOUDFLARE_SECRET_KEY=1x0000000000000000000000000000000AA" >> $GITHUB_ENV
+        run: echo "CLOUDFLARE_SECRET_KEY=${{ secrets.CLOUDFLARE_SECRET_KEY }}" >> $GITHUB_ENV
+        # run: echo "CLOUDFLARE_SECRET_KEY=1x0000000000000000000000000000000AA" >> $GITHUB_ENV
       - name: Terraform create workspace for ephemeral deploys
         if: github.event_name == 'pull_request'
         run: terraform workspace select -or-create $ENV_NAME
