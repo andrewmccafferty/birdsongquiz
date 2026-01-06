@@ -88,6 +88,14 @@ resource "aws_apigatewayv2_integration" "approve_preset_list" {
   integration_method = "POST"
 }
 
+resource "aws_apigatewayv2_integration" "send_feedback" {
+  api_id = aws_apigatewayv2_api.lambda.id
+
+  integration_uri    = aws_lambda_function.lambdas["send_feedback"].invoke_arn
+  integration_type   = "AWS_PROXY"
+  integration_method = "POST"
+}
+
 resource "aws_apigatewayv2_route" "get_recording" {
   api_id = aws_apigatewayv2_api.lambda.id
 
@@ -121,6 +129,13 @@ resource "aws_apigatewayv2_route" "approve_preset_list" {
   route_key = "GET /presets/approve/{suggestionId}"
 
   target = "integrations/${aws_apigatewayv2_integration.approve_preset_list.id}"
+}
+
+resource "aws_apigatewayv2_route" "send_feedback" {
+  api_id    = aws_apigatewayv2_api.lambda.id
+  route_key = "POST /feedback"
+
+  target = "integrations/${aws_apigatewayv2_integration.send_feedback.id}"
 }
 
 resource "aws_cloudwatch_log_group" "api_gw" {
@@ -160,6 +175,15 @@ resource "aws_lambda_permission" "api_gw_suggest_preset_list" {
   statement_id  = "AllowExecutionFromAPIGateway"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.lambdas["suggest_preset_list"].function_name
+  principal     = "apigateway.amazonaws.com"
+
+  source_arn = "${aws_apigatewayv2_api.lambda.execution_arn}/*/*"
+}
+
+resource "aws_lambda_permission" "api_gw_send_feedback" {
+  statement_id  = "AllowExecutionFromAPIGateway"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.lambdas["send_feedback"].function_name
   principal     = "apigateway.amazonaws.com"
 
   source_arn = "${aws_apigatewayv2_api.lambda.execution_arn}/*/*"

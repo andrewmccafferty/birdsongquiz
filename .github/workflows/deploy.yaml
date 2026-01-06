@@ -96,6 +96,18 @@ jobs:
       - name: Set environment name to "prod" for main branch
         if: ${{ github.ref == 'refs/heads/main' }}
         run: echo "ENV_NAME=prod" >> $GITHUB_ENV
+      - name: Set Cloudflare site key from secrets for prod
+        if: ${{ github.ref == 'refs/heads/main' }}
+        run: echo "CLOUDFLARE_SITE_KEY=${{ secrets.CLOUDFLARE_SITE_KEY }}" >> $GITHUB_ENV
+      - name: Set Cloudflare site key dummy value for ephemereals
+        if: github.event_name == 'pull_request'
+        run: echo "CLOUDFLARE_SITE_KEY=1x00000000000000000000AA" >> $GITHUB_ENV
+      - name: Set Cloudflare secret key from secrets for prod
+        if: ${{ github.ref == 'refs/heads/main' }}
+        run: echo "CLOUDFLARE_SECRET_KEY=${{ secrets.CLOUDFLARE_SECRET_KEY }}" >> $GITHUB_ENV
+      - name: Set Cloudflare site key dummy value for ephemereals
+        if: github.event_name == 'pull_request'
+        run: echo "CLOUDFLARE_SECRET_KEY=1x0000000000000000000000000000000AA" >> $GITHUB_ENV
       - name: Terraform create workspace for ephemeral deploys
         if: github.event_name == 'pull_request'
         run: terraform workspace select -or-create $ENV_NAME
@@ -110,7 +122,8 @@ jobs:
             -var xc_api_key=${{ secrets.XC_API_KEY }} \
             -var mailer_send_api_key=${{ secrets.MAILER_SEND_API_KEY }} \
             -var notifications_from_email_address=${{ secrets.NOTIFICATIONS_FROM_EMAIL_ADDRESS }} \
-            -var notifications_to_email_address=${{ secrets.NOTIFICATIONS_TO_EMAIL_ADDRESS }}
+            -var notifications_to_email_address=${{ secrets.NOTIFICATIONS_TO_EMAIL_ADDRESS }} \
+            -var cloudflare_secret_key=$CLOUDFLARE_SECRET_KEY
         continue-on-error: true
 
       - name: Terraform Plan Status
@@ -127,7 +140,8 @@ jobs:
             -var xc_api_key=${{ secrets.XC_API_KEY }} \
             -var mailer_send_api_key=${{ secrets.MAILER_SEND_API_KEY }} \
             -var notifications_from_email_address=${{ secrets.NOTIFICATIONS_FROM_EMAIL_ADDRESS }} \
-            -var notifications_to_email_address=${{ secrets.NOTIFICATIONS_TO_EMAIL_ADDRESS }}
+            -var notifications_to_email_address=${{ secrets.NOTIFICATIONS_TO_EMAIL_ADDRESS }} \
+            -var cloudflare_secret_key=$CLOUDFLARE_SECRET_KEY
       - name: Feed all Terraform output parameters into environment variables
         run: |
           for key in $(terraform output -json | jq -r 'keys[]'); do
@@ -183,4 +197,5 @@ jobs:
           -var xc_api_key=${{ secrets.XC_API_KEY }} \
           -var mailer_send_api_key=${{ secrets.MAILER_SEND_API_KEY }} \
           -var notifications_from_email_address=${{ secrets.NOTIFICATIONS_FROM_EMAIL_ADDRESS }} \
-          -var notifications_to_email_address=${{ secrets.NOTIFICATIONS_TO_EMAIL_ADDRESS }}
+          -var notifications_to_email_address=${{ secrets.NOTIFICATIONS_TO_EMAIL_ADDRESS }} \
+          -var cloudflare_secret_key=$CLOUDFLARE_SECRET_KEY

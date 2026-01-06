@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node addVariablesToFrontend.js & GOOGLE_ANALYTICS_ID=dev webpack serve --open",
+    "start": "node addVariablesToFrontend.js & GOOGLE_ANALYTICS_ID=dev CLOUDFLARE_SITE_KEY=1x00000000000000000000AA webpack serve --open",
     "build": "node addVariablesToFrontend.js & webpack"
   },
   "dependencies": {

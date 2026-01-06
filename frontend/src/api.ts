@@ -22,6 +22,12 @@ export const postApi = async <TRequest, TResponse>(
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
   })
+
+  // Check for No Content response
+  if (response.status === 204) {
+    return {} as TResponse
+  }
+
   const responseBody = await response.json()
 
   if (response.status !== 200) throw Error(responseBody.message)

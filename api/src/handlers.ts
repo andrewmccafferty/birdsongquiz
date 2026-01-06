@@ -10,6 +10,9 @@ import {
 } from "./preset_suggestions"
 import { sendEmailWithSuggestionData } from "./preset_suggestions"
 import { APIGatewayEvent, APIGatewayProxyResult, S3Event } from "aws-lambda"
+import { FeedbackRequest, isFeedbackRequest } from "./model/feedback"
+import { sendFeedbackEmail } from "./feedback"
+import { validateTurnstile } from "./cloudflare_turnstile"
 
 const response = (
   statusCode: number,
@@ -29,7 +32,7 @@ const response = (
   return {
     statusCode,
     headers,
-    body: JSON.stringify(responseBody),
+    body: responseBody ? JSON.stringify(responseBody) : "",
   }
 }
 
@@ -173,6 +176,42 @@ const notifyPresetListSuggested = async (event: S3Event) => {
   await sendEmailWithSuggestionData(bucket, key)
 }
 
+const mapToFeedbackRequest = (
+  event: APIGatewayEvent
+): FeedbackRequest | null => {
+  const body = event.body
+  const feedbackRequestBody = body ? JSON.parse(body) : {}
+  if (!isFeedbackRequest(feedbackRequestBody)) {
+    return null
+  }
+
+  return feedbackRequestBody as FeedbackRequest
+}
+
+const getRequestIpAddress = (event: APIGatewayEvent): string => {
+  return event.headers?.["X-Forwarded-For"] ?? "unknown"
+}
+
+const sendFeedback = async (
+  event: APIGatewayEvent
+): Promise<APIGatewayProxyResult> => {
+  console.log("Checking feedback request", event)
+  const feedbackRequest = mapToFeedbackRequest(event)
+  if (!feedbackRequest) {
+    return response(400, { message: "Invalid feedback request" })
+  }
+  if (
+    !(await validateTurnstile(
+      feedbackRequest.turnstileToken,
+      getRequestIpAddress(event)
+    ))
+  ) {
+    return response(400, "Invalid Cloudflare token")
+  }
+  await sendFeedbackEmail(feedbackRequest)
+  return response(204, null)
+}
+
 export {
   getRecording,
   getSpeciesList,
@@ -180,4 +219,5 @@ export {
   suggestPresetList,
   approvePresetList,
   notifyPresetListSuggested,
+  sendFeedback,
 }

@@ -35,3 +35,8 @@ variable "notifications_to_email_address" {
   description = "The email address notifications will be sent to"
   type = string
 }
+
+variable "cloudflare_secret_key" {
+  description = "Key used to verify Cloudflare Turnstile submissions"
+  type = string
+}
