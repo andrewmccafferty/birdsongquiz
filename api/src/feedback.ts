@@ -9,11 +9,11 @@ const sendFeedbackEmail = async (feedbackRequest: FeedbackRequest) => {
     )
     return
   }
-
+  const messageText = `From ${feedbackRequest.fromName}<${feedbackRequest.fromEmail}>: ${feedbackRequest.message}`
   await sendEmail({
     from: {
-      email: feedbackRequest.fromEmail,
-      name: feedbackRequest.fromName,
+      email: process.env.NOTIFICATIONS_FROM_EMAIL_ADDRESS as string,
+      name: "Birdsong Quiz website",
     },
     to: [
       {
@@ -22,8 +22,8 @@ const sendFeedbackEmail = async (feedbackRequest: FeedbackRequest) => {
       },
     ],
     subject: "Feedback sent from birdsongquiz.co.uk",
-    text: feedbackRequest.message,
-    html: feedbackRequest.message,
+    text: messageText,
+    html: messageText,
   })
 }
 
