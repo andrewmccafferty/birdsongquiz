@@ -198,4 +198,4 @@ jobs:
           -var mailer_send_api_key=${{ secrets.MAILER_SEND_API_KEY }} \
           -var notifications_from_email_address=${{ secrets.NOTIFICATIONS_FROM_EMAIL_ADDRESS }} \
           -var notifications_to_email_address=${{ secrets.NOTIFICATIONS_TO_EMAIL_ADDRESS }} \
-          -var cloudflare_secret_key=$CLOUDFLARE_SECRET_KEY
+          -var cloudflare_secret_key=${{ secrets.CLOUDFLARE_SECRET_KEY }}
