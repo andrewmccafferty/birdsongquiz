@@ -1,10 +1,28 @@
-import React, { useState } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import "./Modal.css"
 import { postApi } from "./api"
 
 interface FeedbackModalProps {
   isOpen: boolean
   onClose: () => void
+}
+
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (
+        element: HTMLElement,
+        options: {
+          sitekey: string
+          callback: (token: string) => void
+          "error-callback"?: () => void
+          "expired-callback"?: () => void
+        }
+      ) => string
+      reset: (widgetId: string) => void
+      remove: (widgetId: string) => void
+    }
+  }
 }
 
 const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpen, onClose }) => {
@@ -15,6 +33,38 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpen, onClose }) => {
   const [submitStatus, setSubmitStatus] = useState<"success" | "error" | null>(
     null
   )
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
+  const turnstileRef = useRef<HTMLDivElement>(null)
+  const widgetIdRef = useRef<string | null>(null)
+
+  useEffect(() => {
+    if (
+      isOpen &&
+      turnstileRef.current &&
+      window.turnstile &&
+      !widgetIdRef.current
+    ) {
+      widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
+        sitekey: process.env.CLOUDFLARE_SITE_KEY as string,
+        callback: (token: string) => {
+          setTurnstileToken(token)
+        },
+        "error-callback": () => {
+          setTurnstileToken(null)
+        },
+        "expired-callback": () => {
+          setTurnstileToken(null)
+        },
+      })
+    }
+
+    return () => {
+      if (widgetIdRef.current && window.turnstile) {
+        window.turnstile.remove(widgetIdRef.current)
+        widgetIdRef.current = null
+      }
+    }
+  }, [isOpen])
 
   if (!isOpen) return null
 
@@ -34,14 +84,22 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpen, onClose }) => {
         fromName: name,
         fromEmail: email,
         message,
+        turnstileToken,
       })
       setSubmitStatus("success")
       setName("")
       setEmail("")
       setMessage("")
+      setTurnstileToken(null)
+      if (widgetIdRef.current && window.turnstile) {
+        window.turnstile.reset(widgetIdRef.current)
+      }
     } catch (error) {
       console.error("Error sending feedback:", error)
       setSubmitStatus("error")
+      if (widgetIdRef.current && window.turnstile) {
+        window.turnstile.reset(widgetIdRef.current)
+      }
     } finally {
       setIsSubmitting(false)
     }
@@ -126,6 +184,10 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpen, onClose }) => {
               />
             </div>
 
+            <div className="form-group">
+              <div ref={turnstileRef}></div>
+            </div>
+
             {submitStatus === "error" && (
               <div className="feedback-error">
                 Sorry, there was an error sending your feedback. Please try
@@ -149,7 +211,8 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpen, onClose }) => {
                   isSubmitting ||
                   !message.trim() ||
                   !name.trim() ||
-                  !email.trim()
+                  !email.trim() ||
+                  !turnstileToken
                 }
               >
                 {isSubmitting ? "Sending..." : "Send Feedback"}

@@ -65,6 +65,7 @@ locals {
         MAILER_SEND_API_KEY                        = var.mailer_send_api_key
         NOTIFICATIONS_FROM_EMAIL_ADDRESS           = var.notifications_from_email_address
         NOTIFICATIONS_TO_EMAIL_ADDRESS             = var.notifications_to_email_address
+        CLOUDFLARE_SECRET_KEY                      = var.cloudflare_secret_key
       }
       role_name = "send_feedback_role"
     }

@@ -57,6 +57,9 @@ module.exports = {
       "process.env.GOOGLE_ANALYTICS_ID": JSON.stringify(
         process.env.GOOGLE_ANALYTICS_ID
       ),
+      "process.env.CLOUDFLARE_SITE_KEY": JSON.stringify(
+        process.env.CLOUDFLARE_SITE_KEY
+      ),
     }),
   ],
 }
