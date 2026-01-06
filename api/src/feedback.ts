@@ -15,10 +15,12 @@ const sendFeedbackEmail = async (feedbackRequest: FeedbackRequest) => {
       email: feedbackRequest.fromEmail,
       name: feedbackRequest.fromName,
     },
-    to: {
-      email: process.env.NOTIFICATIONS_TO_EMAIL_ADDRESS as string,
-      name: "Birdsong Quiz admin",
-    },
+    to: [
+      {
+        email: process.env.NOTIFICATIONS_TO_EMAIL_ADDRESS as string,
+        name: "Birdsong Quiz admin",
+      },
+    ],
     subject: "Feedback sent from birdsongquiz.co.uk",
     text: feedbackRequest.message,
     html: feedbackRequest.message,
