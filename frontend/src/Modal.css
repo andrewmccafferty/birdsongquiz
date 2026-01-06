@@ -20,7 +20,7 @@
   position: relative;
   width: 100%;
   max-width: 400px;
-  height: 90%;
+  max-height: 90%;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
   overflow-y: auto;

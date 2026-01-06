@@ -139,8 +139,11 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpen, onClose }) => {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="feedback-form">
-            <div className="form-group">
-              <label htmlFor="name">
+            <div
+              className="form-group"
+              style={{ flexDirection: "row", alignItems: "center" }}
+            >
+              <label htmlFor="name" style={{ minWidth: "80px", margin: 0 }}>
                 Name <span style={{ color: "red" }}>*</span>
               </label>
               <input
@@ -151,11 +154,15 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpen, onClose }) => {
                 placeholder="Your name"
                 required
                 disabled={isSubmitting}
+                style={{ flex: 1 }}
               />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="email">
+            <div
+              className="form-group"
+              style={{ flexDirection: "row", alignItems: "center" }}
+            >
+              <label htmlFor="email" style={{ minWidth: "80px", margin: 0 }}>
                 Email <span style={{ color: "red" }}>*</span>
               </label>
               <input
@@ -166,11 +173,18 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpen, onClose }) => {
                 placeholder="your.email@example.com"
                 required
                 disabled={isSubmitting}
+                style={{ flex: 1 }}
               />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="message">
+            <div
+              className="form-group"
+              style={{ flexDirection: "row", alignItems: "flex-start" }}
+            >
+              <label
+                htmlFor="message"
+                style={{ minWidth: "80px", margin: 0, paddingTop: "0.75rem" }}
+              >
                 Message <span style={{ color: "red" }}>*</span>
               </label>
               <textarea
@@ -179,8 +193,9 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpen, onClose }) => {
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Tell us what you think..."
                 required
-                rows={6}
+                rows={3}
                 disabled={isSubmitting}
+                style={{ flex: 1 }}
               />
             </div>
 
