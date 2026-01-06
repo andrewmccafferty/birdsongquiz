@@ -39,16 +39,17 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpen, onClose }) => {
       setName("")
       setEmail("")
       setMessage("")
-      setTimeout(() => {
-        onClose()
-        setSubmitStatus(null)
-      }, 2000)
     } catch (error) {
       console.error("Error sending feedback:", error)
       setSubmitStatus("error")
     } finally {
       setIsSubmitting(false)
     }
+  }
+
+  const handleOk = () => {
+    onClose()
+    setSubmitStatus(null)
   }
 
   return (
@@ -63,84 +64,99 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpen, onClose }) => {
           suggest new features.
         </p>
 
-        <form onSubmit={handleSubmit} className="feedback-form">
-          <div className="form-group">
-            <label htmlFor="name">
-              Name <span style={{ color: "red" }}>*</span>
-            </label>
-            <input
-              type="text"
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Your name"
-              required
-              disabled={isSubmitting}
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="email">
-              Email <span style={{ color: "red" }}>*</span>
-            </label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="your.email@example.com"
-              required
-              disabled={isSubmitting}
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="message">
-              Message <span style={{ color: "red" }}>*</span>
-            </label>
-            <textarea
-              id="message"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              placeholder="Tell us what you think..."
-              required
-              rows={6}
-              disabled={isSubmitting}
-            />
-          </div>
-
-          {submitStatus === "success" && (
+        {submitStatus === "success" ? (
+          <div>
             <div className="feedback-success">
               Thank you! Your feedback has been sent successfully.
             </div>
-          )}
-
-          {submitStatus === "error" && (
-            <div className="feedback-error">
-              Sorry, there was an error sending your feedback. Please try again.
+            <div className="feedback-actions">
+              <button
+                type="button"
+                onClick={handleOk}
+                className="feedback-button feedback-button-primary"
+              >
+                OK
+              </button>
             </div>
-          )}
-
-          <div className="feedback-actions">
-            <button
-              type="button"
-              onClick={onClose}
-              className="feedback-button feedback-button-secondary"
-              disabled={isSubmitting}
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="feedback-button feedback-button-primary"
-              disabled={
-                isSubmitting || !message.trim() || !name.trim() || !email.trim()
-              }
-            >
-              {isSubmitting ? "Sending..." : "Send Feedback"}
-            </button>
           </div>
-        </form>
+        ) : (
+          <form onSubmit={handleSubmit} className="feedback-form">
+            <div className="form-group">
+              <label htmlFor="name">
+                Name <span style={{ color: "red" }}>*</span>
+              </label>
+              <input
+                type="text"
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Your name"
+                required
+                disabled={isSubmitting}
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="email">
+                Email <span style={{ color: "red" }}>*</span>
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="your.email@example.com"
+                required
+                disabled={isSubmitting}
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="message">
+                Message <span style={{ color: "red" }}>*</span>
+              </label>
+              <textarea
+                id="message"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                placeholder="Tell us what you think..."
+                required
+                rows={6}
+                disabled={isSubmitting}
+              />
+            </div>
+
+            {submitStatus === "error" && (
+              <div className="feedback-error">
+                Sorry, there was an error sending your feedback. Please try
+                again.
+              </div>
+            )}
+
+            <div className="feedback-actions">
+              <button
+                type="button"
+                onClick={onClose}
+                className="feedback-button feedback-button-secondary"
+                disabled={isSubmitting}
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="feedback-button feedback-button-primary"
+                disabled={
+                  isSubmitting ||
+                  !message.trim() ||
+                  !name.trim() ||
+                  !email.trim()
+                }
+              >
+                {isSubmitting ? "Sending..." : "Send Feedback"}
+              </button>
+            </div>
+          </form>
+        )}
       </div>
     </div>
   )
