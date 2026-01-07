@@ -1,8 +1,7 @@
 name: "Delete ephemeral environments on branch delete"
 on:
-  delete:
-    branches-ignore:
-      - main
+  pull_request:
+    types: [closed]
 
 permissions:
   id-token: write
@@ -16,6 +15,7 @@ env:
 jobs:
   terraform:
     name: "Delete ephemerals on branch delete"
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -46,7 +46,7 @@ jobs:
         env:
           BRANCH_NAME: ${{ github.event.ref }}
         run: |
-          ENV_NAME="${BRANCH_NAME#*/}"
+          ENV_NAME="pr-${{ github.event.pull_request.number }}"
           echo "ENV_NAME=$ENV_NAME" >> $GITHUB_ENV
       - name: Empty buckets before deletion
         run: |
@@ -58,16 +58,7 @@ jobs:
       - name: Place dummy zip file in place to keep TF destroy happy
         run: touch birdsongquiz_lambdas.zip
       - name: Terraform destroy
-        run: |
-          terraform destroy -auto-approve \
-          -input=false \
-          -var environment=$ENV_NAME \
-          -var acm_certificate_arn=${{ secrets.ACM_CERTIFICATE_ARN }} \
-          -var xc_api_key=${{ secrets.XC_API_KEY }} \
-          -var mailer_send_api_key=${{ secrets.MAILER_SEND_API_KEY }} \
-          -var notifications_from_email_address=${{ secrets.NOTIFICATIONS_FROM_EMAIL_ADDRESS }} \
-          -var notifications_to_email_address=${{ secrets.NOTIFICATIONS_TO_EMAIL_ADDRESS }} \
-          -var cloudflare_secret_key=dummy
+        run: ./destroy.sh
 
       - name: Terraform delete workspace
         run: |

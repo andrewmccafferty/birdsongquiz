@@ -90,8 +90,7 @@ jobs:
       - name: Set environment name from branch for ephemeral deploys
         if: github.event_name == 'pull_request'
         run: |
-          BRANCH_NAME="${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}"
-          ENV_NAME="${BRANCH_NAME#*/}"
+          ENV_NAME="pr-${{ github.event.pull_request.number }}"
           echo "ENV_NAME=$ENV_NAME" >> $GITHUB_ENV
       - name: Set environment name to "prod" for main branch
         if: ${{ github.ref == 'refs/heads/main' }}
