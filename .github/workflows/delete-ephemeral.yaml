@@ -1,8 +1,7 @@
 name: "Delete ephemeral environments on branch delete"
 on:
-  delete:
-    branches-ignore:
-      - main
+  pull_request:
+    types: [closed]
 
 permissions:
   id-token: write
@@ -16,6 +15,7 @@ env:
 jobs:
   terraform:
     name: "Delete ephemerals on branch delete"
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -46,7 +46,7 @@ jobs:
         env:
           BRANCH_NAME: ${{ github.event.ref }}
         run: |
-          ENV_NAME="${BRANCH_NAME#*/}"
+          ENV_NAME="PR-${{ github.event.pull_request.number }}"
           echo "ENV_NAME=$ENV_NAME" >> $GITHUB_ENV
       - name: Empty buckets before deletion
         run: |
