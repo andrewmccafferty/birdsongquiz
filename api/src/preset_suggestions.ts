@@ -9,7 +9,7 @@ import {
 } from "./s3_utils"
 
 const updatePresetListVersionToCurrentTimestamp = async () => {
-  putObjectToS3(
+  await putObjectToS3(
     {
       presetsVersion: `${Date.now()}`,
     },

@@ -15,10 +15,6 @@ const getApiRoot = (): string => {
   return getEnvironmentVariable("API_ROOT")
 }
 
-const getApprovePresetListLambdaName = (): string => {
-  return getEnvironmentVariable("APPROVE_PRESET_LIST_LAMBDA")
-}
-
 export interface SpeciesDetail {
   Species: string
   ScientificName: string
@@ -64,9 +60,21 @@ const callApprovalEndpoint = async (
   )
 }
 
+const getFrontendConfigurationPresetsVersion = async (): Promise<string> => {
+  const configuration = JSON.parse(
+    await getObjectFromS3AsString(
+      getEnvironmentVariable("FRONTEND_BUCKET"),
+      "frontend-configuration.json"
+    )
+  )
+  return configuration["presetsVersion"]
+}
+
 test("should be able to submit a suggestion, and on approval it shows up in the preset lists", async ({
   request,
 }) => {
+  const initialPresetsVersion = await getFrontendConfigurationPresetsVersion()
+  console.log("Initial presets version", initialPresetsVersion)
   const testPresetListName = `Test List ${Date.now()}`
   const testSpeciesList = [
     {
@@ -132,4 +140,12 @@ test("should be able to submit a suggestion, and on approval it shows up in the 
   expect(await newPresetListGetResponse.json()).toEqual({
     species: testSpeciesList,
   })
+
+  // Also check that the frontend configuration cache version has changed
+  const newPresetsVersion = await getFrontendConfigurationPresetsVersion()
+  console.log("New presets version", newPresetsVersion)
+
+  expect(newPresetsVersion).toBeDefined()
+  expect(initialPresetsVersion).toBeDefined()
+  expect(newPresetsVersion).not.toEqual(initialPresetsVersion)
 })
