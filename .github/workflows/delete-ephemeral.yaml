@@ -46,7 +46,7 @@ jobs:
         env:
           BRANCH_NAME: ${{ github.event.ref }}
         run: |
-          ENV_NAME="PR-${{ github.event.pull_request.number }}"
+          ENV_NAME="pr-${{ github.event.pull_request.number }}"
           echo "ENV_NAME=$ENV_NAME" >> $GITHUB_ENV
       - name: Empty buckets before deletion
         run: |
