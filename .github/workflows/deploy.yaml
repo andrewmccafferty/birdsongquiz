@@ -107,6 +107,15 @@ jobs:
       - name: Set Cloudflare site key dummy value for ephemereals
         if: github.event_name == 'pull_request'
         run: echo "CLOUDFLARE_SECRET_KEY=1x0000000000000000000000000000000AA" >> $GITHUB_ENV
+      - name: Set Terraform variables
+        run: |
+          echo "TERRAFORM_VARIABLES=-var environment=$ENV_NAME \
+            -var acm_certificate_arn=${{ secrets.ACM_CERTIFICATE_ARN }} \
+            -var xc_api_key=${{ secrets.XC_API_KEY }} \
+            -var mailer_send_api_key=${{ secrets.MAILER_SEND_API_KEY }} \
+            -var notifications_from_email_address=${{ secrets.NOTIFICATIONS_FROM_EMAIL_ADDRESS }} \
+            -var notifications_to_email_address=${{ secrets.NOTIFICATIONS_TO_EMAIL_ADDRESS }} \
+            -var cloudflare_secret_key=$CLOUDFLARE_SECRET_KEY" >> $GITHUB_ENV
       - name: Terraform create workspace for ephemeral deploys
         if: github.event_name == 'pull_request'
         run: terraform workspace select -or-create $ENV_NAME
@@ -116,13 +125,7 @@ jobs:
         run: |
           terraform plan \
             -no-color -input=false \
-            -var environment=$ENV_NAME \
-            -var acm_certificate_arn=${{ secrets.ACM_CERTIFICATE_ARN }} \
-            -var xc_api_key=${{ secrets.XC_API_KEY }} \
-            -var mailer_send_api_key=${{ secrets.MAILER_SEND_API_KEY }} \
-            -var notifications_from_email_address=${{ secrets.NOTIFICATIONS_FROM_EMAIL_ADDRESS }} \
-            -var notifications_to_email_address=${{ secrets.NOTIFICATIONS_TO_EMAIL_ADDRESS }} \
-            -var cloudflare_secret_key=$CLOUDFLARE_SECRET_KEY
+            $TERRAFORM_VARIABLES
         continue-on-error: true
 
       - name: Terraform Plan Status
@@ -134,13 +137,7 @@ jobs:
           terraform apply \
             -auto-approve \
             -input=false \
-            -var environment=$ENV_NAME \
-            -var acm_certificate_arn=${{ secrets.ACM_CERTIFICATE_ARN }} \
-            -var xc_api_key=${{ secrets.XC_API_KEY }} \
-            -var mailer_send_api_key=${{ secrets.MAILER_SEND_API_KEY }} \
-            -var notifications_from_email_address=${{ secrets.NOTIFICATIONS_FROM_EMAIL_ADDRESS }} \
-            -var notifications_to_email_address=${{ secrets.NOTIFICATIONS_TO_EMAIL_ADDRESS }} \
-            -var cloudflare_secret_key=$CLOUDFLARE_SECRET_KEY
+            $TERRAFORM_VARIABLES
       - name: Feed all Terraform output parameters into environment variables
         run: |
           for key in $(terraform output -json | jq -r 'keys[]'); do
@@ -190,11 +187,6 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           terraform workspace select default
-          terraform plan \
-          -var environment=prod \
-          -var acm_certificate_arn=${{ secrets.ACM_CERTIFICATE_ARN }} \
-          -var xc_api_key=${{ secrets.XC_API_KEY }} \
-          -var mailer_send_api_key=${{ secrets.MAILER_SEND_API_KEY }} \
-          -var notifications_from_email_address=${{ secrets.NOTIFICATIONS_FROM_EMAIL_ADDRESS }} \
-          -var notifications_to_email_address=${{ secrets.NOTIFICATIONS_TO_EMAIL_ADDRESS }} \
-          -var cloudflare_secret_key=${{ secrets.CLOUDFLARE_SECRET_KEY }}
+          PROD_TERRAFORM_VARIABLES="${TERRAFORM_VARIABLES/$ENV_NAME/prod}"
+          PROD_TERRAFORM_VARIABLES="${PROD_TERRAFORM_VARIABLES/$CLOUDFLARE_SECRET_KEY/${{ secrets.CLOUDFLARE_SECRET_KEY }}}"
+          terraform plan $PROD_TERRAFORM_VARIABLES
