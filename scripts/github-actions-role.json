@@ -71,6 +71,7 @@
       "Action": [
         "lambda:CreateFunction",
         "lambda:DeleteFunction",
+        "lambda:GetFunctionCodeSigningConfig",
         "lambda:GetFunction",
         "lambda:GetFunctionConfiguration",
         "lambda:UpdateFunctionCode",
