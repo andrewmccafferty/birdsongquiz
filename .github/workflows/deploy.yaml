@@ -188,4 +188,5 @@ jobs:
         run: |
           terraform workspace select default
           PROD_TERRAFORM_VARIABLES="${TERRAFORM_VARIABLES/$ENV_NAME/prod}"
+          PROD_TERRAFORM_VARIABLES="${PROD_TERRAFORM_VARIABLES/$CLOUDFLARE_SECRET_KEY/${{ secrets.CLOUDFLARE_SECRET_KEY }}}"
           terraform plan $PROD_TERRAFORM_VARIABLES
