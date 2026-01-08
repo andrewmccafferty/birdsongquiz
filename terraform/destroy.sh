@@ -4,7 +4,7 @@ VAR_ARGS=$($HOME/go/bin/terraform-config-inspect --json . \
   | to_entries[]
   | select(.key != "environment")
   | select(.value.required == true)
-  | "-var \"\(.key)=dummy\""
+  | "-var \(.key)=dummy"
 ' | tr '\n' ' ')
 
 terraform destroy -auto-approve \
