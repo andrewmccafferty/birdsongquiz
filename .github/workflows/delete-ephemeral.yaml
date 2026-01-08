@@ -57,9 +57,11 @@ jobs:
         run: terraform workspace select $ENV_NAME
       - name: Place dummy zip file in place to keep TF destroy happy
         run: touch birdsongquiz_lambdas.zip
+      - name: Install terraform-config-inspect
+        run: |
+          go install github.com/hashicorp/terraform-config-inspect@latest
       - name: Terraform destroy
         run: ./destroy.sh
-
       - name: Terraform delete workspace
         run: |
           terraform workspace select default
