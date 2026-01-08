@@ -185,8 +185,7 @@ jobs:
         run: npm run prod-test
       - name: Plan for prod
         if: github.event_name == 'pull_request'
-        env:
-          ENV_NAME: prod
         run: |
           terraform workspace select default
-          terraform plan $TERRAFORM_VARIABLES
+          PROD_TERRAFORM_VARIABLES="${TERRAFORM_VARIABLES/$ENV_NAME/prod}"
+          terraform plan $PROD_TERRAFORM_VARIABLES
