@@ -24,7 +24,7 @@ const getRecordingData = async (
 const constructSoundUrlFromRecordingData = (recording: Recording): string => {
   const mp3FileName = recording["file-name"].replace(/\.wav$/i, ".mp3")
 
-  const match = recording.sono.small.match(/uploaded\/([^/]+)\//)
+  const match = recording.sono.small.match(/spectrograms\/([^/]+)\//)
   if (!match) {
     throw new Error("recordistId not found in sono.small")
   }
