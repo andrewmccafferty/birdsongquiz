@@ -5,7 +5,7 @@
   "main": "dist/handlers.cjs",
   "type": "module",
   "dependencies": {
-    "@aws-sdk/client-s3": "3.850.0"
+    "@aws-sdk/client-s3": "^3.1027.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
