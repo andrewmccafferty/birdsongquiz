@@ -35,12 +35,12 @@ describe("recordingData tests", () => {
       recording: {
         en: "Common Blackbird",
         gen: "Turdus",
-        id: "815643",
-        rec: "João Tomás",
+        id: "1011353",
+        rec: "Olivier SWIFT",
         sp: "merula",
       },
       soundUrl:
-        "https://xeno-canto.org/sounds/uploaded/POVKNQVSGU/XC815643-Turdus-merula_fledling-call_070723_Escober-de-Tábara.mp3",
+        "https://xeno-canto.org/sounds/uploaded/JCPKCBKKAQ/XC1011353-TURMER_250617_5600_PontAuthou27_Camping_Marronniers_0544.mp3",
       species: TEST_SPECIES,
     })
     expect(mockGetApiJsonData).toHaveBeenCalledWith(expectedUrl)
